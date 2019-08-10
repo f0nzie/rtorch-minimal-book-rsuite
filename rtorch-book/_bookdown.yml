@@ -1,5 +1,6 @@
 book_filename: "rtorch-book"
 delete_merged_file: true
+repo: https://github.com/f0nzie/rtorch-book
 output_dir: "public"
 language:
   ui:
