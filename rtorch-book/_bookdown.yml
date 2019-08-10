@@ -1,5 +1,6 @@
 book_filename: "rtorch-book"
 delete_merged_file: true
+output_dir: "public"
 language:
   ui:
     chapter_name: "Chapter "

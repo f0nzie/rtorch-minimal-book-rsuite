@@ -427,13 +427,13 @@ Figure 2.1: Here is a nice figure!
 ##         [1.7228e-34, 1.7228e+25, 6.8912e+25],
 ##         [9.2737e-41, 2.1163e-37, 2.1221e-37]])</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">dt</a></code></pre></div>
-<pre><code>## tensor([[6.9255e-310, 4.6810e-310, 2.4390e-154],
-##         [7.3651e+228,  2.7370e-57,  1.3035e-76],
-##         [2.6462e-260, 2.2556e-153, 1.1132e+171]], dtype=torch.float64)</code></pre>
+<pre><code>## tensor([[4.6859e-310,  0.0000e+00, 4.2440e-314],
+##         [4.6859e-310, 4.6859e-310, 1.4822e-323],
+##         [4.2440e-314, 4.9407e-324,  0.0000e+00]], dtype=torch.float64)</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">Bt</a></code></pre></div>
-<pre><code>## tensor([[ True, False, False, False, False],
-##         [False, False, False, False, False],
-##         [False, False, False, False, False],
+<pre><code>## tensor([[ True,  True,  True,  True,  True],
+##         [ True, False, False,  True,  True],
+##         [ True,  True,  True,  True, False],
 ##         [False,  True,  True,  True,  True],
 ##         [ True,  True, False, False,  True]], dtype=torch.bool)</code></pre>
 <p>A 4D tensor like in MNIST hand-written digits recognition dataset:</p>
@@ -454,28 +454,28 @@ Figure 2.1: Here is a nice figure!
 <p>A 3D tensor:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">ft3d &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">FloatTensor</span>(4L, 3L, 2L)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">ft3d</a></code></pre></div>
-<pre><code>## tensor([[[-1.0183e-30,  3.0911e-41],
-##          [-1.0429e-30,  3.0911e-41],
-##          [-1.0429e-30,  3.0911e-41]],
+<pre><code>## tensor([[[1.5333e+09, 3.0943e-41],
+##          [1.5360e+09, 3.0943e-41],
+##          [1.5304e+09, 3.0943e-41]],
 ## 
-##         [[-1.0429e-30,  3.0911e-41],
-##          [-5.7299e-31,  3.0911e-41],
-##          [-5.7299e-31,  3.0911e-41]],
+##         [[1.6267e+09, 3.0943e-41],
+##          [1.5197e+09, 3.0943e-41],
+##          [1.5236e+09, 3.0943e-41]],
 ## 
-##         [[-5.7299e-31,  3.0911e-41],
-##          [-5.7300e-31,  3.0911e-41],
-##          [-5.7300e-31,  3.0911e-41]],
+##         [[1.5399e+09, 3.0943e-41],
+##          [1.5519e+09, 3.0943e-41],
+##          [1.5558e+09, 3.0943e-41]],
 ## 
-##         [[-5.7300e-31,  3.0911e-41],
-##          [-5.7300e-31,  3.0911e-41],
-##          [-5.0471e-31,  3.0911e-41]]])</code></pre>
+##         [[1.5461e+09, 3.0943e-41],
+##          [1.3128e+09, 3.0943e-41],
+##          [1.5490e+09, 3.0943e-41]]])</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># get first element in a tensor</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">ft3d[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## tensor(-1.0183e-30)</code></pre>
+<pre><code>## tensor(1.5333e+09)</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">bt</a></code></pre></div>
-<pre><code>## tensor([[160, 220,  60],
-##         [137, 124, 127],
-##         [  0,   0, 160]], dtype=torch.uint8)</code></pre>
+<pre><code>## tensor([[46, 44, 32],
+##         [32, 52, 46],
+##         [44, 32, 32]], dtype=torch.uint8)</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># [torch.ByteTensor of size 3x3]</span></a></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">ft</a></code></pre></div>
 <pre><code>## tensor([[2.1163e-37, 2.1218e-37, 1.9309e-37],
