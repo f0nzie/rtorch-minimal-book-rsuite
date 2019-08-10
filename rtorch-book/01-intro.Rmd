@@ -1,116 +1,23 @@
 # Introduction {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(linear_algebra).
-
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
-
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+## Motivation
+_Why do we want a package of something that is already working well, such as PyTorch?_
 
 
-## Installation
-
-`rTorch` is available in GitHub only at this moment.
-
-Install `rTorch` with: 
-
-`devtools::install_github("f0nzie/rTorch")`
-
-Before start running `rTorch`, install a Python Anaconda environment first. 
-
-1. Create a conda environment with `conda create -n myenv python=3.7`
-
-2. Activate the new environment with `conda activate myenv`
-
-3. Install PyTorch related packages with:  
-
-`conda install python=3.6.6 pytorch-cpu torchvision-cpu matplotlib pandas -c pytorch`
+## How do we start using `rTorch`
 
 
-Now, you can load `rTorch` in R or RStudio.
-
-The automatic installation, like in `rtensorflow`, may be available later.
-
-**Note.** `matplotlib` and `pandas` are not really necessary, but I was asked if `matplotlib` or `pandas` would in PyTorch, that I decided to put them for testing and experimentation. They both work.
+## What can you do with `rTorch`
 
 
 
-## Matrices and Linear Algebra
-
-There are five major type of Tensors in PyTorch
-
-```{r}
-library(rTorch)
-
-bt <- torch$ByteTensor(3L, 3L)
-ft <- torch$FloatTensor(3L, 3L)
-dt <- torch$DoubleTensor(3L, 3L)
-lt <- torch$LongTensor(3L, 3L)
-Bt <- torch$BoolTensor(5L, 5L)
-
-ft
-dt
-Bt
-```
-
-A 4D tensor like in MNIST hand-written digits recognition dataset:
-
-```{r}
-mnist_4d <- torch$FloatTensor(60000L, 3L, 28L, 28L)
-
-# size
-mnist_4d$size()
-
-# length
-length(mnist_4d)
-
-# shape, like in numpy
-mnist_4d$shape
-
-# number of elements
-mnist_4d$numel()
-```
-
-A 3D tensor:
-
-```{r}
-ft3d <- torch$FloatTensor(4L, 3L, 2L)
-ft3d
-```
-
-```{r}
-# get first element in a tensor
-ft3d[1, 1, 1]
-```
 
 
-```{r}
-bt
-# [torch.ByteTensor of size 3x3]
-```
-
-```{r}
-ft
-# [torch.FloatTensor of size 3x3]
-```
 
 
-```{r}
-# create a tensor with a value
-torch$full(list(2L, 3L), 3.141592)
-```
+
+
+
+
 
 
