@@ -45,13 +45,34 @@ xit
 ```
 
 ## Zero gradient
+The zero gradient was one of the most difficult to implement in R.
+
 
 ## Transform a tensor
+Explain how transform a tensor back and forth to `numpy`.
+Why is this important?
+
 
 ## Build a model class
+PyTorch classes cannot not directly instantiated from `R`. We need an intermediate step to create a class. For this, we use `reticulate` functions that will read the class implementation in `Python` code.
 
-## Convert a tensor to numpy object
+### Examples
 
-## Convert a numpy object to an R object
+## Convert a tensor to `numpy` object
+This is a frequent operation. I have found that this is necessary when 
+
+* a numpy function is not implemented in PyTorch
+* We need to convert a tensor to R
+* Perform a boolean operation that is not directly available in PyTorch.
+
+
+## Convert a `numpy` object to an `R` object
+This is mainly required for these reasons:
+
+1. Create a data structure in R
+2. Plot using r-base or ggplot2
+3. Perform an analysis on parts of a tensor
+4. Use R statistical functions that are not available in PyTorch.
+
 
 
