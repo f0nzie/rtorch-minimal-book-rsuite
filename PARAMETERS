@@ -1,0 +1,6 @@
+RSuiteVersion: 0.37.253
+RVersion: 3.5
+Project: rtorch-book
+Repositories: MRAN[2019-08-10]
+Artifacts: config_templ.txt
+ZipVersion: 0.1
