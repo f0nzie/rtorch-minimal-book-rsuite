@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Linear Regression | A Minimal Tutorial of rTorch</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Linear Regression | A Minimal Tutorial of rTorch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Linear Regression | A Minimal Tutorial of rTorch" />
+  
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  
+
+<meta name="author" content="ALfonso R. Reyes" />
+
+
+<meta name="date" content="2019-08-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-algebra.html">
+<link rel="next" href="logistic-regression.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal rTorch Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i><b>2.1</b> Installation</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#matrices-and-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Matrices and Linear Algebra</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lessons-learned.html"><a href="lessons-learned.html"><i class="fa fa-check"></i><b>3</b> Lessons Learned</a><ul>
+<li class="chapter" data-level="3.1" data-path="lessons-learned.html"><a href="lessons-learned.html#enumeration"><i class="fa fa-check"></i><b>3.1</b> Enumeration</a></li>
+<li class="chapter" data-level="3.2" data-path="lessons-learned.html"><a href="lessons-learned.html#how-to-iterate-a-generator"><i class="fa fa-check"></i><b>3.2</b> How to iterate a generator</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="lessons-learned.html"><a href="lessons-learned.html#using-enumerate-and-iterate"><i class="fa fa-check"></i><b>3.2.1</b> Using <code>enumerate</code> and <code>iterate</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="lessons-learned.html"><a href="lessons-learned.html#using-a-for-loop"><i class="fa fa-check"></i><b>3.2.2</b> Using a <code>for-loop</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="lessons-learned.html"><a href="lessons-learned.html#zero-gradient"><i class="fa fa-check"></i><b>3.3</b> Zero gradient</a></li>
+<li class="chapter" data-level="3.4" data-path="lessons-learned.html"><a href="lessons-learned.html#transform-a-tensor"><i class="fa fa-check"></i><b>3.4</b> Transform a tensor</a></li>
+<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a></li>
+<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to numpy object</a></li>
+<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a numpy object to an R object</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>4</b> Tensors</a><ul>
+<li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#r-code"><i class="fa fa-check"></i><b>4.1</b> R code</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="tensors.html"><a href="tensors.html#load-the-libraries"><i class="fa fa-check"></i><b>4.1.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="tensors.html"><a href="tensors.html#datasets"><i class="fa fa-check"></i><b>4.1.2</b> Datasets</a></li>
+<li class="chapter" data-level="4.1.3" data-path="tensors.html"><a href="tensors.html#run-the-model"><i class="fa fa-check"></i><b>4.1.3</b> Run the model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra with Torch</a><ul>
+<li class="chapter" data-level="5.1" data-path="linear-algebra.html"><a href="linear-algebra.html#scalars"><i class="fa fa-check"></i><b>5.1</b> Scalars</a></li>
+<li class="chapter" data-level="5.2" data-path="linear-algebra.html"><a href="linear-algebra.html#vectors"><i class="fa fa-check"></i><b>5.2</b> Vectors</a></li>
+<li class="chapter" data-level="5.3" data-path="linear-algebra.html"><a href="linear-algebra.html#matrices"><i class="fa fa-check"></i><b>5.3</b> Matrices</a></li>
+<li class="chapter" data-level="5.4" data-path="linear-algebra.html"><a href="linear-algebra.html#d-tensors"><i class="fa fa-check"></i><b>5.4</b> 3D+ tensors</a></li>
+<li class="chapter" data-level="5.5" data-path="linear-algebra.html"><a href="linear-algebra.html#transpose-of-a-matrix"><i class="fa fa-check"></i><b>5.5</b> Transpose of a matrix</a></li>
+<li class="chapter" data-level="5.6" data-path="linear-algebra.html"><a href="linear-algebra.html#vectors-special-case-of-a-matrix"><i class="fa fa-check"></i><b>5.6</b> Vectors, special case of a matrix</a></li>
+<li class="chapter" data-level="5.7" data-path="linear-algebra.html"><a href="linear-algebra.html#tensor-addition"><i class="fa fa-check"></i><b>5.7</b> Tensor addition</a></li>
+<li class="chapter" data-level="5.8" data-path="linear-algebra.html"><a href="linear-algebra.html#add-a-scalar-to-a-tensor"><i class="fa fa-check"></i><b>5.8</b> Add a scalar to a tensor</a></li>
+<li class="chapter" data-level="5.9" data-path="linear-algebra.html"><a href="linear-algebra.html#multiplying-tensors"><i class="fa fa-check"></i><b>5.9</b> Multiplying tensors</a></li>
+<li class="chapter" data-level="5.10" data-path="linear-algebra.html"><a href="linear-algebra.html#dot-product"><i class="fa fa-check"></i><b>5.10</b> Dot product</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="linear-regression.html"><a href="linear-regression.html#case-1-simple-linear-regression"><i class="fa fa-check"></i><b>6.1</b> Case 1: simple linear regression</a></li>
+<li class="chapter" data-level="6.2" data-path="linear-regression.html"><a href="linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>6.2</b> Creating the network model</a></li>
+<li class="chapter" data-level="6.3" data-path="linear-regression.html"><a href="linear-regression.html#datasets-1"><i class="fa fa-check"></i><b>6.3</b> Datasets</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="linear-regression.html"><a href="linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>6.3.1</b> Converting from numpy to tensor</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="linear-regression.html"><a href="linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>6.4</b> Optimizer and Loss</a></li>
+<li class="chapter" data-level="6.5" data-path="linear-regression.html"><a href="linear-regression.html#training"><i class="fa fa-check"></i><b>6.5</b> Training</a></li>
+<li class="chapter" data-level="6.6" data-path="linear-regression.html"><a href="linear-regression.html#result"><i class="fa fa-check"></i><b>6.6</b> Result</a></li>
+<li class="chapter" data-level="6.7" data-path="linear-regression.html"><a href="linear-regression.html#case-2-rainfall"><i class="fa fa-check"></i><b>6.7</b> Case 2: Rainfall</a></li>
+<li class="chapter" data-level="6.8" data-path="linear-regression.html"><a href="linear-regression.html#select-device"><i class="fa fa-check"></i><b>6.8</b> Select device</a></li>
+<li class="chapter" data-level="6.9" data-path="linear-regression.html"><a href="linear-regression.html#training-data"><i class="fa fa-check"></i><b>6.9</b> Training data</a></li>
+<li class="chapter" data-level="6.10" data-path="linear-regression.html"><a href="linear-regression.html#convert-to-tensors"><i class="fa fa-check"></i><b>6.10</b> Convert to tensors</a></li>
+<li class="chapter" data-level="6.11" data-path="linear-regression.html"><a href="linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>6.11</b> Build the model</a></li>
+<li class="chapter" data-level="6.12" data-path="linear-regression.html"><a href="linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>6.12</b> Generate predictions</a></li>
+<li class="chapter" data-level="6.13" data-path="linear-regression.html"><a href="linear-regression.html#loss-function"><i class="fa fa-check"></i><b>6.13</b> Loss Function</a></li>
+<li class="chapter" data-level="6.14" data-path="linear-regression.html"><a href="linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>6.14</b> Compute Gradients</a></li>
+<li class="chapter" data-level="6.15" data-path="linear-regression.html"><a href="linear-regression.html#adjust-weights-and-biases-using-gradient-descent"><i class="fa fa-check"></i><b>6.15</b> Adjust weights and biases using gradient descent</a></li>
+<li class="chapter" data-level="6.16" data-path="linear-regression.html"><a href="linear-regression.html#train-for-multiple-epochs"><i class="fa fa-check"></i><b>6.16</b> Train for multiple epochs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="logistic-regression.html"><a href="logistic-regression.html#hyperparameters"><i class="fa fa-check"></i><b>7.0.1</b> Hyperparameters</a></li>
+<li class="chapter" data-level="7.0.2" data-path="logistic-regression.html"><a href="logistic-regression.html#read-datasets"><i class="fa fa-check"></i><b>7.0.2</b> Read datasets</a></li>
+<li class="chapter" data-level="7.0.3" data-path="logistic-regression.html"><a href="logistic-regression.html#define-the-model"><i class="fa fa-check"></i><b>7.0.3</b> Define the model</a></li>
+<li class="chapter" data-level="7.0.4" data-path="logistic-regression.html"><a href="logistic-regression.html#training-1"><i class="fa fa-check"></i><b>7.0.4</b> Training</a></li>
+<li class="chapter" data-level="7.0.5" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction"><i class="fa fa-check"></i><b>7.0.5</b> Prediction</a></li>
+<li class="chapter" data-level="7.0.6" data-path="logistic-regression.html"><a href="logistic-regression.html#save-the-model"><i class="fa fa-check"></i><b>7.0.6</b> Save the model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="neural-networks.html"><a href="neural-networks.html"><i class="fa fa-check"></i><b>8</b> Neural Networks</a><ul>
+<li class="chapter" data-level="8.1" data-path="neural-networks.html"><a href="neural-networks.html#in-r"><i class="fa fa-check"></i><b>8.1</b> In R</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="neural-networks.html"><a href="neural-networks.html#select-device-1"><i class="fa fa-check"></i><b>8.1.1</b> Select device</a></li>
+<li class="chapter" data-level="8.1.2" data-path="neural-networks.html"><a href="neural-networks.html#create-datasets"><i class="fa fa-check"></i><b>8.1.2</b> Create datasets</a></li>
+<li class="chapter" data-level="8.1.3" data-path="neural-networks.html"><a href="neural-networks.html#define-the-model-1"><i class="fa fa-check"></i><b>8.1.3</b> Define the model</a></li>
+<li class="chapter" data-level="8.1.4" data-path="neural-networks.html"><a href="neural-networks.html#loss-function-1"><i class="fa fa-check"></i><b>8.1.4</b> Loss function</a></li>
+<li class="chapter" data-level="8.1.5" data-path="neural-networks.html"><a href="neural-networks.html#iterate-through-batches"><i class="fa fa-check"></i><b>8.1.5</b> Iterate through batches</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="datasets-in-pytorch.html"><a href="datasets-in-pytorch.html"><i class="fa fa-check"></i><b>9</b> Datasets in PyTorch</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Tutorial of rTorch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-regression" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Linear Regression</h1>
+<div id="case-1-simple-linear-regression" class="section level2">
+<h2><span class="header-section-number">6.1</span> Case 1: simple linear regression</h2>
+<p>Source: <a href="https://www.guru99.com/pytorch-tutorial.html" class="uri">https://www.guru99.com/pytorch-tutorial.html</a></p>
+</div>
+<div id="creating-the-network-model" class="section level2">
+<h2><span class="header-section-number">6.2</span> Creating the network model</h2>
+<p>Our network model is a simple Linear layer with an input and an output shape of one.</p>
+<p>And the network output should be like this</p>
+<pre><code>Net(
+  (hidden): Linear(in_features=1, out_features=1, bias=True)
+)</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb199-3" data-line-number="3">nn       &lt;-<span class="st"> </span>torch<span class="op">$</span>nn</a>
+<a class="sourceLine" id="cb199-4" data-line-number="4">Variable &lt;-<span class="st"> </span>torch<span class="op">$</span>autograd<span class="op">$</span>Variable</a>
+<a class="sourceLine" id="cb199-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb199-6" data-line-number="6">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">123</span>)</a></code></pre></div>
+<pre><code>## &lt;torch._C.Generator&gt;</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">py_run_string</span>(<span class="st">&quot;import torch&quot;</span>)</a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">main =<span class="st"> </span><span class="kw">py_run_string</span>(</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3"><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb201-4" data-line-number="4"><span class="st">import torch.nn as nn</span></a>
+<a class="sourceLine" id="cb201-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="st">class Net(nn.Module):</span></a>
+<a class="sourceLine" id="cb201-7" data-line-number="7"><span class="st">   def __init__(self):</span></a>
+<a class="sourceLine" id="cb201-8" data-line-number="8"><span class="st">       super(Net, self).__init__()</span></a>
+<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="st">       self.layer = torch.nn.Linear(1, 1)</span></a>
+<a class="sourceLine" id="cb201-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb201-11" data-line-number="11"><span class="st">   def forward(self, x):</span></a>
+<a class="sourceLine" id="cb201-12" data-line-number="12"><span class="st">       x = self.layer(x)      </span></a>
+<a class="sourceLine" id="cb201-13" data-line-number="13"><span class="st">       return x</span></a>
+<a class="sourceLine" id="cb201-14" data-line-number="14"><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb201-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb201-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb201-17" data-line-number="17"><span class="co"># build a Linear Rgression model</span></a>
+<a class="sourceLine" id="cb201-18" data-line-number="18">net &lt;-<span class="st"> </span>main<span class="op">$</span><span class="kw">Net</span>()</a>
+<a class="sourceLine" id="cb201-19" data-line-number="19"><span class="kw">print</span>(net)</a></code></pre></div>
+<pre><code>## Net(
+##   (layer): Linear(in_features=1, out_features=1, bias=True)
+## )</code></pre>
+</div>
+<div id="datasets-1" class="section level2">
+<h2><span class="header-section-number">6.3</span> Datasets</h2>
+<p>Before you start the training process, you need to know our data. You make a random function to test our model. <span class="math inline">\(Y = x3 sin(x)+ 3x+0.8 rand(100)\)</span></p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">np<span class="op">$</span>random<span class="op">$</span><span class="kw">seed</span>(123L)</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb203-3" data-line-number="3">x =<span class="st"> </span>np<span class="op">$</span>random<span class="op">$</span><span class="kw">rand</span>(100L)</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4">y =<span class="st"> </span>np<span class="op">$</span><span class="kw">sin</span>(x) <span class="op">*</span><span class="st"> </span>np<span class="op">$</span><span class="kw">power</span>(x, 3L) <span class="op">+</span><span class="st"> </span>3L <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>np<span class="op">$</span>random<span class="op">$</span><span class="kw">rand</span>(100L) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span></a>
+<a class="sourceLine" id="cb203-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="kw">plot</span>(x, y)</a></code></pre></div>
+<p><img src="rtorch-book_files/figure-html/unnamed-chunk-56-1.png" width="528" /></p>
+<p>Before you start the training process, you need to convert the numpy array to Variables that supported by Torch and autograd.</p>
+<div id="converting-from-numpy-to-tensor" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Converting from numpy to tensor</h3>
+<p>Notice that before converting to a Torch tensor, we need first to convert the R numeric vector to a <code>numpy</code> array:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="co"># convert numpy array to tensor in shape of input size</span></a>
+<a class="sourceLine" id="cb204-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x)</a>
+<a class="sourceLine" id="cb204-3" data-line-number="3">y &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(y)</a>
+<a class="sourceLine" id="cb204-4" data-line-number="4">x =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 1L))<span class="op">$</span><span class="kw">float</span>()</a>
+<a class="sourceLine" id="cb204-5" data-line-number="5">y =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(y<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 1L))<span class="op">$</span><span class="kw">float</span>()</a>
+<a class="sourceLine" id="cb204-6" data-line-number="6"><span class="kw">print</span>(x, y)</a></code></pre></div>
+<pre><code>## tensor([[0.6965],
+##         [0.2861],
+##         [0.2269],
+##         [0.5513],
+##         [0.7195],
+##         [0.4231],
+##         [0.9808],
+##         [0.6848],
+##         [0.4809],
+##         [0.3921],
+##         [0.3432],
+##         [0.7290],
+##         [0.4386],
+##         [0.0597],
+##         [0.3980],
+##         [0.7380],
+##         [0.1825],
+##         [0.1755],
+##         [0.5316],
+##         [0.5318],
+##         [0.6344],
+##         [0.8494],
+##         [0.7245],
+##         [0.6110],
+##         [0.7224],
+##         [0.3230],
+##         [0.3618],
+##         [0.2283],
+##         [0.2937],
+##         [0.6310],
+##         [0.0921],
+##         [0.4337],
+##         [0.4309],
+##         [0.4937],
+##         [0.4258],
+##         [0.3123],
+##         [0.4264],
+##         [0.8934],
+##         [0.9442],
+##         [0.5018],
+##         [0.6240],
+##         [0.1156],
+##         [0.3173],
+##         [0.4148],
+##         [0.8663],
+##         [0.2505],
+##         [0.4830],
+##         [0.9856],
+##         [0.5195],
+##         [0.6129],
+##         [0.1206],
+##         [0.8263],
+##         [0.6031],
+##         [0.5451],
+##         [0.3428],
+##         [0.3041],
+##         [0.4170],
+##         [0.6813],
+##         [0.8755],
+##         [0.5104],
+##         [0.6693],
+##         [0.5859],
+##         [0.6249],
+##         [0.6747],
+##         [0.8423],
+##         [0.0832],
+##         [0.7637],
+##         [0.2437],
+##         [0.1942],
+##         [0.5725],
+##         [0.0957],
+##         [0.8853],
+##         [0.6272],
+##         [0.7234],
+##         [0.0161],
+##         [0.5944],
+##         [0.5568],
+##         [0.1590],
+##         [0.1531],
+##         [0.6955],
+##         [0.3188],
+##         [0.6920],
+##         [0.5544],
+##         [0.3890],
+##         [0.9251],
+##         [0.8417],
+##         [0.3574],
+##         [0.0436],
+##         [0.3048],
+##         [0.3982],
+##         [0.7050],
+##         [0.9954],
+##         [0.3559],
+##         [0.7625],
+##         [0.5932],
+##         [0.6917],
+##         [0.1511],
+##         [0.3989],
+##         [0.2409],
+##         [0.3435]])</code></pre>
+</div>
+</div>
+<div id="optimizer-and-loss" class="section level2">
+<h2><span class="header-section-number">6.4</span> Optimizer and Loss</h2>
+<p>Next, you should define the Optimizer and the Loss Function for our training process.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="co"># Define Optimizer and Loss Function</span></a>
+<a class="sourceLine" id="cb206-2" data-line-number="2">optimizer &lt;-<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(net<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span><span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb206-3" data-line-number="3">loss_func &lt;-<span class="st"> </span>torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">MSELoss</span>()</a>
+<a class="sourceLine" id="cb206-4" data-line-number="4"><span class="kw">print</span>(optimizer)</a></code></pre></div>
+<pre><code>## SGD (
+## Parameter Group 0
+##     dampening: 0
+##     lr: 0.2
+##     momentum: 0
+##     nesterov: False
+##     weight_decay: 0
+## )</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="kw">print</span>(loss_func)</a></code></pre></div>
+<pre><code>## MSELoss()</code></pre>
+</div>
+<div id="training" class="section level2">
+<h2><span class="header-section-number">6.5</span> Training</h2>
+<p>Now let’s start our training process. With an epoch of 250, you will iterate our data to find the best value for our hyperparameters.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="co"># x = x$type(torch$float)   # make it a a FloatTensor</span></a>
+<a class="sourceLine" id="cb210-2" data-line-number="2"><span class="co"># y = y$type(torch$float)</span></a>
+<a class="sourceLine" id="cb210-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb210-4" data-line-number="4"><span class="co"># x &lt;- torch$as_tensor(x, dtype = torch$float)</span></a>
+<a class="sourceLine" id="cb210-5" data-line-number="5"><span class="co"># y &lt;- torch$as_tensor(y, dtype = torch$float)</span></a>
+<a class="sourceLine" id="cb210-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb210-7" data-line-number="7">inputs  =<span class="st"> </span><span class="kw">Variable</span>(x)</a>
+<a class="sourceLine" id="cb210-8" data-line-number="8">outputs =<span class="st"> </span><span class="kw">Variable</span>(y)</a>
+<a class="sourceLine" id="cb210-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb210-10" data-line-number="10"><span class="co"># base plot</span></a>
+<a class="sourceLine" id="cb210-11" data-line-number="11"><span class="kw">plot</span>(x<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), y<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="rtorch-book_files/figure-html/unnamed-chunk-59-1.png" width="528" /></p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">250</span>) {</a>
+<a class="sourceLine" id="cb211-2" data-line-number="2">   prediction =<span class="st"> </span><span class="kw">net</span>(inputs)</a>
+<a class="sourceLine" id="cb211-3" data-line-number="3">   loss =<span class="st"> </span><span class="kw">loss_func</span>(prediction, outputs)</a>
+<a class="sourceLine" id="cb211-4" data-line-number="4">   optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
+<a class="sourceLine" id="cb211-5" data-line-number="5">   loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb211-6" data-line-number="6">   optimizer<span class="op">$</span><span class="kw">step</span>()</a>
+<a class="sourceLine" id="cb211-7" data-line-number="7">   </a>
+<a class="sourceLine" id="cb211-8" data-line-number="8">   <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb211-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb211-10" data-line-number="10">   <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">10</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb211-11" data-line-number="11">       <span class="co"># plot and show learning process</span></a>
+<a class="sourceLine" id="cb211-12" data-line-number="12">      <span class="co"># points(x$data$numpy(), y$data$numpy())</span></a>
+<a class="sourceLine" id="cb211-13" data-line-number="13">      <span class="kw">points</span>(x<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), prediction<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb211-14" data-line-number="14">       <span class="co"># cat(i, loss$data$numpy(), &quot;\n&quot;)</span></a>
+<a class="sourceLine" id="cb211-15" data-line-number="15">   }</a>
+<a class="sourceLine" id="cb211-16" data-line-number="16">}</a></code></pre></div>
+</div>
+<div id="result" class="section level2">
+<h2><span class="header-section-number">6.6</span> Result</h2>
+<p>As you can see below, you successfully performed regression with a neural network. Actually, on every iteration, the red line in the plot will update and change its position to fit the data. But in this picture, you only show you the final result.</p>
+</div>
+<div id="case-2-rainfall" class="section level2">
+<h2><span class="header-section-number">6.7</span> Case 2: Rainfall</h2>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+</div>
+<div id="select-device" class="section level2">
+<h2><span class="header-section-number">6.8</span> Select device</h2>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## &lt;torch._C.Generator&gt;</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a></code></pre></div>
+</div>
+<div id="training-data" class="section level2">
+<h2><span class="header-section-number">6.9</span> Training data</h2>
+<p>The training data can be represented using 2 matrices (inputs and targets), each with one row per observation, and one column per variable.</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="co"># Input (temp, rainfall, humidity)</span></a>
+<a class="sourceLine" id="cb216-2" data-line-number="2">inputs =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">43</span>),</a>
+<a class="sourceLine" id="cb216-3" data-line-number="3">                   <span class="kw">list</span>(<span class="dv">91</span>, <span class="dv">88</span>, <span class="dv">64</span>),</a>
+<a class="sourceLine" id="cb216-4" data-line-number="4">                   <span class="kw">list</span>(<span class="dv">87</span>, <span class="dv">134</span>, <span class="dv">58</span>),</a>
+<a class="sourceLine" id="cb216-5" data-line-number="5">                   <span class="kw">list</span>(<span class="dv">102</span>, <span class="dv">43</span>, <span class="dv">37</span>),</a>
+<a class="sourceLine" id="cb216-6" data-line-number="6">                   <span class="kw">list</span>(<span class="dv">69</span>, <span class="dv">96</span>, <span class="dv">70</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a>
+<a class="sourceLine" id="cb216-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb216-8" data-line-number="8"><span class="co"># Targets (apples, oranges)</span></a>
+<a class="sourceLine" id="cb216-9" data-line-number="9">targets =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">56</span>, <span class="dv">70</span>), </a>
+<a class="sourceLine" id="cb216-10" data-line-number="10">                    <span class="kw">list</span>(<span class="dv">81</span>, <span class="dv">101</span>),</a>
+<a class="sourceLine" id="cb216-11" data-line-number="11">                    <span class="kw">list</span>(<span class="dv">119</span>, <span class="dv">133</span>),</a>
+<a class="sourceLine" id="cb216-12" data-line-number="12">                    <span class="kw">list</span>(<span class="dv">22</span>, <span class="dv">37</span>), </a>
+<a class="sourceLine" id="cb216-13" data-line-number="13">                    <span class="kw">list</span>(<span class="dv">103</span>, <span class="dv">119</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a></code></pre></div>
+</div>
+<div id="convert-to-tensors" class="section level2">
+<h2><span class="header-section-number">6.10</span> Convert to tensors</h2>
+<p>Before we build a model, we need to convert inputs and targets to PyTorch tensors.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="co"># Convert inputs and targets to tensors</span></a>
+<a class="sourceLine" id="cb217-2" data-line-number="2">inputs =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(inputs)</a>
+<a class="sourceLine" id="cb217-3" data-line-number="3">targets =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(targets)</a>
+<a class="sourceLine" id="cb217-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb217-5" data-line-number="5"><span class="kw">print</span>(inputs)</a></code></pre></div>
+<pre><code>## tensor([[ 73.,  67.,  43.],
+##         [ 91.,  88.,  64.],
+##         [ 87., 134.,  58.],
+##         [102.,  43.,  37.],
+##         [ 69.,  96.,  70.]], dtype=torch.float64)</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">print</span>(targets)</a></code></pre></div>
+<pre><code>## tensor([[ 56.,  70.],
+##         [ 81., 101.],
+##         [119., 133.],
+##         [ 22.,  37.],
+##         [103., 119.]], dtype=torch.float64)</code></pre>
+<p>The weights and biases can also be represented as matrices, initialized with random values. The first row of <span class="math inline">\(w\)</span> and the first element of <span class="math inline">\(b\)</span> are used to predict the first target variable, i.e. yield for apples, and, similarly, the second for oranges.</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1"><span class="co"># random numbers for weights and biases. Then convert to double()</span></a>
+<a class="sourceLine" id="cb221-2" data-line-number="2">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>double)</a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb221-4" data-line-number="4">w =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, 3L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)  <span class="co">#$double()</span></a>
+<a class="sourceLine" id="cb221-5" data-line-number="5">b =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)      <span class="co">#$double()</span></a>
+<a class="sourceLine" id="cb221-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb221-7" data-line-number="7"><span class="kw">print</span>(w)</a></code></pre></div>
+<pre><code>## tensor([[ 1.5410, -0.2934, -2.1788],
+##         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">print</span>(b)</a></code></pre></div>
+<pre><code>## tensor([0.4033, 0.8380], requires_grad=True)</code></pre>
+</div>
+<div id="build-the-model" class="section level2">
+<h2><span class="header-section-number">6.11</span> Build the model</h2>
+<p>The model is simply a function that performs a matrix multiplication of the input <span class="math inline">\(x\)</span> and the weights <span class="math inline">\(w\)</span> (transposed), and adds the bias <span class="math inline">\(b\)</span> (replicated for each observation).</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb225-2" data-line-number="2">  wt &lt;-<span class="st"> </span>w<span class="op">$</span><span class="kw">t</span>()</a>
+<a class="sourceLine" id="cb225-3" data-line-number="3">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">add</span>(torch<span class="op">$</span><span class="kw">mm</span>(x, wt), b))</a>
+<a class="sourceLine" id="cb225-4" data-line-number="4">}</a></code></pre></div>
+</div>
+<div id="generate-predictions" class="section level2">
+<h2><span class="header-section-number">6.12</span> Generate predictions</h2>
+<p>The matrix obtained by passing the input data to the model is a set of predictions for the target variables.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
+<a class="sourceLine" id="cb226-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb226-3" data-line-number="3"><span class="kw">print</span>(preds)</a></code></pre></div>
+<pre><code>## tensor([[  -0.4516,  -90.4691],
+##         [ -24.6303, -132.3828],
+##         [ -31.2192, -176.1530],
+##         [  64.3523,  -39.5645],
+##         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" data-line-number="1"><span class="co"># Compare with targets</span></a>
+<a class="sourceLine" id="cb228-2" data-line-number="2"><span class="kw">print</span>(targets)</a></code></pre></div>
+<pre><code>## tensor([[ 56.,  70.],
+##         [ 81., 101.],
+##         [119., 133.],
+##         [ 22.,  37.],
+##         [103., 119.]])</code></pre>
+<p>Because we’ve started with random weights and biases, the model does not a very good job of predicting the target variables.</p>
+</div>
+<div id="loss-function" class="section level2">
+<h2><span class="header-section-number">6.13</span> Loss Function</h2>
+<p>We can compare the predictions with the actual targets, using the following method:</p>
+<ul>
+<li>Calculate the difference between the two matrices (preds and targets).</li>
+<li>Square all elements of the difference matrix to remove negative values.</li>
+<li>Calculate the average of the elements in the resulting matrix.</li>
+</ul>
+<p>The result is a single number, known as the mean squared error (MSE).</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" data-line-number="1"><span class="co"># MSE loss</span></a>
+<a class="sourceLine" id="cb230-2" data-line-number="2">mse =<span class="st"> </span><span class="cf">function</span>(t1, t2) {</a>
+<a class="sourceLine" id="cb230-3" data-line-number="3">  diff &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(t1, t2)</a>
+<a class="sourceLine" id="cb230-4" data-line-number="4">  mul &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sum</span>(torch<span class="op">$</span><span class="kw">mul</span>(diff, diff))</a>
+<a class="sourceLine" id="cb230-5" data-line-number="5">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">div</span>(mul, diff<span class="op">$</span><span class="kw">numel</span>()))</a>
+<a class="sourceLine" id="cb230-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1"><span class="co"># Compute loss</span></a>
+<a class="sourceLine" id="cb231-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb231-3" data-line-number="3"><span class="kw">print</span>(loss)</a></code></pre></div>
+<pre><code>## tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1"><span class="co"># 46194</span></a>
+<a class="sourceLine" id="cb233-2" data-line-number="2"><span class="co"># 33060.8070</span></a></code></pre></div>
+<p>The resulting number is called the <strong>loss</strong>, because it indicates how bad the model is at predicting the target variables. Lower the loss, better the model.</p>
+</div>
+<div id="compute-gradients" class="section level2">
+<h2><span class="header-section-number">6.14</span> Compute Gradients</h2>
+<p>With PyTorch, we can automatically compute the gradient or derivative of the loss w.r.t. to the weights and biases, because they have <code>requires_grad</code> set to True.</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
+<a class="sourceLine" id="cb234-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a></code></pre></div>
+<p>The gradients are stored in the .grad property of the respective tensors.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="co"># Gradients for weights</span></a>
+<a class="sourceLine" id="cb235-2" data-line-number="2"><span class="kw">print</span>(w)</a></code></pre></div>
+<pre><code>## tensor([[ 1.5410, -0.2934, -2.1788],
+##         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">print</span>(w<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([[ -6938.4351,  -9674.6757,  -5744.0206],
+##         [-17408.7861, -20595.9333, -12453.4702]])</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1"><span class="co"># Gradients for bias</span></a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="kw">print</span>(b)</a></code></pre></div>
+<pre><code>## tensor([0.4033, 0.8380], requires_grad=True)</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1"><span class="kw">print</span>(b<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([ -89.3802, -212.1051])</code></pre>
+<p>A key insight from calculus is that the gradient indicates the rate of change of the loss, or the slope of the loss function w.r.t. the weights and biases.</p>
+<ul>
+<li>If a gradient element is positive:
+<ul>
+<li>increasing the element’s value slightly will increase the loss.</li>
+<li>decreasing the element’s value slightly will decrease the loss.</li>
+</ul></li>
+<li>If a gradient element is negative,
+<ul>
+<li>increasing the element’s value slightly will decrease the loss.</li>
+<li>decreasing the element’s value slightly will increase the loss.</li>
+</ul></li>
+</ul>
+<p>The increase or decrease is proportional to the value of the gradient.</p>
+<p>Finally, we’ll reset the gradients to zero before moving forward, because PyTorch accumulates gradients.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" data-line-number="1"><span class="co"># Reset the gradients</span></a>
+<a class="sourceLine" id="cb243-2" data-line-number="2">w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a></code></pre></div>
+<pre><code>## tensor([[0., 0., 0.],
+##         [0., 0., 0.]])</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" data-line-number="1">b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a></code></pre></div>
+<pre><code>## tensor([0., 0.])</code></pre>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1"><span class="kw">print</span>(w<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([[0., 0., 0.],
+##         [0., 0., 0.]])</code></pre>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">print</span>(b<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([0., 0.])</code></pre>
+</div>
+<div id="adjust-weights-and-biases-using-gradient-descent" class="section level2">
+<h2><span class="header-section-number">6.15</span> Adjust weights and biases using gradient descent</h2>
+<p>We’ll reduce the loss and improve our model using the gradient descent algorithm, which has the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Generate predictions</li>
+<li>Calculate the loss</li>
+<li>Compute gradients w.r.t the weights and biases</li>
+<li>Adjust the weights by subtracting a small quantity proportional to the gradient</li>
+<li>Reset the gradients to zero</li>
+</ol>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
+<a class="sourceLine" id="cb251-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb251-3" data-line-number="3"><span class="kw">print</span>(preds)</a></code></pre></div>
+<pre><code>## tensor([[  -0.4516,  -90.4691],
+##         [ -24.6303, -132.3828],
+##         [ -31.2192, -176.1530],
+##         [  64.3523,  -39.5645],
+##         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1"><span class="co"># Calculate the loss</span></a>
+<a class="sourceLine" id="cb253-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb253-3" data-line-number="3"><span class="kw">print</span>(loss)</a></code></pre></div>
+<pre><code>## tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb255-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
+<a class="sourceLine" id="cb255-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb255-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb255-4" data-line-number="4"><span class="kw">print</span>(w<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([[ -6938.4351,  -9674.6757,  -5744.0206],
+##         [-17408.7861, -20595.9333, -12453.4702]])</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" data-line-number="1"><span class="kw">print</span>(b<span class="op">$</span>grad)</a></code></pre></div>
+<pre><code>## tensor([ -89.3802, -212.1051])</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
+<a class="sourceLine" id="cb259-2" data-line-number="2"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb259-3" data-line-number="3">  <span class="kw">print</span>(w); <span class="kw">print</span>(b)    <span class="co"># requires_grad attribute remains</span></a>
+<a class="sourceLine" id="cb259-4" data-line-number="4">  w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb259-5" data-line-number="5">  b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb259-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb259-7" data-line-number="7">  <span class="kw">print</span>(w<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
+<a class="sourceLine" id="cb259-8" data-line-number="8">  <span class="kw">print</span>(b<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
+<a class="sourceLine" id="cb259-9" data-line-number="9">})</a></code></pre></div>
+<pre><code>## tensor([[ 1.5410, -0.2934, -2.1788],
+##         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)
+## tensor([0.4033, 0.8380], requires_grad=True)
+## tensor([[0., 0., 0.],
+##         [0., 0., 0.]])
+## tensor([0., 0.])</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" data-line-number="1"><span class="kw">print</span>(w)</a></code></pre></div>
+<pre><code>## tensor([[ 1.6104, -0.1967, -2.1213],
+##         [ 0.7425, -0.8786, -1.2741]], requires_grad=True)</code></pre>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" data-line-number="1"><span class="kw">print</span>(b)</a></code></pre></div>
+<pre><code>## tensor([0.4042, 0.8401], requires_grad=True)</code></pre>
+<p>With the new weights and biases, the model should have a lower loss.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1"><span class="co"># Calculate loss</span></a>
+<a class="sourceLine" id="cb265-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb265-3" data-line-number="3">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb265-4" data-line-number="4"><span class="kw">print</span>(loss)</a></code></pre></div>
+<pre><code>## tensor(23432.4894, grad_fn=&lt;DivBackward0&gt;)</code></pre>
+</div>
+<div id="train-for-multiple-epochs" class="section level2">
+<h2><span class="header-section-number">6.16</span> Train for multiple epochs</h2>
+<p>To reduce the loss further, we repeat the process of adjusting the weights and biases using the gradients multiple times. Each iteration is called an <strong>epoch</strong>.</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="co"># Running all together</span></a>
+<a class="sourceLine" id="cb267-2" data-line-number="2"><span class="co"># Adjust weights and reset gradients</span></a>
+<a class="sourceLine" id="cb267-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {</a>
+<a class="sourceLine" id="cb267-4" data-line-number="4">  preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb267-5" data-line-number="5">  loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb267-6" data-line-number="6">  loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb267-7" data-line-number="7">  <span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb267-8" data-line-number="8">    w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb267-9" data-line-number="9">    b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb267-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb267-11" data-line-number="11">    w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb267-12" data-line-number="12">    b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb267-13" data-line-number="13">  })</a>
+<a class="sourceLine" id="cb267-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb267-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb267-16" data-line-number="16"><span class="co"># Calculate loss</span></a>
+<a class="sourceLine" id="cb267-17" data-line-number="17">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb267-18" data-line-number="18">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb267-19" data-line-number="19"><span class="kw">print</span>(loss)</a></code></pre></div>
+<pre><code>## tensor(1258.0216, grad_fn=&lt;DivBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="co"># predictions</span></a>
+<a class="sourceLine" id="cb269-2" data-line-number="2">preds</a></code></pre></div>
+<pre><code>## tensor([[ 69.2462,  80.2082],
+##         [ 73.7183,  97.2052],
+##         [118.5780, 124.9272],
+##         [ 89.2282,  92.7052],
+##         [ 47.4648,  80.7782]], grad_fn=&lt;AddBackward0&gt;)</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="co"># Targets</span></a>
+<a class="sourceLine" id="cb271-2" data-line-number="2">targets</a></code></pre></div>
+<pre><code>## tensor([[ 56.,  70.],
+##         [ 81., 101.],
+##         [119., 133.],
+##         [ 22.,  37.],
+##         [103., 119.]])</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-algebra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["rtorch-book.pdf", "rtorch-book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

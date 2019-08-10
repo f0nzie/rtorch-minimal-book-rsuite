@@ -4,3 +4,5 @@
 .Rbuildignore
 .Ruserdata
 config.txt
+
+rtorch-book/_bookdown_files/
