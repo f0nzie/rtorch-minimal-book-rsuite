@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="neural-networks.html">
-<link rel="next" href="references.html">
+<link rel="next" href="bookdown-tips.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -128,10 +128,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal rTorch Tutorial</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.1</b> Installation</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i><b>2.1</b> Installation</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#matrices-and-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Matrices and Linear Algebra</a></li>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-do-we-start-using-rtorch"><i class="fa fa-check"></i><b>2.2</b> How do we start using <code>rTorch</code></a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>2.3</b> What can you do with <code>rTorch</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="lessons-learned.html"><a href="lessons-learned.html"><i class="fa fa-check"></i><b>3</b> Lessons Learned</a><ul>
 <li class="chapter" data-level="3.1" data-path="lessons-learned.html"><a href="lessons-learned.html#enumeration"><i class="fa fa-check"></i><b>3.1</b> Enumeration</a></li>
@@ -141,9 +144,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="lessons-learned.html"><a href="lessons-learned.html#zero-gradient"><i class="fa fa-check"></i><b>3.3</b> Zero gradient</a></li>
 <li class="chapter" data-level="3.4" data-path="lessons-learned.html"><a href="lessons-learned.html#transform-a-tensor"><i class="fa fa-check"></i><b>3.4</b> Transform a tensor</a></li>
-<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a></li>
-<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to numpy object</a></li>
-<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a numpy object to an R object</a></li>
+<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="lessons-learned.html"><a href="lessons-learned.html#examples"><i class="fa fa-check"></i><b>3.5.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to <code>numpy</code> object</a></li>
+<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>4</b> Tensors</a><ul>
 <li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#r-code"><i class="fa fa-check"></i><b>4.1</b> R code</a><ul>
@@ -202,6 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datasets-in-pytorch.html"><a href="datasets-in-pytorch.html"><i class="fa fa-check"></i><b>9</b> Datasets in PyTorch</a></li>
+<li class="chapter" data-level="10" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i><b>10</b> Bookdown tips</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -233,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bookdown-tips.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

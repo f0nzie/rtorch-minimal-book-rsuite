@@ -128,10 +128,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal rTorch Tutorial</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.1</b> Installation</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i><b>2.1</b> Installation</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#matrices-and-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Matrices and Linear Algebra</a></li>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-do-we-start-using-rtorch"><i class="fa fa-check"></i><b>2.2</b> How do we start using <code>rTorch</code></a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>2.3</b> What can you do with <code>rTorch</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="lessons-learned.html"><a href="lessons-learned.html"><i class="fa fa-check"></i><b>3</b> Lessons Learned</a><ul>
 <li class="chapter" data-level="3.1" data-path="lessons-learned.html"><a href="lessons-learned.html#enumeration"><i class="fa fa-check"></i><b>3.1</b> Enumeration</a></li>
@@ -141,9 +144,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="lessons-learned.html"><a href="lessons-learned.html#zero-gradient"><i class="fa fa-check"></i><b>3.3</b> Zero gradient</a></li>
 <li class="chapter" data-level="3.4" data-path="lessons-learned.html"><a href="lessons-learned.html#transform-a-tensor"><i class="fa fa-check"></i><b>3.4</b> Transform a tensor</a></li>
-<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a></li>
-<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to numpy object</a></li>
-<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a numpy object to an R object</a></li>
+<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="lessons-learned.html"><a href="lessons-learned.html#examples"><i class="fa fa-check"></i><b>3.5.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to <code>numpy</code> object</a></li>
+<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>4</b> Tensors</a><ul>
 <li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#r-code"><i class="fa fa-check"></i><b>4.1</b> R code</a><ul>
@@ -202,6 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datasets-in-pytorch.html"><a href="datasets-in-pytorch.html"><i class="fa fa-check"></i><b>9</b> Datasets in PyTorch</a></li>
+<li class="chapter" data-level="10" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i><b>10</b> Bookdown tips</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -226,18 +232,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="lessons-learned" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Lessons Learned</h1>
 <p>Here is a review of existing methods.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
 <div id="enumeration" class="section level2">
 <h2><span class="header-section-number">3.1</span> Enumeration</h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">x_train =<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="fl">3.3</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">6.71</span>, <span class="fl">6.93</span>, <span class="fl">4.168</span>, </a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">                  <span class="fl">9.779</span>, <span class="fl">6.182</span>, <span class="fl">7.59</span>, <span class="fl">2.167</span>, <span class="fl">7.042</span>,</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">                  <span class="fl">10.791</span>, <span class="fl">5.313</span>, <span class="fl">7.997</span>, <span class="fl">3.1</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">x_train &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x_train)</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">x_train =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x_train)         <span class="co"># convert to tensor</span></a>
-<a class="sourceLine" id="cb31-7" data-line-number="7">x_train =<span class="st"> </span>x_train<span class="op">$</span><span class="kw">type</span>(torch<span class="op">$</span>FloatTensor)   <span class="co"># make it a a FloatTensor</span></a>
-<a class="sourceLine" id="cb31-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb31-9" data-line-number="9">x_train</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x_train =<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="fl">3.3</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">6.71</span>, <span class="fl">6.93</span>, <span class="fl">4.168</span>, </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                  <span class="fl">9.779</span>, <span class="fl">6.182</span>, <span class="fl">7.59</span>, <span class="fl">2.167</span>, <span class="fl">7.042</span>,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">                  <span class="fl">10.791</span>, <span class="fl">5.313</span>, <span class="fl">7.997</span>, <span class="fl">3.1</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">x_train &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x_train)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">x_train =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x_train)         <span class="co"># convert to tensor</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">x_train =<span class="st"> </span>x_train<span class="op">$</span><span class="kw">type</span>(torch<span class="op">$</span>FloatTensor)   <span class="co"># make it a a FloatTensor</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">x_train</a></code></pre></div>
 <pre><code>## tensor([[ 3.3000],
 ##         [ 4.4000],
 ##         [ 5.5000],
@@ -253,18 +259,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##         [ 5.3130],
 ##         [ 7.9970],
 ##         [ 3.1000]])</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">x_train<span class="op">$</span><span class="kw">nelement</span>()    <span class="co"># number of elements in the tensor</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x_train<span class="op">$</span><span class="kw">nelement</span>()    <span class="co"># number of elements in the tensor</span></a></code></pre></div>
 <pre><code>## [1] 15</code></pre>
 </div>
 <div id="how-to-iterate-a-generator" class="section level2">
 <h2><span class="header-section-number">3.2</span> How to iterate a generator</h2>
 <div id="using-enumerate-and-iterate" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Using <code>enumerate</code> and <code>iterate</code></h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">py =<span class="st"> </span><span class="kw">import_builtins</span>()</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">xx =<span class="st"> </span>py<span class="op">$</span><span class="kw">enumerate</span>(x_train)</a>
-<a class="sourceLine" id="cb35-4" data-line-number="4">xit =<span class="st"> </span><span class="kw">iterate</span>(xx, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">xit</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">py =<span class="st"> </span><span class="kw">import_builtins</span>()</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">xx =<span class="st"> </span>py<span class="op">$</span><span class="kw">enumerate</span>(x_train)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">xit =<span class="st"> </span><span class="kw">iterate</span>(xx, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">xit</a></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
 ## [1] 0
@@ -390,18 +396,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="zero-gradient" class="section level2">
 <h2><span class="header-section-number">3.3</span> Zero gradient</h2>
+<p>The zero gradient was one of the most difficult to implement in R.</p>
 </div>
 <div id="transform-a-tensor" class="section level2">
 <h2><span class="header-section-number">3.4</span> Transform a tensor</h2>
+<p>Explain how transform a tensor back and forth to <code>numpy</code>.
+Why is this important?</p>
 </div>
 <div id="build-a-model-class" class="section level2">
 <h2><span class="header-section-number">3.5</span> Build a model class</h2>
+<p>PyTorch classes cannot not directly instantiated from <code>R</code>. We need an intermediate step to create a class. For this, we use <code>reticulate</code> functions that will read the class implementation in <code>Python</code> code.</p>
+<div id="examples" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Examples</h3>
+</div>
 </div>
 <div id="convert-a-tensor-to-numpy-object" class="section level2">
-<h2><span class="header-section-number">3.6</span> Convert a tensor to numpy object</h2>
+<h2><span class="header-section-number">3.6</span> Convert a tensor to <code>numpy</code> object</h2>
+<p>This is a frequent operation. I have found that this is necessary when</p>
+<ul>
+<li>a numpy function is not implemented in PyTorch</li>
+<li>We need to convert a tensor to R</li>
+<li>Perform a boolean operation that is not directly available in PyTorch.</li>
+</ul>
 </div>
 <div id="convert-a-numpy-object-to-an-r-object" class="section level2">
-<h2><span class="header-section-number">3.7</span> Convert a numpy object to an R object</h2>
+<h2><span class="header-section-number">3.7</span> Convert a <code>numpy</code> object to an <code>R</code> object</h2>
+<p>This is mainly required for these reasons:</p>
+<ol style="list-style-type: decimal">
+<li>Create a data structure in R</li>
+<li>Plot using r-base or ggplot2</li>
+<li>Perform an analysis on parts of a tensor</li>
+<li>Use R statistical functions that are not available in PyTorch.</li>
+</ol>
 
 </div>
 </div>

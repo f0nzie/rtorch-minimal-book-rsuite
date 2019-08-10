@@ -128,10 +128,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal rTorch Tutorial</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.1</b> Installation</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i><b>2.1</b> Installation</a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#matrices-and-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Matrices and Linear Algebra</a></li>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-do-we-start-using-rtorch"><i class="fa fa-check"></i><b>2.2</b> How do we start using <code>rTorch</code></a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>2.3</b> What can you do with <code>rTorch</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="lessons-learned.html"><a href="lessons-learned.html"><i class="fa fa-check"></i><b>3</b> Lessons Learned</a><ul>
 <li class="chapter" data-level="3.1" data-path="lessons-learned.html"><a href="lessons-learned.html#enumeration"><i class="fa fa-check"></i><b>3.1</b> Enumeration</a></li>
@@ -141,9 +144,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="lessons-learned.html"><a href="lessons-learned.html#zero-gradient"><i class="fa fa-check"></i><b>3.3</b> Zero gradient</a></li>
 <li class="chapter" data-level="3.4" data-path="lessons-learned.html"><a href="lessons-learned.html#transform-a-tensor"><i class="fa fa-check"></i><b>3.4</b> Transform a tensor</a></li>
-<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a></li>
-<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to numpy object</a></li>
-<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a numpy object to an R object</a></li>
+<li class="chapter" data-level="3.5" data-path="lessons-learned.html"><a href="lessons-learned.html#build-a-model-class"><i class="fa fa-check"></i><b>3.5</b> Build a model class</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="lessons-learned.html"><a href="lessons-learned.html#examples"><i class="fa fa-check"></i><b>3.5.1</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>3.6</b> Convert a tensor to <code>numpy</code> object</a></li>
+<li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>4</b> Tensors</a><ul>
 <li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#r-code"><i class="fa fa-check"></i><b>4.1</b> R code</a><ul>
@@ -202,6 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datasets-in-pytorch.html"><a href="datasets-in-pytorch.html"><i class="fa fa-check"></i><b>9</b> Datasets in PyTorch</a></li>
+<li class="chapter" data-level="10" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i><b>10</b> Bookdown tips</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -230,12 +236,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> R code</h2>
 <div id="load-the-libraries" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Load the libraries</h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co"># device = torch.device(&#39;cuda&#39;) # Uncomment this to run on GPU</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb37-6" data-line-number="6">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># device = torch.device(&#39;cuda&#39;) # Uncomment this to run on GPU</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## &lt;torch._C.Generator&gt;</code></pre>
 <p>N is batch size;
 D_in is input dimension;
@@ -244,51 +250,51 @@ D_out is output dimension.</p>
 </div>
 <div id="datasets" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> Datasets</h3>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">N &lt;-<span class="st"> </span>64L; D_in &lt;-<span class="st"> </span>1000L; H &lt;-<span class="st"> </span>100L; D_out &lt;-<span class="st"> </span>10L</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="co"># Create random Tensors to hold inputs and outputs</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">x =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_in, <span class="dt">device=</span>device)</a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">y =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_out, <span class="dt">device=</span>device)</a></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Randomly initialize weights</span></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">w1 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(D_in, H, <span class="dt">device=</span>device)</a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">w2 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(H, D_out, <span class="dt">device=</span>device)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">N &lt;-<span class="st"> </span>64L; D_in &lt;-<span class="st"> </span>1000L; H &lt;-<span class="st"> </span>100L; D_out &lt;-<span class="st"> </span>10L</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># Create random Tensors to hold inputs and outputs</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">x =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_in, <span class="dt">device=</span>device)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">y =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_out, <span class="dt">device=</span>device)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># Randomly initialize weights</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">w1 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(D_in, H, <span class="dt">device=</span>device)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">w2 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(H, D_out, <span class="dt">device=</span>device)</a></code></pre></div>
 </div>
 <div id="run-the-model" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> Run the model</h3>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">learning_rate =<span class="st"> </span><span class="fl">1e-6</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) {</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">  <span class="co"># Forward pass: compute predicted y</span></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">  h =<span class="st"> </span>x<span class="op">$</span><span class="kw">mm</span>(w1)</a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">  h_relu =<span class="st"> </span>h<span class="op">$</span><span class="kw">clamp</span>(<span class="dt">min=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">  y_pred =<span class="st"> </span>h_relu<span class="op">$</span><span class="kw">mm</span>(w2)</a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb41-8" data-line-number="8">  <span class="co"># Compute and print loss; loss is a scalar, and is stored in a PyTorch Tensor</span></a>
-<a class="sourceLine" id="cb41-9" data-line-number="9">  <span class="co"># of shape (); we can get its value as a Python number with loss.item().</span></a>
-<a class="sourceLine" id="cb41-10" data-line-number="10">  loss =<span class="st"> </span>(torch<span class="op">$</span><span class="kw">sub</span>(y_pred, y))<span class="op">$</span><span class="kw">pow</span>(<span class="dv">2</span>)<span class="op">$</span><span class="kw">sum</span>()</a>
-<a class="sourceLine" id="cb41-11" data-line-number="11">  <span class="kw">cat</span>(t, <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb41-12" data-line-number="12">  <span class="kw">cat</span>(loss<span class="op">$</span><span class="kw">item</span>(), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb41-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb41-14" data-line-number="14">  <span class="co"># Backprop to compute gradients of w1 and w2 with respect to loss</span></a>
-<a class="sourceLine" id="cb41-15" data-line-number="15">  grad_y_pred =<span class="st"> </span>torch<span class="op">$</span><span class="kw">mul</span>(torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">2.0</span>), torch<span class="op">$</span><span class="kw">sub</span>(y_pred, y))</a>
-<a class="sourceLine" id="cb41-16" data-line-number="16">  grad_w2 =<span class="st"> </span>h_relu<span class="op">$</span><span class="kw">t</span>()<span class="op">$</span><span class="kw">mm</span>(grad_y_pred)</a>
-<a class="sourceLine" id="cb41-17" data-line-number="17">  grad_h_relu =<span class="st"> </span>grad_y_pred<span class="op">$</span><span class="kw">mm</span>(w2<span class="op">$</span><span class="kw">t</span>())</a>
-<a class="sourceLine" id="cb41-18" data-line-number="18">  grad_h =<span class="st"> </span>grad_h_relu<span class="op">$</span><span class="kw">clone</span>()</a>
-<a class="sourceLine" id="cb41-19" data-line-number="19">  <span class="co"># grad_h[h &lt; 0] = 0</span></a>
-<a class="sourceLine" id="cb41-20" data-line-number="20">  mask &lt;-<span class="st"> </span>grad_h<span class="op">$</span><span class="kw">lt</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb41-21" data-line-number="21">  <span class="co"># print(mask)</span></a>
-<a class="sourceLine" id="cb41-22" data-line-number="22">  <span class="co"># negatives &lt;- torch$masked_select(grad_h, mask)</span></a>
-<a class="sourceLine" id="cb41-23" data-line-number="23">  <span class="co"># print(negatives)</span></a>
-<a class="sourceLine" id="cb41-24" data-line-number="24">  <span class="co"># negatives &lt;- 0.0</span></a>
-<a class="sourceLine" id="cb41-25" data-line-number="25">  </a>
-<a class="sourceLine" id="cb41-26" data-line-number="26">  torch<span class="op">$</span><span class="kw">masked_select</span>(grad_h, mask)<span class="op">$</span><span class="kw">fill_</span>(<span class="fl">0.0</span>)</a>
-<a class="sourceLine" id="cb41-27" data-line-number="27">  </a>
-<a class="sourceLine" id="cb41-28" data-line-number="28">  <span class="co"># print(grad_h)</span></a>
-<a class="sourceLine" id="cb41-29" data-line-number="29">  grad_w1 =<span class="st"> </span>x<span class="op">$</span><span class="kw">t</span>()<span class="op">$</span><span class="kw">mm</span>(grad_h)</a>
-<a class="sourceLine" id="cb41-30" data-line-number="30">   </a>
-<a class="sourceLine" id="cb41-31" data-line-number="31">  <span class="co"># Update weights using gradient descent</span></a>
-<a class="sourceLine" id="cb41-32" data-line-number="32">  w1 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w1, torch<span class="op">$</span><span class="kw">mul</span>(learning_rate, grad_w1))</a>
-<a class="sourceLine" id="cb41-33" data-line-number="33">  w2 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w2, torch<span class="op">$</span><span class="kw">mul</span>(learning_rate, grad_w2))</a>
-<a class="sourceLine" id="cb41-34" data-line-number="34">}  </a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">learning_rate =<span class="st"> </span><span class="fl">1e-6</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) {</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="co"># Forward pass: compute predicted y</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  h =<span class="st"> </span>x<span class="op">$</span><span class="kw">mm</span>(w1)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">  h_relu =<span class="st"> </span>h<span class="op">$</span><span class="kw">clamp</span>(<span class="dt">min=</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">  y_pred =<span class="st"> </span>h_relu<span class="op">$</span><span class="kw">mm</span>(w2)</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">  <span class="co"># Compute and print loss; loss is a scalar, and is stored in a PyTorch Tensor</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">  <span class="co"># of shape (); we can get its value as a Python number with loss.item().</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">  loss =<span class="st"> </span>(torch<span class="op">$</span><span class="kw">sub</span>(y_pred, y))<span class="op">$</span><span class="kw">pow</span>(<span class="dv">2</span>)<span class="op">$</span><span class="kw">sum</span>()</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">  <span class="kw">cat</span>(t, <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">  <span class="kw">cat</span>(loss<span class="op">$</span><span class="kw">item</span>(), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">  <span class="co"># Backprop to compute gradients of w1 and w2 with respect to loss</span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">  grad_y_pred =<span class="st"> </span>torch<span class="op">$</span><span class="kw">mul</span>(torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">2.0</span>), torch<span class="op">$</span><span class="kw">sub</span>(y_pred, y))</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">  grad_w2 =<span class="st"> </span>h_relu<span class="op">$</span><span class="kw">t</span>()<span class="op">$</span><span class="kw">mm</span>(grad_y_pred)</a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">  grad_h_relu =<span class="st"> </span>grad_y_pred<span class="op">$</span><span class="kw">mm</span>(w2<span class="op">$</span><span class="kw">t</span>())</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18">  grad_h =<span class="st"> </span>grad_h_relu<span class="op">$</span><span class="kw">clone</span>()</a>
+<a class="sourceLine" id="cb13-19" data-line-number="19">  <span class="co"># grad_h[h &lt; 0] = 0</span></a>
+<a class="sourceLine" id="cb13-20" data-line-number="20">  mask &lt;-<span class="st"> </span>grad_h<span class="op">$</span><span class="kw">lt</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb13-21" data-line-number="21">  <span class="co"># print(mask)</span></a>
+<a class="sourceLine" id="cb13-22" data-line-number="22">  <span class="co"># negatives &lt;- torch$masked_select(grad_h, mask)</span></a>
+<a class="sourceLine" id="cb13-23" data-line-number="23">  <span class="co"># print(negatives)</span></a>
+<a class="sourceLine" id="cb13-24" data-line-number="24">  <span class="co"># negatives &lt;- 0.0</span></a>
+<a class="sourceLine" id="cb13-25" data-line-number="25">  </a>
+<a class="sourceLine" id="cb13-26" data-line-number="26">  torch<span class="op">$</span><span class="kw">masked_select</span>(grad_h, mask)<span class="op">$</span><span class="kw">fill_</span>(<span class="fl">0.0</span>)</a>
+<a class="sourceLine" id="cb13-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb13-28" data-line-number="28">  <span class="co"># print(grad_h)</span></a>
+<a class="sourceLine" id="cb13-29" data-line-number="29">  grad_w1 =<span class="st"> </span>x<span class="op">$</span><span class="kw">t</span>()<span class="op">$</span><span class="kw">mm</span>(grad_h)</a>
+<a class="sourceLine" id="cb13-30" data-line-number="30">   </a>
+<a class="sourceLine" id="cb13-31" data-line-number="31">  <span class="co"># Update weights using gradient descent</span></a>
+<a class="sourceLine" id="cb13-32" data-line-number="32">  w1 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w1, torch<span class="op">$</span><span class="kw">mul</span>(learning_rate, grad_w1))</a>
+<a class="sourceLine" id="cb13-33" data-line-number="33">  w2 =<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w2, torch<span class="op">$</span><span class="kw">mul</span>(learning_rate, grad_w2))</a>
+<a class="sourceLine" id="cb13-34" data-line-number="34">}  </a></code></pre></div>
 <pre><code>## 1    29428666 
 ## 2    22572578 
 ## 3    20474034 
