@@ -4,5 +4,7 @@
 .Rbuildignore
 .Ruserdata
 config.txt
+deployment/libs
+deployment/sbox
 
 rtorch-book/_bookdown_files/
