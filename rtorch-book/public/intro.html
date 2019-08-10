@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Introduction | A Minimal Tutorial of rTorch</title>
-  <meta name="description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <title>Chapter 2 Introduction | A Minimal rTorch Tutorial</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Introduction | A Minimal Tutorial of rTorch" />
+  <meta property="og:title" content="Chapter 2 Introduction | A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Introduction | A Minimal Tutorial of rTorch" />
+  <meta name="twitter:title" content="Chapter 2 Introduction | A Minimal rTorch Tutorial" />
   
-  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
 
-<meta name="author" content="ALfonso R. Reyes" />
+<meta name="author" content="Alfonso R. Reyes" />
 
 
 <meta name="date" content="2019-08-10" />
@@ -215,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Tutorial of rTorch</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal rTorch Tutorial</a>
           </h1>
         </div>
 
@@ -423,13 +423,13 @@ Figure 2.1: Here is a nice figure!
 <a class="sourceLine" id="cb4-7" data-line-number="7">Bt &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">BoolTensor</span>(5L, 5L)</a>
 <a class="sourceLine" id="cb4-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">ft</a></code></pre></div>
-<pre><code>## tensor([[2.1163e-37, 2.1218e-37, 1.9309e-37],
-##         [1.7228e-34, 1.7228e+25, 6.8912e+25],
-##         [9.2737e-41, 2.1163e-37, 2.1221e-37]])</code></pre>
+<pre><code>## tensor([[1.9304e-37, 1.7228e-34, 2.6288e+20],
+##         [1.0515e+21, 9.2737e-41, 2.1163e-37],
+##         [2.1216e-37, 1.9306e-37, 1.7228e-34]])</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">dt</a></code></pre></div>
-<pre><code>## tensor([[4.6859e-310,  0.0000e+00, 4.2440e-314],
-##         [4.6859e-310, 4.6859e-310, 1.4822e-323],
-##         [4.2440e-314, 4.9407e-324,  0.0000e+00]], dtype=torch.float64)</code></pre>
+<pre><code>## tensor([[6.9501e-310, 4.6548e-310, 6.0135e-154],
+##         [ 2.5246e-52,  1.3036e-76,  3.2425e-86],
+##         [2.4401e-154, 6.0135e-154,  1.0328e-47]], dtype=torch.float64)</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">Bt</a></code></pre></div>
 <pre><code>## tensor([[ True,  True,  True,  True,  True],
 ##         [ True, False, False,  True,  True],
@@ -454,33 +454,33 @@ Figure 2.1: Here is a nice figure!
 <p>A 3D tensor:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">ft3d &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">FloatTensor</span>(4L, 3L, 2L)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">ft3d</a></code></pre></div>
-<pre><code>## tensor([[[1.5333e+09, 3.0943e-41],
-##          [1.5360e+09, 3.0943e-41],
-##          [1.5304e+09, 3.0943e-41]],
+<pre><code>## tensor([[[-3.8249e-18,  4.5895e-41],
+##          [        nan,  3.0737e-41],
+##          [-3.3786e+38,  3.0737e-41]],
 ## 
-##         [[1.6267e+09, 3.0943e-41],
-##          [1.5197e+09, 3.0943e-41],
-##          [1.5236e+09, 3.0943e-41]],
+##         [[-6.1252e-18,  4.5895e-41],
+##          [ 2.6625e-44,  0.0000e+00],
+##          [ 0.0000e+00,  0.0000e+00]],
 ## 
-##         [[1.5399e+09, 3.0943e-41],
-##          [1.5519e+09, 3.0943e-41],
-##          [1.5558e+09, 3.0943e-41]],
+##         [[-1.7407e+34,  3.0737e-41],
+##          [-1.7599e+34,  3.0737e-41],
+##          [-1.7599e+34,  3.0737e-41]],
 ## 
-##         [[1.5461e+09, 3.0943e-41],
-##          [1.3128e+09, 3.0943e-41],
-##          [1.5490e+09, 3.0943e-41]]])</code></pre>
+##         [[-1.7599e+34,  3.0737e-41],
+##          [-8.4995e+33,  3.0737e-41],
+##          [-8.4996e+33,  3.0737e-41]]])</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># get first element in a tensor</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">ft3d[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## tensor(1.5333e+09)</code></pre>
+<pre><code>## tensor(-3.8249e-18)</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">bt</a></code></pre></div>
-<pre><code>## tensor([[46, 44, 32],
-##         [32, 52, 46],
-##         [44, 32, 32]], dtype=torch.uint8)</code></pre>
+<pre><code>## tensor([[44, 32, 32],
+##         [55, 46, 93],
+##         [41, 10, 32]], dtype=torch.uint8)</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># [torch.ByteTensor of size 3x3]</span></a></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">ft</a></code></pre></div>
-<pre><code>## tensor([[2.1163e-37, 2.1218e-37, 1.9309e-37],
-##         [1.7228e-34, 1.7228e+25, 6.8912e+25],
-##         [9.2737e-41, 2.1163e-37, 2.1221e-37]])</code></pre>
+<pre><code>## tensor([[1.9304e-37, 1.7228e-34, 2.6288e+20],
+##         [1.0515e+21, 9.2737e-41, 2.1163e-37],
+##         [2.1216e-37, 1.9306e-37, 1.7228e-34]])</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># [torch.FloatTensor of size 3x3]</span></a></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># create a tensor with a value</span></a>
 <a class="sourceLine" id="cb28-2" data-line-number="2">torch<span class="op">$</span><span class="kw">full</span>(<span class="kw">list</span>(2L, 3L), <span class="fl">3.141592</span>)</a></code></pre></div>
@@ -518,9 +518,9 @@ Figure 2.1: Here is a nice figure!
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "linkedin": false,
 "weibo": false,
@@ -541,7 +541,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["rtorch-book.pdf", "rtorch-book.epub"],
+"download": ["rtorch-book.pdf"],
 "toc": {
 "collapse": "subsection"
 }

@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Minimal Tutorial of rTorch</title>
-  <meta name="description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <title>A Minimal rTorch Tutorial</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Minimal Tutorial of rTorch" />
+  <meta property="og:title" content="A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Tutorial of rTorch" />
+  <meta name="twitter:title" content="A Minimal rTorch Tutorial" />
   
-  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to do machine learning. This book was produced with bookdown." />
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
 
-<meta name="author" content="ALfonso R. Reyes" />
+<meta name="author" content="Alfonso R. Reyes" />
 
 
 <meta name="date" content="2019-08-10" />
@@ -215,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Tutorial of rTorch</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal rTorch Tutorial</a>
           </h1>
         </div>
 
@@ -224,18 +224,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">A Minimal Tutorial of rTorch</h1>
-<p class="author"><em>ALfonso R. Reyes</em></p>
+<h1 class="title">A Minimal rTorch Tutorial</h1>
+<p class="author"><em>Alfonso R. Reyes</em></p>
 <p class="date"><em>2019-08-10</em></p>
 </div>
 <div id="prerequisites" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</a>
+<p>The <strong>rTorch</strong> package can be installed from CRAN or Github:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;rTorch&quot;</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># or the development version</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></a></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># devtools::install_github(&quot;f0nzie/rTorch&quot;)</span></a></code></pre></div>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
 
 </div>
@@ -259,9 +258,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "linkedin": false,
 "weibo": false,
@@ -282,7 +281,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["rtorch-book.pdf", "rtorch-book.epub"],
+"download": ["rtorch-book.pdf"],
 "toc": {
 "collapse": "subsection"
 }
