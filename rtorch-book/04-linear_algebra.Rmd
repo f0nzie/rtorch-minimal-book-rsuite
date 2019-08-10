@@ -1,4 +1,4 @@
-# Linear Algebra with Torch {#linear_algebra}
+# Linear Algebra with Torch {#linearalgebra}
 
 ```{r}
 library(rTorch)
