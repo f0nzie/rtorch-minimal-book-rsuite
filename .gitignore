@@ -8,3 +8,5 @@ deployment/libs
 deployment/sbox
 
 rtorch-book/_bookdown_files/
+
+*.ckpt
