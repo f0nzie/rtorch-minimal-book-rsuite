@@ -1,1 +1,2 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+This is a minimal tutorial of rTorch, a package based on PyTorch. This book has been written in R Markdown using **bookdown** (https://github.com/rstudio/bookdown). 
+

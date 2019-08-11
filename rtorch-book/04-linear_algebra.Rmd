@@ -1,5 +1,8 @@
 # Linear Algebra with Torch {#linearalgebra}
 
+The following are basic operations of Linear Algebra using PyTorch.
+
+
 ```{r}
 library(rTorch)
 ```
@@ -137,7 +140,7 @@ tt2r
 t2r == tt2r
 ```
 
-## Tensor addition
+## Tensor arithmetic
 
 ```{r}
 (x = torch$ones(5L, 4L))
@@ -182,6 +185,8 @@ $$A * B = B * A$$
 ```{r}
 x * y == y * x
 ```
+
+
 
 ## Dot product
 
@@ -275,7 +280,6 @@ a$matmul(b)
 ```
 
 Here is agood explanation: https://stackoverflow.com/a/44525687/5270873
-
 
 ```{r}
 abt <- torch$mm(a, b)$transpose(dim0=0L, dim1=1L)
