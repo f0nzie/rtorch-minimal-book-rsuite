@@ -24,7 +24,7 @@
 <meta name="author" content="Alfonso R. Reyes" />
 
 
-<meta name="date" content="2019-08-10" />
+<meta name="date" content="2019-08-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -130,6 +130,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.1</b> Installation</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i><b>1.2</b> Python Anaconda</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.2.1</b> Example</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i><b>1.2.2</b> Automatic installation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
@@ -157,17 +161,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.3" data-path="tensors.html"><a href="tensors.html#run-the-model"><i class="fa fa-check"></i><b>4.1.3</b> Run the model</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra with Torch</a><ul>
-<li class="chapter" data-level="5.1" data-path="linear-algebra.html"><a href="linear-algebra.html#scalars"><i class="fa fa-check"></i><b>5.1</b> Scalars</a></li>
-<li class="chapter" data-level="5.2" data-path="linear-algebra.html"><a href="linear-algebra.html#vectors"><i class="fa fa-check"></i><b>5.2</b> Vectors</a></li>
-<li class="chapter" data-level="5.3" data-path="linear-algebra.html"><a href="linear-algebra.html#matrices"><i class="fa fa-check"></i><b>5.3</b> Matrices</a></li>
-<li class="chapter" data-level="5.4" data-path="linear-algebra.html"><a href="linear-algebra.html#d-tensors"><i class="fa fa-check"></i><b>5.4</b> 3D+ tensors</a></li>
-<li class="chapter" data-level="5.5" data-path="linear-algebra.html"><a href="linear-algebra.html#transpose-of-a-matrix"><i class="fa fa-check"></i><b>5.5</b> Transpose of a matrix</a></li>
-<li class="chapter" data-level="5.6" data-path="linear-algebra.html"><a href="linear-algebra.html#vectors-special-case-of-a-matrix"><i class="fa fa-check"></i><b>5.6</b> Vectors, special case of a matrix</a></li>
-<li class="chapter" data-level="5.7" data-path="linear-algebra.html"><a href="linear-algebra.html#tensor-addition"><i class="fa fa-check"></i><b>5.7</b> Tensor addition</a></li>
-<li class="chapter" data-level="5.8" data-path="linear-algebra.html"><a href="linear-algebra.html#add-a-scalar-to-a-tensor"><i class="fa fa-check"></i><b>5.8</b> Add a scalar to a tensor</a></li>
-<li class="chapter" data-level="5.9" data-path="linear-algebra.html"><a href="linear-algebra.html#multiplying-tensors"><i class="fa fa-check"></i><b>5.9</b> Multiplying tensors</a></li>
-<li class="chapter" data-level="5.10" data-path="linear-algebra.html"><a href="linear-algebra.html#dot-product"><i class="fa fa-check"></i><b>5.10</b> Dot product</a></li>
+<li class="chapter" data-level="5" data-path="linearalgebra.html"><a href="linearalgebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra with Torch</a><ul>
+<li class="chapter" data-level="5.1" data-path="linearalgebra.html"><a href="linearalgebra.html#scalars"><i class="fa fa-check"></i><b>5.1</b> Scalars</a></li>
+<li class="chapter" data-level="5.2" data-path="linearalgebra.html"><a href="linearalgebra.html#vectors"><i class="fa fa-check"></i><b>5.2</b> Vectors</a></li>
+<li class="chapter" data-level="5.3" data-path="linearalgebra.html"><a href="linearalgebra.html#matrices"><i class="fa fa-check"></i><b>5.3</b> Matrices</a></li>
+<li class="chapter" data-level="5.4" data-path="linearalgebra.html"><a href="linearalgebra.html#d-tensors"><i class="fa fa-check"></i><b>5.4</b> 3D+ tensors</a></li>
+<li class="chapter" data-level="5.5" data-path="linearalgebra.html"><a href="linearalgebra.html#transpose-of-a-matrix"><i class="fa fa-check"></i><b>5.5</b> Transpose of a matrix</a></li>
+<li class="chapter" data-level="5.6" data-path="linearalgebra.html"><a href="linearalgebra.html#vectors-special-case-of-a-matrix"><i class="fa fa-check"></i><b>5.6</b> Vectors, special case of a matrix</a></li>
+<li class="chapter" data-level="5.7" data-path="linearalgebra.html"><a href="linearalgebra.html#tensor-arithmetic"><i class="fa fa-check"></i><b>5.7</b> Tensor arithmetic</a></li>
+<li class="chapter" data-level="5.8" data-path="linearalgebra.html"><a href="linearalgebra.html#add-a-scalar-to-a-tensor"><i class="fa fa-check"></i><b>5.8</b> Add a scalar to a tensor</a></li>
+<li class="chapter" data-level="5.9" data-path="linearalgebra.html"><a href="linearalgebra.html#multiplying-tensors"><i class="fa fa-check"></i><b>5.9</b> Multiplying tensors</a></li>
+<li class="chapter" data-level="5.10" data-path="linearalgebra.html"><a href="linearalgebra.html#dot-product"><i class="fa fa-check"></i><b>5.10</b> Dot product</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>6</b> Linear Regression</a><ul>
 <li class="chapter" data-level="6.1" data-path="linear-regression.html"><a href="linear-regression.html#case-1-simple-linear-regression"><i class="fa fa-check"></i><b>6.1</b> Case 1: simple linear regression</a></li>
@@ -207,7 +211,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="datasets-in-pytorch.html"><a href="datasets-in-pytorch.html"><i class="fa fa-check"></i><b>9</b> Datasets in PyTorch</a></li>
-<li class="chapter" data-level="10" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i><b>10</b> Bookdown tips</a></li>
+<li class="chapter" data-level="10" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i><b>10</b> Bookdown tips</a><ul>
+<li class="chapter" data-level="10.1" data-path="bookdown-tips.html"><a href="bookdown-tips.html#label-references"><i class="fa fa-check"></i><b>10.1</b> Label references</a></li>
+<li class="chapter" data-level="10.2" data-path="bookdown-tips.html"><a href="bookdown-tips.html#figures-and-tables-with-references"><i class="fa fa-check"></i><b>10.2</b> Figures and Tables with references</a></li>
+<li class="chapter" data-level="10.3" data-path="bookdown-tips.html"><a href="bookdown-tips.html#long-captions"><i class="fa fa-check"></i><b>10.3</b> Long captions</a></li>
+<li class="chapter" data-level="10.4" data-path="bookdown-tips.html"><a href="bookdown-tips.html#citations-and-bibiliography"><i class="fa fa-check"></i><b>10.4</b> Citations and Bibiliography</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -231,19 +240,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="lessons-learned" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Lessons Learned</h1>
+<p>This chapter will explain the main differences between PyTorch and rTorch.
+Most of the things work direclty in PyTorch but we need to be aware of some minor differences when working with rTorch.</p>
 <p>Here is a review of existing methods.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
 <div id="enumeration" class="section level2">
 <h2><span class="header-section-number">3.1</span> Enumeration</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x_train =<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="fl">3.3</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">6.71</span>, <span class="fl">6.93</span>, <span class="fl">4.168</span>, </a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">                  <span class="fl">9.779</span>, <span class="fl">6.182</span>, <span class="fl">7.59</span>, <span class="fl">2.167</span>, <span class="fl">7.042</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                  <span class="fl">10.791</span>, <span class="fl">5.313</span>, <span class="fl">7.997</span>, <span class="fl">3.1</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">x_train &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x_train)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">x_train =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x_train)         <span class="co"># convert to tensor</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">x_train =<span class="st"> </span>x_train<span class="op">$</span><span class="kw">type</span>(torch<span class="op">$</span>FloatTensor)   <span class="co"># make it a a FloatTensor</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">x_train</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x_train =<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="fl">3.3</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">6.71</span>, <span class="fl">6.93</span>, <span class="fl">4.168</span>, </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                  <span class="fl">9.779</span>, <span class="fl">6.182</span>, <span class="fl">7.59</span>, <span class="fl">2.167</span>, <span class="fl">7.042</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                  <span class="fl">10.791</span>, <span class="fl">5.313</span>, <span class="fl">7.997</span>, <span class="fl">3.1</span>), <span class="dt">dim =</span> <span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">x_train &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x_train)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">x_train =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x_train)         <span class="co"># convert to tensor</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">x_train =<span class="st"> </span>x_train<span class="op">$</span><span class="kw">type</span>(torch<span class="op">$</span>FloatTensor)   <span class="co"># make it a a FloatTensor</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">x_train</a></code></pre></div>
 <pre><code>## tensor([[ 3.3000],
 ##         [ 4.4000],
 ##         [ 5.5000],
@@ -259,18 +270,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##         [ 5.3130],
 ##         [ 7.9970],
 ##         [ 3.1000]])</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x_train<span class="op">$</span><span class="kw">nelement</span>()    <span class="co"># number of elements in the tensor</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">x_train<span class="op">$</span><span class="kw">nelement</span>()    <span class="co"># number of elements in the tensor</span></a></code></pre></div>
 <pre><code>## [1] 15</code></pre>
 </div>
 <div id="how-to-iterate-a-generator" class="section level2">
 <h2><span class="header-section-number">3.2</span> How to iterate a generator</h2>
 <div id="using-enumerate-and-iterate" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Using <code>enumerate</code> and <code>iterate</code></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">py =<span class="st"> </span><span class="kw">import_builtins</span>()</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">xx =<span class="st"> </span>py<span class="op">$</span><span class="kw">enumerate</span>(x_train)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">xit =<span class="st"> </span><span class="kw">iterate</span>(xx, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">xit</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">py =<span class="st"> </span><span class="kw">import_builtins</span>()</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">xx =<span class="st"> </span>py<span class="op">$</span><span class="kw">enumerate</span>(x_train)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">xit =<span class="st"> </span><span class="kw">iterate</span>(xx, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">xit</a></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
 ## [1] 0
