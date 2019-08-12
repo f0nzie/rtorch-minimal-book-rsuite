@@ -16,3 +16,7 @@ rtorch-book/public/
 rtorch-book/_bookdown_files/
 
 
+
+*.html
+
+*.json
