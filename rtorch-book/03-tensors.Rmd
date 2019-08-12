@@ -2,6 +2,14 @@
 
 We describe the most important PyTorch methods in this chapter.
 
+## Arithmetic of tensors
+
+## Boolean operations
+
+## Slicing
+
+
+
 
 ## Example
 The following example was converted from PyTorch to rTorch to show differences and similarities of both approaches. The original source can be found here:

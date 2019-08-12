@@ -155,10 +155,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="lessons-learned.html"><a href="lessons-learned.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>3.7</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>4</b> Tensors</a><ul>
-<li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#example-1"><i class="fa fa-check"></i><b>4.1</b> Example</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="tensors.html"><a href="tensors.html#load-the-libraries"><i class="fa fa-check"></i><b>4.1.1</b> Load the libraries</a></li>
-<li class="chapter" data-level="4.1.2" data-path="tensors.html"><a href="tensors.html#datasets"><i class="fa fa-check"></i><b>4.1.2</b> Datasets</a></li>
-<li class="chapter" data-level="4.1.3" data-path="tensors.html"><a href="tensors.html#run-the-model"><i class="fa fa-check"></i><b>4.1.3</b> Run the model</a></li>
+<li class="chapter" data-level="4.1" data-path="tensors.html"><a href="tensors.html#arithmetic-of-tensors"><i class="fa fa-check"></i><b>4.1</b> Arithmetic of tensors</a></li>
+<li class="chapter" data-level="4.2" data-path="tensors.html"><a href="tensors.html#boolean-operations"><i class="fa fa-check"></i><b>4.2</b> Boolean operations</a></li>
+<li class="chapter" data-level="4.3" data-path="tensors.html"><a href="tensors.html#slicing"><i class="fa fa-check"></i><b>4.3</b> Slicing</a></li>
+<li class="chapter" data-level="4.4" data-path="tensors.html"><a href="tensors.html#example-1"><i class="fa fa-check"></i><b>4.4</b> Example</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="tensors.html"><a href="tensors.html#load-the-libraries"><i class="fa fa-check"></i><b>4.4.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="4.4.2" data-path="tensors.html"><a href="tensors.html#datasets"><i class="fa fa-check"></i><b>4.4.2</b> Datasets</a></li>
+<li class="chapter" data-level="4.4.3" data-path="tensors.html"><a href="tensors.html#run-the-model"><i class="fa fa-check"></i><b>4.4.3</b> Run the model</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="linearalgebra.html"><a href="linearalgebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra with Torch</a><ul>
@@ -241,12 +244,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tensors" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Tensors</h1>
 <p>We describe the most important PyTorch methods in this chapter.</p>
+<div id="arithmetic-of-tensors" class="section level2">
+<h2><span class="header-section-number">4.1</span> Arithmetic of tensors</h2>
+</div>
+<div id="boolean-operations" class="section level2">
+<h2><span class="header-section-number">4.2</span> Boolean operations</h2>
+</div>
+<div id="slicing" class="section level2">
+<h2><span class="header-section-number">4.3</span> Slicing</h2>
+</div>
 <div id="example-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Example</h2>
+<h2><span class="header-section-number">4.4</span> Example</h2>
 <p>The following example was converted from PyTorch to rTorch to show differences and similarities of both approaches. The original source can be found here:</p>
 <p>Source: <a href="https://github.com/jcjohnson/pytorch-examples#pytorch-tensors" class="uri">https://github.com/jcjohnson/pytorch-examples#pytorch-tensors</a></p>
 <div id="load-the-libraries" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Load the libraries</h3>
+<h3><span class="header-section-number">4.4.1</span> Load the libraries</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a>
@@ -262,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="datasets" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Datasets</h3>
+<h3><span class="header-section-number">4.4.2</span> Datasets</h3>
 <p>We will create a random dataset for a two layer neural network.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">N &lt;-<span class="st"> </span>64L; D_in &lt;-<span class="st"> </span>1000L; H &lt;-<span class="st"> </span>100L; D_out &lt;-<span class="st"> </span>10L</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -274,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-3" data-line-number="3">w2 &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(H, D_out, <span class="dt">device=</span>device)  <span class="co"># layer 2</span></a></code></pre></div>
 </div>
 <div id="run-the-model" class="section level3">
-<h3><span class="header-section-number">4.1.3</span> Run the model</h3>
+<h3><span class="header-section-number">4.4.3</span> Run the model</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">learning_rate =<span class="st"> </span><span class="fl">1e-6</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co"># loop</span></a>
