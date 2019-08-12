@@ -20,3 +20,5 @@ rtorch-book/_bookdown_files/
 *.html
 
 *.json
+
+rtorch-book/rtorch-book\.Rmd
