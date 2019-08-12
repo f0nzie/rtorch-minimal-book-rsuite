@@ -1,4 +1,6 @@
 # Lessons Learned
+This chapter will explain the main differences between PyTorch and rTorch.
+Most of the things work direclty in PyTorch but we need to be aware of some minor differences when working with rTorch.
 
 Here is a review of existing methods.
 
