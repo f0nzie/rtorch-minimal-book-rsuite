@@ -7,7 +7,12 @@ config.txt
 deployment/libs
 deployment/sbox
 
-# rtorch-book/_bookdown_files/
+
 # rtorch-book/public/*
 
 *.ckpt
+
+rtorch-book/public/
+rtorch-book/_bookdown_files/
+
+
