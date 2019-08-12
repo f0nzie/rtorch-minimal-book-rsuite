@@ -9,6 +9,7 @@ transforms  <- torchvision$transforms
 torch$set_default_dtype(torch$float)
 ```
 
+## Example 1: MNIST handwritten digits
 
 ### Hyperparameters
 ```{r}
