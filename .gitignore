@@ -8,18 +8,13 @@ deployment/libs
 deployment/sbox
 
 
-# rtorch-book/public/*
-
 *.ckpt
 
 rtorch-book/public/
 rtorch-book/_bookdown_files/
-rtorch-book/public/*.html
+# rtorch-book/public/*.html
 
-
-
-*.html
-
-*.json
+# *.html
+# *.json
 
 rtorch-book/rtorch-book\.Rmd
