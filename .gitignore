@@ -10,7 +10,7 @@ deployment/sbox
 
 *.ckpt
 
-rtorch-book/public/
+# rtorch-book/public/
 rtorch-book/_bookdown_files/
 # rtorch-book/public/*.html
 

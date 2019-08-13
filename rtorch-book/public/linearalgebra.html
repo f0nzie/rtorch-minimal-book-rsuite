@@ -129,10 +129,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>0.1</b> Installation</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i><b>0.2</b> Python Anaconda</a><ul>
-<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>0.2.1</b> Example</a></li>
-<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i><b>0.2.2</b> Automatic installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i>Python Anaconda</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i>Automatic installation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
@@ -615,7 +615,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb39-22" data-line-number="22"><span class="co">#&gt; tensor([[1, 2],</span></a>
 <a class="sourceLine" id="cb39-23" data-line-number="23"><span class="co">#&gt;         [3, 4]])</span></a>
 <a class="sourceLine" id="cb39-24" data-line-number="24">torch.dot(at, bt)</a>
-<a class="sourceLine" id="cb39-25" data-line-number="25"><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): RuntimeError: dot: Expected 1-D argument self, but got 2-D</span></a></code></pre></div>
+<a class="sourceLine" id="cb39-25" data-line-number="25"><span class="co">#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): RuntimeError: dot: Expected 1-D argument self, but got 2-D</span></a>
+<a class="sourceLine" id="cb39-26" data-line-number="26"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb39-27" data-line-number="27"><span class="co">#&gt; Detailed traceback: </span></a>
+<a class="sourceLine" id="cb39-28" data-line-number="28"><span class="co">#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span></a></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">a &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">Tensor</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">list</span>(<span class="dv">3</span>, <span class="dv">4</span>)))</a>
 <a class="sourceLine" id="cb40-2" data-line-number="2">b &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">Tensor</span>(<span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)))</a>
 <a class="sourceLine" id="cb40-3" data-line-number="3">c &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">Tensor</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">11</span>, <span class="dv">12</span>), <span class="kw">list</span>(<span class="dv">13</span>, <span class="dv">14</span>)))</a>
