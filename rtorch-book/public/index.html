@@ -129,10 +129,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>0.1</b> Installation</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i><b>0.2</b> Python Anaconda</a><ul>
-<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>0.2.1</b> Example</a></li>
-<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i><b>0.2.2</b> Automatic installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i>Python Anaconda</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i>Automatic installation</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
@@ -277,8 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note. It is not mandatory to have a previously created <code>Python</code> environment with <code>Anaconda</code>, where <code>PyTorch</code> and <code>TorchVision</code> have already been installed. This step is optional. You could also get it installed directly from the <code>R</code> console, in very similar fashion as in <a href="">R-TensorFlow</a> using the function <code>install_pytorch</code>.</p>
 </blockquote>
 <p>This book is available online via <a href="">GitHub Pages</a>, or you can also build it from source from its <a href="">repository</a>.</p>
-<div id="installation" class="section level2">
-<h2><span class="header-section-number">0.1</span> Installation</h2>
+<div id="installation" class="section level2 unnumbered">
+<h2>Installation</h2>
 <p><code>rTorch</code> is available via CRAN or GitHub.</p>
 <p>The <strong>rTorch</strong> package can be installed from CRAN or Github.</p>
 <p>From CRAN:</p>
@@ -286,11 +286,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>From GitHub, install <code>rTorch</code> with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;f0nzie/rTorch&quot;</span>)</a></code></pre></div>
 </div>
-<div id="python-anaconda" class="section level2">
-<h2><span class="header-section-number">0.2</span> Python Anaconda</h2>
+<div id="python-anaconda" class="section level2 unnumbered">
+<h2>Python Anaconda</h2>
 <p>Before start running <code>rTorch</code>, install a Python Anaconda environment first.</p>
-<div id="example" class="section level3">
-<h3><span class="header-section-number">0.2.1</span> Example</h3>
+<div id="example" class="section level3 unnumbered">
+<h3>Example</h3>
 <ol style="list-style-type: decimal">
 <li><p>Create a <code>conda</code> environment from the terminal with <code>conda create -n myenv python=3.7</code></p></li>
 <li><p>Activate the new environment with <code>conda activate myenv</code></p></li>
@@ -300,8 +300,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The last part <code>-c pytorch</code> specifies the conda channel to download the PyTorch packages. Your installation may not work if you don’t indicate the channel.</p>
 <p>Now, you can load <code>rTorch</code> in R or RStudio.</p>
 </div>
-<div id="automatic-installation" class="section level3">
-<h3><span class="header-section-number">0.2.2</span> Automatic installation</h3>
+<div id="automatic-installation" class="section level3 unnumbered">
+<h3>Automatic installation</h3>
 <p>I use the idea from automatic installation in <code>r-tensorflow</code>, to create the function <code>rTorch::install_pytorch()</code>. This function will allow you to install a <code>conda</code> environment complete with all <code>PyTorch</code> requirements.</p>
 <blockquote>
 <p><strong>Note.</strong> <code>matplotlib</code> and <code>pandas</code> are not really necessary for <code>rTorch</code> to work, but I was asked if <code>matplotlib</code> or <code>pandas</code> would work with <code>PyTorch</code>. So, I decided to install them for testing and experimentation. They both work.</p>
@@ -361,19 +361,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
