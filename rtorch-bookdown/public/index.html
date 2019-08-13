@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Datasets in PyTorch | A Minimal rTorch Tutorial</title>
+  <title>A Minimal rTorch Tutorial</title>
   <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Datasets in PyTorch | A Minimal rTorch Tutorial" />
+  <meta property="og:title" content="A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Datasets in PyTorch | A Minimal rTorch Tutorial" />
+  <meta name="twitter:title" content="A Minimal rTorch Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Alfonso R. Reyes" />
 
 
-<meta name="date" content="2019-08-12" />
+<meta name="date" content="2019-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="neural-networks.html">
-<link rel="next" href="simple-regression-with-pytorch.html">
+
+<link rel="next" href="intro.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -260,17 +260,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="datasets-in-pytorch" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Datasets in PyTorch</h1>
+<div id="header">
+<h1 class="title">A Minimal rTorch Tutorial</h1>
+<p class="author"><em>Alfonso R. Reyes</em></p>
+<p class="date"><em>2019-08-13</em></p>
+</div>
+<div id="prerequisites" class="section level1 unnumbered">
+<h1>Prerequisites</h1>
+<p>You need two things to get <code>rTorch</code> working:</p>
+<ol style="list-style-type: decimal">
+<li><p>Install Python <a href="">Anaconda</a>. Preferrably, for 64-bits, and above Python 3.6+.</p></li>
+<li><p>Install <a href="">R</a>, <a href="">Rtools</a> and <a href="">RStudio</a>.</p></li>
+<li><p>Install <code>rTorch</code> from CRAN or GitHub.</p></li>
+</ol>
+<blockquote>
+<p>Note. It is not mandatory to have a previously created <code>Python</code> environment with <code>Anaconda</code>, where <code>PyTorch</code> and <code>TorchVision</code> have already been installed. This step is optional. You could also get it installed directly from the <code>R</code> console, in very similar fashion as in <a href="">R-TensorFlow</a> using the function <code>install_pytorch</code>.</p>
+</blockquote>
+<p>This book is available online via <a href="">GitHub Pages</a>, or you can also build it from source from its <a href="">repository</a>.</p>
+<div id="installation" class="section level2 unnumbered">
+<h2>Installation</h2>
+<p><code>rTorch</code> is available via CRAN or GitHub.</p>
+<p>The <strong>rTorch</strong> package can be installed from CRAN or Github.</p>
+<p>From CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;rTorch&quot;</span>)</a></code></pre></div>
+<p>From GitHub, install <code>rTorch</code> with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;f0nzie/rTorch&quot;</span>)</a></code></pre></div>
+</div>
+<div id="python-anaconda" class="section level2 unnumbered">
+<h2>Python Anaconda</h2>
+<p>Before start running <code>rTorch</code>, install a Python Anaconda environment first.</p>
+<div id="example" class="section level3 unnumbered">
+<h3>Example</h3>
+<ol style="list-style-type: decimal">
+<li><p>Create a <code>conda</code> environment from the terminal with <code>conda create -n myenv python=3.7</code></p></li>
+<li><p>Activate the new environment with <code>conda activate myenv</code></p></li>
+<li><p>Install the <code>PyTorch</code> related packages with:</p></li>
+</ol>
+<p><code>conda install python=3.6.6 pytorch-cpu torchvision-cpu matplotlib pandas -c pytorch</code></p>
+<p>The last part <code>-c pytorch</code> specifies the conda channel to download the PyTorch packages. Your installation may not work if you don’t indicate the channel.</p>
+<p>Now, you can load <code>rTorch</code> in R or RStudio.</p>
+</div>
+<div id="automatic-installation" class="section level3 unnumbered">
+<h3>Automatic installation</h3>
+<p>I use the idea from automatic installation in <code>r-tensorflow</code>, to create the function <code>rTorch::install_pytorch()</code>. This function will allow you to install a <code>conda</code> environment complete with all <code>PyTorch</code> requirements.</p>
+<blockquote>
+<p><strong>Note.</strong> <code>matplotlib</code> and <code>pandas</code> are not really necessary for <code>rTorch</code> to work, but I was asked if <code>matplotlib</code> or <code>pandas</code> would work with <code>PyTorch</code>. So, I decided to install them for testing and experimentation. They both work.</p>
+</blockquote>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simple-regression-with-pytorch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

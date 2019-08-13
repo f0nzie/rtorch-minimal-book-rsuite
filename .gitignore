@@ -10,11 +10,6 @@ deployment/sbox
 
 *.ckpt
 
-# rtorch-book/public/
-rtorch-book/_bookdown_files/
-# rtorch-book/public/*.html
+rtorch-bookdown/_bookdown_files/
 
-# *.html
-# *.json
-
-rtorch-book/rtorch-book\.Rmd
+rtorch-bookdown/rtorch-book\.Rmd
