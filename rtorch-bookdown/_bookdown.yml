@@ -1,5 +1,6 @@
 book_filename: "rtorch-book"
 delete_merged_file: true
+new_session: yes
 repo: https://github.com/f0nzie/rtorch-book.git
 output_dir: "public"
 language:
