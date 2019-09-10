@@ -24,7 +24,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 torch.manual_seed(123)
-#> <torch._C.Generator object at 0x7efd67342a70>
+#> <torch._C.Generator object at 0x7feca546ca70>
 class Net(nn.Module):
    def __init__(self):
        super(Net, self).__init__()
