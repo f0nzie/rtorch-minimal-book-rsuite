@@ -1,0 +1,12 @@
+*
+!.gitignore
+!isolation.Rproj
+!.Rprofile
+!*.Rmd
+!*.yml
+!*.bib
+!preamble.tex
+!style.css
+!_common.R
+!README.*
+!refs/**
