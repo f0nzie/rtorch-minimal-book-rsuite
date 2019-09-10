@@ -6,6 +6,11 @@ Source: https://www.guru99.com/pytorch-tutorial.html
 
 Our network model is a simple Linear layer with an input and an output shape of 1.
 
+```{r}
+library(rTorch)
+```
+
+
 
 ```{python}
 from __future__ import print_function

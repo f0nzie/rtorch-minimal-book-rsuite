@@ -18,7 +18,7 @@ Source: https://github.com/jcjohnson/pytorch-examples#pytorch-tensors
 
 ### Load the libraries
 
-```{r}
+```{r example-device-cpu}
 library(rTorch)
 
 device = torch$device('cpu')
@@ -36,7 +36,7 @@ torch$manual_seed(0)
 ### Datasets 
 We will create a random dataset for a two layer neural network.
 
-```{r}
+```{r create-random-tensors}
 N <- 64L; D_in <- 1000L; H <- 100L; D_out <- 10L
 
 # Create random Tensors to hold inputs and outputs

@@ -81,8 +81,7 @@ print(x, y)
 ### Optimizer and Loss
 Next, you should define the Optimizer and the Loss Function for our training process.
 
-
-```{r}
+```{r define-optimizer}
 # Define Optimizer and Loss Function
 optimizer <- torch$optim$SGD(net$parameters(), lr=0.2)
 loss_func <- torch$nn$MSELoss()
@@ -94,7 +93,7 @@ print(loss_func)
 
 Now let's start our training process. With an epoch of 250, you will iterate our data to find the best value for our hyperparameters.
 
-```{r fig.width=5.5, fig.height=5.5}
+```{r plot-xy, fig.width=5.5, fig.height=5.5}
 # x = x$type(torch$float)   # make it a a FloatTensor
 # y = y$type(torch$float)
 
@@ -135,7 +134,7 @@ As you can see below, you successfully performed regression with a neural networ
 
 ## Case 2: Rainfall
 
-```{r }
+```{r rainfall-load-rtorch}
 library(rTorch)
 ```
 

@@ -297,6 +297,7 @@ btat
 $$(A B)^T = B^T A^T$$
 
 ```{r}
+# tolerance
 torch$allclose(abt, btat, rtol=0.0001)
 ```
 
