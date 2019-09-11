@@ -1,6 +1,6 @@
 # Logistic Regression
 
-```{r}
+```{r load-torch-modules}
 library(rTorch)
 
 nn          <- torch$nn
@@ -12,7 +12,7 @@ torch$set_default_dtype(torch$float)
 ## Example 1: MNIST handwritten digits
 
 ### Hyperparameters
-```{r}
+```{r hyperparameters}
 # Hyper-parameters 
 input_size    <- 784L
 num_classes   <- 10L
@@ -23,7 +23,7 @@ learning_rate <- 0.001
 
 ### Read datasets
 
-```{r}
+```{r read-datasets}
 # MNIST dataset (images and labels)
 # IDX format
 local_folder <- '../datasets/raw_data'
@@ -46,14 +46,14 @@ test_loader = torch$utils$data$DataLoader(dataset=test_dataset,
                                           shuffle=FALSE)
 ```
 
-```{r}
+```{r class-len}
 class(train_loader)
 length(train_loader)
 ```
 
 ### Define the model
 
-```{r}
+```{r set-print-model}
 # Logistic regression model
 model = nn$Linear(input_size, num_classes)
 
@@ -67,7 +67,7 @@ print(model)
 
 ### Training
 
-```{r}
+```{r load-iterator}
 # Train the model
 iter_train_loader <- iterate(train_loader)
 total_step <-length(iter_train_loader)
@@ -110,7 +110,7 @@ for (epoch in 1:num_epochs) {
 
 ### Prediction
 
-```{r}
+```{r prediction}
 # Adjust weights and reset gradients
 iter_test_loader <- iterate(test_loader)
 

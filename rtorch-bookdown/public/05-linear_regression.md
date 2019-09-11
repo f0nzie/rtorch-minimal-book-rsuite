@@ -70,7 +70,7 @@ y = np$sin(x) * np$power(x, 3L) + 3L * x + np$random$rand(100L) * 0.8
 plot(x, y)
 ```
 
-<img src="05-linear_regression_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="05-linear_regression_files/figure-html/datasets-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 Before you start the training process, you need to convert the numpy array to Variables that supported by Torch and autograd.
