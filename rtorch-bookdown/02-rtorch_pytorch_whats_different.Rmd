@@ -1,4 +1,4 @@
-# Lessons Learned
+# rTorch and PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
 
@@ -9,7 +9,7 @@ library(rTorch)
 ```
 
 ## Calling objects from PyTorch
-We use the dollar sign or `$` to call a class, function or method from the `torch` module.
+We use the dollar sign or `$` to call a class, function or method from the rTorch modules. In this case, from `torch` module:
 
 ```{r}
 torch$tensor
@@ -30,7 +30,7 @@ Then we can proceed to extract classes, methods and functions from the `nn`, `tr
 ## Show the attributes (methods) of a class or PyTorch object
 Sometimes we are interested in knowing the internal components of a class. In that case, we use the reticulate function `py_list_attributes()`.
 
-```{r}
+```{r mnist-digits-train-dataset}
 local_folder <- '../datasets/mnist_digits'
 train_dataset = torchvision$datasets$MNIST(root = local_folder, 
                                            train = TRUE, 
@@ -46,14 +46,14 @@ reticulate::py_list_attributes(train_dataset)
 
 Knowing the internal methods of a class could be useful when we want to refer to a specific property of such class. For example, from the list above, we know that the object `train_dataset` has an attribute `__len__`. We can call it like this:
 
-```{r}
+```{r len-dataset}
 train_dataset$`__len__`()
 ```
 
 
 ## Enumeration
 
-```{r r-array}
+```{r create-r-array}
 
 x_train = array(c(3.3, 4.4, 5.5, 6.71, 6.93, 4.168, 
                   9.779, 6.182, 7.59, 2.167, 7.042,
@@ -86,7 +86,7 @@ py$len(x_train)
 ```
 
 
-```{r}
+```{r iterate-train}
 xit = iterate(enum_x_train, simplify = TRUE)
 xit
 ```
@@ -252,19 +252,19 @@ cat("\nTargets:\n")
 targets
 ```
 
-Notice that while in Python the tensor operation, gradient of the weights times the **Learning Rate**, 
+Notice that while in Python, the tensor operation, gradient of the weights times the **Learning Rate**, is:
 
 $$w = -w + \nabla w \; \alpha$$
 
 is a very straight forwward and clean code:
 
-```{python, eval=FALSE}
+```{python py-calc-gradient, eval=FALSE}
 w -= w.grad * 1e-5
 ```
 
 In R shows a little bit more convoluted:
 
-```{r, eval=FALSE}
+```{r r-calc-gradient, eval=FALSE}
 w$data <- torch$sub(w$data, torch$mul(w$grad, torch$scalar_tensor(1e-5)))
 ```
 
