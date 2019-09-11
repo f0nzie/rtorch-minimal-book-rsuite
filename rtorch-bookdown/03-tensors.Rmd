@@ -45,7 +45,7 @@ y <- torch$randn(N, D_out, device=device)
 ```
 
 
-```{r}
+```{r random-init-weights}
 # Randomly initialize weights
 w1 <- torch$randn(D_in, H, device=device)   # layer 1
 w2 <- torch$randn(H, D_out, device=device)  # layer 2
@@ -53,7 +53,7 @@ w2 <- torch$randn(H, D_out, device=device)  # layer 2
 
 ### Run the model
 
-```{r}
+```{r run-model}
 learning_rate = 1e-6
 
 # loop

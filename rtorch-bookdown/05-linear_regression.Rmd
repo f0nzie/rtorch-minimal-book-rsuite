@@ -18,7 +18,7 @@ Net(
 ```
 
 
-```{r}
+```{r setup-nn}
 library(rTorch)
 
 nn       <- torch$nn
@@ -53,7 +53,7 @@ print(net)
 Before you start the training process, you need to know our data. You make a random function to test our model. $Y = x3 sin(x)+ 3x+0.8 rand(100)$
 
 
-```{r, fig.width=5.5, fig.height=5.5}
+```{r datasets, fig.width=5.5, fig.height=5.5}
 
 np$random$seed(123L)
 
@@ -69,7 +69,7 @@ Before you start the training process, you need to convert the numpy array to Va
 ### Converting from numpy to tensor
 Notice that before converting to a Torch tensor, we need first to convert the R numeric vector to a `numpy` array:
 
-```{r}
+```{r numpy-to-tensor}
 # convert numpy array to tensor in shape of input size
 x <- r_to_py(x)
 y <- r_to_py(y)
@@ -140,7 +140,7 @@ library(rTorch)
 
 ### Select device
 
-```{r}
+```{r seed-device}
 torch$manual_seed(0)
 
 device = torch$device('cpu')
@@ -149,7 +149,7 @@ device = torch$device('cpu')
 ### Training data
 The training data can be represented using 2 matrices (inputs and targets), each with one row per observation, and one column per variable.
 
-```{r}
+```{r inputs-and targets}
 # Input (temp, rainfall, humidity)
 inputs = np$array(list(list(73, 67, 43),
                    list(91, 88, 64),
@@ -169,7 +169,7 @@ targets = np$array(list(list(56, 70),
 ### Convert to tensors
 Before we build a model, we need to convert inputs and targets to PyTorch tensors.
 
-```{r}
+```{r convert-to-tensors}
 # Convert inputs and targets to tensors
 inputs = torch$from_numpy(inputs)
 targets = torch$from_numpy(targets)
@@ -181,7 +181,7 @@ print(targets)
 
 The weights and biases can also be represented as matrices, initialized with random values. The first row of $w$ and the first element of $b$ are used to predict the first target variable, i.e. yield for apples, and, similarly, the second for oranges.
 
-```{r}
+```{r to-double}
 # random numbers for weights and biases. Then convert to double()
 torch$set_default_dtype(torch$double)
 
@@ -196,7 +196,7 @@ print(b)
 ### Build the model
 The model is simply a function that performs a matrix multiplication of the input $x$ and the weights $w$ (transposed), and adds the bias $b$ (replicated for each observation).
 
-```{r}
+```{r build-model}
 model <- function(x) {
   wt <- w$t()
   return(torch$add(torch$mm(x, wt), b))
@@ -206,13 +206,13 @@ model <- function(x) {
 ### Generate predictions
 The matrix obtained by passing the input data to the model is a set of predictions for the target variables.
 
-```{r}
+```{r predictions}
 # Generate predictions
 preds = model(inputs)
 print(preds)
 ```
 
-```{r}
+```{r targets}
 # Compare with targets
 print(targets)
 ```
@@ -229,7 +229,7 @@ We can compare the predictions with the actual targets, using the following meth
 
 The result is a single number, known as the mean squared error (MSE).
 
-```{r}
+```{r mse-loss}
 # MSE loss
 mse = function(t1, t2) {
   diff <- torch$sub(t1, t2)
@@ -239,7 +239,7 @@ mse = function(t1, t2) {
 ```
 
 
-```{r}
+```{r compute-loss}
 # Compute loss
 loss = mse(preds, targets)
 print(loss)
@@ -254,20 +254,20 @@ The resulting number is called the **loss**, because it indicates how bad the mo
 
 With PyTorch, we can automatically compute the gradient or derivative of the loss w.r.t. to the weights and biases, because they have `requires_grad` set to True.
 
-```{r}
+```{r compute-gradients}
 # Compute gradients
 loss$backward()
 ```
 
 The gradients are stored in the .grad property of the respective tensors.
 
-```{r}
+```{r print-weights-gradients}
 # Gradients for weights
 print(w)
 print(w$grad)
 ```
 
-```{r}
+```{r print-bias}
 # Gradients for bias
 print(b)
 print(b$grad)
@@ -288,7 +288,7 @@ The increase or decrease is proportional to the value of the gradient.
 
 Finally, we'll reset the gradients to zero before moving forward, because PyTorch accumulates gradients.
 
-```{r}
+```{r reset-gradients}
 # Reset the gradients
 w$grad$zero_()
 b$grad$zero_()
@@ -308,20 +308,20 @@ We'll reduce the loss and improve our model using the gradient descent algorithm
 4. Adjust the weights by subtracting a small quantity proportional to the gradient
 5. Reset the gradients to zero
 
-```{r}
+```{r gen-predictions}
 # Generate predictions
 preds = model(inputs)
 print(preds)
 ```
 
-```{r}
+```{r calc-loss}
 # Calculate the loss
 loss = mse(preds, targets)
 print(loss)
 ```
 
 
-```{r}
+```{r cal-gradients}
 # Compute gradients
 loss$backward()
 
@@ -330,7 +330,7 @@ print(b$grad)
 ```
 
 
-```{r}
+```{r adjust-weights-reset-gradients}
 # Adjust weights and reset gradients
 with(torch$no_grad(), {
   print(w); print(b)    # requires_grad attribute remains
@@ -348,7 +348,7 @@ print(b)
 
 With the new weights and biases, the model should have a lower loss.
 
-```{r}
+```{r calculate-loss}
 # Calculate loss
 preds = model(inputs)
 loss = mse(preds, targets)
@@ -361,7 +361,7 @@ print(loss)
 To reduce the loss further, we repeat the process of adjusting the weights and biases using the gradients multiple times. Each iteration is called an **epoch**.
 
 
-```{r}
+```{r all-together-now}
 # Running all together
 # Adjust weights and reset gradients
 for (i in 1:100) {
