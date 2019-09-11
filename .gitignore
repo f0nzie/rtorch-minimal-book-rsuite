@@ -13,3 +13,7 @@ deployment/sbox
 rtorch-bookdown/_bookdown_files/
 
 rtorch-bookdown/rtorch-book\.Rmd
+
+*.bak
+
+*.rds
