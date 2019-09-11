@@ -24,7 +24,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 torch.manual_seed(123)
-#> <torch._C.Generator object at 0x7feca546ca70>
+#> <torch._C.Generator object at 0x7f3f4528da70>
 class Net(nn.Module):
    def __init__(self):
        super(Net, self).__init__()
@@ -112,7 +112,7 @@ plt.scatter(x, y)
 plt.show()
 ```
 
-<img src="09-simple_regression_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="09-simple_regression_files/figure-html/py-datasets-1.png" width="70%" style="display: block; margin: auto;" />
 
 This is the code in R:
 
@@ -128,7 +128,7 @@ y = np$sin(x) * np$power(x, 3L) + 3*x + np$random$rand(100L)*0.8
 plot(x, y)
 ```
 
-<img src="09-simple_regression_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="09-simple_regression_files/figure-html/r-datasets-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 Before you start the training process, you need to convert the numpy array to Variables that supported by Torch and autograd.
@@ -516,13 +516,13 @@ for i in range(250):
        plt.pause(0.1)
 ```
 
-<img src="09-simple_regression_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-2.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-3.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-4.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-5.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-6.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-7.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-8.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-9.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-10.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-11.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-12.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-13.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-14.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-15.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-16.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-17.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-18.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-19.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-20.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-21.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-22.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-23.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-24.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/unnamed-chunk-11-25.png" width="70%" style="display: block; margin: auto;" />
+<img src="09-simple_regression_files/figure-html/py-iterate-1.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-2.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-3.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-4.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-5.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-6.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-7.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-8.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-9.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-10.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-11.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-12.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-13.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-14.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-15.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-16.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-17.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-18.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-19.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-20.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-21.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-22.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-23.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-24.png" width="70%" style="display: block; margin: auto;" /><img src="09-simple_regression_files/figure-html/py-iterate-25.png" width="70%" style="display: block; margin: auto;" />
 
 ```python
 plt.show()
 ```
 
-<img src="09-simple_regression_files/figure-html/unnamed-chunk-11-26.png" width="70%" style="display: block; margin: auto;" />
+<img src="09-simple_regression_files/figure-html/py-iterate-26.png" width="70%" style="display: block; margin: auto;" />
 
 ### Code in R
 
@@ -550,7 +550,7 @@ for (i in 1:250) {
 }
 ```
 
-<img src="09-simple_regression_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="09-simple_regression_files/figure-html/r-iterate-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ## Result

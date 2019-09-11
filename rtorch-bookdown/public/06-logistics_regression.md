@@ -114,36 +114,36 @@ for (epoch in 1:num_epochs) {
         i <-  i + 1
     }
 }  
-#> Epoch [2/5], Step [100/600], Loss: 2.163379 
-#> Epoch [2/5], Step [200/600], Loss: 2.055281 
-#> Epoch [2/5], Step [300/600], Loss: 1.979400 
-#> Epoch [2/5], Step [400/600], Loss: 1.897730 
-#> Epoch [2/5], Step [500/600], Loss: 1.847887 
-#> Epoch [2/5], Step [600/600], Loss: 1.826631 
-#> Epoch [3/5], Step [100/600], Loss: 1.719920 
-#> Epoch [3/5], Step [200/600], Loss: 1.649268 
-#> Epoch [3/5], Step [300/600], Loss: 1.562473 
-#> Epoch [3/5], Step [400/600], Loss: 1.495745 
-#> Epoch [3/5], Step [500/600], Loss: 1.507322 
-#> Epoch [3/5], Step [600/600], Loss: 1.522697 
-#> Epoch [4/5], Step [100/600], Loss: 1.433105 
-#> Epoch [4/5], Step [200/600], Loss: 1.386779 
-#> Epoch [4/5], Step [300/600], Loss: 1.293425 
-#> Epoch [4/5], Step [400/600], Loss: 1.236290 
-#> Epoch [4/5], Step [500/600], Loss: 1.287380 
-#> Epoch [4/5], Step [600/600], Loss: 1.322656 
-#> Epoch [5/5], Step [100/600], Loss: 1.242932 
-#> Epoch [5/5], Step [200/600], Loss: 1.212864 
-#> Epoch [5/5], Step [300/600], Loss: 1.112460 
-#> Epoch [5/5], Step [400/600], Loss: 1.065234 
-#> Epoch [5/5], Step [500/600], Loss: 1.138610 
-#> Epoch [5/5], Step [600/600], Loss: 1.184720 
-#> Epoch [6/5], Step [100/600], Loss: 1.110802 
-#> Epoch [6/5], Step [200/600], Loss: 1.092412 
-#> Epoch [6/5], Step [300/600], Loss: 0.984723 
-#> Epoch [6/5], Step [400/600], Loss: 0.946799 
-#> Epoch [6/5], Step [500/600], Loss: 1.032449 
-#> Epoch [6/5], Step [600/600], Loss: 1.084727
+#> Epoch [2/5], Step [100/600], Loss: 2.191183 
+#> Epoch [2/5], Step [200/600], Loss: 2.066281 
+#> Epoch [2/5], Step [300/600], Loss: 2.026777 
+#> Epoch [2/5], Step [400/600], Loss: 1.888579 
+#> Epoch [2/5], Step [500/600], Loss: 1.866322 
+#> Epoch [2/5], Step [600/600], Loss: 1.813863 
+#> Epoch [3/5], Step [100/600], Loss: 1.750456 
+#> Epoch [3/5], Step [200/600], Loss: 1.668510 
+#> Epoch [3/5], Step [300/600], Loss: 1.632287 
+#> Epoch [3/5], Step [400/600], Loss: 1.508179 
+#> Epoch [3/5], Step [500/600], Loss: 1.519291 
+#> Epoch [3/5], Step [600/600], Loss: 1.513945 
+#> Epoch [4/5], Step [100/600], Loss: 1.463533 
+#> Epoch [4/5], Step [200/600], Loss: 1.418029 
+#> Epoch [4/5], Step [300/600], Loss: 1.378467 
+#> Epoch [4/5], Step [400/600], Loss: 1.268453 
+#> Epoch [4/5], Step [500/600], Loss: 1.291720 
+#> Epoch [4/5], Step [600/600], Loss: 1.320038 
+#> Epoch [5/5], Step [100/600], Loss: 1.273591 
+#> Epoch [5/5], Step [200/600], Loss: 1.252113 
+#> Epoch [5/5], Step [300/600], Loss: 1.207957 
+#> Epoch [5/5], Step [400/600], Loss: 1.109646 
+#> Epoch [5/5], Step [500/600], Loss: 1.134973 
+#> Epoch [5/5], Step [600/600], Loss: 1.189169 
+#> Epoch [6/5], Step [100/600], Loss: 1.142797 
+#> Epoch [6/5], Step [200/600], Loss: 1.135667 
+#> Epoch [6/5], Step [300/600], Loss: 1.087381 
+#> Epoch [6/5], Step [400/600], Loss: 0.998658 
+#> Epoch [6/5], Step [500/600], Loss: 1.021408 
+#> Epoch [6/5], Step [600/600], Loss: 1.096232
 ```
 
 
@@ -172,7 +172,7 @@ with(torch$no_grad(), {
     cat(sprintf('Accuracy of the model on the 10000 test images: %f %%', (100 * correct / total)))
   
 })
-#> Accuracy of the model on the 10000 test images: 82.810000 %
+#> Accuracy of the model on the 10000 test images: 82.570000 %
 ```
 
 ### Save the model

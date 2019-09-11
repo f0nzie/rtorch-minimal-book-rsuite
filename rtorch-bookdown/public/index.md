@@ -11,7 +11,7 @@ link-citations: yes
 description: "This is a minimal tutorial of using the `rTorch` package to have fun while doing machine learning. This book was produced with `bookdown`."
 ---
 
-# Prerequisites {-} {#prereqs}
+# Prerequisites {-}
 
 You need two things to get `rTorch` working:
 
