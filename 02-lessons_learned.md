@@ -316,7 +316,11 @@ import torch
 torch.manual_seed(0)  # reproducible
 
 # Input (temp, rainfall, humidity)
+<<<<<<< Updated upstream
 #> <torch._C.Generator object at 0x7f9e7f152df0>
+=======
+#> <torch._C.Generator object at 0x7f977d044df0>
+>>>>>>> Stashed changes
 inputs = np.array([[73, 67, 43],
                    [91, 88, 64],
                    [87, 134, 58],
