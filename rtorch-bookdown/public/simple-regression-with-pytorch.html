@@ -280,6 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-the-network-model-1" class="section level2">
 <h2><span class="header-section-number">9.1</span> Creating the network model</h2>
 <p>Our network model is a simple Linear layer with an input and an output shape of 1.</p>
+<<<<<<< Updated upstream
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="im">from</span> __future__ <span class="im">import</span> print_function</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -304,6 +305,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; Net(</span></a>
 <a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt;   (layer): Linear(in_features=1, out_features=1, bias=True)</span></a>
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; )</span></a></code></pre></div>
+=======
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="im">from</span> __future__ <span class="im">import</span> print_function</a>
+<a class="sourceLine" id="cb118-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb118-3" data-line-number="3"><span class="im">import</span> torch</a>
+<a class="sourceLine" id="cb118-4" data-line-number="4"><span class="im">import</span> torch.nn <span class="im">as</span> nn</a>
+<a class="sourceLine" id="cb118-5" data-line-number="5"><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</a>
+<a class="sourceLine" id="cb118-6" data-line-number="6"><span class="im">from</span> torch.autograd <span class="im">import</span> Variable</a>
+<a class="sourceLine" id="cb118-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb118-8" data-line-number="8">torch.manual_seed(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb118-9" data-line-number="9"><span class="co">#&gt; &lt;torch._C.Generator object at 0x7f2b970a5a70&gt;</span></a>
+<a class="sourceLine" id="cb118-10" data-line-number="10"><span class="kw">class</span> Net(nn.Module):</a>
+<a class="sourceLine" id="cb118-11" data-line-number="11">   <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb118-12" data-line-number="12">       <span class="bu">super</span>(Net, <span class="va">self</span>).<span class="fu">__init__</span>()</a>
+<a class="sourceLine" id="cb118-13" data-line-number="13">       <span class="va">self</span>.layer <span class="op">=</span> torch.nn.Linear(<span class="dv">1</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb118-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb118-15" data-line-number="15">   <span class="kw">def</span> forward(<span class="va">self</span>, x):</a>
+<a class="sourceLine" id="cb118-16" data-line-number="16">       x <span class="op">=</span> <span class="va">self</span>.layer(x)      </a>
+<a class="sourceLine" id="cb118-17" data-line-number="17">       <span class="cf">return</span> x</a>
+<a class="sourceLine" id="cb118-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb118-19" data-line-number="19">net <span class="op">=</span> Net()</a>
+<a class="sourceLine" id="cb118-20" data-line-number="20"><span class="bu">print</span>(net)</a>
+<a class="sourceLine" id="cb118-21" data-line-number="21"><span class="co">#&gt; Net(</span></a>
+<a class="sourceLine" id="cb118-22" data-line-number="22"><span class="co">#&gt;   (layer): Linear(in_features=1, out_features=1, bias=True)</span></a>
+<a class="sourceLine" id="cb118-23" data-line-number="23"><span class="co">#&gt; )</span></a></code></pre></div>
+>>>>>>> Stashed changes
 <p>And the network output should be like this</p>
 <pre><code>Net(
   (hidden): Linear(in_features=1, out_features=1, bias=True)

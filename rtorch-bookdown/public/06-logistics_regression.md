@@ -114,6 +114,7 @@ for (epoch in 1:num_epochs) {
         i <-  i + 1
     }
 }  
+<<<<<<< Updated upstream
 #> Epoch [2/5], Step [100/600], Loss: 2.191183 
 #> Epoch [2/5], Step [200/600], Loss: 2.066281 
 #> Epoch [2/5], Step [300/600], Loss: 2.026777 
@@ -144,6 +145,38 @@ for (epoch in 1:num_epochs) {
 #> Epoch [6/5], Step [400/600], Loss: 0.998658 
 #> Epoch [6/5], Step [500/600], Loss: 1.021408 
 #> Epoch [6/5], Step [600/600], Loss: 1.096232
+=======
+#> Epoch [2/5], Step [100/600], Loss: 2.241216 
+#> Epoch [2/5], Step [200/600], Loss: 2.108645 
+#> Epoch [2/5], Step [300/600], Loss: 2.062737 
+#> Epoch [2/5], Step [400/600], Loss: 1.957013 
+#> Epoch [2/5], Step [500/600], Loss: 1.868986 
+#> Epoch [2/5], Step [600/600], Loss: 1.857411 
+#> Epoch [3/5], Step [100/600], Loss: 1.732885 
+#> Epoch [3/5], Step [200/600], Loss: 1.654569 
+#> Epoch [3/5], Step [300/600], Loss: 1.676052 
+#> Epoch [3/5], Step [400/600], Loss: 1.581568 
+#> Epoch [3/5], Step [500/600], Loss: 1.494308 
+#> Epoch [3/5], Step [600/600], Loss: 1.559544 
+#> Epoch [4/5], Step [100/600], Loss: 1.407361 
+#> Epoch [4/5], Step [200/600], Loss: 1.377253 
+#> Epoch [4/5], Step [300/600], Loss: 1.421703 
+#> Epoch [4/5], Step [400/600], Loss: 1.340798 
+#> Epoch [4/5], Step [500/600], Loss: 1.250808 
+#> Epoch [4/5], Step [600/600], Loss: 1.359947 
+#> Epoch [5/5], Step [100/600], Loss: 1.195293 
+#> Epoch [5/5], Step [200/600], Loss: 1.202895 
+#> Epoch [5/5], Step [300/600], Loss: 1.248877 
+#> Epoch [5/5], Step [400/600], Loss: 1.180327 
+#> Epoch [5/5], Step [500/600], Loss: 1.086607 
+#> Epoch [5/5], Step [600/600], Loss: 1.220642 
+#> Epoch [6/5], Step [100/600], Loss: 1.050101 
+#> Epoch [6/5], Step [200/600], Loss: 1.086684 
+#> Epoch [6/5], Step [300/600], Loss: 1.126206 
+#> Epoch [6/5], Step [400/600], Loss: 1.068254 
+#> Epoch [6/5], Step [500/600], Loss: 0.970227 
+#> Epoch [6/5], Step [600/600], Loss: 1.118673
+>>>>>>> Stashed changes
 ```
 
 
@@ -172,7 +205,11 @@ with(torch$no_grad(), {
     cat(sprintf('Accuracy of the model on the 10000 test images: %f %%', (100 * correct / total)))
   
 })
+<<<<<<< Updated upstream
 #> Accuracy of the model on the 10000 test images: 82.570000 %
+=======
+#> Accuracy of the model on the 10000 test images: 82.900000 %
+>>>>>>> Stashed changes
 ```
 
 ### Save the model

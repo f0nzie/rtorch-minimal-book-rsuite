@@ -24,7 +24,11 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 torch.manual_seed(123)
+<<<<<<< Updated upstream
 #> <torch._C.Generator object at 0x7f3f4528da70>
+=======
+#> <torch._C.Generator object at 0x7f2b970a5a70>
+>>>>>>> Stashed changes
 class Net(nn.Module):
    def __init__(self):
        super(Net, self).__init__()
