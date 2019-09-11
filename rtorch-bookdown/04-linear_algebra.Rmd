@@ -1,0 +1,326 @@
+# Linear Algebra with Torch {#linearalgebra}
+
+The following are basic operations of Linear Algebra using PyTorch.
+
+
+```{r}
+library(rTorch)
+```
+
+
+## Scalars
+
+```{r torch-scalars}
+torch$scalar_tensor(2.78654)
+
+torch$scalar_tensor(0L)
+
+torch$scalar_tensor(1L)
+
+torch$scalar_tensor(TRUE)
+
+torch$scalar_tensor(FALSE)
+```
+
+## Vectors
+
+```{r torch-as-tensor}
+v <- c(0, 1, 2, 3, 4, 5)
+torch$as_tensor(v)
+```
+
+
+```{r torch-as-tensor-shape}
+# row-vector
+message("R matrix")
+(mr <- matrix(1:10, nrow=1))
+message("as_tensor")
+torch$as_tensor(mr)
+message("shape_of_tensor")
+torch$as_tensor(mr)$shape
+```
+
+```{r column-vector}
+# column-vector
+message("R matrix, one column")
+(mc <- matrix(1:10, ncol=1))
+message("as_tensor")
+torch$as_tensor(mc)
+message("size of tensor")
+torch$as_tensor(mc)$shape
+```
+
+## Matrices
+
+```{r matrix-to-tensor-ex1}
+message("R matrix")
+(m1 <- matrix(1:24, nrow = 3, byrow = TRUE))
+message("as_tensor")
+(t1 <- torch$as_tensor(m1))
+message("shape")
+torch$as_tensor(m1)$shape
+message("size")
+torch$as_tensor(m1)$size()
+message("dim")
+dim(torch$as_tensor(m1))
+message("length")
+length(torch$as_tensor(m1))
+```
+
+```{r matrix-to-tensor-ex2}
+message("R matrix")
+(m2 <- matrix(0:99, ncol = 10))
+message("as_tensor")
+(t2 <- torch$as_tensor(m2))
+message("shape")
+t2$shape
+message("dim")
+dim(torch$as_tensor(m2))
+```
+
+```{r r-select-by-index-1}
+m1[1, 1]
+m2[1, 1]
+```
+
+```{r tensor-select-by-index-2}
+t1[1, 1]
+t2[1, 1]
+```
+
+## 3D+ tensors
+
+```{r tensor-rgb}
+# RGB color image has three axes 
+(img <- torch$rand(3L, 28L, 28L))
+img$shape
+```
+
+```{r rgb-select-index}
+img[1, 1, 1]
+img[3, 28, 28]
+```
+
+
+## Transpose of a matrix
+
+```{r r-matrix-transpose}
+(m3 <- matrix(1:25, ncol = 5))
+
+# transpose
+message("transpose")
+tm3 <- t(m3)
+tm3
+```
+
+```{r tensor-transpose}
+message("as_tensor")
+(t3 <- torch$as_tensor(m3))
+message("transpose")
+tt3 <- t3$transpose(dim0 = 0L, dim1 = 1L)
+tt3
+```
+
+```{r is_it_equal}
+tm3 == tt3$numpy()   # convert first the tensor to numpy
+```
+
+## Vectors, special case of a matrix
+
+```{r matrix-select-column-then-row}
+message("R matrix")
+m2 <- matrix(0:99, ncol = 10)
+message("as_tensor")
+(t2 <- torch$as_tensor(m2))
+
+# in R
+message("select column of matrix")
+(v1 <- m2[, 1])
+message("select row of matrix")
+(v2 <- m2[10, ])
+```
+
+```{r tensor-select-column-then-row}
+# PyTorch
+message()
+t2c <- t2[, 1]
+t2r <- t2[10, ]
+
+t2c
+t2r
+```
+
+In vectors, the vector and its transpose are equal.
+
+```{r vector-transpose-equal}
+tt2r <- t2r$transpose(dim0 = 0L, dim1 = 0L)
+tt2r
+```
+
+```{r is_vector_equal_to_tranpose}
+# a tensor of booleans. is vector equal to its transposed?
+t2r == tt2r
+```
+
+## Tensor arithmetic
+
+```{r torch-ones}
+message("x")
+(x = torch$ones(5L, 4L))
+message("y")
+(y = torch$ones(5L, 4L))
+message("x+y")
+x + y
+```
+
+$$A + B = B + A$$
+
+```{r}
+x + y == y + x
+```
+
+## Add a scalar to a tensor
+
+```{r tensor-add-scalar}
+s <- 0.5    # scalar
+x + s
+```
+
+```{r tensor_times_two_tensors}
+# scalar multiplying two tensors
+s * (x + y)
+```
+
+## Multiplying tensors
+
+$$A * B = B * A$$
+
+```{r multiply-tensors}
+message("x")
+(x = torch$ones(5L, 4L))
+message("y")
+(y = torch$ones(5L, 4L))
+message("2x+4y")
+(z = 2 * x + 4 * y)
+```
+
+
+```{r tensor-mul-equal}
+x * y == y * x
+```
+
+
+
+## Dot product
+
+$$dot(a,b)_{i,j,k,a,b,c} = \sum_m a_{i,j,k,m}b_{a,b,m,c}$$
+
+```{r tensor-dot}
+torch$dot(torch$tensor(c(2, 3)), torch$tensor(c(2, 1)))
+```
+
+```{r numpy-dot}
+a <- np$array(list(list(1, 2), list(3, 4)))
+a
+b <- np$array(list(list(1, 2), list(3, 4)))
+b
+
+np$dot(a, b)
+```
+
+`torch.dot()` treats both a and b as 1D vectors (irrespective of their original shape) and computes their inner product. 
+
+```{r dot-error, error=TRUE}
+at <- torch$as_tensor(a)
+bt <- torch$as_tensor(b)
+
+# torch$dot(at, bt)  <- RuntimeError: dot: Expected 1-D argument self, but got 2-D
+# at %.*% bt
+```
+
+If we perform the same dot product operation in Python, we get the same error:
+
+
+```{python, error=TRUE}
+import torch
+import numpy as np
+
+a = np.array([[1, 2], [3, 4]])
+a
+b = np.array([[1, 2], [3, 4]])
+b
+
+np.dot(a, b)
+
+at = torch.as_tensor(a)
+bt = torch.as_tensor(b)
+
+at
+bt
+
+torch.dot(at, bt)
+```
+
+
+```{r, error=TRUE}
+a <- torch$Tensor(list(list(1, 2), list(3, 4)))
+b <- torch$Tensor(c(c(1, 2), c(3, 4)))
+c <- torch$Tensor(list(list(11, 12), list(13, 14)))
+
+a
+b
+torch$dot(a, b)
+
+# this is another way of performing dot product in PyTorch
+# a$dot(a)
+```
+
+```{r, error=TRUE}
+o1 <- torch$ones(2L, 2L)
+o2 <- torch$ones(2L, 2L)
+
+o1
+o2
+
+torch$dot(o1, o2)
+o1$dot(o2)
+```
+
+
+```{r }
+# 1D tensors work fine
+r = torch$dot(torch$Tensor(list(4L, 2L, 4L)), torch$Tensor(list(3L, 4L, 1L)))
+r
+```
+
+```{r tensor-matmul}
+## mm and matmul seem to address the dot product we are looking for in tensors
+a = torch$randn(2L, 3L)
+b = torch$randn(3L, 4L)
+
+a$mm(b)
+a$matmul(b)
+```
+
+Here is agood explanation: https://stackoverflow.com/a/44525687/5270873
+
+```{r tensor-mm}
+abt <- torch$mm(a, b)$transpose(dim0=0L, dim1=1L)
+abt
+```
+
+```{r tensor-transpose-matmul}
+at <- a$transpose(dim0=0L, dim1=1L)
+bt <- b$transpose(dim0=0L, dim1=1L)
+
+btat <- torch$matmul(bt, at)
+btat
+```
+
+$$(A B)^T = B^T A^T$$
+
+```{r tensor-operation-tolerance}
+# tolerance
+torch$allclose(abt, btat, rtol=0.0001)
+```
+

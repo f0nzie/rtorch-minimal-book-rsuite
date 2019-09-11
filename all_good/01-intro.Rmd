@@ -1,0 +1,210 @@
+# Introduction {#intro}
+
+## Motivation
+_Why do we want a package of something that is already working well, such as PyTorch?_
+
+There are several reasons, but the main one is to bring another machine learning framework to R. Probably it just me but I feel PyTorch very comfortable to work with. Feels pretty much like everything else in Python. I have tried other frameworks in R. The closest that matches a natural language like PyTorch, is [MXnet](). Unfortunately, it is the hardest to install and maintain after updates. 
+
+Yes. I could have worked directly with PyTorch in a native Python environment, such as Jupyter or PyCharm but it very hard to quit __RMarkdown__ once you get used to it. It is the real thing in regards to [literate programming](https://en.wikipedia.org/wiki/Literate_programming). It does not only contributes to improving the quality of the code but establishes a workflow for a better understanding of the subject by your intended readers [@knuth1983], in what is been called the _literate programming paradigm_ [@cordes1991].
+
+This has the additional benefit of giving the ability to write combination of Python and R code together in the same document. There will times when it is better to create a class in Python; and other times where R will be more convenient to handle a data structure.
+
+
+
+## How do we start using `rTorch`
+Start using `rTorch` is very simple. The installation instructions are shown in Chapter \@ref(prereqs). After installing the minimum system requirements, you just call it with:
+
+```{r call-rtorch}
+library(rTorch)
+
+transforms  <- torchvision$transforms
+```
+
+There are several way of testing that `rTorch` is up and running. Let's see some of them:
+
+### Getting the PyTorch version
+
+```{r}
+rTorch::torch_version()
+```
+
+### PyTorch configuration
+This will show the PyTorch version and the current version of Python installed, as well as the paths where they reside.
+
+```{r}
+rTorch::torch_config()
+```
+
+
+
+## What can you do with `rTorch`
+Practically, you can do everything you could with PyTorch within the R ecosystem.
+Additionally to the `rTorch` module, from where you can extract methods, functions and classes, there are available two more modules: `torchvision` and `np`, which is short for `numpy`.
+
+### The `torchvision` module
+This is an example of using the `torchvision` module. With `torchvision` we could download any of the datasets available. In this case, we will be downloading the training dataset of the **MNIST** handwritten digits. There are 60,000 images in the training set.
+
+```{r}
+local_folder <- '../datasets/mnist_digits'
+train_dataset = torchvision$datasets$MNIST(root = local_folder, 
+                                           train = TRUE, 
+                                           transform = transforms$ToTensor(),
+                                           download = TRUE)
+
+train_dataset
+```
+
+You can do similarly for the `test` dataset if you set the flag `train = FALSE`. The `test` dataset has only 10,000 images.
+
+```{r}
+test_dataset = torchvision$datasets$MNIST(root = local_folder, 
+                                          train = FALSE, 
+                                          transform = transforms$ToTensor())
+test_dataset
+```
+
+
+### `np`: the `numpy` module
+`numpy` is automaticaly installed when `PyTorch` is. There is some interdependence between both.  Anytime that we need to do some transformation that is not available in `PyTorch`, we will use `numpy`.
+
+There are several operations that we could perform with `numpy`:
+
+#### Create an array {-}
+
+```{r}
+# do some array manipulations with NumPy
+a <- np$array(c(1:4))
+a
+```
+
+```{r}
+np$reshape(np$arange(0, 9), c(3L, 3L))
+```
+
+```{r}
+np$array(list(
+             list(73, 67, 43),
+             list(87, 134, 58),
+             list(102, 43, 37),
+             list(73, 67, 43), 
+             list(91, 88, 64), 
+             list(102, 43, 37), 
+             list(69, 96, 70), 
+             list(91, 88, 64), 
+             list(102, 43, 37), 
+             list(69, 96, 70)
+           ), dtype='float32')
+```
+
+
+#### Reshape an array {-}
+For the same `test` dataset that we loaded above, we will show the image of the handwritten digit and its label or class. Before plotting the image, we need to:
+
+1. Extract the image and label from the dataset
+2. Convert the tensor to a numpy array
+3. Reshape the tensor as a 2D array
+4. Plot the digit and its label
+
+
+```{r fig.asp=1}
+rotate <- function(x) t(apply(x, 2, rev))   # function to rotate the matrix
+
+# label for the image
+label <- test_dataset[0][[2]]
+label    
+
+# convert tensor to numpy array
+.show_img <- test_dataset[0][[1]]$numpy()
+dim(.show_img) 
+
+# reshape 3D array to 2D 
+show_img <- np$reshape(.show_img, c(28L, 28L))
+dim(show_img)
+```
+
+```{r fig.asp=1}
+# show in grays and rotate
+image(rotate(show_img), col = gray.colors(64))
+title(label)
+```
+
+
+#### Generate a random array {-}
+
+```{r, fig.asp=1}
+# set the seed
+np$random$seed(123L)
+# generate a random array
+x = np$random$rand(100L)
+# calculate the y array
+y = np$sin(x) * np$power(x, 3L) + 3L * x + np$random$rand(100L) * 0.8
+
+plot(x, y)
+```
+
+#### Convert a `numpy` array to a PyTorch tensor {-}
+This is a very common operation that I have seen in examples using PyTorch. Creating the array in `numpy`. and then convert it to a tensor.
+
+```{r}
+# input array
+x = np$array(rbind(
+            c(0,0,1),
+            c(0,1,1),
+            c(1,0,1),
+            c(1,1,1)))
+
+# the numpy array
+x
+```
+
+```{r}
+# convert the numpy array to float
+X <- np$float32(x)
+# convert the numpy array to a float tensor
+X <- torch$FloatTensor(X)
+X
+```
+
+### Python built-in functions
+To access the Python built-in functions we make use of the package `reticulate` and the function `import_builtins()`.
+
+```{r}
+py_bi <- import_builtins()
+```
+
+
+#### Length of a dataset {-}
+
+```{r}
+py_bi$len(train_dataset)
+py_bi$len(test_dataset)
+```
+
+#### Iterators {-}
+
+```{r}
+# iterate through training dataset
+enum_train_dataset <- py_bi$enumerate(train_dataset)
+
+cat(sprintf("%8s %8s \n", "index", "label"))
+for (i in 1:py_bi$len(train_dataset)) {
+    obj <- reticulate::iter_next(enum_train_dataset)
+    idx   <- obj[[1]]        # index number
+    cat(sprintf("%8d %5d \n", idx, obj[[2]][[2]]))
+    
+    if (i >= 100) break   # print only 100 labels
+}
+```
+
+
+#### Types and instances {-}
+
+```{r}
+# get the class of the object
+py_bi$type(train_dataset)
+
+# is train_dataset a torchvision dataset class
+py_bi$isinstance(train_dataset, torchvision$datasets$mnist$MNIST)
+```
+
+
