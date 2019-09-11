@@ -1,5 +1,5 @@
 
-# Lessons Learned
+# rTorch and PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
 
@@ -11,7 +11,7 @@ library(rTorch)
 ```
 
 ## Calling objects from PyTorch
-We use the dollar sign or `$` to call a class, function or method from the `torch` module.
+We use the dollar sign or `$` to call a class, function or method from the rTorch modules. In this case, from `torch` module:
 
 
 ```r
@@ -316,7 +316,7 @@ import torch
 torch.manual_seed(0)  # reproducible
 
 # Input (temp, rainfall, humidity)
-#> <torch._C.Generator object at 0x7f9e7f152df0>
+#> <torch._C.Generator object at 0x7f653dd8edf0>
 inputs = np.array([[73, 67, 43],
                    [91, 88, 64],
                    [87, 134, 58],
@@ -483,7 +483,7 @@ targets
 #>         [103., 119.]])
 ```
 
-Notice that while in Python the tensor operation, gradient of the weights times the **Learning Rate**, 
+Notice that while in Python, the tensor operation, gradient of the weights times the **Learning Rate**, is:
 
 $$w = -w + \nabla w \; \alpha$$
 
