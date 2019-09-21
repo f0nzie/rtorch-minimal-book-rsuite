@@ -40,7 +40,7 @@ test_dataset = torchvision$datasets$MNIST(root=local_folder,
                                           train=FALSE, 
                                           transform=transforms$ToTensor())
 
-# Data loader (input pipeline)
+# Data loader (input pipeline). Make the datasets iteratble
 train_loader = torch$utils$data$DataLoader(dataset=train_dataset, 
                                            batch_size=batch_size, 
                                            shuffle=TRUE)
@@ -106,8 +106,6 @@ for (epoch in 1:num_epochs) {
         i <-  i + 1
     }
 }  
-
-
 ```
 
 
