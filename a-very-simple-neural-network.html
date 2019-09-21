@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 A very simple neural network | A Minimal rTorch Tutorial</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 A very simple neural network | A Minimal rTorch Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 A very simple neural network | A Minimal rTorch Tutorial" />
+  
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+<meta name="author" content="Alfonso R. Reyes" />
+
+
+<meta name="date" content="2019-09-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-two-layer-neural-network.html"/>
+<link rel="next" href="neural-networks-2.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal rTorch Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i>Python Anaconda</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i>Automatic installation</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Getting Started</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#how-do-we-start-using-rtorch"><i class="fa fa-check"></i><b>1.2</b> How do we start using <code>rTorch</code></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#getting-the-pytorch-version"><i class="fa fa-check"></i><b>1.2.1</b> Getting the PyTorch version</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#pytorch-configuration"><i class="fa fa-check"></i><b>1.2.2</b> PyTorch configuration</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.3.1</b> The <code>torchvision</code> module</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.3.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.3.3</b> Python built-in functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html"><i class="fa fa-check"></i><b>2</b> rTorch vs PyTorch: What’s different</a><ul>
+<li class="chapter" data-level="2.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#calling-objects-from-pytorch"><i class="fa fa-check"></i><b>2.1</b> Calling objects from PyTorch</a></li>
+<li class="chapter" data-level="2.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#call-a-module-from-pytorch"><i class="fa fa-check"></i><b>2.2</b> Call a module from PyTorch</a></li>
+<li class="chapter" data-level="2.3" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#show-the-attributes-methods-of-a-class-or-pytorch-object"><i class="fa fa-check"></i><b>2.3</b> Show the attributes (methods) of a class or PyTorch object</a></li>
+<li class="chapter" data-level="2.4" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#enumeration"><i class="fa fa-check"></i><b>2.4</b> Enumeration</a></li>
+<li class="chapter" data-level="2.5" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#how-to-iterate"><i class="fa fa-check"></i><b>2.5</b> How to iterate</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#using-enumerate-and-iterate"><i class="fa fa-check"></i><b>2.5.1</b> Using <code>enumerate</code> and <code>iterate</code></a></li>
+<li class="chapter" data-level="2.5.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#using-a-for-loop-to-iterate"><i class="fa fa-check"></i><b>2.5.2</b> Using a <code>for-loop</code> to iterate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#zero-gradient"><i class="fa fa-check"></i><b>2.6</b> Zero gradient</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#version-in-python"><i class="fa fa-check"></i><b>2.6.1</b> Version in Python</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#version-in-r"><i class="fa fa-check"></i><b>2.6.2</b> Version in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#transform-a-tensor"><i class="fa fa-check"></i><b>2.7</b> Transform a tensor</a></li>
+<li class="chapter" data-level="2.8" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#build-a-model-class"><i class="fa fa-check"></i><b>2.8</b> Build a model class</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-1"><i class="fa fa-check"></i><b>2.8.1</b> Example 1</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2"><i class="fa fa-check"></i><b>2.8.2</b> Example 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>2.9</b> Convert a tensor to <code>numpy</code> object</a></li>
+<li class="chapter" data-level="2.10" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>2.10</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
+</ul></li>
+<li class="part"><span><b>II Basic Tensor Operations</b></span></li>
+<li class="chapter" data-level="3" data-path="tensors.html"><a href="tensors.html"><i class="fa fa-check"></i><b>3</b> Tensors</a><ul>
+<li class="chapter" data-level="3.1" data-path="tensors.html"><a href="tensors.html#arithmetic-of-tensors"><i class="fa fa-check"></i><b>3.1</b> Arithmetic of tensors</a></li>
+<li class="chapter" data-level="3.2" data-path="tensors.html"><a href="tensors.html#boolean-operations"><i class="fa fa-check"></i><b>3.2</b> Boolean operations</a></li>
+<li class="chapter" data-level="3.3" data-path="tensors.html"><a href="tensors.html#slicing"><i class="fa fa-check"></i><b>3.3</b> Slicing</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="linearalgebra.html"><a href="linearalgebra.html"><i class="fa fa-check"></i><b>4</b> Linear Algebra with Torch</a><ul>
+<li class="chapter" data-level="4.1" data-path="linearalgebra.html"><a href="linearalgebra.html#scalars"><i class="fa fa-check"></i><b>4.1</b> Scalars</a></li>
+<li class="chapter" data-level="4.2" data-path="linearalgebra.html"><a href="linearalgebra.html#vectors"><i class="fa fa-check"></i><b>4.2</b> Vectors</a></li>
+<li class="chapter" data-level="4.3" data-path="linearalgebra.html"><a href="linearalgebra.html#matrices"><i class="fa fa-check"></i><b>4.3</b> Matrices</a></li>
+<li class="chapter" data-level="4.4" data-path="linearalgebra.html"><a href="linearalgebra.html#d-tensors"><i class="fa fa-check"></i><b>4.4</b> 3D+ tensors</a></li>
+<li class="chapter" data-level="4.5" data-path="linearalgebra.html"><a href="linearalgebra.html#transpose-of-a-matrix"><i class="fa fa-check"></i><b>4.5</b> Transpose of a matrix</a></li>
+<li class="chapter" data-level="4.6" data-path="linearalgebra.html"><a href="linearalgebra.html#vectors-special-case-of-a-matrix"><i class="fa fa-check"></i><b>4.6</b> Vectors, special case of a matrix</a></li>
+<li class="chapter" data-level="4.7" data-path="linearalgebra.html"><a href="linearalgebra.html#tensor-arithmetic"><i class="fa fa-check"></i><b>4.7</b> Tensor arithmetic</a></li>
+<li class="chapter" data-level="4.8" data-path="linearalgebra.html"><a href="linearalgebra.html#add-a-scalar-to-a-tensor"><i class="fa fa-check"></i><b>4.8</b> Add a scalar to a tensor</a></li>
+<li class="chapter" data-level="4.9" data-path="linearalgebra.html"><a href="linearalgebra.html#multiplying-tensors"><i class="fa fa-check"></i><b>4.9</b> Multiplying tensors</a></li>
+<li class="chapter" data-level="4.10" data-path="linearalgebra.html"><a href="linearalgebra.html#dot-product"><i class="fa fa-check"></i><b>4.10</b> Dot product</a></li>
+</ul></li>
+<li class="part"><span><b>III Logistic Regression</b></span></li>
+<li class="chapter" data-level="5" data-path="mnistdigits.html"><a href="mnistdigits.html"><i class="fa fa-check"></i><b>5</b> Example 1: MNIST handwritten digits</a><ul>
+<li class="chapter" data-level="5.1" data-path="mnistdigits.html"><a href="mnistdigits.html#hyperparameters"><i class="fa fa-check"></i><b>5.1</b> Hyperparameters</a></li>
+<li class="chapter" data-level="5.2" data-path="mnistdigits.html"><a href="mnistdigits.html#read-datasets"><i class="fa fa-check"></i><b>5.2</b> Read datasets</a></li>
+<li class="chapter" data-level="5.3" data-path="mnistdigits.html"><a href="mnistdigits.html#define-the-model"><i class="fa fa-check"></i><b>5.3</b> Define the model</a></li>
+<li class="chapter" data-level="5.4" data-path="mnistdigits.html"><a href="mnistdigits.html#training"><i class="fa fa-check"></i><b>5.4</b> Training</a></li>
+<li class="chapter" data-level="5.5" data-path="mnistdigits.html"><a href="mnistdigits.html#prediction"><i class="fa fa-check"></i><b>5.5</b> Prediction</a></li>
+<li class="chapter" data-level="5.6" data-path="mnistdigits.html"><a href="mnistdigits.html#save-the-model"><i class="fa fa-check"></i><b>5.6</b> Save the model</a></li>
+</ul></li>
+<li class="part"><span><b>IV Linear Regression</b></span></li>
+<li class="chapter" data-level="6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>6</b> Simple linear regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#generate-the-dataset"><i class="fa fa-check"></i><b>6.2</b> Generate the dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#convert-arrays-to-tensors"><i class="fa fa-check"></i><b>6.3</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="6.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>6.4</b> Converting from numpy to tensor</a></li>
+<li class="chapter" data-level="6.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>6.5</b> Creating the network model</a></li>
+<li class="chapter" data-level="6.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>6.6</b> Optimizer and Loss</a></li>
+<li class="chapter" data-level="6.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#training-1"><i class="fa fa-check"></i><b>6.7</b> Training</a></li>
+<li class="chapter" data-level="6.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#results"><i class="fa fa-check"></i><b>6.8</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Rainfall. Linear Regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#training-data"><i class="fa fa-check"></i><b>7.1</b> Training data</a></li>
+<li class="chapter" data-level="7.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#convert-arrays-to-tensors-1"><i class="fa fa-check"></i><b>7.2</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="7.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>7.3</b> Build the model</a></li>
+<li class="chapter" data-level="7.4" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>7.4</b> Generate predictions</a></li>
+<li class="chapter" data-level="7.5" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#loss-function"><i class="fa fa-check"></i><b>7.5</b> Loss Function</a></li>
+<li class="chapter" data-level="7.6" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#step-by-step-process"><i class="fa fa-check"></i><b>7.6</b> Step by step process</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-the-losses"><i class="fa fa-check"></i><b>7.6.1</b> Compute the losses</a></li>
+<li class="chapter" data-level="7.6.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>7.6.2</b> Compute Gradients</a></li>
+<li class="chapter" data-level="7.6.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#reset-the-gradients"><i class="fa fa-check"></i><b>7.6.3</b> Reset the gradients</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>7.7</b> All together: train for multiple epochs</a></li>
+</ul></li>
+<li class="part"><span><b>V Neural Networks</b></span></li>
+<li class="chapter" data-level="8" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>8</b> A two-layer neural network</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>8.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="8.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>8.2</b> Dataset</a></li>
+<li class="chapter" data-level="8.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>8.3</b> Run the model for 50 iterations</a></li>
+<li class="chapter" data-level="8.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>8.4</b> Run it at 100 iterations</a></li>
+<li class="chapter" data-level="8.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>8.5</b> Original PyTorch code</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>9</b> A very simple neural network</a><ul>
+<li class="chapter" data-level="9.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>9.2</b> Select device</a></li>
+<li class="chapter" data-level="9.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>9.3</b> Create the dataset</a></li>
+<li class="chapter" data-level="9.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>9.4</b> Define the model</a></li>
+<li class="chapter" data-level="9.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>9.5</b> Loss function</a></li>
+<li class="chapter" data-level="9.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>9.6</b> Iterate through batches</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>10</b> Neural Networks 2</a><ul>
+<li class="chapter" data-level="10.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>10.1</b> nn2 1</a></li>
+<li class="chapter" data-level="10.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>10.2</b> nn2 2</a></li>
+</ul></li>
+<li class="part"><span><b>VI Image Recognition</b></span></li>
+<li class="part"><span><b>VII PyTorch and R data structures</b></span></li>
+<li class="chapter" data-level="11" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>11</b> Working with data.frame</a><ul>
+<li class="chapter" data-level="11.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>11.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#dataset-iteration-batch-settings"><i class="fa fa-check"></i><b>11.2</b> Dataset iteration batch settings</a></li>
+<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a></li>
+<li class="chapter" data-level="11.4" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.4</b> using <code>data.frame</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>12</b> Working with data.table</a><ul>
+<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.1.1</b> Using `data.table</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendixA.html"><a href="appendixA.html#median"><i class="fa fa-check"></i><b>A.1.2</b> Median</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendixA.html"><a href="appendixA.html#standard-deviation"><i class="fa fa-check"></i><b>A.1.3</b> Standard deviation</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.4</b> Five-number summary</a></li>
+<li class="chapter" data-level="A.1.5" data-path="appendixA.html"><a href="appendixA.html#distribution"><i class="fa fa-check"></i><b>A.1.5</b> Distribution</a></li>
+<li class="chapter" data-level="A.1.6" data-path="appendixA.html"><a href="appendixA.html#outliers"><i class="fa fa-check"></i><b>A.1.6</b> Outliers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal rTorch Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-very-simple-neural-network" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> A very simple neural network</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">9.1</span> Introduction</h2>
+<p>Source: <a href="https://github.com/jcjohnson/pytorch-examples#pytorch-nn" class="uri">https://github.com/jcjohnson/pytorch-examples#pytorch-nn</a></p>
+<p>In this example we use the torch <code>nn</code> package to implement our two-layer network:</p>
+</div>
+<div id="select-device" class="section level2">
+<h2><span class="header-section-number">9.2</span> Select device</h2>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb115-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb115-3" data-line-number="3">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a>
+<a class="sourceLine" id="cb115-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb115-5" data-line-number="5"><span class="co"># device = torch.device(&#39;cuda&#39;) # Uncomment this to run on GPU</span></a></code></pre></div>
+<ul>
+<li><code>N</code> is batch size;</li>
+<li><code>D_in</code> is input dimension;</li>
+<li><code>H</code> is hidden dimension;</li>
+<li><code>D_out</code> is output dimension.</li>
+</ul>
+</div>
+<div id="create-the-dataset" class="section level2">
+<h2><span class="header-section-number">9.3</span> Create the dataset</h2>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="co">#&gt; &lt;torch._C.Generator&gt;</span></a>
+<a class="sourceLine" id="cb116-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb116-4" data-line-number="4">N &lt;-<span class="st"> </span>64L; D_in &lt;-<span class="st"> </span>1000L; H &lt;-<span class="st"> </span>100L; D_out &lt;-<span class="st"> </span>10L</a>
+<a class="sourceLine" id="cb116-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb116-6" data-line-number="6"><span class="co"># Create random Tensors to hold inputs and outputs</span></a>
+<a class="sourceLine" id="cb116-7" data-line-number="7">x =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_in, <span class="dt">device=</span>device)</a>
+<a class="sourceLine" id="cb116-8" data-line-number="8">y =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(N, D_out, <span class="dt">device=</span>device)</a></code></pre></div>
+</div>
+<div id="define-the-model-1" class="section level2">
+<h2><span class="header-section-number">9.4</span> Define the model</h2>
+<p>Use the <code>nn</code> package to define our model as a sequence of layers. <code>nn.Sequential</code> is a Module which contains other Modules, and applies them in sequence to produce its output. Each Linear Module computes output from input using a linear function, and holds internal Tensors for its weight and bias.
+After constructing the model we use the <code>.to()</code> method to move it to the
+desired device.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1">model &lt;-<span class="st"> </span>torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">Sequential</span>(</a>
+<a class="sourceLine" id="cb117-2" data-line-number="2">  torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">Linear</span>(D_in, H),              <span class="co"># first layer</span></a>
+<a class="sourceLine" id="cb117-3" data-line-number="3">  torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">ReLU</span>(),</a>
+<a class="sourceLine" id="cb117-4" data-line-number="4">  torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">Linear</span>(H, D_out))<span class="op">$</span><span class="kw">to</span>(device)  <span class="co"># output layer</span></a>
+<a class="sourceLine" id="cb117-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb117-6" data-line-number="6"><span class="kw">print</span>(model)</a>
+<a class="sourceLine" id="cb117-7" data-line-number="7"><span class="co">#&gt; Sequential(</span></a>
+<a class="sourceLine" id="cb117-8" data-line-number="8"><span class="co">#&gt;   (0): Linear(in_features=1000, out_features=100, bias=True)</span></a>
+<a class="sourceLine" id="cb117-9" data-line-number="9"><span class="co">#&gt;   (1): ReLU()</span></a>
+<a class="sourceLine" id="cb117-10" data-line-number="10"><span class="co">#&gt;   (2): Linear(in_features=100, out_features=10, bias=True)</span></a>
+<a class="sourceLine" id="cb117-11" data-line-number="11"><span class="co">#&gt; )</span></a></code></pre></div>
+</div>
+<div id="loss-function-1" class="section level2">
+<h2><span class="header-section-number">9.5</span> Loss function</h2>
+<p>The <code>nn</code> package also contains definitions of popular loss functions; in this case we will use Mean Squared Error (<strong>MSE</strong>) as our loss function. Setting <code>reduction='sum'</code> means that we are computing the <em>sum</em> of squared errors rather than the mean; this is for consistency with the examples above where we manually compute the loss, but in practice it is more common to use mean squared error as a loss by setting <code>reduction='elementwise_mean'</code>.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">loss_fn =<span class="st"> </span>torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">MSELoss</span>(<span class="dt">reduction =</span> <span class="st">&#39;sum&#39;</span>)</a></code></pre></div>
+</div>
+<div id="iterate-through-batches" class="section level2">
+<h2><span class="header-section-number">9.6</span> Iterate through batches</h2>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">learning_rate =<span class="st"> </span><span class="fl">1e-4</span></a>
+<a class="sourceLine" id="cb119-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) {</a>
+<a class="sourceLine" id="cb119-4" data-line-number="4">  <span class="co"># Forward pass: compute predicted y by passing x to the model. Module objects</span></a>
+<a class="sourceLine" id="cb119-5" data-line-number="5">  <span class="co"># override the __call__ operator so you can call them like functions. When</span></a>
+<a class="sourceLine" id="cb119-6" data-line-number="6">  <span class="co"># doing so you pass a Tensor of input data to the Module and it produces</span></a>
+<a class="sourceLine" id="cb119-7" data-line-number="7">  <span class="co"># a Tensor of output data.</span></a>
+<a class="sourceLine" id="cb119-8" data-line-number="8">  y_pred =<span class="st"> </span><span class="kw">model</span>(x)</a>
+<a class="sourceLine" id="cb119-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb119-10" data-line-number="10">  <span class="co"># Compute and print loss. We pass Tensors containing the predicted and true</span></a>
+<a class="sourceLine" id="cb119-11" data-line-number="11">  <span class="co"># values of y, and the loss function returns a Tensor containing the loss.</span></a>
+<a class="sourceLine" id="cb119-12" data-line-number="12">  loss =<span class="st"> </span><span class="kw">loss_fn</span>(y_pred, y)</a>
+<a class="sourceLine" id="cb119-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb119-14" data-line-number="14">  <span class="kw">cat</span>(t, <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb119-15" data-line-number="15">  <span class="kw">cat</span>(loss<span class="op">$</span><span class="kw">item</span>(), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb119-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb119-17" data-line-number="17">  <span class="co"># Zero the gradients before running the backward pass.</span></a>
+<a class="sourceLine" id="cb119-18" data-line-number="18">  model<span class="op">$</span><span class="kw">zero_grad</span>()</a>
+<a class="sourceLine" id="cb119-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb119-20" data-line-number="20">  <span class="co"># Backward pass: compute gradient of the loss with respect to all the learnable</span></a>
+<a class="sourceLine" id="cb119-21" data-line-number="21">  <span class="co"># parameters of the model. Internally, the parameters of each Module are stored</span></a>
+<a class="sourceLine" id="cb119-22" data-line-number="22">  <span class="co"># in Tensors with requires_grad=True, so this call will compute gradients for</span></a>
+<a class="sourceLine" id="cb119-23" data-line-number="23">  <span class="co"># all learnable parameters in the model.</span></a>
+<a class="sourceLine" id="cb119-24" data-line-number="24">  loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb119-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb119-26" data-line-number="26">  <span class="co"># Update the weights using gradient descent. Each parameter is a Tensor, so</span></a>
+<a class="sourceLine" id="cb119-27" data-line-number="27">  <span class="co"># we can access its data and gradients like we did before.</span></a>
+<a class="sourceLine" id="cb119-28" data-line-number="28">  <span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb119-29" data-line-number="29">      <span class="cf">for</span> (param <span class="cf">in</span> <span class="kw">iterate</span>(model<span class="op">$</span><span class="kw">parameters</span>())) {</a>
+<a class="sourceLine" id="cb119-30" data-line-number="30">        <span class="co"># in Python this code is much simpler. In R we have to do some conversions</span></a>
+<a class="sourceLine" id="cb119-31" data-line-number="31">        </a>
+<a class="sourceLine" id="cb119-32" data-line-number="32">        <span class="co"># param$data &lt;- torch$sub(param$data,</span></a>
+<a class="sourceLine" id="cb119-33" data-line-number="33">        <span class="co">#                         torch$mul(param$grad$float(),</span></a>
+<a class="sourceLine" id="cb119-34" data-line-number="34">        <span class="co">#                           torch$scalar_tensor(learning_rate)))</span></a>
+<a class="sourceLine" id="cb119-35" data-line-number="35">        </a>
+<a class="sourceLine" id="cb119-36" data-line-number="36">        param<span class="op">$</span>data &lt;-<span class="st"> </span>param<span class="op">$</span>data <span class="op">-</span><span class="st"> </span>param<span class="op">$</span>grad <span class="op">*</span><span class="st"> </span>learning_rate</a>
+<a class="sourceLine" id="cb119-37" data-line-number="37">      }</a>
+<a class="sourceLine" id="cb119-38" data-line-number="38">   })</a>
+<a class="sourceLine" id="cb119-39" data-line-number="39">}  </a>
+<a class="sourceLine" id="cb119-40" data-line-number="40"><span class="co">#&gt; 1    628 </span></a>
+<a class="sourceLine" id="cb119-41" data-line-number="41"><span class="co">#&gt; 2    585 </span></a>
+<a class="sourceLine" id="cb119-42" data-line-number="42"><span class="co">#&gt; 3    547 </span></a>
+<a class="sourceLine" id="cb119-43" data-line-number="43"><span class="co">#&gt; 4    513 </span></a>
+<a class="sourceLine" id="cb119-44" data-line-number="44"><span class="co">#&gt; 5    482 </span></a>
+<a class="sourceLine" id="cb119-45" data-line-number="45"><span class="co">#&gt; 6    455 </span></a>
+<a class="sourceLine" id="cb119-46" data-line-number="46"><span class="co">#&gt; 7    430 </span></a>
+<a class="sourceLine" id="cb119-47" data-line-number="47"><span class="co">#&gt; 8    406 </span></a>
+<a class="sourceLine" id="cb119-48" data-line-number="48"><span class="co">#&gt; 9    385 </span></a>
+<a class="sourceLine" id="cb119-49" data-line-number="49"><span class="co">#&gt; 10   364 </span></a>
+<a class="sourceLine" id="cb119-50" data-line-number="50"><span class="co">#&gt; 11   345 </span></a>
+<a class="sourceLine" id="cb119-51" data-line-number="51"><span class="co">#&gt; 12   328 </span></a>
+<a class="sourceLine" id="cb119-52" data-line-number="52"><span class="co">#&gt; 13   311 </span></a>
+<a class="sourceLine" id="cb119-53" data-line-number="53"><span class="co">#&gt; 14   295 </span></a>
+<a class="sourceLine" id="cb119-54" data-line-number="54"><span class="co">#&gt; 15   280 </span></a>
+<a class="sourceLine" id="cb119-55" data-line-number="55"><span class="co">#&gt; 16   265 </span></a>
+<a class="sourceLine" id="cb119-56" data-line-number="56"><span class="co">#&gt; 17   252 </span></a>
+<a class="sourceLine" id="cb119-57" data-line-number="57"><span class="co">#&gt; 18   239 </span></a>
+<a class="sourceLine" id="cb119-58" data-line-number="58"><span class="co">#&gt; 19   226 </span></a>
+<a class="sourceLine" id="cb119-59" data-line-number="59"><span class="co">#&gt; 20   214 </span></a>
+<a class="sourceLine" id="cb119-60" data-line-number="60"><span class="co">#&gt; 21   203 </span></a>
+<a class="sourceLine" id="cb119-61" data-line-number="61"><span class="co">#&gt; 22   192 </span></a>
+<a class="sourceLine" id="cb119-62" data-line-number="62"><span class="co">#&gt; 23   181 </span></a>
+<a class="sourceLine" id="cb119-63" data-line-number="63"><span class="co">#&gt; 24   172 </span></a>
+<a class="sourceLine" id="cb119-64" data-line-number="64"><span class="co">#&gt; 25   162 </span></a>
+<a class="sourceLine" id="cb119-65" data-line-number="65"><span class="co">#&gt; 26   153 </span></a>
+<a class="sourceLine" id="cb119-66" data-line-number="66"><span class="co">#&gt; 27   145 </span></a>
+<a class="sourceLine" id="cb119-67" data-line-number="67"><span class="co">#&gt; 28   137 </span></a>
+<a class="sourceLine" id="cb119-68" data-line-number="68"><span class="co">#&gt; 29   129 </span></a>
+<a class="sourceLine" id="cb119-69" data-line-number="69"><span class="co">#&gt; 30   122 </span></a>
+<a class="sourceLine" id="cb119-70" data-line-number="70"><span class="co">#&gt; 31   115 </span></a>
+<a class="sourceLine" id="cb119-71" data-line-number="71"><span class="co">#&gt; 32   109 </span></a>
+<a class="sourceLine" id="cb119-72" data-line-number="72"><span class="co">#&gt; 33   103 </span></a>
+<a class="sourceLine" id="cb119-73" data-line-number="73"><span class="co">#&gt; 34   96.9 </span></a>
+<a class="sourceLine" id="cb119-74" data-line-number="74"><span class="co">#&gt; 35   91.5 </span></a>
+<a class="sourceLine" id="cb119-75" data-line-number="75"><span class="co">#&gt; 36   86.3 </span></a>
+<a class="sourceLine" id="cb119-76" data-line-number="76"><span class="co">#&gt; 37   81.5 </span></a>
+<a class="sourceLine" id="cb119-77" data-line-number="77"><span class="co">#&gt; 38   76.9 </span></a>
+<a class="sourceLine" id="cb119-78" data-line-number="78"><span class="co">#&gt; 39   72.6 </span></a>
+<a class="sourceLine" id="cb119-79" data-line-number="79"><span class="co">#&gt; 40   68.5 </span></a>
+<a class="sourceLine" id="cb119-80" data-line-number="80"><span class="co">#&gt; 41   64.6 </span></a>
+<a class="sourceLine" id="cb119-81" data-line-number="81"><span class="co">#&gt; 42   61 </span></a>
+<a class="sourceLine" id="cb119-82" data-line-number="82"><span class="co">#&gt; 43   57.6 </span></a>
+<a class="sourceLine" id="cb119-83" data-line-number="83"><span class="co">#&gt; 44   54.3 </span></a>
+<a class="sourceLine" id="cb119-84" data-line-number="84"><span class="co">#&gt; 45   51.3 </span></a>
+<a class="sourceLine" id="cb119-85" data-line-number="85"><span class="co">#&gt; 46   48.5 </span></a>
+<a class="sourceLine" id="cb119-86" data-line-number="86"><span class="co">#&gt; 47   45.8 </span></a>
+<a class="sourceLine" id="cb119-87" data-line-number="87"><span class="co">#&gt; 48   43.2 </span></a>
+<a class="sourceLine" id="cb119-88" data-line-number="88"><span class="co">#&gt; 49   40.9 </span></a>
+<a class="sourceLine" id="cb119-89" data-line-number="89"><span class="co">#&gt; 50   38.6 </span></a>
+<a class="sourceLine" id="cb119-90" data-line-number="90"><span class="co">#&gt; 51   36.5 </span></a>
+<a class="sourceLine" id="cb119-91" data-line-number="91"><span class="co">#&gt; 52   34.5 </span></a>
+<a class="sourceLine" id="cb119-92" data-line-number="92"><span class="co">#&gt; 53   32.7 </span></a>
+<a class="sourceLine" id="cb119-93" data-line-number="93"><span class="co">#&gt; 54   30.9 </span></a>
+<a class="sourceLine" id="cb119-94" data-line-number="94"><span class="co">#&gt; 55   29.3 </span></a>
+<a class="sourceLine" id="cb119-95" data-line-number="95"><span class="co">#&gt; 56   27.8 </span></a>
+<a class="sourceLine" id="cb119-96" data-line-number="96"><span class="co">#&gt; 57   26.3 </span></a>
+<a class="sourceLine" id="cb119-97" data-line-number="97"><span class="co">#&gt; 58   24.9 </span></a>
+<a class="sourceLine" id="cb119-98" data-line-number="98"><span class="co">#&gt; 59   23.7 </span></a>
+<a class="sourceLine" id="cb119-99" data-line-number="99"><span class="co">#&gt; 60   22.4 </span></a>
+<a class="sourceLine" id="cb119-100" data-line-number="100"><span class="co">#&gt; 61   21.3 </span></a>
+<a class="sourceLine" id="cb119-101" data-line-number="101"><span class="co">#&gt; 62   20.2 </span></a>
+<a class="sourceLine" id="cb119-102" data-line-number="102"><span class="co">#&gt; 63   19.2 </span></a>
+<a class="sourceLine" id="cb119-103" data-line-number="103"><span class="co">#&gt; 64   18.2 </span></a>
+<a class="sourceLine" id="cb119-104" data-line-number="104"><span class="co">#&gt; 65   17.3 </span></a>
+<a class="sourceLine" id="cb119-105" data-line-number="105"><span class="co">#&gt; 66   16.5 </span></a>
+<a class="sourceLine" id="cb119-106" data-line-number="106"><span class="co">#&gt; 67   15.7 </span></a>
+<a class="sourceLine" id="cb119-107" data-line-number="107"><span class="co">#&gt; 68   14.9 </span></a>
+<a class="sourceLine" id="cb119-108" data-line-number="108"><span class="co">#&gt; 69   14.2 </span></a>
+<a class="sourceLine" id="cb119-109" data-line-number="109"><span class="co">#&gt; 70   13.5 </span></a>
+<a class="sourceLine" id="cb119-110" data-line-number="110"><span class="co">#&gt; 71   12.9 </span></a>
+<a class="sourceLine" id="cb119-111" data-line-number="111"><span class="co">#&gt; 72   12.3 </span></a>
+<a class="sourceLine" id="cb119-112" data-line-number="112"><span class="co">#&gt; 73   11.7 </span></a>
+<a class="sourceLine" id="cb119-113" data-line-number="113"><span class="co">#&gt; 74   11.1 </span></a>
+<a class="sourceLine" id="cb119-114" data-line-number="114"><span class="co">#&gt; 75   10.6 </span></a>
+<a class="sourceLine" id="cb119-115" data-line-number="115"><span class="co">#&gt; 76   10.1 </span></a>
+<a class="sourceLine" id="cb119-116" data-line-number="116"><span class="co">#&gt; 77   9.67 </span></a>
+<a class="sourceLine" id="cb119-117" data-line-number="117"><span class="co">#&gt; 78   9.24 </span></a>
+<a class="sourceLine" id="cb119-118" data-line-number="118"><span class="co">#&gt; 79   8.82 </span></a>
+<a class="sourceLine" id="cb119-119" data-line-number="119"><span class="co">#&gt; 80   8.42 </span></a>
+<a class="sourceLine" id="cb119-120" data-line-number="120"><span class="co">#&gt; 81   8.05 </span></a>
+<a class="sourceLine" id="cb119-121" data-line-number="121"><span class="co">#&gt; 82   7.69 </span></a>
+<a class="sourceLine" id="cb119-122" data-line-number="122"><span class="co">#&gt; 83   7.35 </span></a>
+<a class="sourceLine" id="cb119-123" data-line-number="123"><span class="co">#&gt; 84   7.03 </span></a>
+<a class="sourceLine" id="cb119-124" data-line-number="124"><span class="co">#&gt; 85   6.72 </span></a>
+<a class="sourceLine" id="cb119-125" data-line-number="125"><span class="co">#&gt; 86   6.43 </span></a>
+<a class="sourceLine" id="cb119-126" data-line-number="126"><span class="co">#&gt; 87   6.16 </span></a>
+<a class="sourceLine" id="cb119-127" data-line-number="127"><span class="co">#&gt; 88   5.9 </span></a>
+<a class="sourceLine" id="cb119-128" data-line-number="128"><span class="co">#&gt; 89   5.65 </span></a>
+<a class="sourceLine" id="cb119-129" data-line-number="129"><span class="co">#&gt; 90   5.41 </span></a>
+<a class="sourceLine" id="cb119-130" data-line-number="130"><span class="co">#&gt; 91   5.18 </span></a>
+<a class="sourceLine" id="cb119-131" data-line-number="131"><span class="co">#&gt; 92   4.97 </span></a>
+<a class="sourceLine" id="cb119-132" data-line-number="132"><span class="co">#&gt; 93   4.76 </span></a>
+<a class="sourceLine" id="cb119-133" data-line-number="133"><span class="co">#&gt; 94   4.57 </span></a>
+<a class="sourceLine" id="cb119-134" data-line-number="134"><span class="co">#&gt; 95   4.38 </span></a>
+<a class="sourceLine" id="cb119-135" data-line-number="135"><span class="co">#&gt; 96   4.2 </span></a>
+<a class="sourceLine" id="cb119-136" data-line-number="136"><span class="co">#&gt; 97   4.03 </span></a>
+<a class="sourceLine" id="cb119-137" data-line-number="137"><span class="co">#&gt; 98   3.87 </span></a>
+<a class="sourceLine" id="cb119-138" data-line-number="138"><span class="co">#&gt; 99   3.72 </span></a>
+<a class="sourceLine" id="cb119-139" data-line-number="139"><span class="co">#&gt; 100  3.57 </span></a>
+<a class="sourceLine" id="cb119-140" data-line-number="140"><span class="co">#&gt; 101  3.43 </span></a>
+<a class="sourceLine" id="cb119-141" data-line-number="141"><span class="co">#&gt; 102  3.29 </span></a>
+<a class="sourceLine" id="cb119-142" data-line-number="142"><span class="co">#&gt; 103  3.17 </span></a>
+<a class="sourceLine" id="cb119-143" data-line-number="143"><span class="co">#&gt; 104  3.04 </span></a>
+<a class="sourceLine" id="cb119-144" data-line-number="144"><span class="co">#&gt; 105  2.92 </span></a>
+<a class="sourceLine" id="cb119-145" data-line-number="145"><span class="co">#&gt; 106  2.81 </span></a>
+<a class="sourceLine" id="cb119-146" data-line-number="146"><span class="co">#&gt; 107  2.7 </span></a>
+<a class="sourceLine" id="cb119-147" data-line-number="147"><span class="co">#&gt; 108  2.6 </span></a>
+<a class="sourceLine" id="cb119-148" data-line-number="148"><span class="co">#&gt; 109  2.5 </span></a>
+<a class="sourceLine" id="cb119-149" data-line-number="149"><span class="co">#&gt; 110  2.41 </span></a>
+<a class="sourceLine" id="cb119-150" data-line-number="150"><span class="co">#&gt; 111  2.31 </span></a>
+<a class="sourceLine" id="cb119-151" data-line-number="151"><span class="co">#&gt; 112  2.23 </span></a>
+<a class="sourceLine" id="cb119-152" data-line-number="152"><span class="co">#&gt; 113  2.14 </span></a>
+<a class="sourceLine" id="cb119-153" data-line-number="153"><span class="co">#&gt; 114  2.06 </span></a>
+<a class="sourceLine" id="cb119-154" data-line-number="154"><span class="co">#&gt; 115  1.99 </span></a>
+<a class="sourceLine" id="cb119-155" data-line-number="155"><span class="co">#&gt; 116  1.91 </span></a>
+<a class="sourceLine" id="cb119-156" data-line-number="156"><span class="co">#&gt; 117  1.84 </span></a>
+<a class="sourceLine" id="cb119-157" data-line-number="157"><span class="co">#&gt; 118  1.77 </span></a>
+<a class="sourceLine" id="cb119-158" data-line-number="158"><span class="co">#&gt; 119  1.71 </span></a>
+<a class="sourceLine" id="cb119-159" data-line-number="159"><span class="co">#&gt; 120  1.65 </span></a>
+<a class="sourceLine" id="cb119-160" data-line-number="160"><span class="co">#&gt; 121  1.59 </span></a>
+<a class="sourceLine" id="cb119-161" data-line-number="161"><span class="co">#&gt; 122  1.53 </span></a>
+<a class="sourceLine" id="cb119-162" data-line-number="162"><span class="co">#&gt; 123  1.47 </span></a>
+<a class="sourceLine" id="cb119-163" data-line-number="163"><span class="co">#&gt; 124  1.42 </span></a>
+<a class="sourceLine" id="cb119-164" data-line-number="164"><span class="co">#&gt; 125  1.37 </span></a>
+<a class="sourceLine" id="cb119-165" data-line-number="165"><span class="co">#&gt; 126  1.32 </span></a>
+<a class="sourceLine" id="cb119-166" data-line-number="166"><span class="co">#&gt; 127  1.27 </span></a>
+<a class="sourceLine" id="cb119-167" data-line-number="167"><span class="co">#&gt; 128  1.23 </span></a>
+<a class="sourceLine" id="cb119-168" data-line-number="168"><span class="co">#&gt; 129  1.18 </span></a>
+<a class="sourceLine" id="cb119-169" data-line-number="169"><span class="co">#&gt; 130  1.14 </span></a>
+<a class="sourceLine" id="cb119-170" data-line-number="170"><span class="co">#&gt; 131  1.1 </span></a>
+<a class="sourceLine" id="cb119-171" data-line-number="171"><span class="co">#&gt; 132  1.06 </span></a>
+<a class="sourceLine" id="cb119-172" data-line-number="172"><span class="co">#&gt; 133  1.02 </span></a>
+<a class="sourceLine" id="cb119-173" data-line-number="173"><span class="co">#&gt; 134  0.989 </span></a>
+<a class="sourceLine" id="cb119-174" data-line-number="174"><span class="co">#&gt; 135  0.954 </span></a>
+<a class="sourceLine" id="cb119-175" data-line-number="175"><span class="co">#&gt; 136  0.921 </span></a>
+<a class="sourceLine" id="cb119-176" data-line-number="176"><span class="co">#&gt; 137  0.889 </span></a>
+<a class="sourceLine" id="cb119-177" data-line-number="177"><span class="co">#&gt; 138  0.858 </span></a>
+<a class="sourceLine" id="cb119-178" data-line-number="178"><span class="co">#&gt; 139  0.828 </span></a>
+<a class="sourceLine" id="cb119-179" data-line-number="179"><span class="co">#&gt; 140  0.799 </span></a>
+<a class="sourceLine" id="cb119-180" data-line-number="180"><span class="co">#&gt; 141  0.772 </span></a>
+<a class="sourceLine" id="cb119-181" data-line-number="181"><span class="co">#&gt; 142  0.745 </span></a>
+<a class="sourceLine" id="cb119-182" data-line-number="182"><span class="co">#&gt; 143  0.719 </span></a>
+<a class="sourceLine" id="cb119-183" data-line-number="183"><span class="co">#&gt; 144  0.695 </span></a>
+<a class="sourceLine" id="cb119-184" data-line-number="184"><span class="co">#&gt; 145  0.671 </span></a>
+<a class="sourceLine" id="cb119-185" data-line-number="185"><span class="co">#&gt; 146  0.648 </span></a>
+<a class="sourceLine" id="cb119-186" data-line-number="186"><span class="co">#&gt; 147  0.626 </span></a>
+<a class="sourceLine" id="cb119-187" data-line-number="187"><span class="co">#&gt; 148  0.605 </span></a>
+<a class="sourceLine" id="cb119-188" data-line-number="188"><span class="co">#&gt; 149  0.584 </span></a>
+<a class="sourceLine" id="cb119-189" data-line-number="189"><span class="co">#&gt; 150  0.564 </span></a>
+<a class="sourceLine" id="cb119-190" data-line-number="190"><span class="co">#&gt; 151  0.545 </span></a>
+<a class="sourceLine" id="cb119-191" data-line-number="191"><span class="co">#&gt; 152  0.527 </span></a>
+<a class="sourceLine" id="cb119-192" data-line-number="192"><span class="co">#&gt; 153  0.509 </span></a>
+<a class="sourceLine" id="cb119-193" data-line-number="193"><span class="co">#&gt; 154  0.492 </span></a>
+<a class="sourceLine" id="cb119-194" data-line-number="194"><span class="co">#&gt; 155  0.476 </span></a>
+<a class="sourceLine" id="cb119-195" data-line-number="195"><span class="co">#&gt; 156  0.46 </span></a>
+<a class="sourceLine" id="cb119-196" data-line-number="196"><span class="co">#&gt; 157  0.444 </span></a>
+<a class="sourceLine" id="cb119-197" data-line-number="197"><span class="co">#&gt; 158  0.43 </span></a>
+<a class="sourceLine" id="cb119-198" data-line-number="198"><span class="co">#&gt; 159  0.415 </span></a>
+<a class="sourceLine" id="cb119-199" data-line-number="199"><span class="co">#&gt; 160  0.402 </span></a>
+<a class="sourceLine" id="cb119-200" data-line-number="200"><span class="co">#&gt; 161  0.388 </span></a>
+<a class="sourceLine" id="cb119-201" data-line-number="201"><span class="co">#&gt; 162  0.375 </span></a>
+<a class="sourceLine" id="cb119-202" data-line-number="202"><span class="co">#&gt; 163  0.363 </span></a>
+<a class="sourceLine" id="cb119-203" data-line-number="203"><span class="co">#&gt; 164  0.351 </span></a>
+<a class="sourceLine" id="cb119-204" data-line-number="204"><span class="co">#&gt; 165  0.339 </span></a>
+<a class="sourceLine" id="cb119-205" data-line-number="205"><span class="co">#&gt; 166  0.328 </span></a>
+<a class="sourceLine" id="cb119-206" data-line-number="206"><span class="co">#&gt; 167  0.318 </span></a>
+<a class="sourceLine" id="cb119-207" data-line-number="207"><span class="co">#&gt; 168  0.307 </span></a>
+<a class="sourceLine" id="cb119-208" data-line-number="208"><span class="co">#&gt; 169  0.297 </span></a>
+<a class="sourceLine" id="cb119-209" data-line-number="209"><span class="co">#&gt; 170  0.287 </span></a>
+<a class="sourceLine" id="cb119-210" data-line-number="210"><span class="co">#&gt; 171  0.278 </span></a>
+<a class="sourceLine" id="cb119-211" data-line-number="211"><span class="co">#&gt; 172  0.269 </span></a>
+<a class="sourceLine" id="cb119-212" data-line-number="212"><span class="co">#&gt; 173  0.26 </span></a>
+<a class="sourceLine" id="cb119-213" data-line-number="213"><span class="co">#&gt; 174  0.252 </span></a>
+<a class="sourceLine" id="cb119-214" data-line-number="214"><span class="co">#&gt; 175  0.244 </span></a>
+<a class="sourceLine" id="cb119-215" data-line-number="215"><span class="co">#&gt; 176  0.236 </span></a>
+<a class="sourceLine" id="cb119-216" data-line-number="216"><span class="co">#&gt; 177  0.228 </span></a>
+<a class="sourceLine" id="cb119-217" data-line-number="217"><span class="co">#&gt; 178  0.221 </span></a>
+<a class="sourceLine" id="cb119-218" data-line-number="218"><span class="co">#&gt; 179  0.214 </span></a>
+<a class="sourceLine" id="cb119-219" data-line-number="219"><span class="co">#&gt; 180  0.207 </span></a>
+<a class="sourceLine" id="cb119-220" data-line-number="220"><span class="co">#&gt; 181  0.2 </span></a>
+<a class="sourceLine" id="cb119-221" data-line-number="221"><span class="co">#&gt; 182  0.194 </span></a>
+<a class="sourceLine" id="cb119-222" data-line-number="222"><span class="co">#&gt; 183  0.187 </span></a>
+<a class="sourceLine" id="cb119-223" data-line-number="223"><span class="co">#&gt; 184  0.181 </span></a>
+<a class="sourceLine" id="cb119-224" data-line-number="224"><span class="co">#&gt; 185  0.176 </span></a>
+<a class="sourceLine" id="cb119-225" data-line-number="225"><span class="co">#&gt; 186  0.17 </span></a>
+<a class="sourceLine" id="cb119-226" data-line-number="226"><span class="co">#&gt; 187  0.165 </span></a>
+<a class="sourceLine" id="cb119-227" data-line-number="227"><span class="co">#&gt; 188  0.159 </span></a>
+<a class="sourceLine" id="cb119-228" data-line-number="228"><span class="co">#&gt; 189  0.154 </span></a>
+<a class="sourceLine" id="cb119-229" data-line-number="229"><span class="co">#&gt; 190  0.149 </span></a>
+<a class="sourceLine" id="cb119-230" data-line-number="230"><span class="co">#&gt; 191  0.145 </span></a>
+<a class="sourceLine" id="cb119-231" data-line-number="231"><span class="co">#&gt; 192  0.14 </span></a>
+<a class="sourceLine" id="cb119-232" data-line-number="232"><span class="co">#&gt; 193  0.136 </span></a>
+<a class="sourceLine" id="cb119-233" data-line-number="233"><span class="co">#&gt; 194  0.131 </span></a>
+<a class="sourceLine" id="cb119-234" data-line-number="234"><span class="co">#&gt; 195  0.127 </span></a>
+<a class="sourceLine" id="cb119-235" data-line-number="235"><span class="co">#&gt; 196  0.123 </span></a>
+<a class="sourceLine" id="cb119-236" data-line-number="236"><span class="co">#&gt; 197  0.119 </span></a>
+<a class="sourceLine" id="cb119-237" data-line-number="237"><span class="co">#&gt; 198  0.115 </span></a>
+<a class="sourceLine" id="cb119-238" data-line-number="238"><span class="co">#&gt; 199  0.112 </span></a>
+<a class="sourceLine" id="cb119-239" data-line-number="239"><span class="co">#&gt; 200  0.108 </span></a>
+<a class="sourceLine" id="cb119-240" data-line-number="240"><span class="co">#&gt; 201  0.105 </span></a>
+<a class="sourceLine" id="cb119-241" data-line-number="241"><span class="co">#&gt; 202  0.102 </span></a>
+<a class="sourceLine" id="cb119-242" data-line-number="242"><span class="co">#&gt; 203  0.0983 </span></a>
+<a class="sourceLine" id="cb119-243" data-line-number="243"><span class="co">#&gt; 204  0.0952 </span></a>
+<a class="sourceLine" id="cb119-244" data-line-number="244"><span class="co">#&gt; 205  0.0923 </span></a>
+<a class="sourceLine" id="cb119-245" data-line-number="245"><span class="co">#&gt; 206  0.0894 </span></a>
+<a class="sourceLine" id="cb119-246" data-line-number="246"><span class="co">#&gt; 207  0.0866 </span></a>
+<a class="sourceLine" id="cb119-247" data-line-number="247"><span class="co">#&gt; 208  0.0838 </span></a>
+<a class="sourceLine" id="cb119-248" data-line-number="248"><span class="co">#&gt; 209  0.0812 </span></a>
+<a class="sourceLine" id="cb119-249" data-line-number="249"><span class="co">#&gt; 210  0.0787 </span></a>
+<a class="sourceLine" id="cb119-250" data-line-number="250"><span class="co">#&gt; 211  0.0762 </span></a>
+<a class="sourceLine" id="cb119-251" data-line-number="251"><span class="co">#&gt; 212  0.0739 </span></a>
+<a class="sourceLine" id="cb119-252" data-line-number="252"><span class="co">#&gt; 213  0.0716 </span></a>
+<a class="sourceLine" id="cb119-253" data-line-number="253"><span class="co">#&gt; 214  0.0693 </span></a>
+<a class="sourceLine" id="cb119-254" data-line-number="254"><span class="co">#&gt; 215  0.0672 </span></a>
+<a class="sourceLine" id="cb119-255" data-line-number="255"><span class="co">#&gt; 216  0.0651 </span></a>
+<a class="sourceLine" id="cb119-256" data-line-number="256"><span class="co">#&gt; 217  0.0631 </span></a>
+<a class="sourceLine" id="cb119-257" data-line-number="257"><span class="co">#&gt; 218  0.0611 </span></a>
+<a class="sourceLine" id="cb119-258" data-line-number="258"><span class="co">#&gt; 219  0.0592 </span></a>
+<a class="sourceLine" id="cb119-259" data-line-number="259"><span class="co">#&gt; 220  0.0574 </span></a>
+<a class="sourceLine" id="cb119-260" data-line-number="260"><span class="co">#&gt; 221  0.0556 </span></a>
+<a class="sourceLine" id="cb119-261" data-line-number="261"><span class="co">#&gt; 222  0.0539 </span></a>
+<a class="sourceLine" id="cb119-262" data-line-number="262"><span class="co">#&gt; 223  0.0522 </span></a>
+<a class="sourceLine" id="cb119-263" data-line-number="263"><span class="co">#&gt; 224  0.0506 </span></a>
+<a class="sourceLine" id="cb119-264" data-line-number="264"><span class="co">#&gt; 225  0.0491 </span></a>
+<a class="sourceLine" id="cb119-265" data-line-number="265"><span class="co">#&gt; 226  0.0476 </span></a>
+<a class="sourceLine" id="cb119-266" data-line-number="266"><span class="co">#&gt; 227  0.0461 </span></a>
+<a class="sourceLine" id="cb119-267" data-line-number="267"><span class="co">#&gt; 228  0.0447 </span></a>
+<a class="sourceLine" id="cb119-268" data-line-number="268"><span class="co">#&gt; 229  0.0433 </span></a>
+<a class="sourceLine" id="cb119-269" data-line-number="269"><span class="co">#&gt; 230  0.042 </span></a>
+<a class="sourceLine" id="cb119-270" data-line-number="270"><span class="co">#&gt; 231  0.0407 </span></a>
+<a class="sourceLine" id="cb119-271" data-line-number="271"><span class="co">#&gt; 232  0.0394 </span></a>
+<a class="sourceLine" id="cb119-272" data-line-number="272"><span class="co">#&gt; 233  0.0382 </span></a>
+<a class="sourceLine" id="cb119-273" data-line-number="273"><span class="co">#&gt; 234  0.0371 </span></a>
+<a class="sourceLine" id="cb119-274" data-line-number="274"><span class="co">#&gt; 235  0.0359 </span></a>
+<a class="sourceLine" id="cb119-275" data-line-number="275"><span class="co">#&gt; 236  0.0348 </span></a>
+<a class="sourceLine" id="cb119-276" data-line-number="276"><span class="co">#&gt; 237  0.0338 </span></a>
+<a class="sourceLine" id="cb119-277" data-line-number="277"><span class="co">#&gt; 238  0.0327 </span></a>
+<a class="sourceLine" id="cb119-278" data-line-number="278"><span class="co">#&gt; 239  0.0317 </span></a>
+<a class="sourceLine" id="cb119-279" data-line-number="279"><span class="co">#&gt; 240  0.0308 </span></a>
+<a class="sourceLine" id="cb119-280" data-line-number="280"><span class="co">#&gt; 241  0.0298 </span></a>
+<a class="sourceLine" id="cb119-281" data-line-number="281"><span class="co">#&gt; 242  0.0289 </span></a>
+<a class="sourceLine" id="cb119-282" data-line-number="282"><span class="co">#&gt; 243  0.028 </span></a>
+<a class="sourceLine" id="cb119-283" data-line-number="283"><span class="co">#&gt; 244  0.0272 </span></a>
+<a class="sourceLine" id="cb119-284" data-line-number="284"><span class="co">#&gt; 245  0.0263 </span></a>
+<a class="sourceLine" id="cb119-285" data-line-number="285"><span class="co">#&gt; 246  0.0255 </span></a>
+<a class="sourceLine" id="cb119-286" data-line-number="286"><span class="co">#&gt; 247  0.0248 </span></a>
+<a class="sourceLine" id="cb119-287" data-line-number="287"><span class="co">#&gt; 248  0.024 </span></a>
+<a class="sourceLine" id="cb119-288" data-line-number="288"><span class="co">#&gt; 249  0.0233 </span></a>
+<a class="sourceLine" id="cb119-289" data-line-number="289"><span class="co">#&gt; 250  0.0226 </span></a>
+<a class="sourceLine" id="cb119-290" data-line-number="290"><span class="co">#&gt; 251  0.0219 </span></a>
+<a class="sourceLine" id="cb119-291" data-line-number="291"><span class="co">#&gt; 252  0.0212 </span></a>
+<a class="sourceLine" id="cb119-292" data-line-number="292"><span class="co">#&gt; 253  0.0206 </span></a>
+<a class="sourceLine" id="cb119-293" data-line-number="293"><span class="co">#&gt; 254  0.02 </span></a>
+<a class="sourceLine" id="cb119-294" data-line-number="294"><span class="co">#&gt; 255  0.0194 </span></a>
+<a class="sourceLine" id="cb119-295" data-line-number="295"><span class="co">#&gt; 256  0.0188 </span></a>
+<a class="sourceLine" id="cb119-296" data-line-number="296"><span class="co">#&gt; 257  0.0182 </span></a>
+<a class="sourceLine" id="cb119-297" data-line-number="297"><span class="co">#&gt; 258  0.0177 </span></a>
+<a class="sourceLine" id="cb119-298" data-line-number="298"><span class="co">#&gt; 259  0.0171 </span></a>
+<a class="sourceLine" id="cb119-299" data-line-number="299"><span class="co">#&gt; 260  0.0166 </span></a>
+<a class="sourceLine" id="cb119-300" data-line-number="300"><span class="co">#&gt; 261  0.0161 </span></a>
+<a class="sourceLine" id="cb119-301" data-line-number="301"><span class="co">#&gt; 262  0.0156 </span></a>
+<a class="sourceLine" id="cb119-302" data-line-number="302"><span class="co">#&gt; 263  0.0151 </span></a>
+<a class="sourceLine" id="cb119-303" data-line-number="303"><span class="co">#&gt; 264  0.0147 </span></a>
+<a class="sourceLine" id="cb119-304" data-line-number="304"><span class="co">#&gt; 265  0.0142 </span></a>
+<a class="sourceLine" id="cb119-305" data-line-number="305"><span class="co">#&gt; 266  0.0138 </span></a>
+<a class="sourceLine" id="cb119-306" data-line-number="306"><span class="co">#&gt; 267  0.0134 </span></a>
+<a class="sourceLine" id="cb119-307" data-line-number="307"><span class="co">#&gt; 268  0.013 </span></a>
+<a class="sourceLine" id="cb119-308" data-line-number="308"><span class="co">#&gt; 269  0.0126 </span></a>
+<a class="sourceLine" id="cb119-309" data-line-number="309"><span class="co">#&gt; 270  0.0122 </span></a>
+<a class="sourceLine" id="cb119-310" data-line-number="310"><span class="co">#&gt; 271  0.0119 </span></a>
+<a class="sourceLine" id="cb119-311" data-line-number="311"><span class="co">#&gt; 272  0.0115 </span></a>
+<a class="sourceLine" id="cb119-312" data-line-number="312"><span class="co">#&gt; 273  0.0112 </span></a>
+<a class="sourceLine" id="cb119-313" data-line-number="313"><span class="co">#&gt; 274  0.0108 </span></a>
+<a class="sourceLine" id="cb119-314" data-line-number="314"><span class="co">#&gt; 275  0.0105 </span></a>
+<a class="sourceLine" id="cb119-315" data-line-number="315"><span class="co">#&gt; 276  0.0102 </span></a>
+<a class="sourceLine" id="cb119-316" data-line-number="316"><span class="co">#&gt; 277  0.00988 </span></a>
+<a class="sourceLine" id="cb119-317" data-line-number="317"><span class="co">#&gt; 278  0.00959 </span></a>
+<a class="sourceLine" id="cb119-318" data-line-number="318"><span class="co">#&gt; 279  0.0093 </span></a>
+<a class="sourceLine" id="cb119-319" data-line-number="319"><span class="co">#&gt; 280  0.00902 </span></a>
+<a class="sourceLine" id="cb119-320" data-line-number="320"><span class="co">#&gt; 281  0.00875 </span></a>
+<a class="sourceLine" id="cb119-321" data-line-number="321"><span class="co">#&gt; 282  0.00849 </span></a>
+<a class="sourceLine" id="cb119-322" data-line-number="322"><span class="co">#&gt; 283  0.00824 </span></a>
+<a class="sourceLine" id="cb119-323" data-line-number="323"><span class="co">#&gt; 284  0.00799 </span></a>
+<a class="sourceLine" id="cb119-324" data-line-number="324"><span class="co">#&gt; 285  0.00775 </span></a>
+<a class="sourceLine" id="cb119-325" data-line-number="325"><span class="co">#&gt; 286  0.00752 </span></a>
+<a class="sourceLine" id="cb119-326" data-line-number="326"><span class="co">#&gt; 287  0.0073 </span></a>
+<a class="sourceLine" id="cb119-327" data-line-number="327"><span class="co">#&gt; 288  0.00708 </span></a>
+<a class="sourceLine" id="cb119-328" data-line-number="328"><span class="co">#&gt; 289  0.00687 </span></a>
+<a class="sourceLine" id="cb119-329" data-line-number="329"><span class="co">#&gt; 290  0.00666 </span></a>
+<a class="sourceLine" id="cb119-330" data-line-number="330"><span class="co">#&gt; 291  0.00647 </span></a>
+<a class="sourceLine" id="cb119-331" data-line-number="331"><span class="co">#&gt; 292  0.00627 </span></a>
+<a class="sourceLine" id="cb119-332" data-line-number="332"><span class="co">#&gt; 293  0.00609 </span></a>
+<a class="sourceLine" id="cb119-333" data-line-number="333"><span class="co">#&gt; 294  0.00591 </span></a>
+<a class="sourceLine" id="cb119-334" data-line-number="334"><span class="co">#&gt; 295  0.00573 </span></a>
+<a class="sourceLine" id="cb119-335" data-line-number="335"><span class="co">#&gt; 296  0.00556 </span></a>
+<a class="sourceLine" id="cb119-336" data-line-number="336"><span class="co">#&gt; 297  0.0054 </span></a>
+<a class="sourceLine" id="cb119-337" data-line-number="337"><span class="co">#&gt; 298  0.00524 </span></a>
+<a class="sourceLine" id="cb119-338" data-line-number="338"><span class="co">#&gt; 299  0.00508 </span></a>
+<a class="sourceLine" id="cb119-339" data-line-number="339"><span class="co">#&gt; 300  0.00493 </span></a>
+<a class="sourceLine" id="cb119-340" data-line-number="340"><span class="co">#&gt; 301  0.00478 </span></a>
+<a class="sourceLine" id="cb119-341" data-line-number="341"><span class="co">#&gt; 302  0.00464 </span></a>
+<a class="sourceLine" id="cb119-342" data-line-number="342"><span class="co">#&gt; 303  0.0045 </span></a>
+<a class="sourceLine" id="cb119-343" data-line-number="343"><span class="co">#&gt; 304  0.00437 </span></a>
+<a class="sourceLine" id="cb119-344" data-line-number="344"><span class="co">#&gt; 305  0.00424 </span></a>
+<a class="sourceLine" id="cb119-345" data-line-number="345"><span class="co">#&gt; 306  0.00412 </span></a>
+<a class="sourceLine" id="cb119-346" data-line-number="346"><span class="co">#&gt; 307  0.00399 </span></a>
+<a class="sourceLine" id="cb119-347" data-line-number="347"><span class="co">#&gt; 308  0.00388 </span></a>
+<a class="sourceLine" id="cb119-348" data-line-number="348"><span class="co">#&gt; 309  0.00376 </span></a>
+<a class="sourceLine" id="cb119-349" data-line-number="349"><span class="co">#&gt; 310  0.00365 </span></a>
+<a class="sourceLine" id="cb119-350" data-line-number="350"><span class="co">#&gt; 311  0.00354 </span></a>
+<a class="sourceLine" id="cb119-351" data-line-number="351"><span class="co">#&gt; 312  0.00344 </span></a>
+<a class="sourceLine" id="cb119-352" data-line-number="352"><span class="co">#&gt; 313  0.00334 </span></a>
+<a class="sourceLine" id="cb119-353" data-line-number="353"><span class="co">#&gt; 314  0.00324 </span></a>
+<a class="sourceLine" id="cb119-354" data-line-number="354"><span class="co">#&gt; 315  0.00314 </span></a>
+<a class="sourceLine" id="cb119-355" data-line-number="355"><span class="co">#&gt; 316  0.00305 </span></a>
+<a class="sourceLine" id="cb119-356" data-line-number="356"><span class="co">#&gt; 317  0.00296 </span></a>
+<a class="sourceLine" id="cb119-357" data-line-number="357"><span class="co">#&gt; 318  0.00287 </span></a>
+<a class="sourceLine" id="cb119-358" data-line-number="358"><span class="co">#&gt; 319  0.00279 </span></a>
+<a class="sourceLine" id="cb119-359" data-line-number="359"><span class="co">#&gt; 320  0.00271 </span></a>
+<a class="sourceLine" id="cb119-360" data-line-number="360"><span class="co">#&gt; 321  0.00263 </span></a>
+<a class="sourceLine" id="cb119-361" data-line-number="361"><span class="co">#&gt; 322  0.00255 </span></a>
+<a class="sourceLine" id="cb119-362" data-line-number="362"><span class="co">#&gt; 323  0.00248 </span></a>
+<a class="sourceLine" id="cb119-363" data-line-number="363"><span class="co">#&gt; 324  0.0024 </span></a>
+<a class="sourceLine" id="cb119-364" data-line-number="364"><span class="co">#&gt; 325  0.00233 </span></a>
+<a class="sourceLine" id="cb119-365" data-line-number="365"><span class="co">#&gt; 326  0.00226 </span></a>
+<a class="sourceLine" id="cb119-366" data-line-number="366"><span class="co">#&gt; 327  0.0022 </span></a>
+<a class="sourceLine" id="cb119-367" data-line-number="367"><span class="co">#&gt; 328  0.00213 </span></a>
+<a class="sourceLine" id="cb119-368" data-line-number="368"><span class="co">#&gt; 329  0.00207 </span></a>
+<a class="sourceLine" id="cb119-369" data-line-number="369"><span class="co">#&gt; 330  0.00201 </span></a>
+<a class="sourceLine" id="cb119-370" data-line-number="370"><span class="co">#&gt; 331  0.00195 </span></a>
+<a class="sourceLine" id="cb119-371" data-line-number="371"><span class="co">#&gt; 332  0.00189 </span></a>
+<a class="sourceLine" id="cb119-372" data-line-number="372"><span class="co">#&gt; 333  0.00184 </span></a>
+<a class="sourceLine" id="cb119-373" data-line-number="373"><span class="co">#&gt; 334  0.00178 </span></a>
+<a class="sourceLine" id="cb119-374" data-line-number="374"><span class="co">#&gt; 335  0.00173 </span></a>
+<a class="sourceLine" id="cb119-375" data-line-number="375"><span class="co">#&gt; 336  0.00168 </span></a>
+<a class="sourceLine" id="cb119-376" data-line-number="376"><span class="co">#&gt; 337  0.00163 </span></a>
+<a class="sourceLine" id="cb119-377" data-line-number="377"><span class="co">#&gt; 338  0.00158 </span></a>
+<a class="sourceLine" id="cb119-378" data-line-number="378"><span class="co">#&gt; 339  0.00154 </span></a>
+<a class="sourceLine" id="cb119-379" data-line-number="379"><span class="co">#&gt; 340  0.00149 </span></a>
+<a class="sourceLine" id="cb119-380" data-line-number="380"><span class="co">#&gt; 341  0.00145 </span></a>
+<a class="sourceLine" id="cb119-381" data-line-number="381"><span class="co">#&gt; 342  0.00141 </span></a>
+<a class="sourceLine" id="cb119-382" data-line-number="382"><span class="co">#&gt; 343  0.00137 </span></a>
+<a class="sourceLine" id="cb119-383" data-line-number="383"><span class="co">#&gt; 344  0.00133 </span></a>
+<a class="sourceLine" id="cb119-384" data-line-number="384"><span class="co">#&gt; 345  0.00129 </span></a>
+<a class="sourceLine" id="cb119-385" data-line-number="385"><span class="co">#&gt; 346  0.00125 </span></a>
+<a class="sourceLine" id="cb119-386" data-line-number="386"><span class="co">#&gt; 347  0.00121 </span></a>
+<a class="sourceLine" id="cb119-387" data-line-number="387"><span class="co">#&gt; 348  0.00118 </span></a>
+<a class="sourceLine" id="cb119-388" data-line-number="388"><span class="co">#&gt; 349  0.00114 </span></a>
+<a class="sourceLine" id="cb119-389" data-line-number="389"><span class="co">#&gt; 350  0.00111 </span></a>
+<a class="sourceLine" id="cb119-390" data-line-number="390"><span class="co">#&gt; 351  0.00108 </span></a>
+<a class="sourceLine" id="cb119-391" data-line-number="391"><span class="co">#&gt; 352  0.00105 </span></a>
+<a class="sourceLine" id="cb119-392" data-line-number="392"><span class="co">#&gt; 353  0.00102 </span></a>
+<a class="sourceLine" id="cb119-393" data-line-number="393"><span class="co">#&gt; 354  0.000987 </span></a>
+<a class="sourceLine" id="cb119-394" data-line-number="394"><span class="co">#&gt; 355  0.000958 </span></a>
+<a class="sourceLine" id="cb119-395" data-line-number="395"><span class="co">#&gt; 356  0.000931 </span></a>
+<a class="sourceLine" id="cb119-396" data-line-number="396"><span class="co">#&gt; 357  0.000904 </span></a>
+<a class="sourceLine" id="cb119-397" data-line-number="397"><span class="co">#&gt; 358  0.000877 </span></a>
+<a class="sourceLine" id="cb119-398" data-line-number="398"><span class="co">#&gt; 359  0.000852 </span></a>
+<a class="sourceLine" id="cb119-399" data-line-number="399"><span class="co">#&gt; 360  0.000827 </span></a>
+<a class="sourceLine" id="cb119-400" data-line-number="400"><span class="co">#&gt; 361  0.000803 </span></a>
+<a class="sourceLine" id="cb119-401" data-line-number="401"><span class="co">#&gt; 362  0.00078 </span></a>
+<a class="sourceLine" id="cb119-402" data-line-number="402"><span class="co">#&gt; 363  0.000757 </span></a>
+<a class="sourceLine" id="cb119-403" data-line-number="403"><span class="co">#&gt; 364  0.000735 </span></a>
+<a class="sourceLine" id="cb119-404" data-line-number="404"><span class="co">#&gt; 365  0.000714 </span></a>
+<a class="sourceLine" id="cb119-405" data-line-number="405"><span class="co">#&gt; 366  0.000693 </span></a>
+<a class="sourceLine" id="cb119-406" data-line-number="406"><span class="co">#&gt; 367  0.000673 </span></a>
+<a class="sourceLine" id="cb119-407" data-line-number="407"><span class="co">#&gt; 368  0.000654 </span></a>
+<a class="sourceLine" id="cb119-408" data-line-number="408"><span class="co">#&gt; 369  0.000635 </span></a>
+<a class="sourceLine" id="cb119-409" data-line-number="409"><span class="co">#&gt; 370  0.000617 </span></a>
+<a class="sourceLine" id="cb119-410" data-line-number="410"><span class="co">#&gt; 371  0.000599 </span></a>
+<a class="sourceLine" id="cb119-411" data-line-number="411"><span class="co">#&gt; 372  0.000581 </span></a>
+<a class="sourceLine" id="cb119-412" data-line-number="412"><span class="co">#&gt; 373  0.000565 </span></a>
+<a class="sourceLine" id="cb119-413" data-line-number="413"><span class="co">#&gt; 374  0.000548 </span></a>
+<a class="sourceLine" id="cb119-414" data-line-number="414"><span class="co">#&gt; 375  0.000532 </span></a>
+<a class="sourceLine" id="cb119-415" data-line-number="415"><span class="co">#&gt; 376  0.000517 </span></a>
+<a class="sourceLine" id="cb119-416" data-line-number="416"><span class="co">#&gt; 377  0.000502 </span></a>
+<a class="sourceLine" id="cb119-417" data-line-number="417"><span class="co">#&gt; 378  0.000488 </span></a>
+<a class="sourceLine" id="cb119-418" data-line-number="418"><span class="co">#&gt; 379  0.000474 </span></a>
+<a class="sourceLine" id="cb119-419" data-line-number="419"><span class="co">#&gt; 380  0.00046 </span></a>
+<a class="sourceLine" id="cb119-420" data-line-number="420"><span class="co">#&gt; 381  0.000447 </span></a>
+<a class="sourceLine" id="cb119-421" data-line-number="421"><span class="co">#&gt; 382  0.000434 </span></a>
+<a class="sourceLine" id="cb119-422" data-line-number="422"><span class="co">#&gt; 383  0.000421 </span></a>
+<a class="sourceLine" id="cb119-423" data-line-number="423"><span class="co">#&gt; 384  0.000409 </span></a>
+<a class="sourceLine" id="cb119-424" data-line-number="424"><span class="co">#&gt; 385  0.000397 </span></a>
+<a class="sourceLine" id="cb119-425" data-line-number="425"><span class="co">#&gt; 386  0.000386 </span></a>
+<a class="sourceLine" id="cb119-426" data-line-number="426"><span class="co">#&gt; 387  0.000375 </span></a>
+<a class="sourceLine" id="cb119-427" data-line-number="427"><span class="co">#&gt; 388  0.000364 </span></a>
+<a class="sourceLine" id="cb119-428" data-line-number="428"><span class="co">#&gt; 389  0.000354 </span></a>
+<a class="sourceLine" id="cb119-429" data-line-number="429"><span class="co">#&gt; 390  0.000343 </span></a>
+<a class="sourceLine" id="cb119-430" data-line-number="430"><span class="co">#&gt; 391  0.000334 </span></a>
+<a class="sourceLine" id="cb119-431" data-line-number="431"><span class="co">#&gt; 392  0.000324 </span></a>
+<a class="sourceLine" id="cb119-432" data-line-number="432"><span class="co">#&gt; 393  0.000315 </span></a>
+<a class="sourceLine" id="cb119-433" data-line-number="433"><span class="co">#&gt; 394  0.000306 </span></a>
+<a class="sourceLine" id="cb119-434" data-line-number="434"><span class="co">#&gt; 395  0.000297 </span></a>
+<a class="sourceLine" id="cb119-435" data-line-number="435"><span class="co">#&gt; 396  0.000288 </span></a>
+<a class="sourceLine" id="cb119-436" data-line-number="436"><span class="co">#&gt; 397  0.00028 </span></a>
+<a class="sourceLine" id="cb119-437" data-line-number="437"><span class="co">#&gt; 398  0.000272 </span></a>
+<a class="sourceLine" id="cb119-438" data-line-number="438"><span class="co">#&gt; 399  0.000264 </span></a>
+<a class="sourceLine" id="cb119-439" data-line-number="439"><span class="co">#&gt; 400  0.000257 </span></a>
+<a class="sourceLine" id="cb119-440" data-line-number="440"><span class="co">#&gt; 401  0.000249 </span></a>
+<a class="sourceLine" id="cb119-441" data-line-number="441"><span class="co">#&gt; 402  0.000242 </span></a>
+<a class="sourceLine" id="cb119-442" data-line-number="442"><span class="co">#&gt; 403  0.000235 </span></a>
+<a class="sourceLine" id="cb119-443" data-line-number="443"><span class="co">#&gt; 404  0.000228 </span></a>
+<a class="sourceLine" id="cb119-444" data-line-number="444"><span class="co">#&gt; 405  0.000222 </span></a>
+<a class="sourceLine" id="cb119-445" data-line-number="445"><span class="co">#&gt; 406  0.000216 </span></a>
+<a class="sourceLine" id="cb119-446" data-line-number="446"><span class="co">#&gt; 407  0.000209 </span></a>
+<a class="sourceLine" id="cb119-447" data-line-number="447"><span class="co">#&gt; 408  0.000203 </span></a>
+<a class="sourceLine" id="cb119-448" data-line-number="448"><span class="co">#&gt; 409  0.000198 </span></a>
+<a class="sourceLine" id="cb119-449" data-line-number="449"><span class="co">#&gt; 410  0.000192 </span></a>
+<a class="sourceLine" id="cb119-450" data-line-number="450"><span class="co">#&gt; 411  0.000186 </span></a>
+<a class="sourceLine" id="cb119-451" data-line-number="451"><span class="co">#&gt; 412  0.000181 </span></a>
+<a class="sourceLine" id="cb119-452" data-line-number="452"><span class="co">#&gt; 413  0.000176 </span></a>
+<a class="sourceLine" id="cb119-453" data-line-number="453"><span class="co">#&gt; 414  0.000171 </span></a>
+<a class="sourceLine" id="cb119-454" data-line-number="454"><span class="co">#&gt; 415  0.000166 </span></a>
+<a class="sourceLine" id="cb119-455" data-line-number="455"><span class="co">#&gt; 416  0.000161 </span></a>
+<a class="sourceLine" id="cb119-456" data-line-number="456"><span class="co">#&gt; 417  0.000157 </span></a>
+<a class="sourceLine" id="cb119-457" data-line-number="457"><span class="co">#&gt; 418  0.000152 </span></a>
+<a class="sourceLine" id="cb119-458" data-line-number="458"><span class="co">#&gt; 419  0.000148 </span></a>
+<a class="sourceLine" id="cb119-459" data-line-number="459"><span class="co">#&gt; 420  0.000144 </span></a>
+<a class="sourceLine" id="cb119-460" data-line-number="460"><span class="co">#&gt; 421  0.00014 </span></a>
+<a class="sourceLine" id="cb119-461" data-line-number="461"><span class="co">#&gt; 422  0.000136 </span></a>
+<a class="sourceLine" id="cb119-462" data-line-number="462"><span class="co">#&gt; 423  0.000132 </span></a>
+<a class="sourceLine" id="cb119-463" data-line-number="463"><span class="co">#&gt; 424  0.000128 </span></a>
+<a class="sourceLine" id="cb119-464" data-line-number="464"><span class="co">#&gt; 425  0.000124 </span></a>
+<a class="sourceLine" id="cb119-465" data-line-number="465"><span class="co">#&gt; 426  0.000121 </span></a>
+<a class="sourceLine" id="cb119-466" data-line-number="466"><span class="co">#&gt; 427  0.000117 </span></a>
+<a class="sourceLine" id="cb119-467" data-line-number="467"><span class="co">#&gt; 428  0.000114 </span></a>
+<a class="sourceLine" id="cb119-468" data-line-number="468"><span class="co">#&gt; 429  0.000111 </span></a>
+<a class="sourceLine" id="cb119-469" data-line-number="469"><span class="co">#&gt; 430  0.000108 </span></a>
+<a class="sourceLine" id="cb119-470" data-line-number="470"><span class="co">#&gt; 431  0.000105 </span></a>
+<a class="sourceLine" id="cb119-471" data-line-number="471"><span class="co">#&gt; 432  0.000102 </span></a>
+<a class="sourceLine" id="cb119-472" data-line-number="472"><span class="co">#&gt; 433  9.87e-05 </span></a>
+<a class="sourceLine" id="cb119-473" data-line-number="473"><span class="co">#&gt; 434  9.59e-05 </span></a>
+<a class="sourceLine" id="cb119-474" data-line-number="474"><span class="co">#&gt; 435  9.32e-05 </span></a>
+<a class="sourceLine" id="cb119-475" data-line-number="475"><span class="co">#&gt; 436  9.06e-05 </span></a>
+<a class="sourceLine" id="cb119-476" data-line-number="476"><span class="co">#&gt; 437  8.8e-05 </span></a>
+<a class="sourceLine" id="cb119-477" data-line-number="477"><span class="co">#&gt; 438  8.55e-05 </span></a>
+<a class="sourceLine" id="cb119-478" data-line-number="478"><span class="co">#&gt; 439  8.31e-05 </span></a>
+<a class="sourceLine" id="cb119-479" data-line-number="479"><span class="co">#&gt; 440  8.07e-05 </span></a>
+<a class="sourceLine" id="cb119-480" data-line-number="480"><span class="co">#&gt; 441  7.84e-05 </span></a>
+<a class="sourceLine" id="cb119-481" data-line-number="481"><span class="co">#&gt; 442  7.62e-05 </span></a>
+<a class="sourceLine" id="cb119-482" data-line-number="482"><span class="co">#&gt; 443  7.41e-05 </span></a>
+<a class="sourceLine" id="cb119-483" data-line-number="483"><span class="co">#&gt; 444  7.2e-05 </span></a>
+<a class="sourceLine" id="cb119-484" data-line-number="484"><span class="co">#&gt; 445  6.99e-05 </span></a>
+<a class="sourceLine" id="cb119-485" data-line-number="485"><span class="co">#&gt; 446  6.79e-05 </span></a>
+<a class="sourceLine" id="cb119-486" data-line-number="486"><span class="co">#&gt; 447  6.6e-05 </span></a>
+<a class="sourceLine" id="cb119-487" data-line-number="487"><span class="co">#&gt; 448  6.41e-05 </span></a>
+<a class="sourceLine" id="cb119-488" data-line-number="488"><span class="co">#&gt; 449  6.23e-05 </span></a>
+<a class="sourceLine" id="cb119-489" data-line-number="489"><span class="co">#&gt; 450  6.06e-05 </span></a>
+<a class="sourceLine" id="cb119-490" data-line-number="490"><span class="co">#&gt; 451  5.89e-05 </span></a>
+<a class="sourceLine" id="cb119-491" data-line-number="491"><span class="co">#&gt; 452  5.72e-05 </span></a>
+<a class="sourceLine" id="cb119-492" data-line-number="492"><span class="co">#&gt; 453  5.56e-05 </span></a>
+<a class="sourceLine" id="cb119-493" data-line-number="493"><span class="co">#&gt; 454  5.4e-05 </span></a>
+<a class="sourceLine" id="cb119-494" data-line-number="494"><span class="co">#&gt; 455  5.25e-05 </span></a>
+<a class="sourceLine" id="cb119-495" data-line-number="495"><span class="co">#&gt; 456  5.1e-05 </span></a>
+<a class="sourceLine" id="cb119-496" data-line-number="496"><span class="co">#&gt; 457  4.96e-05 </span></a>
+<a class="sourceLine" id="cb119-497" data-line-number="497"><span class="co">#&gt; 458  4.82e-05 </span></a>
+<a class="sourceLine" id="cb119-498" data-line-number="498"><span class="co">#&gt; 459  4.68e-05 </span></a>
+<a class="sourceLine" id="cb119-499" data-line-number="499"><span class="co">#&gt; 460  4.55e-05 </span></a>
+<a class="sourceLine" id="cb119-500" data-line-number="500"><span class="co">#&gt; 461  4.42e-05 </span></a>
+<a class="sourceLine" id="cb119-501" data-line-number="501"><span class="co">#&gt; 462  4.3e-05 </span></a>
+<a class="sourceLine" id="cb119-502" data-line-number="502"><span class="co">#&gt; 463  4.18e-05 </span></a>
+<a class="sourceLine" id="cb119-503" data-line-number="503"><span class="co">#&gt; 464  4.06e-05 </span></a>
+<a class="sourceLine" id="cb119-504" data-line-number="504"><span class="co">#&gt; 465  3.94e-05 </span></a>
+<a class="sourceLine" id="cb119-505" data-line-number="505"><span class="co">#&gt; 466  3.83e-05 </span></a>
+<a class="sourceLine" id="cb119-506" data-line-number="506"><span class="co">#&gt; 467  3.72e-05 </span></a>
+<a class="sourceLine" id="cb119-507" data-line-number="507"><span class="co">#&gt; 468  3.62e-05 </span></a>
+<a class="sourceLine" id="cb119-508" data-line-number="508"><span class="co">#&gt; 469  3.52e-05 </span></a>
+<a class="sourceLine" id="cb119-509" data-line-number="509"><span class="co">#&gt; 470  3.42e-05 </span></a>
+<a class="sourceLine" id="cb119-510" data-line-number="510"><span class="co">#&gt; 471  3.32e-05 </span></a>
+<a class="sourceLine" id="cb119-511" data-line-number="511"><span class="co">#&gt; 472  3.23e-05 </span></a>
+<a class="sourceLine" id="cb119-512" data-line-number="512"><span class="co">#&gt; 473  3.14e-05 </span></a>
+<a class="sourceLine" id="cb119-513" data-line-number="513"><span class="co">#&gt; 474  3.05e-05 </span></a>
+<a class="sourceLine" id="cb119-514" data-line-number="514"><span class="co">#&gt; 475  2.96e-05 </span></a>
+<a class="sourceLine" id="cb119-515" data-line-number="515"><span class="co">#&gt; 476  2.88e-05 </span></a>
+<a class="sourceLine" id="cb119-516" data-line-number="516"><span class="co">#&gt; 477  2.8e-05 </span></a>
+<a class="sourceLine" id="cb119-517" data-line-number="517"><span class="co">#&gt; 478  2.72e-05 </span></a>
+<a class="sourceLine" id="cb119-518" data-line-number="518"><span class="co">#&gt; 479  2.65e-05 </span></a>
+<a class="sourceLine" id="cb119-519" data-line-number="519"><span class="co">#&gt; 480  2.57e-05 </span></a>
+<a class="sourceLine" id="cb119-520" data-line-number="520"><span class="co">#&gt; 481  2.5e-05 </span></a>
+<a class="sourceLine" id="cb119-521" data-line-number="521"><span class="co">#&gt; 482  2.43e-05 </span></a>
+<a class="sourceLine" id="cb119-522" data-line-number="522"><span class="co">#&gt; 483  2.36e-05 </span></a>
+<a class="sourceLine" id="cb119-523" data-line-number="523"><span class="co">#&gt; 484  2.29e-05 </span></a>
+<a class="sourceLine" id="cb119-524" data-line-number="524"><span class="co">#&gt; 485  2.23e-05 </span></a>
+<a class="sourceLine" id="cb119-525" data-line-number="525"><span class="co">#&gt; 486  2.17e-05 </span></a>
+<a class="sourceLine" id="cb119-526" data-line-number="526"><span class="co">#&gt; 487  2.11e-05 </span></a>
+<a class="sourceLine" id="cb119-527" data-line-number="527"><span class="co">#&gt; 488  2.05e-05 </span></a>
+<a class="sourceLine" id="cb119-528" data-line-number="528"><span class="co">#&gt; 489  1.99e-05 </span></a>
+<a class="sourceLine" id="cb119-529" data-line-number="529"><span class="co">#&gt; 490  1.94e-05 </span></a>
+<a class="sourceLine" id="cb119-530" data-line-number="530"><span class="co">#&gt; 491  1.88e-05 </span></a>
+<a class="sourceLine" id="cb119-531" data-line-number="531"><span class="co">#&gt; 492  1.83e-05 </span></a>
+<a class="sourceLine" id="cb119-532" data-line-number="532"><span class="co">#&gt; 493  1.78e-05 </span></a>
+<a class="sourceLine" id="cb119-533" data-line-number="533"><span class="co">#&gt; 494  1.73e-05 </span></a>
+<a class="sourceLine" id="cb119-534" data-line-number="534"><span class="co">#&gt; 495  1.68e-05 </span></a>
+<a class="sourceLine" id="cb119-535" data-line-number="535"><span class="co">#&gt; 496  1.63e-05 </span></a>
+<a class="sourceLine" id="cb119-536" data-line-number="536"><span class="co">#&gt; 497  1.59e-05 </span></a>
+<a class="sourceLine" id="cb119-537" data-line-number="537"><span class="co">#&gt; 498  1.54e-05 </span></a>
+<a class="sourceLine" id="cb119-538" data-line-number="538"><span class="co">#&gt; 499  1.5e-05 </span></a>
+<a class="sourceLine" id="cb119-539" data-line-number="539"><span class="co">#&gt; 500  1.46e-05</span></a></code></pre></div>
+<p>These two expression are equivalent, with the first being the long version natural way of doing it in <strong>PyTorch</strong>. The second is using the generics in R for subtraction, multiplication and scalar conversion.</p>
+<pre><code>param$data &lt;- torch$sub(param$data,
+                        torch$mul(param$grad$float(),
+                          torch$scalar_tensor(learning_rate)))
+}</code></pre>
+<pre><code>param$data &lt;- param$data - param$grad * learning_rate</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-two-layer-neural-network.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="neural-networks-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["rtorch-book.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
