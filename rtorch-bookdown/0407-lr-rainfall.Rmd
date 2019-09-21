@@ -1,144 +1,11 @@
-# Linear Regression
-
-## Case 1: simple linear regression
-
-Source: https://www.guru99.com/pytorch-tutorial.html
-
-
-### Creating the network model
-
-Our network model is a simple Linear layer with an input and an output shape of one.
-
-And the network output should be like this
-
-```
-Net(
-  (hidden): Linear(in_features=1, out_features=1, bias=True)
-)
-```
-
-
-```{r setup-nn}
-library(rTorch)
-
-nn       <- torch$nn
-Variable <- torch$autograd$Variable
-
-torch$manual_seed(123)
-
-py_run_string("import torch")
-main = py_run_string(
-"
-import torch.nn as nn
-
-class Net(nn.Module):
-   def __init__(self):
-       super(Net, self).__init__()
-       self.layer = torch.nn.Linear(1, 1)
-
-   def forward(self, x):
-       x = self.layer(x)      
-       return x
-")
-
-
-# build a Linear Rgression model
-net <- main$Net()
-print(net)
-```
-
-
-### Datasets
-
-Before you start the training process, you need to know our data. You make a random function to test our model. $Y = x3 sin(x)+ 3x+0.8 rand(100)$
-
-
-```{r datasets, fig.width=5.5, fig.height=5.5}
-
-np$random$seed(123L)
-
-x = np$random$rand(100L)
-y = np$sin(x) * np$power(x, 3L) + 3L * x + np$random$rand(100L) * 0.8
-
-plot(x, y)
-```
-
-
-Before you start the training process, you need to convert the numpy array to Variables that supported by Torch and autograd.
-
-### Converting from numpy to tensor
-Notice that before converting to a Torch tensor, we need first to convert the R numeric vector to a `numpy` array:
-
-```{r numpy-to-tensor}
-# convert numpy array to tensor in shape of input size
-x <- r_to_py(x)
-y <- r_to_py(y)
-x = torch$from_numpy(x$reshape(-1L, 1L))$float()
-y = torch$from_numpy(y$reshape(-1L, 1L))$float()
-print(x, y)
-```
-
-### Optimizer and Loss
-Next, you should define the Optimizer and the Loss Function for our training process.
-
-```{r define-optimizer}
-# Define Optimizer and Loss Function
-optimizer <- torch$optim$SGD(net$parameters(), lr=0.2)
-loss_func <- torch$nn$MSELoss()
-print(optimizer)
-print(loss_func)
-```
-
-### Training
-
-Now let's start our training process. With an epoch of 250, you will iterate our data to find the best value for our hyperparameters.
-
-```{r plot-xy, fig.width=5.5, fig.height=5.5}
-# x = x$type(torch$float)   # make it a a FloatTensor
-# y = y$type(torch$float)
-
-# x <- torch$as_tensor(x, dtype = torch$float)
-# y <- torch$as_tensor(y, dtype = torch$float)
-
-inputs  = Variable(x)
-outputs = Variable(y)
-
-# base plot
-plot(x$data$numpy(), y$data$numpy(), col = "blue")
-for (i in 1:250) {
-   prediction = net(inputs)
-   loss = loss_func(prediction, outputs)
-   optimizer$zero_grad()
-   loss$backward()
-   optimizer$step()
-   
-   if (i > 1) break
-
-   if (i %% 10 == 0) {
-       # plot and show learning process
-      # points(x$data$numpy(), y$data$numpy())
-      points(x$data$numpy(), prediction$data$numpy(), col="red")
-       # cat(i, loss$data$numpy(), "\n")
-   }
-}
-```
-
-
-### Result
-
-As you can see below, you successfully performed regression with a neural network. Actually, on every iteration, the red line in the plot will update and change its position to fit the data. But in this picture, you only show you the final result.
-
-
-
-
-
-## Case 2: Rainfall
+# Rainfall. Linear Regression
 
 ```{r rainfall-load-rtorch}
 library(rTorch)
 ```
 
-### Select device
+
+Select the device: CPU or GPU
 
 ```{r seed-device}
 torch$manual_seed(0)
@@ -146,7 +13,7 @@ torch$manual_seed(0)
 device = torch$device('cpu')
 ```
 
-### Training data
+## Training data
 The training data can be represented using 2 matrices (inputs and targets), each with one row per observation, and one column per variable.
 
 ```{r inputs-and targets}
@@ -166,7 +33,7 @@ targets = np$array(list(list(56, 70),
 ```
 
 
-### Convert to tensors
+## Convert arrays to tensors
 Before we build a model, we need to convert inputs and targets to PyTorch tensors.
 
 ```{r convert-to-tensors}
@@ -193,7 +60,7 @@ print(b)
 ```
 
 
-### Build the model
+## Build the model
 The model is simply a function that performs a matrix multiplication of the input $x$ and the weights $w$ (transposed), and adds the bias $b$ (replicated for each observation).
 
 ```{r build-model}
@@ -203,7 +70,7 @@ model <- function(x) {
 }
 ```
 
-### Generate predictions
+## Generate predictions
 The matrix obtained by passing the input data to the model is a set of predictions for the target variables.
 
 ```{r predictions}
@@ -219,7 +86,7 @@ print(targets)
 
 Because we've started with random weights and biases, the model does not a very good job of predicting the target variables.
 
-### Loss Function
+## Loss Function
 
 We can compare the predictions with the actual targets, using the following method:
 
@@ -236,8 +103,13 @@ mse = function(t1, t2) {
   mul <- torch$sum(torch$mul(diff, diff))
   return(torch$div(mul, diff$numel()))
 }
+
+print(mse)
 ```
 
+## Step by step process
+
+### Compute the losses
 
 ```{r compute-loss}
 # Compute loss
@@ -285,6 +157,7 @@ A key insight from calculus is that the gradient indicates the rate of change of
 
 The increase or decrease is proportional to the value of the gradient.
 
+### Reset the gradients
 
 Finally, we'll reset the gradients to zero before moving forward, because PyTorch accumulates gradients.
 
@@ -298,7 +171,7 @@ print(b$grad)
 ```
 
 
-### Adjust weights and biases using gradient descent
+#### Adjust weights and biases using gradient descent
 
 We'll reduce the loss and improve our model using the gradient descent algorithm, which has the following steps:
 
@@ -356,15 +229,16 @@ print(loss)
 ```
 
 
-
-### Train for multiple epochs
+## All together: train for multiple epochs
 To reduce the loss further, we repeat the process of adjusting the weights and biases using the gradients multiple times. Each iteration is called an **epoch**.
 
 
 ```{r all-together-now}
 # Running all together
 # Adjust weights and reset gradients
-for (i in 1:100) {
+num_epochs <- 100
+
+for (i in 1:num_epochs) {
   preds = model(inputs)
   loss = mse(preds, targets)
   loss$backward()

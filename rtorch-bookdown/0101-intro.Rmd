@@ -1,3 +1,5 @@
+# (PART) Getting Started {-}
+
 # Introduction {#intro}
 
 ## Motivation
@@ -12,7 +14,7 @@ This has the additional benefit of giving the ability to write combination of Py
 
 
 ## How do we start using `rTorch`
-Start using `rTorch` is very simple. The installation instructions are shown in Chapter \@ref(prereqs). After installing the minimum system requirements, you just call it with:
+Start using `rTorch` is very simple. After installing the minimum system requirements, you just call it with:
 
 ```{r call-rtorch}
 library(rTorch)

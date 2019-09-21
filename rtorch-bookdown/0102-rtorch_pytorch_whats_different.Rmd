@@ -1,4 +1,4 @@
-# rTorch and PyTorch: What's different
+# rTorch vs PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
 
