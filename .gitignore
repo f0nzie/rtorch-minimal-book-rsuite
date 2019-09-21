@@ -7,13 +7,25 @@ config.txt
 deployment/libs
 deployment/sbox
 
-
 *.ckpt
-
-rtorch-bookdown/_bookdown_files/
 
 rtorch-bookdown/rtorch-book\.Rmd
 
 *.bak
-
 *.rds
+rtorch-bookdown/awesome_model.pkl
+# no datasets
+data/
+work/one-at-a-time/mnist_fashion/
+rtorch-bookdown/mnist_fashion/
+# no temp files
+rtorch-bookdown/_bookdown_files/
+work/rpy-torch/_bookdown_files/
+work/advanced/_bookdown_files/
+work/one-at-a-time/_bookdown_files/
+
+work/advanced/awesome_model.pkl
+
+work/one-at-a-time/awesome_model.pkl
+
+work/one-at-a-time/one_at_a_time.log
