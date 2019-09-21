@@ -79,7 +79,7 @@ head(dt)
 #> 5:    5  2352 321 0.137 0.312   0   1   0
 #> 6:    6  2352 654 0.278 0.421   0   1   0
 toc()
-#> 106.653 sec elapsed
+#> 106.557 sec elapsed
 
 #   60   1.266 sec elapsed
 #  600   11.798 sec elapsed; 12.9s
