@@ -284,14 +284,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI PyTorch and R data structures</b></span></li>
 <li class="chapter" data-level="11" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>11</b> Working with data.frame</a><ul>
 <li class="chapter" data-level="11.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>11.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#dataset-iteration-batch-settings"><i class="fa fa-check"></i><b>11.2</b> Dataset iteration batch settings</a></li>
-<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a></li>
-<li class="chapter" data-level="11.4" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.4</b> using <code>data.frame</code></a></li>
+<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>11.2</b> Load dataset</a></li>
+<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.3.1</b> using <code>data.frame</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>12</b> Working with data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.1.1</b> Using `data.table</a></li>
-</ul></li>
+<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="12.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>12.2</b> Load dataset</a></li>
+<li class="chapter" data-level="12.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>12.3</b> Read the datasets without normalization</a></li>
+<li class="chapter" data-level="12.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.4</b> Using <code>data.table</code></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
@@ -334,8 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb211-8" data-line-number="8">builtins    &lt;-<span class="st"> </span><span class="kw">import_builtins</span>()</a>
 <a class="sourceLine" id="cb211-9" data-line-number="9">np          &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;numpy&quot;</span>)</a></code></pre></div>
 </div>
-<div id="dataset-iteration-batch-settings" class="section level2">
-<h2><span class="header-section-number">11.2</span> Dataset iteration batch settings</h2>
+<div id="load-dataset" class="section level2">
+<h2><span class="header-section-number">11.2</span> Load dataset</h2>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" data-line-number="1"><span class="co"># folders where the images are located</span></a>
 <a class="sourceLine" id="cb212-2" data-line-number="2">train_data_path =<span class="st"> &#39;~/mnist_png_full/training/&#39;</span></a>
 <a class="sourceLine" id="cb212-3" data-line-number="3">test_data_path  =<span class="st"> &#39;~/mnist_png_full/testing/&#39;</span></a></code></pre></div>
@@ -351,9 +353,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="summary-statistics-for-tensors" class="section level2">
 <h2><span class="header-section-number">11.3</span> Summary statistics for tensors</h2>
-</div>
-<div id="using-data.frame" class="section level2">
-<h2><span class="header-section-number">11.4</span> using <code>data.frame</code></h2>
+<div id="using-data.frame" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> using <code>data.frame</code></h3>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="kw">library</span>(tictoc)</a>
 <a class="sourceLine" id="cb214-2" data-line-number="2"><span class="kw">tic</span>()</a>
 <a class="sourceLine" id="cb214-3" data-line-number="3"></a>
@@ -387,22 +388,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb214-31" data-line-number="31">              <span class="cf">function</span>(y) <span class="kw">stat_fun</span>(<span class="dv">1</span>, y)</a>
 <a class="sourceLine" id="cb214-32" data-line-number="32">          )</a>
 <a class="sourceLine" id="cb214-33" data-line-number="33">  )</a>
-<a class="sourceLine" id="cb214-34" data-line-number="34">)</a>
-<a class="sourceLine" id="cb214-35" data-line-number="35"><span class="kw">head</span>(df)</a>
-<a class="sourceLine" id="cb214-36" data-line-number="36"><span class="co">#&gt;   ridx                    size numel sum  mean   std med max min</span></a>
-<a class="sourceLine" id="cb214-37" data-line-number="37"><span class="co">#&gt; 1    1 torch.Size([3, 28, 28])  2352 366 0.156 0.329   0   1   0</span></a>
-<a class="sourceLine" id="cb214-38" data-line-number="38"><span class="co">#&gt; 2    2 torch.Size([3, 28, 28])  2352 284 0.121 0.297   0   1   0</span></a>
-<a class="sourceLine" id="cb214-39" data-line-number="39"><span class="co">#&gt; 3    3 torch.Size([3, 28, 28])  2352 645 0.274 0.420   0   1   0</span></a>
-<a class="sourceLine" id="cb214-40" data-line-number="40"><span class="co">#&gt; 4    4 torch.Size([3, 28, 28])  2352 410 0.174 0.355   0   1   0</span></a>
-<a class="sourceLine" id="cb214-41" data-line-number="41"><span class="co">#&gt; 5    5 torch.Size([3, 28, 28])  2352 321 0.137 0.312   0   1   0</span></a>
-<a class="sourceLine" id="cb214-42" data-line-number="42"><span class="co">#&gt; 6    6 torch.Size([3, 28, 28])  2352 654 0.278 0.421   0   1   0</span></a>
-<a class="sourceLine" id="cb214-43" data-line-number="43"><span class="kw">toc</span>()</a>
-<a class="sourceLine" id="cb214-44" data-line-number="44"><span class="co">#&gt; 14.669 sec elapsed</span></a>
-<a class="sourceLine" id="cb214-45" data-line-number="45"><span class="co"># 59    1.663s</span></a>
-<a class="sourceLine" id="cb214-46" data-line-number="46"><span class="co">#   599  13.5s</span></a>
-<a class="sourceLine" id="cb214-47" data-line-number="47"><span class="co">#  5999  54.321 sec; 137.6s</span></a>
-<a class="sourceLine" id="cb214-48" data-line-number="48"><span class="co"># 59999 553.489 sec elapsed</span></a></code></pre></div>
+<a class="sourceLine" id="cb214-34" data-line-number="34">)</a></code></pre></div>
+<p>Summary statistics:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">head</span>(df, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="co">#&gt;    ridx                    size numel sum  mean   std med   max min</span></a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="co">#&gt; 1     1 torch.Size([3, 28, 28])  2352 366 0.156 0.329   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="co">#&gt; 2     2 torch.Size([3, 28, 28])  2352 284 0.121 0.297   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-5" data-line-number="5"><span class="co">#&gt; 3     3 torch.Size([3, 28, 28])  2352 645 0.274 0.420   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="co">#&gt; 4     4 torch.Size([3, 28, 28])  2352 410 0.174 0.355   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-7" data-line-number="7"><span class="co">#&gt; 5     5 torch.Size([3, 28, 28])  2352 321 0.137 0.312   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-8" data-line-number="8"><span class="co">#&gt; 6     6 torch.Size([3, 28, 28])  2352 654 0.278 0.421   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-9" data-line-number="9"><span class="co">#&gt; 7     7 torch.Size([3, 28, 28])  2352 496 0.211 0.374   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-10" data-line-number="10"><span class="co">#&gt; 8     8 torch.Size([3, 28, 28])  2352 549 0.233 0.399   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-11" data-line-number="11"><span class="co">#&gt; 9     9 torch.Size([3, 28, 28])  2352 449 0.191 0.365   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-12" data-line-number="12"><span class="co">#&gt; 10   10 torch.Size([3, 28, 28])  2352 465 0.198 0.367   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-13" data-line-number="13"><span class="co">#&gt; 11   11 torch.Size([3, 28, 28])  2352 383 0.163 0.338   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-14" data-line-number="14"><span class="co">#&gt; 12   12 torch.Size([3, 28, 28])  2352 499 0.212 0.378   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-15" data-line-number="15"><span class="co">#&gt; 13   13 torch.Size([3, 28, 28])  2352 313 0.133 0.309   0 0.996   0</span></a>
+<a class="sourceLine" id="cb215-16" data-line-number="16"><span class="co">#&gt; 14   14 torch.Size([3, 28, 28])  2352 360 0.153 0.325   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-17" data-line-number="17"><span class="co">#&gt; 15   15 torch.Size([3, 28, 28])  2352 435 0.185 0.358   0 0.996   0</span></a>
+<a class="sourceLine" id="cb215-18" data-line-number="18"><span class="co">#&gt; 16   16 torch.Size([3, 28, 28])  2352 429 0.182 0.358   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-19" data-line-number="19"><span class="co">#&gt; 17   17 torch.Size([3, 28, 28])  2352 596 0.254 0.408   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-20" data-line-number="20"><span class="co">#&gt; 18   18 torch.Size([3, 28, 28])  2352 527 0.224 0.392   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-21" data-line-number="21"><span class="co">#&gt; 19   19 torch.Size([3, 28, 28])  2352 303 0.129 0.301   0 1.000   0</span></a>
+<a class="sourceLine" id="cb215-22" data-line-number="22"><span class="co">#&gt; 20   20 torch.Size([3, 28, 28])  2352 458 0.195 0.364   0 1.000   0</span></a></code></pre></div>
+<p>Elapsed time per size of sample:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1"><span class="kw">toc</span>()</a>
+<a class="sourceLine" id="cb216-2" data-line-number="2"><span class="co">#&gt; 11.608 sec elapsed</span></a>
+<a class="sourceLine" id="cb216-3" data-line-number="3"><span class="co">#    60   1.663s</span></a>
+<a class="sourceLine" id="cb216-4" data-line-number="4"><span class="co">#   600  13.5s</span></a>
+<a class="sourceLine" id="cb216-5" data-line-number="5"><span class="co">#  6000  54.321 sec;</span></a>
+<a class="sourceLine" id="cb216-6" data-line-number="6"><span class="co"># 60000 553.489 sec elapsed</span></a></code></pre></div>
 
+</div>
 </div>
 </div>
             </section>

@@ -1,4 +1,5 @@
 
+
 # Working with data.table
 
 ## Load PyTorch libraries
@@ -14,13 +15,22 @@ transforms  <- import("torchvision.transforms")
 dsets       <- import("torchvision.datasets")
 builtins    <- import_builtins()
 np          <- import("numpy")
+```
 
+## Load dataset
+
+
+```r
 ## Dataset iteration batch settings
 # folders where the images are located
 train_data_path = '~/mnist_png_full/training/'
 test_data_path  = '~/mnist_png_full/testing/'
+```
 
-# read the datasets without normalization
+## Read the datasets without normalization
+
+
+```r
 train_dataset = torchvision$datasets$ImageFolder(root = train_data_path, 
     transform = torchvision$transforms$ToTensor()
 )
@@ -31,7 +41,8 @@ print(train_dataset)
 #>     Root location: /home/msfz751/mnist_png_full/training/
 ```
 
-### Using `data.table
+
+## Using `data.table`
 
 
 ```r
@@ -69,7 +80,11 @@ dt <- data.table(ridx = idx+1,
           )
   )
 )
+```
 
+Summary statistics:
+
+```r
 head(dt)
 #>    ridx numel sum  mean   std med max min
 #> 1:    1  2352 366 0.156 0.329   0   1   0
@@ -78,11 +93,17 @@ head(dt)
 #> 4:    4  2352 410 0.174 0.355   0   1   0
 #> 5:    5  2352 321 0.137 0.312   0   1   0
 #> 6:    6  2352 654 0.278 0.421   0   1   0
-toc()
-#> 106.557 sec elapsed
-
-#   60   1.266 sec elapsed
-#  600   11.798 sec elapsed; 12.9s
-# 6000  119.256 sec elapsed; 132.9s
-# 1117.619 sec elapsed
 ```
+
+Elapsed time per size of sample:
+
+```r
+toc()
+#> 103.99 sec elapsed
+
+#    60    1.266 sec elapsed
+#   600   11.798 sec elapsed;
+#  6000  119.256 sec elapsed;
+# 60000 1117.619 sec elapsed
+```
+

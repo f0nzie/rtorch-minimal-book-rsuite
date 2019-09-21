@@ -284,14 +284,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI PyTorch and R data structures</b></span></li>
 <li class="chapter" data-level="11" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>11</b> Working with data.frame</a><ul>
 <li class="chapter" data-level="11.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>11.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#dataset-iteration-batch-settings"><i class="fa fa-check"></i><b>11.2</b> Dataset iteration batch settings</a></li>
-<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a></li>
-<li class="chapter" data-level="11.4" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.4</b> using <code>data.frame</code></a></li>
+<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>11.2</b> Load dataset</a></li>
+<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.3.1</b> using <code>data.frame</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>12</b> Working with data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.1.1</b> Using `data.table</a></li>
-</ul></li>
+<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="12.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>12.2</b> Load dataset</a></li>
+<li class="chapter" data-level="12.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>12.3</b> Read the datasets without normalization</a></li>
+<li class="chapter" data-level="12.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.4</b> Using <code>data.table</code></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
@@ -472,35 +474,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> 3D+ tensors</h2>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1"><span class="co"># RGB color image has three axes </span></a>
 <a class="sourceLine" id="cb134-2" data-line-number="2">(img &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">rand</span>(3L, 28L, 28L))</a>
-<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="co">#&gt; tensor([[[0.9406, 0.6663, 0.5133,  ..., 0.4150, 0.6334, 0.2895],</span></a>
-<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="co">#&gt;          [0.0066, 0.4675, 0.5220,  ..., 0.9886, 0.3406, 0.0257],</span></a>
-<a class="sourceLine" id="cb134-5" data-line-number="5"><span class="co">#&gt;          [0.4719, 0.5561, 0.5313,  ..., 0.1938, 0.7813, 0.8822],</span></a>
+<a class="sourceLine" id="cb134-3" data-line-number="3"><span class="co">#&gt; tensor([[[0.2340, 0.3828, 0.6446,  ..., 0.7164, 0.4065, 0.2352],</span></a>
+<a class="sourceLine" id="cb134-4" data-line-number="4"><span class="co">#&gt;          [0.8160, 0.5704, 0.7304,  ..., 0.5735, 0.7694, 0.2255],</span></a>
+<a class="sourceLine" id="cb134-5" data-line-number="5"><span class="co">#&gt;          [0.8125, 0.2182, 0.7164,  ..., 0.2336, 0.9739, 0.1759],</span></a>
 <a class="sourceLine" id="cb134-6" data-line-number="6"><span class="co">#&gt;          ...,</span></a>
-<a class="sourceLine" id="cb134-7" data-line-number="7"><span class="co">#&gt;          [0.5611, 0.2408, 0.0092,  ..., 0.9986, 0.7231, 0.3741],</span></a>
-<a class="sourceLine" id="cb134-8" data-line-number="8"><span class="co">#&gt;          [0.2530, 0.6928, 0.3026,  ..., 0.8944, 0.4192, 0.8850],</span></a>
-<a class="sourceLine" id="cb134-9" data-line-number="9"><span class="co">#&gt;          [0.4972, 0.2432, 0.5765,  ..., 0.7691, 0.5337, 0.6260]],</span></a>
+<a class="sourceLine" id="cb134-7" data-line-number="7"><span class="co">#&gt;          [0.5792, 0.0054, 0.7785,  ..., 0.9056, 0.2010, 0.5388],</span></a>
+<a class="sourceLine" id="cb134-8" data-line-number="8"><span class="co">#&gt;          [0.4288, 0.6506, 0.2438,  ..., 0.9242, 0.0811, 0.6308],</span></a>
+<a class="sourceLine" id="cb134-9" data-line-number="9"><span class="co">#&gt;          [0.5169, 0.6707, 0.7254,  ..., 0.0285, 0.8195, 0.3811]],</span></a>
 <a class="sourceLine" id="cb134-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb134-11" data-line-number="11"><span class="co">#&gt;         [[0.9321, 0.5459, 0.5974,  ..., 0.2983, 0.7084, 0.1273],</span></a>
-<a class="sourceLine" id="cb134-12" data-line-number="12"><span class="co">#&gt;          [0.4761, 0.9534, 0.7419,  ..., 0.5790, 0.7361, 0.0911],</span></a>
-<a class="sourceLine" id="cb134-13" data-line-number="13"><span class="co">#&gt;          [0.2789, 0.9756, 0.0351,  ..., 0.5127, 0.4415, 0.1315],</span></a>
+<a class="sourceLine" id="cb134-11" data-line-number="11"><span class="co">#&gt;         [[0.4872, 0.8200, 0.2137,  ..., 0.8010, 0.3078, 0.3122],</span></a>
+<a class="sourceLine" id="cb134-12" data-line-number="12"><span class="co">#&gt;          [0.7057, 0.5176, 0.2336,  ..., 0.1730, 0.4599, 0.7185],</span></a>
+<a class="sourceLine" id="cb134-13" data-line-number="13"><span class="co">#&gt;          [0.2573, 0.3282, 0.1669,  ..., 0.6791, 0.8521, 0.1105],</span></a>
 <a class="sourceLine" id="cb134-14" data-line-number="14"><span class="co">#&gt;          ...,</span></a>
-<a class="sourceLine" id="cb134-15" data-line-number="15"><span class="co">#&gt;          [0.3657, 0.0281, 0.5339,  ..., 0.7133, 0.6791, 0.0393],</span></a>
-<a class="sourceLine" id="cb134-16" data-line-number="16"><span class="co">#&gt;          [0.6837, 0.7037, 0.7135,  ..., 0.2820, 0.5130, 0.6812],</span></a>
-<a class="sourceLine" id="cb134-17" data-line-number="17"><span class="co">#&gt;          [0.2354, 0.5400, 0.6830,  ..., 0.1359, 0.4379, 0.3382]],</span></a>
+<a class="sourceLine" id="cb134-15" data-line-number="15"><span class="co">#&gt;          [0.8233, 0.2683, 0.2291,  ..., 0.4702, 0.2980, 0.1801],</span></a>
+<a class="sourceLine" id="cb134-16" data-line-number="16"><span class="co">#&gt;          [0.6441, 0.3026, 0.2811,  ..., 0.1800, 0.9933, 0.6809],</span></a>
+<a class="sourceLine" id="cb134-17" data-line-number="17"><span class="co">#&gt;          [0.0180, 0.4391, 0.5946,  ..., 0.8308, 0.3496, 0.0098]],</span></a>
 <a class="sourceLine" id="cb134-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb134-19" data-line-number="19"><span class="co">#&gt;         [[0.3035, 0.0678, 0.7924,  ..., 0.2452, 0.8107, 0.7492],</span></a>
-<a class="sourceLine" id="cb134-20" data-line-number="20"><span class="co">#&gt;          [0.3953, 0.5481, 0.4870,  ..., 0.1743, 0.5801, 0.9975],</span></a>
-<a class="sourceLine" id="cb134-21" data-line-number="21"><span class="co">#&gt;          [0.6828, 0.5977, 0.6156,  ..., 0.9641, 0.8876, 0.7981],</span></a>
+<a class="sourceLine" id="cb134-19" data-line-number="19"><span class="co">#&gt;         [[0.7794, 0.9102, 0.5455,  ..., 0.1684, 0.2108, 0.2129],</span></a>
+<a class="sourceLine" id="cb134-20" data-line-number="20"><span class="co">#&gt;          [0.0480, 0.7227, 0.7689,  ..., 0.5458, 0.1328, 0.4799],</span></a>
+<a class="sourceLine" id="cb134-21" data-line-number="21"><span class="co">#&gt;          [0.5743, 0.9217, 0.6627,  ..., 0.5269, 0.4471, 0.0361],</span></a>
 <a class="sourceLine" id="cb134-22" data-line-number="22"><span class="co">#&gt;          ...,</span></a>
-<a class="sourceLine" id="cb134-23" data-line-number="23"><span class="co">#&gt;          [0.7945, 0.5705, 0.6571,  ..., 0.2721, 0.7012, 0.1391],</span></a>
-<a class="sourceLine" id="cb134-24" data-line-number="24"><span class="co">#&gt;          [0.7643, 0.7438, 0.5161,  ..., 0.7091, 0.8764, 0.8766],</span></a>
-<a class="sourceLine" id="cb134-25" data-line-number="25"><span class="co">#&gt;          [0.1172, 0.2209, 0.2908,  ..., 0.1834, 0.2846, 0.9464]]])</span></a>
+<a class="sourceLine" id="cb134-23" data-line-number="23"><span class="co">#&gt;          [0.3580, 0.9370, 0.0537,  ..., 0.9707, 0.8620, 0.6104],</span></a>
+<a class="sourceLine" id="cb134-24" data-line-number="24"><span class="co">#&gt;          [0.1380, 0.1459, 0.5186,  ..., 0.6406, 0.8320, 0.1941],</span></a>
+<a class="sourceLine" id="cb134-25" data-line-number="25"><span class="co">#&gt;          [0.3965, 0.2196, 0.4389,  ..., 0.3337, 0.9860, 0.9671]]])</span></a>
 <a class="sourceLine" id="cb134-26" data-line-number="26">img<span class="op">$</span>shape</a>
 <a class="sourceLine" id="cb134-27" data-line-number="27"><span class="co">#&gt; torch.Size([3, 28, 28])</span></a></code></pre></div>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">img[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb135-2" data-line-number="2"><span class="co">#&gt; tensor(0.9406)</span></a>
+<a class="sourceLine" id="cb135-2" data-line-number="2"><span class="co">#&gt; tensor(0.2340)</span></a>
 <a class="sourceLine" id="cb135-3" data-line-number="3">img[<span class="dv">3</span>, <span class="dv">28</span>, <span class="dv">28</span>]</a>
-<a class="sourceLine" id="cb135-4" data-line-number="4"><span class="co">#&gt; tensor(0.9464)</span></a></code></pre></div>
+<a class="sourceLine" id="cb135-4" data-line-number="4"><span class="co">#&gt; tensor(0.9671)</span></a></code></pre></div>
 </div>
 <div id="transpose-of-a-matrix" class="section level2">
 <h2><span class="header-section-number">4.5</span> Transpose of a matrix</h2>
@@ -772,27 +774,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb156-3" data-line-number="3">b =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(3L, 4L)</a>
 <a class="sourceLine" id="cb156-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb156-5" data-line-number="5">a<span class="op">$</span><span class="kw">mm</span>(b)</a>
-<a class="sourceLine" id="cb156-6" data-line-number="6"><span class="co">#&gt; tensor([[-0.7348, -0.3528, -0.2967,  0.5455],</span></a>
-<a class="sourceLine" id="cb156-7" data-line-number="7"><span class="co">#&gt;         [-1.2992, -0.8217, -0.3118,  0.7636]])</span></a>
+<a class="sourceLine" id="cb156-6" data-line-number="6"><span class="co">#&gt; tensor([[ 0.3318,  1.8743,  1.0379, -0.5480],</span></a>
+<a class="sourceLine" id="cb156-7" data-line-number="7"><span class="co">#&gt;         [-1.4726,  2.9532, -1.1073, -3.1027]])</span></a>
 <a class="sourceLine" id="cb156-8" data-line-number="8">a<span class="op">$</span><span class="kw">matmul</span>(b)</a>
-<a class="sourceLine" id="cb156-9" data-line-number="9"><span class="co">#&gt; tensor([[-0.7348, -0.3528, -0.2967,  0.5455],</span></a>
-<a class="sourceLine" id="cb156-10" data-line-number="10"><span class="co">#&gt;         [-1.2992, -0.8217, -0.3118,  0.7636]])</span></a></code></pre></div>
+<a class="sourceLine" id="cb156-9" data-line-number="9"><span class="co">#&gt; tensor([[ 0.3318,  1.8743,  1.0379, -0.5480],</span></a>
+<a class="sourceLine" id="cb156-10" data-line-number="10"><span class="co">#&gt;         [-1.4726,  2.9532, -1.1073, -3.1027]])</span></a></code></pre></div>
 <p>Here is agood explanation: <a href="https://stackoverflow.com/a/44525687/5270873" class="uri">https://stackoverflow.com/a/44525687/5270873</a></p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">abt &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">mm</span>(a, b)<span class="op">$</span><span class="kw">transpose</span>(<span class="dt">dim0=</span>0L, <span class="dt">dim1=</span>1L)</a>
 <a class="sourceLine" id="cb157-2" data-line-number="2">abt</a>
-<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="co">#&gt; tensor([[-0.7348, -1.2992],</span></a>
-<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="co">#&gt;         [-0.3528, -0.8217],</span></a>
-<a class="sourceLine" id="cb157-5" data-line-number="5"><span class="co">#&gt;         [-0.2967, -0.3118],</span></a>
-<a class="sourceLine" id="cb157-6" data-line-number="6"><span class="co">#&gt;         [ 0.5455,  0.7636]])</span></a></code></pre></div>
+<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="co">#&gt; tensor([[ 0.3318, -1.4726],</span></a>
+<a class="sourceLine" id="cb157-4" data-line-number="4"><span class="co">#&gt;         [ 1.8743,  2.9532],</span></a>
+<a class="sourceLine" id="cb157-5" data-line-number="5"><span class="co">#&gt;         [ 1.0379, -1.1073],</span></a>
+<a class="sourceLine" id="cb157-6" data-line-number="6"><span class="co">#&gt;         [-0.5480, -3.1027]])</span></a></code></pre></div>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">at &lt;-<span class="st"> </span>a<span class="op">$</span><span class="kw">transpose</span>(<span class="dt">dim0=</span>0L, <span class="dt">dim1=</span>1L)</a>
 <a class="sourceLine" id="cb158-2" data-line-number="2">bt &lt;-<span class="st"> </span>b<span class="op">$</span><span class="kw">transpose</span>(<span class="dt">dim0=</span>0L, <span class="dt">dim1=</span>1L)</a>
 <a class="sourceLine" id="cb158-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb158-4" data-line-number="4">btat &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">matmul</span>(bt, at)</a>
 <a class="sourceLine" id="cb158-5" data-line-number="5">btat</a>
-<a class="sourceLine" id="cb158-6" data-line-number="6"><span class="co">#&gt; tensor([[-0.7348, -1.2992],</span></a>
-<a class="sourceLine" id="cb158-7" data-line-number="7"><span class="co">#&gt;         [-0.3528, -0.8217],</span></a>
-<a class="sourceLine" id="cb158-8" data-line-number="8"><span class="co">#&gt;         [-0.2967, -0.3118],</span></a>
-<a class="sourceLine" id="cb158-9" data-line-number="9"><span class="co">#&gt;         [ 0.5455,  0.7636]])</span></a></code></pre></div>
+<a class="sourceLine" id="cb158-6" data-line-number="6"><span class="co">#&gt; tensor([[ 0.3318, -1.4726],</span></a>
+<a class="sourceLine" id="cb158-7" data-line-number="7"><span class="co">#&gt;         [ 1.8743,  2.9532],</span></a>
+<a class="sourceLine" id="cb158-8" data-line-number="8"><span class="co">#&gt;         [ 1.0379, -1.1073],</span></a>
+<a class="sourceLine" id="cb158-9" data-line-number="9"><span class="co">#&gt;         [-0.5480, -3.1027]])</span></a></code></pre></div>
 <p><span class="math display">\[(A B)^T = B^T A^T\]</span></p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="co"># tolerance</span></a>
 <a class="sourceLine" id="cb159-2" data-line-number="2">torch<span class="op">$</span><span class="kw">allclose</span>(abt, btat, <span class="dt">rtol=</span><span class="fl">0.0001</span>)</a>

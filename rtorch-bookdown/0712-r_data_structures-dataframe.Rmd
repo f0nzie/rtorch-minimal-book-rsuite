@@ -14,7 +14,7 @@ builtins    <- import_builtins()
 np          <- import("numpy")
 ```
 
-## Dataset iteration batch settings
+## Load dataset
 
 ```{r path-to-mnist-digits}
 # folders where the images are located
@@ -35,7 +35,7 @@ print(train_dataset)
 
 ## Summary statistics for tensors
 
-## using `data.frame`
+### using `data.frame`
 
 ```{r use-dataframe}
 library(tictoc)
@@ -72,12 +72,21 @@ df <- data.frame(ridx = idx+1,      # index number for the sample
           )
   )
 )
-head(df)
-toc()
-# 59    1.663s
-#   599  13.5s
-#  5999  54.321 sec; 137.6s
-# 59999 553.489 sec elapsed
 ```
+
+Summary statistics:
+```{r}
+head(df, 20)
+```
+
+Elapsed time per size of sample:
+```{r}
+toc()
+#    60   1.663s
+#   600  13.5s
+#  6000  54.321 sec;
+# 60000 553.489 sec elapsed
+```
+
 
 

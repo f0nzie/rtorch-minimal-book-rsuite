@@ -1,3 +1,20 @@
+```{r include=FALSE, cache=FALSE}
+set.seed(1234)
+options(digits = 3)
+
+knitr::opts_chunk$set(
+    comment = "#>",
+    collapse = TRUE,
+    cache = FALSE,
+    out.width = "70%",
+    fig.align = 'center',
+    fig.width = 6,
+    fig.asp = 0.618,  # 1 / phi
+    fig.show = "hold"
+)
+
+# options(dplyr.print_min = 6, dplyr.print_max = 6)
+```
 # Working with data.table
 
 ## Load PyTorch libraries
@@ -12,13 +29,20 @@ transforms  <- import("torchvision.transforms")
 dsets       <- import("torchvision.datasets")
 builtins    <- import_builtins()
 np          <- import("numpy")
+```
 
+## Load dataset
+
+```{r}
 ## Dataset iteration batch settings
 # folders where the images are located
 train_data_path = '~/mnist_png_full/training/'
 test_data_path  = '~/mnist_png_full/testing/'
+```
 
-# read the datasets without normalization
+## Read the datasets without normalization
+
+```{r}
 train_dataset = torchvision$datasets$ImageFolder(root = train_data_path, 
     transform = torchvision$transforms$ToTensor()
 )
@@ -26,7 +50,8 @@ train_dataset = torchvision$datasets$ImageFolder(root = train_data_path,
 print(train_dataset)
 ```
 
-### Using `data.table
+
+## Using `data.table`
 
 ```{r}
 library(data.table)
@@ -64,11 +89,20 @@ dt <- data.table(ridx = idx+1,
   )
 )
 
+```
+
+Summary statistics:
+```{r}
 head(dt)
+```
+
+Elapsed time per size of sample:
+```{r}
 toc()
 
-#   60   1.266 sec elapsed
-#  600   11.798 sec elapsed; 12.9s
-# 6000  119.256 sec elapsed; 132.9s
-# 1117.619 sec elapsed
+#    60    1.266 sec elapsed
+#   600   11.798 sec elapsed;
+#  6000  119.256 sec elapsed;
+# 60000 1117.619 sec elapsed
 ```
+
