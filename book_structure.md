@@ -10,10 +10,6 @@
 
 5. Neural Networks
 
-6. Image Recognition
+6. PyTorch and R data structures
 
-7. Deployment
-
-8. PyTorch and R data structures
-
-9. PyTorch with Rmarkdown
+Appendix
