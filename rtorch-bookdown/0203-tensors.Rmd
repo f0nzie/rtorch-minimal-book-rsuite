@@ -559,9 +559,9 @@ print( torch$take(src, torch$tensor(list(0L, 2L, 5L))) )
 ```
 
 
-## Tensor operations
+## Other tensor operations
 
-### cross product
+### Cross product
 ```{r}
 m1 = torch$ones(3L, 5L)
 m2 = torch$ones(3L, 5L)
