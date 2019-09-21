@@ -316,7 +316,7 @@ import torch
 torch.manual_seed(0)  # reproducible
 
 # Input (temp, rainfall, humidity)
-#> <torch._C.Generator object at 0x7f57cd74ee10>
+#> <torch._C.Generator object at 0x7f5cf437de10>
 inputs = np.array([[73, 67, 43],
                    [91, 88, 64],
                    [87, 134, 58],

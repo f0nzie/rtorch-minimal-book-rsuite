@@ -284,14 +284,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>VI PyTorch and R data structures</b></span></li>
 <li class="chapter" data-level="11" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>11</b> Working with data.frame</a><ul>
 <li class="chapter" data-level="11.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>11.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#dataset-iteration-batch-settings"><i class="fa fa-check"></i><b>11.2</b> Dataset iteration batch settings</a></li>
-<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a></li>
-<li class="chapter" data-level="11.4" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.4</b> using <code>data.frame</code></a></li>
+<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>11.2</b> Load dataset</a></li>
+<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.3.1</b> using <code>data.frame</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>12</b> Working with data.table</a><ul>
-<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.1.1</b> Using `data.table</a></li>
-</ul></li>
+<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="12.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>12.2</b> Load dataset</a></li>
+<li class="chapter" data-level="12.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>12.3</b> Read the datasets without normalization</a></li>
+<li class="chapter" data-level="12.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.4</b> Using <code>data.table</code></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
@@ -590,7 +592,7 @@ Most of the things work directly in <code>PyTorch</code> but we need to be aware
 <a class="sourceLine" id="cb31-4" data-line-number="4">torch.manual_seed(<span class="dv">0</span>)  <span class="co"># reproducible</span></a>
 <a class="sourceLine" id="cb31-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb31-6" data-line-number="6"><span class="co"># Input (temp, rainfall, humidity)</span></a>
-<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="co">#&gt; &lt;torch._C.Generator object at 0x7f57cd74ee10&gt;</span></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="co">#&gt; &lt;torch._C.Generator object at 0x7f5cf437de10&gt;</span></a>
 <a class="sourceLine" id="cb31-8" data-line-number="8">inputs <span class="op">=</span> np.array([[<span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">43</span>],</a>
 <a class="sourceLine" id="cb31-9" data-line-number="9">                   [<span class="dv">91</span>, <span class="dv">88</span>, <span class="dv">64</span>],</a>
 <a class="sourceLine" id="cb31-10" data-line-number="10">                   [<span class="dv">87</span>, <span class="dv">134</span>, <span class="dv">58</span>],</a>
