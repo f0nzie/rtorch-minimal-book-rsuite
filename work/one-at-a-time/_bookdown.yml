@@ -1,0 +1,10 @@
+new_session: yes
+book_filename: "one_at_a_time"
+delete_merged_file: true
+repo: https://github.com/f0nzie/rtorch-book.git
+output_dir: "public"
+language:
+  ui:
+    chapter_name: "Chapter "
+    
+before_chapter_script: "_common.R"    

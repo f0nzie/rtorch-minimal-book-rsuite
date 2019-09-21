@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Statistical Background | rTorch + PyTorch</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Statistical Background | rTorch + PyTorch" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Statistical Background | rTorch + PyTorch" />
+  
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+<meta name="author" content="Alfonso R. Reyes" />
+
+
+<meta name="date" content="2019-09-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="autograd.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal rTorch Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i>Python Anaconda</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i>Automatic installation</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I PyTorch with Rmarkdown</b></span></li>
+<li class="chapter" data-level="1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html"><i class="fa fa-check"></i><b>1</b> Simple Regression with PyTorch</a><ul>
+<li class="chapter" data-level="1.1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#creating-the-network-model"><i class="fa fa-check"></i><b>1.1</b> Creating the network model</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#code-in-r"><i class="fa fa-check"></i><b>1.1.1</b> Code in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#datasets"><i class="fa fa-check"></i><b>1.2</b> Datasets</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#code-in-r-1"><i class="fa fa-check"></i><b>1.2.1</b> Code in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#optimizer-and-loss"><i class="fa fa-check"></i><b>1.3</b> Optimizer and Loss</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#equivalent-code-in-r"><i class="fa fa-check"></i><b>1.3.1</b> Equivalent code in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#training"><i class="fa fa-check"></i><b>1.4</b> Training</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#code-in-python"><i class="fa fa-check"></i><b>1.4.1</b> Code in Python</a></li>
+<li class="chapter" data-level="1.4.2" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#code-in-r-2"><i class="fa fa-check"></i><b>1.4.2</b> Code in R</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="simple-regression-with-pytorch.html"><a href="simple-regression-with-pytorch.html#result"><i class="fa fa-check"></i><b>1.5</b> Result</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="autograd.html"><a href="autograd.html"><i class="fa fa-check"></i><b>2</b> Autograd</a><ul>
+<li class="chapter" data-level="2.1" data-path="autograd.html"><a href="autograd.html#python-code"><i class="fa fa-check"></i><b>2.1</b> Python code</a></li>
+<li class="chapter" data-level="2.2" data-path="autograd.html"><a href="autograd.html#r-code"><i class="fa fa-check"></i><b>2.2</b> R code</a></li>
+<li class="chapter" data-level="2.3" data-path="autograd.html"><a href="autograd.html#observations"><i class="fa fa-check"></i><b>2.3</b> Observations</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendixA.html"><a href="appendixA.html#median"><i class="fa fa-check"></i><b>A.1.2</b> Median</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendixA.html"><a href="appendixA.html#standard-deviation"><i class="fa fa-check"></i><b>A.1.3</b> Standard deviation</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.4</b> Five-number summary</a></li>
+<li class="chapter" data-level="A.1.5" data-path="appendixA.html"><a href="appendixA.html#distribution"><i class="fa fa-check"></i><b>A.1.5</b> Distribution</a></li>
+<li class="chapter" data-level="A.1.6" data-path="appendixA.html"><a href="appendixA.html#outliers"><i class="fa fa-check"></i><b>A.1.6</b> Outliers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">rTorch + PyTorch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendixA" class="section level1">
+<h1><span class="header-section-number">A</span> Statistical Background</h1>
+<div id="basic-statistical-terms" class="section level2">
+<h2><span class="header-section-number">A.1</span> Basic statistical terms</h2>
+<div id="mean" class="section level3">
+<h3><span class="header-section-number">A.1.1</span> Mean</h3>
+<p>The mean is the most commonly reported measure of center. It is commonly called the “average” though this term can be a little ambiguous. The mean is the sum of all of the data elements divided by how many elements there are. If we have <span class="math inline">\(n\)</span> data points, the mean is given by: <span class="math display">\[Mean = \frac{x_1 + x_2 + \cdots + x_n}{n}\]</span></p>
+</div>
+<div id="median" class="section level3">
+<h3><span class="header-section-number">A.1.2</span> Median</h3>
+<p>The median is calculated by first sorting a variable’s data from smallest to largest. After sorting the data, the middle element in the list is the <strong>median</strong>. If the middle falls between two values, then the median is the mean of those two values.</p>
+</div>
+<div id="standard-deviation" class="section level3">
+<h3><span class="header-section-number">A.1.3</span> Standard deviation</h3>
+<p>We will next discuss the <strong>standard deviation</strong> of a sample dataset pertaining to one variable. The formula can be a little intimidating at first but it is important to remember that it is essentially a measure of how far to expect a given data value is from its mean:</p>
+<p><span class="math display">\[Standard \, deviation = \sqrt{\frac{(x_1 - Mean)^2 + (x_2 - Mean)^2 + \cdots + (x_n - Mean)^2}{n - 1}}\]</span></p>
+</div>
+<div id="five-number-summary" class="section level3">
+<h3><span class="header-section-number">A.1.4</span> Five-number summary</h3>
+<p>The <strong>five-number summary</strong> consists of five values: minimum, first quantile AKA 25<sup>th</sup> percentile, second quantile AKA median AKA 50<sup>th</sup> percentile, third quantile AKA 75<sup>th</sup>, and maximum. The quantiles are calculated as</p>
+<ul>
+<li>first quantile (<span class="math inline">\(Q_1\)</span>): the median of the first half of the sorted data</li>
+<li>third quantile (<span class="math inline">\(Q_3\)</span>): the median of the second half of the sorted data</li>
+</ul>
+<p>The <em>interquartile range</em> is defined as <span class="math inline">\(Q_3 - Q_1\)</span> and is a measure of how spread out the middle 50% of values is. The five-number summary is not influenced by the presence of outliers in the ways that the mean and standard deviation are. It is, thus, recommended for skewed datasets.</p>
+</div>
+<div id="distribution" class="section level3">
+<h3><span class="header-section-number">A.1.5</span> Distribution</h3>
+<p>The <strong>distribution</strong> of a variable/dataset corresponds to generalizing patterns in the dataset. It often shows how frequently elements in the dataset appear. It shows how the data varies and gives some information about where a typical element in the data might fall. Distributions are most easily seen through data visualization.</p>
+</div>
+<div id="outliers" class="section level3">
+<h3><span class="header-section-number">A.1.6</span> Outliers</h3>
+<p><strong>Outliers</strong> correspond to values in the dataset that fall far outside the range of “ordinary” values. In regards to a boxplot (by default), they correspond to values below <span class="math inline">\(Q_1 - (1.5 * IQR)\)</span> or above <span class="math inline">\(Q_3 + (1.5 * IQR)\)</span>.</p>
+<p>Note that these terms (aside from <strong>Distribution</strong>) only apply to quantitative variables.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="autograd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["rpytorch.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
