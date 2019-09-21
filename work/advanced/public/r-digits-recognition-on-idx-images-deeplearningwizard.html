@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 R: Digits recognition on IDX images - DeepLearningWizard | A Minimal rTorch Tutorial</title>
+  <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 R: Digits recognition on IDX images - DeepLearningWizard | A Minimal rTorch Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 R: Digits recognition on IDX images - DeepLearningWizard | A Minimal rTorch Tutorial" />
+  
+  <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
+  
+
+<meta name="author" content="Alfonso R. Reyes" />
+
+
+<meta name="date" content="2019-09-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="appendixA.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal rTorch Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#python-anaconda"><i class="fa fa-check"></i>Python Anaconda</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#automatic-installation"><i class="fa fa-check"></i>Automatic installation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html"><i class="fa fa-check"></i><b>1</b> R: Digits recognition on IDX images - DeepLearningWizard</a><ul>
+<li class="chapter" data-level="1.1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#load-datasets"><i class="fa fa-check"></i><b>1.1</b> Load datasets</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#load-training-dataset"><i class="fa fa-check"></i><b>1.1.1</b> Load training dataset</a></li>
+<li class="chapter" data-level="1.1.2" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#introspection"><i class="fa fa-check"></i><b>1.1.2</b> Introspection</a></li>
+<li class="chapter" data-level="1.1.3" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#class-and-length-of-train_dataset"><i class="fa fa-check"></i><b>1.1.3</b> Class and length of <code>train_dataset</code></a></li>
+<li class="chapter" data-level="1.1.4" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#introspection-training-dataset"><i class="fa fa-check"></i><b>1.1.4</b> Introspection training dataset</a></li>
+<li class="chapter" data-level="1.1.5" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#mnist-image-from-training-dataset"><i class="fa fa-check"></i><b>1.1.5</b> MNIST image from training dataset</a></li>
+<li class="chapter" data-level="1.1.6" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#plot-a-second-image"><i class="fa fa-check"></i><b>1.1.6</b> Plot a second image</a></li>
+<li class="chapter" data-level="1.1.7" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#loading-the-test-dataset"><i class="fa fa-check"></i><b>1.1.7</b> Loading the test dataset</a></li>
+<li class="chapter" data-level="1.1.8" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#plot-image-test-dataset"><i class="fa fa-check"></i><b>1.1.8</b> Plot image test dataset</a></li>
+<li class="chapter" data-level="1.1.9" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#plot-a-second-test-image"><i class="fa fa-check"></i><b>1.1.9</b> Plot a second test image</a></li>
+<li class="chapter" data-level="1.1.10" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#plot-the-last-test-image"><i class="fa fa-check"></i><b>1.1.10</b> Plot the last test image</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#defining-epochs"><i class="fa fa-check"></i><b>1.2</b> Defining epochs</a></li>
+<li class="chapter" data-level="1.3" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#create-iterable-objects-training-and-testing-dataset"><i class="fa fa-check"></i><b>1.3</b> Create iterable objects: training and testing dataset</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#check-iteraibility"><i class="fa fa-check"></i><b>1.3.1</b> Check iteraibility</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#building-the-model"><i class="fa fa-check"></i><b>1.4</b> Building the model</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#instantiate-model-class-based-on-input-and-out-dimensions"><i class="fa fa-check"></i><b>1.4.1</b> Instantiate model class based on input and out dimensions</a></li>
+<li class="chapter" data-level="1.4.2" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#instantiate-cross-entropy-loss-class"><i class="fa fa-check"></i><b>1.4.2</b> Instantiate Cross Entropy Loss class</a></li>
+<li class="chapter" data-level="1.4.3" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#instantiate-optimizer-class"><i class="fa fa-check"></i><b>1.4.3</b> Instantiate Optimizer class</a></li>
+<li class="chapter" data-level="1.4.4" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#parameters-introspection"><i class="fa fa-check"></i><b>1.4.4</b> Parameters introspection</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#train-the-model-and-test-per-epoch"><i class="fa fa-check"></i><b>1.5</b> Train the model and test per epoch</a></li>
+<li class="chapter" data-level="1.6" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#break-down-accuracy-calculation"><i class="fa fa-check"></i><b>1.6</b> Break down accuracy calculation</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#printing-output-size"><i class="fa fa-check"></i><b>1.6.1</b> Printing output size</a></li>
+<li class="chapter" data-level="1.6.2" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#printing-one-output"><i class="fa fa-check"></i><b>1.6.2</b> Printing one output</a></li>
+<li class="chapter" data-level="1.6.3" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#printing-prediction-output"><i class="fa fa-check"></i><b>1.6.3</b> Printing prediction output</a></li>
+<li class="chapter" data-level="1.6.4" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#print-prediction-value"><i class="fa fa-check"></i><b>1.6.4</b> Print prediction value</a></li>
+<li class="chapter" data-level="1.6.5" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#print-prediction-label-and-label-size"><i class="fa fa-check"></i><b>1.6.5</b> Print prediction, label and label size</a></li>
+<li class="chapter" data-level="1.6.6" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#print-second-prediction-and-ground-truth"><i class="fa fa-check"></i><b>1.6.6</b> Print second prediction and ground truth</a></li>
+<li class="chapter" data-level="1.6.7" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#print-accuracy"><i class="fa fa-check"></i><b>1.6.7</b> Print accuracy</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="r-digits-recognition-on-idx-images-deeplearningwizard.html"><a href="r-digits-recognition-on-idx-images-deeplearningwizard.html#saving-pytorch-model"><i class="fa fa-check"></i><b>1.7</b> Saving PyTorch model</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendixA.html"><a href="appendixA.html#median"><i class="fa fa-check"></i><b>A.1.2</b> Median</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendixA.html"><a href="appendixA.html#standard-deviation"><i class="fa fa-check"></i><b>A.1.3</b> Standard deviation</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.4</b> Five-number summary</a></li>
+<li class="chapter" data-level="A.1.5" data-path="appendixA.html"><a href="appendixA.html#distribution"><i class="fa fa-check"></i><b>A.1.5</b> Distribution</a></li>
+<li class="chapter" data-level="A.1.6" data-path="appendixA.html"><a href="appendixA.html#outliers"><i class="fa fa-check"></i><b>A.1.6</b> Outliers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal rTorch Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-digits-recognition-on-idx-images---deeplearningwizard" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> R: Digits recognition on IDX images - DeepLearningWizard</h1>
+<p>Source: <a href="https://www.deeplearningwizard.com/deep_learning/practical_pytorch/pytorch_logistic_regression/" class="uri">https://www.deeplearningwizard.com/deep_learning/practical_pytorch/pytorch_logistic_regression/</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">torch       &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torch&quot;</span>)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">torchvision &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision&quot;</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">nn          &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torch.nn&quot;</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">transforms  &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision.transforms&quot;</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">dsets       &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision.datasets&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">builtins    &lt;-<span class="st"> </span><span class="kw">import_builtins</span>()</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">np          &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;numpy&quot;</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">batch_size_train &lt;-<span class="st">  </span>64L</a></code></pre></div>
+<div id="load-datasets" class="section level2">
+<h2><span class="header-section-number">1.1</span> Load datasets</h2>
+<div id="load-training-dataset" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Load training dataset</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">train_dataset =<span class="st"> </span>dsets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span><span class="kw">file.path</span>(<span class="st">&quot;.&quot;</span>, <span class="st">&#39;data&#39;</span>), </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">                            <span class="dt">train=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                            <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>(),</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">                            <span class="dt">download=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">                            </a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">train_dataset</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Dataset MNIST</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;     Number of datapoints: 60000</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;     Root location: ./data</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;     Split: Train</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">builtins<span class="op">$</span><span class="kw">len</span>(train_dataset)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; [1] 60000</span></a></code></pre></div>
+</div>
+<div id="introspection" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Introspection</h3>
+</div>
+<div id="class-and-length-of-train_dataset" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Class and length of <code>train_dataset</code></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># R</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">class</span>(train_dataset)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [1] &quot;torchvision.datasets.mnist.MNIST&quot;         </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [2] &quot;torchvision.datasets.vision.VisionDataset&quot;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; [3] &quot;torch.utils.data.dataset.Dataset&quot;         </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [4] &quot;python.builtin.object&quot;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">length</span>(train_dataset)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Python</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">builtins<span class="op">$</span><span class="kw">type</span>(train_dataset)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; &lt;class &#39;torchvision.datasets.mnist.MNIST&#39;&gt;</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">builtins<span class="op">$</span><span class="kw">len</span>(train_dataset)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [1] 60000</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">py_len</span>(train_dataset)</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [1] 60000</span></a></code></pre></div>
+<blockquote>
+<p>Note that both similar commands produce different results</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">names</span>(train_dataset)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt;  [1] &quot;class_to_idx&quot;     &quot;classes&quot;          &quot;data&quot;            </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;  [4] &quot;download&quot;         &quot;extra_repr&quot;       &quot;extract_gzip&quot;    </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;  [7] &quot;processed_folder&quot; &quot;raw_folder&quot;       &quot;root&quot;            </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; [10] &quot;target_transform&quot; &quot;targets&quot;          &quot;test_data&quot;       </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; [13] &quot;test_file&quot;        &quot;test_labels&quot;      &quot;train&quot;           </span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; [16] &quot;train_data&quot;       &quot;train_labels&quot;     &quot;training_file&quot;   </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [19] &quot;transform&quot;        &quot;transforms&quot;       &quot;urls&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">reticulate<span class="op">::</span><span class="kw">py_list_attributes</span>(train_dataset)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;  [1] &quot;__add__&quot;                &quot;__class__&quot;             </span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;  [3] &quot;__delattr__&quot;            &quot;__dict__&quot;              </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  [5] &quot;__dir__&quot;                &quot;__doc__&quot;               </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;  [7] &quot;__eq__&quot;                 &quot;__format__&quot;            </span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;  [9] &quot;__ge__&quot;                 &quot;__getattribute__&quot;      </span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [11] &quot;__getitem__&quot;            &quot;__gt__&quot;                </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [13] &quot;__hash__&quot;               &quot;__init__&quot;              </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; [15] &quot;__init_subclass__&quot;      &quot;__le__&quot;                </span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; [17] &quot;__len__&quot;                &quot;__lt__&quot;                </span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; [19] &quot;__module__&quot;             &quot;__ne__&quot;                </span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; [21] &quot;__new__&quot;                &quot;__reduce__&quot;            </span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; [23] &quot;__reduce_ex__&quot;          &quot;__repr__&quot;              </span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; [25] &quot;__setattr__&quot;            &quot;__sizeof__&quot;            </span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; [27] &quot;__str__&quot;                &quot;__subclasshook__&quot;      </span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; [29] &quot;__weakref__&quot;            &quot;_check_exists&quot;         </span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; [31] &quot;_format_transform_repr&quot; &quot;_repr_indent&quot;          </span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; [33] &quot;class_to_idx&quot;           &quot;classes&quot;               </span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; [35] &quot;data&quot;                   &quot;download&quot;              </span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; [37] &quot;extra_repr&quot;             &quot;extract_gzip&quot;          </span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; [39] &quot;processed_folder&quot;       &quot;raw_folder&quot;            </span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; [41] &quot;root&quot;                   &quot;target_transform&quot;      </span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; [43] &quot;targets&quot;                &quot;test_data&quot;             </span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; [45] &quot;test_file&quot;              &quot;test_labels&quot;           </span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; [47] &quot;train&quot;                  &quot;train_data&quot;            </span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; [49] &quot;train_labels&quot;           &quot;training_file&quot;         </span></a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt; [51] &quot;transform&quot;              &quot;transforms&quot;            </span></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; [53] &quot;urls&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># this is identical to Python len() function</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">train_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__len__</span><span class="st">`</span>()</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] 60000</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># this is not what we are looking for which is torch.Size([1, 28, 28])</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># d0 &lt;- train_dataset$data[0][0]</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">d0 &lt;-<span class="st"> </span>train_dataset<span class="op">$</span>data[<span class="dv">1</span>][<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Warning in `[.torch.Tensor`(train_dataset$data, 1): Incorrect number of</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; dimensions supplied. The number of supplied arguments, (not counting any</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; NULL, tf$newaxis or np$newaxis) must match thenumber of dimensions in the</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; tensor, unless an all_dims() was supplied (this will produce an error in</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; the future)</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; Warning in `[.torch.Tensor`(train_dataset$data[1], 1): Incorrect number of</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; dimensions supplied. The number of supplied arguments, (not counting any</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; NULL, tf$newaxis or np$newaxis) must match thenumber of dimensions in the</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; tensor, unless an all_dims() was supplied (this will produce an error in</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; the future)</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="kw">class</span>(d0)</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; [1] &quot;torch.Tensor&quot;          &quot;torch._C._TensorBase&quot;  &quot;python.builtin.object&quot;</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">d0<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; torch.Size([28])</span></a></code></pre></div>
+<pre><code>d0 &lt;- train_dataset$data[0][0]
+Error: It looks like you might be using 0-based indexing to extract using `[`. The rTorch package now uses 1-based extraction by default. You can switch to the old behavior (0-based extraction) with: options(torch.extract.one_based = FALSE)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># this is identical to train_dataset.data.size() in Python</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">train_dataset<span class="op">$</span>data<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; torch.Size([60000, 28, 28])</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># this is not a dimension we are looking for either</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">train_dataset<span class="op">$</span>data[<span class="kw">c</span>(1L)][1L]<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Warning in `[.torch.Tensor`(train_dataset$data, c(1L)): Incorrect number</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; of dimensions supplied. The number of supplied arguments, (not counting any</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; NULL, tf$newaxis or np$newaxis) must match thenumber of dimensions in the</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; tensor, unless an all_dims() was supplied (this will produce an error in</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; the future)</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; Warning in `[.torch.Tensor`(train_dataset$data[c(1L)], 1L): Incorrect</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; number of dimensions supplied. The number of supplied arguments, (not</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; counting any NULL, tf$newaxis or np$newaxis) must match thenumber of</span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt; dimensions in the tensor, unless an all_dims() was supplied (this will</span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt; produce an error in the future)</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt; torch.Size([28])</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># py = import_builtins()</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">enum_train_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(train_dataset)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">class</span>(enum_train_dataset)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; [1] &quot;python.builtin.iterator&quot;  &quot;python.builtin.enumerate&quot;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; [3] &quot;python.builtin.object&quot;</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co"># enum_train_dataset$`__count__`</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">reticulate<span class="op">::</span><span class="kw">py_list_attributes</span>(enum_train_dataset)</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt;  [1] &quot;__class__&quot;         &quot;__delattr__&quot;       &quot;__dir__&quot;          </span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt;  [4] &quot;__doc__&quot;           &quot;__eq__&quot;            &quot;__format__&quot;       </span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt;  [7] &quot;__ge__&quot;            &quot;__getattribute__&quot;  &quot;__gt__&quot;           </span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt; [10] &quot;__hash__&quot;          &quot;__init__&quot;          &quot;__init_subclass__&quot;</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt; [13] &quot;__iter__&quot;          &quot;__le__&quot;            &quot;__lt__&quot;           </span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">#&gt; [16] &quot;__ne__&quot;            &quot;__new__&quot;           &quot;__next__&quot;         </span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt; [19] &quot;__reduce__&quot;        &quot;__reduce_ex__&quot;     &quot;__repr__&quot;         </span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt; [22] &quot;__setattr__&quot;       &quot;__sizeof__&quot;        &quot;__str__&quot;          </span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="co">#&gt; [25] &quot;__subclasshook__&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># this is not a number we were expecting</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">enum_train_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__sizeof__</span><span class="st">`</span>()</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; [1] 48</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">train_dataset<span class="op">$</span>data<span class="op">$</span><span class="kw">nelement</span>()  <span class="co"># total number of elements in the tensor</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [1] 47040000</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">train_dataset<span class="op">$</span>data<span class="op">$</span>shape       <span class="co"># shape</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; torch.Size([60000, 28, 28])</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">train_dataset<span class="op">$</span>data<span class="op">$</span><span class="kw">size</span>()      <span class="co"># size</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt; torch.Size([60000, 28, 28])</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># get index, label and image</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co"># the pointer will move forward everytime we run the chunk</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">obj   &lt;-<span class="st"> </span>reticulate<span class="op">::</span><span class="kw">iter_next</span>(enum_train_dataset)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">idx   &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]        <span class="co"># index number</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">image &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">label &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="kw">cat</span>(idx, label, <span class="kw">class</span>(label), <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; 0 5 integer  </span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="kw">print</span>(image<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a></code></pre></div>
+</div>
+<div id="introspection-training-dataset" class="section level3">
+<h3><span class="header-section-number">1.1.4</span> Introspection training dataset</h3>
+<div id="inspecting-a-single-image" class="section level4">
+<h4><span class="header-section-number">1.1.4.1</span> Inspecting a single image</h4>
+<p>So this is how a single image is represented in numbers. It’s actually a 28 pixel x 28 pixel image which is why you would end up with this 28x28 matrix of numbers.</p>
+</div>
+<div id="inspecting-training-dataset-first-element-of-tuple" class="section level4">
+<h4><span class="header-section-number">1.1.4.2</span> Inspecting training dataset first element of tuple</h4>
+<p>This means to access the image, you need to access the first element in the tuple.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># Input Matrix</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">image<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co"># A 28x28 sized image of a digit</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co"># torch.Size([1, 28, 28])</span></a></code></pre></div>
+</div>
+</div>
+<div id="mnist-image-from-training-dataset" class="section level3">
+<h3><span class="header-section-number">1.1.5</span> MNIST image from training dataset</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">class</span>(image<span class="op">$</span><span class="kw">numpy</span>())</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; [1] &quot;array&quot;</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">dim</span>(image<span class="op">$</span><span class="kw">numpy</span>())</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; [1]  1 28 28</span></a></code></pre></div>
+<div id="plot-one-image" class="section level4">
+<h4><span class="header-section-number">1.1.5.1</span> Plot one image</h4>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">rotate &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">t</span>(<span class="kw">apply</span>(x, <span class="dv">2</span>, rev))   <span class="co">#function to rotate the matrix</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co"># read label for digit</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">label</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; [1] 5</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co"># read tensor for image</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co"># img_tensor_2d &lt;- image[0]</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">img_tensor_2d &lt;-<span class="st"> </span>image[1L]</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt; Warning in `[.torch.Tensor`(image, 1L): Incorrect number of dimensions</span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt; supplied. The number of supplied arguments, (not counting any NULL,</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt; tf$newaxis or np$newaxis) must match thenumber of dimensions in the tensor,</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co">#&gt; unless an all_dims() was supplied (this will produce an error in the</span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co">#&gt; future)</span></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15">img_tensor_2d<span class="op">$</span>shape       <span class="co"># shape of the 2D tensor: torch.Size([28, 28])</span></a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="co">#&gt; torch.Size([28, 28])</span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="co"># convert tensor to numpy array</span></a>
+<a class="sourceLine" id="cb20-19" data-line-number="19">img_mat_2d &lt;-<span class="st"> </span>img_tensor_2d<span class="op">$</span><span class="kw">numpy</span>()</a>
+<a class="sourceLine" id="cb20-20" data-line-number="20"><span class="kw">dim</span>(img_mat_2d)</a>
+<a class="sourceLine" id="cb20-21" data-line-number="21"><span class="co">#&gt; [1] 28 28</span></a>
+<a class="sourceLine" id="cb20-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co"># show digit image</span></a>
+<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="kw">image</span>(<span class="kw">rotate</span>(img_mat_2d))</a>
+<a class="sourceLine" id="cb20-25" data-line-number="25"><span class="kw">title</span>(label)</a></code></pre></div>
+<p><img src="0611-mnist_idx_download_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="plot-a-second-image" class="section level3">
+<h3><span class="header-section-number">1.1.6</span> Plot a second image</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># iterate to the next tensor</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">obj &lt;-<span class="st"> </span>reticulate<span class="op">::</span><span class="kw">iter_next</span>(enum_train_dataset)   <span class="co"># iterator</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">idx &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">img &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">lbl &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">img_tensor_2d &lt;-<span class="st"> </span>img[<span class="dv">1</span>]            <span class="co"># get 2D tensor</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; Warning in `[.torch.Tensor`(img, 1): Incorrect number of dimensions</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt; supplied. The number of supplied arguments, (not counting any NULL,</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt; tf$newaxis or np$newaxis) must match thenumber of dimensions in the tensor,</span></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt; unless an all_dims() was supplied (this will produce an error in the</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt; future)</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">img_mat_2d &lt;-<span class="st"> </span>img_tensor_2d<span class="op">$</span><span class="kw">numpy</span>()  <span class="co"># convert to 2D array</span></a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co"># show digit image</span></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="kw">image</span>(<span class="kw">rotate</span>(img_mat_2d))            <span class="co"># rotate and plot</span></a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">title</span>(lbl)                         <span class="co"># label as plot title</span></a></code></pre></div>
+<p><img src="0611-mnist_idx_download_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="loading-the-test-dataset" class="section level3">
+<h3><span class="header-section-number">1.1.7</span> Loading the test dataset</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">test_dataset =<span class="st"> </span>dsets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root =</span> <span class="st">&#39;../../data&#39;</span>, </a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">                           <span class="dt">train=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">                           <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>())</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="kw">py_len</span>(test_dataset)</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">#&gt; [1] 10000</span></a></code></pre></div>
+<div id="introspection-of-the-test-dataset" class="section level4">
+<h4><span class="header-section-number">1.1.7.1</span> Introspection of the test dataset</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># we&#39;ll get all the attributes of the class</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">reticulate<span class="op">::</span><span class="kw">py_list_attributes</span>(test_dataset)</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="co">#&gt;  [1] &quot;__add__&quot;                &quot;__class__&quot;             </span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co">#&gt;  [3] &quot;__delattr__&quot;            &quot;__dict__&quot;              </span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co">#&gt;  [5] &quot;__dir__&quot;                &quot;__doc__&quot;               </span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="co">#&gt;  [7] &quot;__eq__&quot;                 &quot;__format__&quot;            </span></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">#&gt;  [9] &quot;__ge__&quot;                 &quot;__getattribute__&quot;      </span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">#&gt; [11] &quot;__getitem__&quot;            &quot;__gt__&quot;                </span></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="co">#&gt; [13] &quot;__hash__&quot;               &quot;__init__&quot;              </span></a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"><span class="co">#&gt; [15] &quot;__init_subclass__&quot;      &quot;__le__&quot;                </span></a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="co">#&gt; [17] &quot;__len__&quot;                &quot;__lt__&quot;                </span></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12"><span class="co">#&gt; [19] &quot;__module__&quot;             &quot;__ne__&quot;                </span></a>
+<a class="sourceLine" id="cb23-13" data-line-number="13"><span class="co">#&gt; [21] &quot;__new__&quot;                &quot;__reduce__&quot;            </span></a>
+<a class="sourceLine" id="cb23-14" data-line-number="14"><span class="co">#&gt; [23] &quot;__reduce_ex__&quot;          &quot;__repr__&quot;              </span></a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="co">#&gt; [25] &quot;__setattr__&quot;            &quot;__sizeof__&quot;            </span></a>
+<a class="sourceLine" id="cb23-16" data-line-number="16"><span class="co">#&gt; [27] &quot;__str__&quot;                &quot;__subclasshook__&quot;      </span></a>
+<a class="sourceLine" id="cb23-17" data-line-number="17"><span class="co">#&gt; [29] &quot;__weakref__&quot;            &quot;_check_exists&quot;         </span></a>
+<a class="sourceLine" id="cb23-18" data-line-number="18"><span class="co">#&gt; [31] &quot;_format_transform_repr&quot; &quot;_repr_indent&quot;          </span></a>
+<a class="sourceLine" id="cb23-19" data-line-number="19"><span class="co">#&gt; [33] &quot;class_to_idx&quot;           &quot;classes&quot;               </span></a>
+<a class="sourceLine" id="cb23-20" data-line-number="20"><span class="co">#&gt; [35] &quot;data&quot;                   &quot;download&quot;              </span></a>
+<a class="sourceLine" id="cb23-21" data-line-number="21"><span class="co">#&gt; [37] &quot;extra_repr&quot;             &quot;extract_gzip&quot;          </span></a>
+<a class="sourceLine" id="cb23-22" data-line-number="22"><span class="co">#&gt; [39] &quot;processed_folder&quot;       &quot;raw_folder&quot;            </span></a>
+<a class="sourceLine" id="cb23-23" data-line-number="23"><span class="co">#&gt; [41] &quot;root&quot;                   &quot;target_transform&quot;      </span></a>
+<a class="sourceLine" id="cb23-24" data-line-number="24"><span class="co">#&gt; [43] &quot;targets&quot;                &quot;test_data&quot;             </span></a>
+<a class="sourceLine" id="cb23-25" data-line-number="25"><span class="co">#&gt; [45] &quot;test_file&quot;              &quot;test_labels&quot;           </span></a>
+<a class="sourceLine" id="cb23-26" data-line-number="26"><span class="co">#&gt; [47] &quot;train&quot;                  &quot;train_data&quot;            </span></a>
+<a class="sourceLine" id="cb23-27" data-line-number="27"><span class="co">#&gt; [49] &quot;train_labels&quot;           &quot;training_file&quot;         </span></a>
+<a class="sourceLine" id="cb23-28" data-line-number="28"><span class="co">#&gt; [51] &quot;transform&quot;              &quot;transforms&quot;            </span></a>
+<a class="sourceLine" id="cb23-29" data-line-number="29"><span class="co">#&gt; [53] &quot;urls&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co"># get the Python type</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">builtins<span class="op">$</span><span class="kw">type</span>(test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(0L))   <span class="co"># in Python a tuple gets converted to a list</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">#&gt; &lt;class &#39;list&#39;&gt;</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co"># in Python: type(test_dataset[0]) -&gt; &lt;class &#39;tuple&#39;&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># the size of the first and last image tensor</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(0L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">size</span>()      <span class="co"># same as test_dataset[0][0].size()</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(9999L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">size</span>()  </a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a></code></pre></div>
+<p>This is the same as:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">py_to_r</span>(test_dataset)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="co">#&gt; Dataset MNIST</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="co">#&gt;     Number of datapoints: 10000</span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="co">#&gt;     Root location: ../../data</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="co">#&gt;     Split: Test</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># the size of the first and last image tensor</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co"># py_get_item(test_dataset, 0L)[[1]]$size()</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="kw">py_get_item</span>(test_dataset, 0L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="kw">py_get_item</span>(test_dataset, 9999L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"><span class="co">#&gt; torch.Size([1, 28, 28])</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="co"># same as test_dataset[0][0].size()</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># the label is the second list member</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">label &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(0L)[[<span class="dv">2</span>]]  <span class="co"># in Python: test_dataset[0][1]</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">label</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
+</div>
+</div>
+<div id="plot-image-test-dataset" class="section level3">
+<h3><span class="header-section-number">1.1.8</span> Plot image test dataset</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># convert tensor to numpy array</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">.show_img &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(0L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">numpy</span>() </a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="kw">dim</span>(.show_img)                                           <span class="co"># numpy 3D array</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="co">#&gt; [1]  1 28 28</span></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="co"># reshape 3D array to 2D </span></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">show_img &lt;-<span class="st"> </span>np<span class="op">$</span><span class="kw">reshape</span>(.show_img, <span class="kw">c</span>(28L, 28L))</a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="kw">dim</span>(show_img)</a>
+<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="co">#&gt; [1] 28 28</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co"># another way to reshape the array</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">show_img &lt;-<span class="st"> </span>np<span class="op">$</span><span class="kw">reshape</span>(test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(0L)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">numpy</span>(), <span class="kw">c</span>(28L, 28L))</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="kw">dim</span>(show_img)</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="co">#&gt; [1] 28 28</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># show in grays and rotate</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">image</span>(<span class="kw">rotate</span>(show_img), <span class="dt">col =</span> <span class="kw">gray.colors</span>(<span class="dv">64</span>))</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw">title</span>(label)</a></code></pre></div>
+<p><img src="0611-mnist_idx_download_files/figure-html/unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="plot-a-second-test-image" class="section level3">
+<h3><span class="header-section-number">1.1.9</span> Plot a second test image</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># next image, index moves from (0L) to (1L), and so on</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">idx &lt;-<span class="st"> </span>1L</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">.show_img &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(idx)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">numpy</span>()</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">show_img  &lt;-<span class="st"> </span>np<span class="op">$</span><span class="kw">reshape</span>(.show_img, <span class="kw">c</span>(28L, 28L))</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">label     &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(idx)[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="kw">image</span>(<span class="kw">rotate</span>(show_img), <span class="dt">col =</span> <span class="kw">gray.colors</span>(<span class="dv">64</span>))</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8"><span class="kw">title</span>(label)</a></code></pre></div>
+<p><img src="0611-mnist_idx_download_files/figure-html/unnamed-chunk-30-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="plot-the-last-test-image" class="section level3">
+<h3><span class="header-section-number">1.1.10</span> Plot the last test image</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># next image, index moves from (0L) to (1L), and so on</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co"># first image is 0, last image would be 9999</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">idx &lt;-<span class="st"> </span><span class="kw">py_len</span>(test_dataset) <span class="op">-</span><span class="st"> </span>1L</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">.show_img &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(idx)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">numpy</span>()</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">show_img  &lt;-<span class="st"> </span>np<span class="op">$</span><span class="kw">reshape</span>(.show_img, <span class="kw">c</span>(28L, 28L))</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">label     &lt;-<span class="st"> </span>test_dataset<span class="op">$</span><span class="st">`</span><span class="dt">__getitem__</span><span class="st">`</span>(idx)[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb33-8" data-line-number="8"><span class="kw">image</span>(<span class="kw">rotate</span>(show_img), <span class="dt">col =</span> <span class="kw">gray.colors</span>(<span class="dv">64</span>))</a>
+<a class="sourceLine" id="cb33-9" data-line-number="9"><span class="kw">title</span>(label)</a></code></pre></div>
+<p><img src="0611-mnist_idx_download_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="defining-epochs" class="section level2">
+<h2><span class="header-section-number">1.2</span> Defining epochs</h2>
+<p>When the model goes through the whole 60k images once, learning how to classify 0-9, it’s consider <strong>1 epoch</strong>.</p>
+<p>However, there’s a concept of batch size where it means the model would look at 100 images before updating the model’s weights, thereby learning. When the model updates its weights (parameters) after looking at all the images, this is considered 1 iteration.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">batch_size &lt;-<span class="st"> </span>100L</a></code></pre></div>
+<p>We arbitrarily set 3000 iterations here which means the model would update 3000 times.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">n_iters &lt;-<span class="st"> </span>3000L</a></code></pre></div>
+<p>One epoch consists of 60,000 / 100 = 600 iterations. Because we would like to go through 3000 iterations, this implies we would have 3000 / 600 = 5 epochs as each epoch has 600 iterations.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">num_epochs =<span class="st"> </span>n_iters <span class="op">/</span><span class="st"> </span>(<span class="kw">py_len</span>(train_dataset) <span class="op">/</span><span class="st"> </span>batch_size)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">num_epochs =<span class="st"> </span><span class="kw">as.integer</span>(num_epochs)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">num_epochs</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="co">#&gt; [1] 5</span></a></code></pre></div>
+</div>
+<div id="create-iterable-objects-training-and-testing-dataset" class="section level2">
+<h2><span class="header-section-number">1.3</span> Create iterable objects: training and testing dataset</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">train_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>train_dataset, </a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">                                           <span class="dt">batch_size=</span>batch_size, </a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">                                           <span class="dt">shuffle=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># Iterable object</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">test_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>test_dataset, </a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">                                          <span class="dt">batch_size=</span>batch_size, </a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">                                          <span class="dt">shuffle=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div id="check-iteraibility" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Check iteraibility</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">collections &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;collections&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">builtins<span class="op">$</span><span class="kw">isinstance</span>(train_loader, collections<span class="op">$</span>Iterable)</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">builtins<span class="op">$</span><span class="kw">isinstance</span>(test_loader, collections<span class="op">$</span>Iterable)</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+</div>
+</div>
+<div id="building-the-model" class="section level2">
+<h2><span class="header-section-number">1.4</span> Building the model</h2>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Same as linear regression! </span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">main &lt;-<span class="st"> </span><span class="kw">py_run_string</span>(</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="st">import torch.nn as nn</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="st">class LogisticRegressionModel(nn.Module):</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="st">    def __init__(self, input_dim, output_dim):</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="st">        super(LogisticRegressionModel, self).__init__()</span></a>
+<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="st">        self.linear = nn.Linear(input_dim, output_dim)</span></a>
+<a class="sourceLine" id="cb40-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb40-11" data-line-number="11"><span class="st">    def forward(self, x):</span></a>
+<a class="sourceLine" id="cb40-12" data-line-number="12"><span class="st">        out = self.linear(x)</span></a>
+<a class="sourceLine" id="cb40-13" data-line-number="13"><span class="st">        return out</span></a>
+<a class="sourceLine" id="cb40-14" data-line-number="14"><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb40-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb40-16" data-line-number="16"><span class="co"># build a Linear Rgression model</span></a>
+<a class="sourceLine" id="cb40-17" data-line-number="17">LogisticRegressionModel &lt;-<span class="st"> </span>main<span class="op">$</span>LogisticRegressionModel</a></code></pre></div>
+<div id="instantiate-model-class-based-on-input-and-out-dimensions" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Instantiate model class based on input and out dimensions</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># feeding the model with 28x28 images</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">input_dim =<span class="st"> </span>28L<span class="op">*</span>28L</a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co"># classify digits 0-9 a total of 10 classes,</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">output_dim =<span class="st"> </span>10L</a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">model =<span class="st"> </span><span class="kw">LogisticRegressionModel</span>(input_dim, output_dim)</a></code></pre></div>
+</div>
+<div id="instantiate-cross-entropy-loss-class" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Instantiate Cross Entropy Loss class</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># need Cross Entropy Loss to calculate loss before we backpropagation</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">criterion =<span class="st"> </span>nn<span class="op">$</span><span class="kw">CrossEntropyLoss</span>()  </a></code></pre></div>
+</div>
+<div id="instantiate-optimizer-class" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Instantiate Optimizer class</h3>
+<p>Similar to what we’ve covered above, this calculates the parameters’ gradients and update them subsequently.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="co"># calculate parameters&#39; gradients and update</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">learning_rate =<span class="st"> </span><span class="fl">0.001</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">optimizer =<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(model<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span>learning_rate)  </a></code></pre></div>
+</div>
+<div id="parameters-introspection" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Parameters introspection</h3>
+<p>You’ll realize we have 2 sets of parameters, 10x784 which is <span class="math inline">\(A\)</span> and 10x1 which is <span class="math inline">\(b\)</span> in the <span class="math inline">\(y = AX + b\)</span> equation, where <span class="math inline">\(X\)</span> is our input of size 784.</p>
+<p>We’ll go into details subsequently how these parameters interact with our input to produce our 10x1 output.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Type of parameter object</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="kw">print</span>(model<span class="op">$</span><span class="kw">parameters</span>())</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="co">#&gt; &lt;generator object Module.parameters at 0x7f45d43e7200&gt;</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">model_parameters &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">list</span>(model<span class="op">$</span><span class="kw">parameters</span>())</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="co"># Length of parameters</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7"><span class="kw">print</span>(builtins<span class="op">$</span><span class="kw">len</span>(model_parameters))</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8"><span class="co">#&gt; [1] 2</span></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb44-10" data-line-number="10"><span class="co"># FC 1 Parameters </span></a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">builtins<span class="op">$</span><span class="kw">list</span>(model_parameters)[[<span class="dv">1</span>]]<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb44-12" data-line-number="12"><span class="co">#&gt; torch.Size([10, 784])</span></a>
+<a class="sourceLine" id="cb44-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb44-14" data-line-number="14"><span class="co"># FC 1 Bias Parameters</span></a>
+<a class="sourceLine" id="cb44-15" data-line-number="15">builtins<span class="op">$</span><span class="kw">list</span>(model_parameters)[[<span class="dv">2</span>]]<span class="op">$</span><span class="kw">size</span>()</a>
+<a class="sourceLine" id="cb44-16" data-line-number="16"><span class="co">#&gt; torch.Size([10])</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">builtins<span class="op">$</span><span class="kw">len</span>(builtins<span class="op">$</span><span class="kw">list</span>(model<span class="op">$</span><span class="kw">parameters</span>()))</a>
+<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+</div>
+</div>
+<div id="train-the-model-and-test-per-epoch" class="section level2">
+<h2><span class="header-section-number">1.5</span> Train the model and test per epoch</h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">iter =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
+<a class="sourceLine" id="cb46-4" data-line-number="4">  iter_train_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(train_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">  <span class="cf">for</span> (obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_train_dataset)) {</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">      <span class="co"># get the tensors for images and labels</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">      images &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">      labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">      </a>
+<a class="sourceLine" id="cb46-10" data-line-number="10">      <span class="co"># Reshape images to (batch_size, input_size)</span></a>
+<a class="sourceLine" id="cb46-11" data-line-number="11">      images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">      </a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">      <span class="co"># Clear gradients w.r.t. parameters</span></a>
+<a class="sourceLine" id="cb46-14" data-line-number="14">      optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">      </a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">      <span class="co"># Forward pass to get output/logits</span></a>
+<a class="sourceLine" id="cb46-17" data-line-number="17">      outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb46-18" data-line-number="18">      </a>
+<a class="sourceLine" id="cb46-19" data-line-number="19">      <span class="co"># Calculate Loss: softmax --&gt; cross entropy loss</span></a>
+<a class="sourceLine" id="cb46-20" data-line-number="20">      loss =<span class="st"> </span><span class="kw">criterion</span>(outputs, labels)</a>
+<a class="sourceLine" id="cb46-21" data-line-number="21">      </a>
+<a class="sourceLine" id="cb46-22" data-line-number="22">      <span class="co"># Getting gradients w.r.t. parameters</span></a>
+<a class="sourceLine" id="cb46-23" data-line-number="23">      loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb46-24" data-line-number="24">      </a>
+<a class="sourceLine" id="cb46-25" data-line-number="25">      <span class="co"># Updating parameters</span></a>
+<a class="sourceLine" id="cb46-26" data-line-number="26">      optimizer<span class="op">$</span><span class="kw">step</span>()</a>
+<a class="sourceLine" id="cb46-27" data-line-number="27">      </a>
+<a class="sourceLine" id="cb46-28" data-line-number="28">      iter =<span class="st"> </span>iter <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb46-29" data-line-number="29">      </a>
+<a class="sourceLine" id="cb46-30" data-line-number="30">      <span class="cf">if</span> (iter <span class="op">%%</span><span class="st"> </span><span class="dv">500</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb46-31" data-line-number="31">          <span class="co"># Calculate Accuracy         </span></a>
+<a class="sourceLine" id="cb46-32" data-line-number="32">          correct =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb46-33" data-line-number="33">          total =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb46-34" data-line-number="34">          </a>
+<a class="sourceLine" id="cb46-35" data-line-number="35">          <span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb46-36" data-line-number="36">          iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb46-37" data-line-number="37">          <span class="cf">for</span> (obj2 <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb46-38" data-line-number="38">              <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb46-39" data-line-number="39">              images &lt;-<span class="st"> </span>obj2[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb46-40" data-line-number="40">              labels &lt;-<span class="st"> </span>obj2[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb46-41" data-line-number="41">              images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb46-42" data-line-number="42">          </a>
+<a class="sourceLine" id="cb46-43" data-line-number="43">              <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb46-44" data-line-number="44">              outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb46-45" data-line-number="45">          </a>
+<a class="sourceLine" id="cb46-46" data-line-number="46">              <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb46-47" data-line-number="47">              .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb46-48" data-line-number="48">              predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb46-49" data-line-number="49">          </a>
+<a class="sourceLine" id="cb46-50" data-line-number="50">              <span class="co"># Total number of labels</span></a>
+<a class="sourceLine" id="cb46-51" data-line-number="51">              total =<span class="st"> </span>total <span class="op">+</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">size</span>(0L)</a>
+<a class="sourceLine" id="cb46-52" data-line-number="52">          </a>
+<a class="sourceLine" id="cb46-53" data-line-number="53">              <span class="co"># Total correct predictions</span></a>
+<a class="sourceLine" id="cb46-54" data-line-number="54">              correct =<span class="st"> </span>correct <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>((predicted<span class="op">$</span><span class="kw">numpy</span>() <span class="op">==</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">numpy</span>()))</a>
+<a class="sourceLine" id="cb46-55" data-line-number="55">          }</a>
+<a class="sourceLine" id="cb46-56" data-line-number="56">          accuracy =<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total</a>
+<a class="sourceLine" id="cb46-57" data-line-number="57">          </a>
+<a class="sourceLine" id="cb46-58" data-line-number="58">          <span class="co"># Print Loss</span></a>
+<a class="sourceLine" id="cb46-59" data-line-number="59">          <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Iteration: %5d. Loss: %f. Accuracy: %8.2f </span><span class="ch">\n</span><span class="st">&#39;</span>, </a>
+<a class="sourceLine" id="cb46-60" data-line-number="60">                      iter, loss<span class="op">$</span><span class="kw">item</span>(), accuracy))</a>
+<a class="sourceLine" id="cb46-61" data-line-number="61">      }</a>
+<a class="sourceLine" id="cb46-62" data-line-number="62">  }</a>
+<a class="sourceLine" id="cb46-63" data-line-number="63">}  </a>
+<a class="sourceLine" id="cb46-64" data-line-number="64"><span class="co">#&gt; Iteration:   500. Loss: 1.844407. Accuracy:    67.53 </span></a>
+<a class="sourceLine" id="cb46-65" data-line-number="65"><span class="co">#&gt; Iteration:  1000. Loss: 1.510866. Accuracy:    75.77 </span></a>
+<a class="sourceLine" id="cb46-66" data-line-number="66"><span class="co">#&gt; Iteration:  1500. Loss: 1.348944. Accuracy:    78.83 </span></a>
+<a class="sourceLine" id="cb46-67" data-line-number="67"><span class="co">#&gt; Iteration:  2000. Loss: 1.271528. Accuracy:    81.01 </span></a>
+<a class="sourceLine" id="cb46-68" data-line-number="68"><span class="co">#&gt; Iteration:  2500. Loss: 1.116428. Accuracy:    82.18 </span></a>
+<a class="sourceLine" id="cb46-69" data-line-number="69"><span class="co">#&gt; Iteration:  3000. Loss: 1.015488. Accuracy:    82.83</span></a></code></pre></div>
+</div>
+<div id="break-down-accuracy-calculation" class="section level2">
+<h2><span class="header-section-number">1.6</span> Break down accuracy calculation</h2>
+<p>As we’ve trained our model, we can extract the accuracy calculation portion to understand what’s happening without re-training the model.</p>
+<p>This would print out the output of the model’s predictions on your notebook.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb47-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb47-11" data-line-number="11">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">    </a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">        <span class="kw">print</span>(<span class="st">&#39;OUTPUTS&#39;</span>)</a>
+<a class="sourceLine" id="cb47-16" data-line-number="16">        <span class="kw">print</span>(outputs)</a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb47-18" data-line-number="18">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb47-19" data-line-number="19">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb47-20" data-line-number="20">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb47-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb47-22" data-line-number="22"><span class="co">#&gt; [1] &quot;OUTPUTS&quot;</span></a>
+<a class="sourceLine" id="cb47-23" data-line-number="23"><span class="co">#&gt; tensor([[-2.6718e-01, -9.7215e-01, -3.7828e-01, -2.3553e-01,  2.5785e-02,</span></a>
+<a class="sourceLine" id="cb47-24" data-line-number="24"><span class="co">#&gt;          -3.8414e-01, -1.0437e+00,  2.9174e+00, -1.1332e-01,  1.0439e+00],</span></a>
+<a class="sourceLine" id="cb47-25" data-line-number="25"><span class="co">#&gt;         [ 2.6765e-01,  6.6981e-02,  1.6429e+00,  1.0573e+00, -1.4823e+00,</span></a>
+<a class="sourceLine" id="cb47-26" data-line-number="26"><span class="co">#&gt;           5.4529e-01,  1.3558e+00, -1.8501e+00,  3.9202e-01, -1.7576e+00],</span></a>
+<a class="sourceLine" id="cb47-27" data-line-number="27"><span class="co">#&gt;         [-1.0769e+00,  2.3056e+00,  1.6169e-01,  2.2141e-02, -7.0286e-01,</span></a>
+<a class="sourceLine" id="cb47-28" data-line-number="28"><span class="co">#&gt;          -3.8091e-01, -1.4849e-01, -2.5239e-01,  2.9780e-01, -2.7914e-01],</span></a>
+<a class="sourceLine" id="cb47-29" data-line-number="29"><span class="co">#&gt;         [ 2.6486e+00, -2.6032e+00, -1.1634e-01, -5.0450e-01, -1.1288e+00,</span></a>
+<a class="sourceLine" id="cb47-30" data-line-number="30"><span class="co">#&gt;           5.2274e-01,  8.8430e-01,  2.3863e-01, -4.6270e-01, -2.8516e-01],</span></a>
+<a class="sourceLine" id="cb47-31" data-line-number="31"><span class="co">#&gt;         [-4.7014e-02, -2.0740e+00,  4.1675e-01, -6.2992e-01,  1.8000e+00,</span></a>
+<a class="sourceLine" id="cb47-32" data-line-number="32"><span class="co">#&gt;          -5.1329e-01,  2.1697e-01,  4.4838e-01,  6.1082e-02,  8.2316e-01],</span></a>
+<a class="sourceLine" id="cb47-33" data-line-number="33"><span class="co">#&gt;         [-1.4803e+00,  2.8262e+00,  4.6622e-02,  1.6930e-01, -7.5336e-01,</span></a>
+<a class="sourceLine" id="cb47-34" data-line-number="34"><span class="co">#&gt;          -5.3446e-01, -7.1719e-01, -8.6172e-02,  4.5272e-01, -1.6629e-01],</span></a>
+<a class="sourceLine" id="cb47-35" data-line-number="35"><span class="co">#&gt;         [-1.1186e+00, -1.0216e+00, -6.9578e-01,  2.1209e-01,  1.5520e+00,</span></a>
+<a class="sourceLine" id="cb47-36" data-line-number="36"><span class="co">#&gt;           3.1497e-01, -8.9650e-01,  7.2697e-01,  3.0069e-01,  7.7426e-01],</span></a>
+<a class="sourceLine" id="cb47-37" data-line-number="37"><span class="co">#&gt;         [-1.4802e+00, -3.4184e-01, -5.8756e-01, -2.2709e-02,  7.4537e-01,</span></a>
+<a class="sourceLine" id="cb47-38" data-line-number="38"><span class="co">#&gt;           4.4165e-01,  4.0343e-01,  9.1702e-02, -1.0856e-01,  1.2940e+00],</span></a>
+<a class="sourceLine" id="cb47-39" data-line-number="39"><span class="co">#&gt;         [ 4.4101e-01, -6.3391e-01,  8.6755e-01, -1.3195e+00,  7.1170e-01,</span></a>
+<a class="sourceLine" id="cb47-40" data-line-number="40"><span class="co">#&gt;          -7.9358e-02,  6.1142e-01, -7.0910e-01,  8.4869e-02,  2.0316e-01],</span></a>
+<a class="sourceLine" id="cb47-41" data-line-number="41"><span class="co">#&gt;         [-5.5800e-01, -8.4707e-01, -1.0412e+00, -1.3990e+00,  1.1480e+00,</span></a>
+<a class="sourceLine" id="cb47-42" data-line-number="42"><span class="co">#&gt;          -3.0466e-01, -3.6837e-01,  1.7317e+00,  1.0337e-01,  1.8416e+00],</span></a>
+<a class="sourceLine" id="cb47-43" data-line-number="43"><span class="co">#&gt;         [ 3.0692e+00, -1.9278e+00,  7.8095e-01,  9.0444e-01, -7.7624e-01,</span></a>
+<a class="sourceLine" id="cb47-44" data-line-number="44"><span class="co">#&gt;           8.9542e-01, -6.0627e-01, -1.4186e+00,  7.1852e-01, -1.7337e+00],</span></a>
+<a class="sourceLine" id="cb47-45" data-line-number="45"><span class="co">#&gt;         [ 6.2351e-01, -5.4315e-01,  5.2817e-01, -3.0180e-01,  1.9662e-01,</span></a>
+<a class="sourceLine" id="cb47-46" data-line-number="46"><span class="co">#&gt;          -4.0121e-01,  4.7821e-01, -8.9836e-01,  1.9019e-01, -6.3042e-01],</span></a>
+<a class="sourceLine" id="cb47-47" data-line-number="47"><span class="co">#&gt;         [-8.6225e-01, -1.4641e+00, -9.1411e-01, -1.0122e+00,  1.4772e+00,</span></a>
+<a class="sourceLine" id="cb47-48" data-line-number="48"><span class="co">#&gt;          -1.7790e-01, -3.1944e-01,  1.0522e+00,  9.7945e-02,  2.0848e+00],</span></a>
+<a class="sourceLine" id="cb47-49" data-line-number="49"><span class="co">#&gt;         [ 2.8021e+00, -2.5090e+00, -2.0271e-01, -3.6392e-01, -5.1993e-01,</span></a>
+<a class="sourceLine" id="cb47-50" data-line-number="50"><span class="co">#&gt;           4.5944e-01, -2.3870e-01, -7.1607e-01,  3.2955e-01,  2.6863e-01],</span></a>
+<a class="sourceLine" id="cb47-51" data-line-number="51"><span class="co">#&gt;         [-1.5158e+00,  2.7263e+00, -3.3578e-02,  4.5137e-01, -1.2166e+00,</span></a>
+<a class="sourceLine" id="cb47-52" data-line-number="52"><span class="co">#&gt;          -1.2864e-01, -6.0388e-02, -2.6355e-01,  3.6538e-01, -2.7402e-01],</span></a>
+<a class="sourceLine" id="cb47-53" data-line-number="53"><span class="co">#&gt;         [ 3.9361e-01, -7.1803e-01,  2.2522e-01,  1.1674e+00, -5.5812e-01,</span></a>
+<a class="sourceLine" id="cb47-54" data-line-number="54"><span class="co">#&gt;           8.4882e-01, -4.2806e-01, -4.6202e-01,  6.2647e-01, -1.1107e+00],</span></a>
+<a class="sourceLine" id="cb47-55" data-line-number="55"><span class="co">#&gt;         [-3.8685e-01, -2.1534e+00, -2.6687e-02, -4.4067e-01,  1.2934e+00,</span></a>
+<a class="sourceLine" id="cb47-56" data-line-number="56"><span class="co">#&gt;          -6.1483e-01, -1.4081e-01,  7.5741e-01,  2.3433e-01,  1.6344e+00],</span></a>
+<a class="sourceLine" id="cb47-57" data-line-number="57"><span class="co">#&gt;         [ 2.2991e-01, -1.4145e+00, -6.8522e-01,  3.9699e-01, -4.4554e-01,</span></a>
+<a class="sourceLine" id="cb47-58" data-line-number="58"><span class="co">#&gt;          -2.9083e-01, -7.9810e-01,  2.8441e+00, -3.9568e-01,  5.5539e-01],</span></a>
+<a class="sourceLine" id="cb47-59" data-line-number="59"><span class="co">#&gt;         [-8.1589e-01,  4.2874e-03,  5.4029e-02,  9.3499e-01, -4.6281e-01,</span></a>
+<a class="sourceLine" id="cb47-60" data-line-number="60"><span class="co">#&gt;           4.2144e-01,  8.9302e-01, -5.2084e-01,  6.7484e-02, -4.5751e-01],</span></a>
+<a class="sourceLine" id="cb47-61" data-line-number="61"><span class="co">#&gt;         [-9.8250e-01, -1.5964e+00, -4.4237e-01, -2.2851e-01,  1.9782e+00,</span></a>
+<a class="sourceLine" id="cb47-62" data-line-number="62"><span class="co">#&gt;          -6.4183e-02, -3.0233e-02,  2.4058e-01,  1.1286e-01,  1.2895e+00],</span></a>
+<a class="sourceLine" id="cb47-63" data-line-number="63"><span class="co">#&gt;         [-9.5323e-01, -1.5057e-01, -1.3891e+00, -1.5632e-01,  5.6694e-01,</span></a>
+<a class="sourceLine" id="cb47-64" data-line-number="64"><span class="co">#&gt;           2.1661e-01, -1.4406e+00,  1.6431e+00,  3.3198e-01,  1.3767e+00],</span></a>
+<a class="sourceLine" id="cb47-65" data-line-number="65"><span class="co">#&gt;         [-5.4694e-01, -1.6877e+00, -1.0514e-01,  1.9592e-01,  5.5577e-01,</span></a>
+<a class="sourceLine" id="cb47-66" data-line-number="66"><span class="co">#&gt;           5.6281e-01,  2.2576e+00, -1.2466e+00,  2.0720e-01, -1.3185e-01],</span></a>
+<a class="sourceLine" id="cb47-67" data-line-number="67"><span class="co">#&gt;         [-4.6741e-01,  1.9829e-01,  4.0676e-01, -8.2605e-01,  8.6893e-01,</span></a>
+<a class="sourceLine" id="cb47-68" data-line-number="68"><span class="co">#&gt;          -1.3750e+00,  9.3788e-01,  1.4162e-03, -3.3417e-01, -1.9560e-02],</span></a>
+<a class="sourceLine" id="cb47-69" data-line-number="69"><span class="co">#&gt;         [ 7.3755e-02, -9.1854e-01, -5.8375e-01,  3.7490e-01, -1.7006e-01,</span></a>
+<a class="sourceLine" id="cb47-70" data-line-number="70"><span class="co">#&gt;           1.4637e+00,  4.4269e-01, -9.9670e-01,  7.1414e-01, -9.2081e-03],</span></a>
+<a class="sourceLine" id="cb47-71" data-line-number="71"><span class="co">#&gt;         [-7.3995e-01, -1.1248e+00,  1.3888e-02, -2.1514e-01,  1.3438e+00,</span></a>
+<a class="sourceLine" id="cb47-72" data-line-number="72"><span class="co">#&gt;          -1.8070e-01, -2.7269e-01,  3.8880e-01, -3.1441e-01,  9.1193e-01],</span></a>
+<a class="sourceLine" id="cb47-73" data-line-number="73"><span class="co">#&gt;         [ 4.4555e+00, -3.0544e+00,  6.2694e-01, -1.5091e+00, -1.2836e-01,</span></a>
+<a class="sourceLine" id="cb47-74" data-line-number="74"><span class="co">#&gt;           9.7676e-01,  8.8577e-01, -7.8870e-01, -9.9223e-02, -1.4179e+00],</span></a>
+<a class="sourceLine" id="cb47-75" data-line-number="75"><span class="co">#&gt;         [-8.2992e-02, -1.3153e+00, -4.2191e-01, -4.1405e-02,  2.0538e-01,</span></a>
+<a class="sourceLine" id="cb47-76" data-line-number="76"><span class="co">#&gt;          -1.1811e-01, -7.2204e-01,  1.7849e+00, -2.6186e-01,  1.0258e+00],</span></a>
+<a class="sourceLine" id="cb47-77" data-line-number="77"><span class="co">#&gt;         [-2.9693e-01, -2.2569e+00, -3.6873e-01, -6.1876e-01,  2.1669e+00,</span></a>
+<a class="sourceLine" id="cb47-78" data-line-number="78"><span class="co">#&gt;           1.7138e-01,  2.1854e-01, -1.6807e-01,  4.1248e-02,  1.4987e+00],</span></a>
+<a class="sourceLine" id="cb47-79" data-line-number="79"><span class="co">#&gt;         [ 2.6959e+00, -2.5159e+00,  3.3213e-02,  8.0680e-01, -1.2448e+00,</span></a>
+<a class="sourceLine" id="cb47-80" data-line-number="80"><span class="co">#&gt;           5.3824e-01, -2.7931e-01, -7.5103e-01,  5.1123e-01, -6.8900e-01],</span></a>
+<a class="sourceLine" id="cb47-81" data-line-number="81"><span class="co">#&gt;         [-1.1834e+00,  1.3338e+00, -2.7373e-01,  2.0626e-01, -4.9209e-01,</span></a>
+<a class="sourceLine" id="cb47-82" data-line-number="82"><span class="co">#&gt;           1.8564e-01,  2.0464e-01, -2.0471e-01,  2.7375e-01, -3.3994e-01],</span></a>
+<a class="sourceLine" id="cb47-83" data-line-number="83"><span class="co">#&gt;         [-8.4596e-01, -4.9207e-02, -9.5077e-01,  2.2865e+00, -1.2410e+00,</span></a>
+<a class="sourceLine" id="cb47-84" data-line-number="84"><span class="co">#&gt;           1.0138e+00, -1.9550e-01,  5.9801e-01,  2.4058e-01, -2.2453e-01],</span></a>
+<a class="sourceLine" id="cb47-85" data-line-number="85"><span class="co">#&gt;         [-1.2390e+00,  1.1011e+00, -2.8704e-01,  5.1365e-01, -5.6387e-01,</span></a>
+<a class="sourceLine" id="cb47-86" data-line-number="86"><span class="co">#&gt;           1.0177e-01, -8.4012e-02, -4.8704e-02,  1.8927e-01,  1.2479e-01],</span></a>
+<a class="sourceLine" id="cb47-87" data-line-number="87"><span class="co">#&gt;         [-8.9525e-01, -5.3509e-01, -5.0425e-01,  2.4342e+00, -2.4923e-01,</span></a>
+<a class="sourceLine" id="cb47-88" data-line-number="88"><span class="co">#&gt;           1.4325e+00, -2.6419e-01, -9.9149e-01,  5.0292e-01, -5.1470e-02],</span></a>
+<a class="sourceLine" id="cb47-89" data-line-number="89"><span class="co">#&gt;         [ 1.9330e+00, -1.8409e+00,  8.7123e-01, -1.9675e+00,  8.4040e-01,</span></a>
+<a class="sourceLine" id="cb47-90" data-line-number="90"><span class="co">#&gt;           1.5266e-01,  1.4075e+00, -8.4292e-01, -3.9462e-01, -3.2327e-01],</span></a>
+<a class="sourceLine" id="cb47-91" data-line-number="91"><span class="co">#&gt;         [-8.0783e-01, -2.8637e-01,  7.0505e-01, -4.4292e-01, -1.3952e-01,</span></a>
+<a class="sourceLine" id="cb47-92" data-line-number="92"><span class="co">#&gt;          -4.8807e-01, -1.2692e+00,  1.7051e+00,  6.6026e-01,  4.6030e-01],</span></a>
+<a class="sourceLine" id="cb47-93" data-line-number="93"><span class="co">#&gt;         [ 6.2139e-01, -1.3256e+00,  2.6486e+00,  1.1492e-01, -9.3550e-01,</span></a>
+<a class="sourceLine" id="cb47-94" data-line-number="94"><span class="co">#&gt;           2.4791e-01,  4.5380e-01, -7.0015e-01,  3.7306e-01, -1.7436e+00],</span></a>
+<a class="sourceLine" id="cb47-95" data-line-number="95"><span class="co">#&gt;         [-5.5987e-01, -1.6354e+00, -4.4958e-02, -1.2046e-01, -2.4659e-01,</span></a>
+<a class="sourceLine" id="cb47-96" data-line-number="96"><span class="co">#&gt;          -2.9349e-01, -5.4588e-01,  2.3016e+00, -2.9172e-01,  1.0525e+00],</span></a>
+<a class="sourceLine" id="cb47-97" data-line-number="97"><span class="co">#&gt;         [-1.4912e+00,  2.0822e+00, -4.3812e-01,  1.8910e-01, -7.6682e-01,</span></a>
+<a class="sourceLine" id="cb47-98" data-line-number="98"><span class="co">#&gt;           2.1661e-02, -5.6708e-02, -9.8352e-02,  2.8237e-01, -1.9239e-02],</span></a>
+<a class="sourceLine" id="cb47-99" data-line-number="99"><span class="co">#&gt;         [ 3.4046e-01,  4.4956e-01,  7.7549e-01,  1.2199e+00, -1.7434e+00,</span></a>
+<a class="sourceLine" id="cb47-100" data-line-number="100"><span class="co">#&gt;           5.0158e-01,  5.0036e-01, -1.2070e+00,  6.8620e-01, -1.3505e+00],</span></a>
+<a class="sourceLine" id="cb47-101" data-line-number="101"><span class="co">#&gt;         [-1.5799e+00,  3.0452e+00, -2.5215e-01,  3.0556e-01, -1.2524e+00,</span></a>
+<a class="sourceLine" id="cb47-102" data-line-number="102"><span class="co">#&gt;          -8.0153e-02, -1.9698e-01, -6.0436e-01,  7.1355e-01, -2.4921e-01],</span></a>
+<a class="sourceLine" id="cb47-103" data-line-number="103"><span class="co">#&gt;         [-7.2136e-01,  1.7005e+00,  1.1643e-02,  6.7300e-04, -5.4400e-01,</span></a>
+<a class="sourceLine" id="cb47-104" data-line-number="104"><span class="co">#&gt;          -1.8966e-01, -1.0067e-01, -2.9851e-02,  1.4318e-01, -2.0904e-01],</span></a>
+<a class="sourceLine" id="cb47-105" data-line-number="105"><span class="co">#&gt;         [-8.1176e-01, -9.4104e-01, -2.3557e-02, -4.7543e-01, -2.2663e-02,</span></a>
+<a class="sourceLine" id="cb47-106" data-line-number="106"><span class="co">#&gt;          -2.0953e-01, -7.4563e-01,  2.1555e+00, -1.9285e-01,  1.2371e+00],</span></a>
+<a class="sourceLine" id="cb47-107" data-line-number="107"><span class="co">#&gt;         [-2.1459e+00, -4.5855e-01, -3.4177e-01, -2.1906e-01,  2.1347e+00,</span></a>
+<a class="sourceLine" id="cb47-108" data-line-number="108"><span class="co">#&gt;          -7.2641e-01, -8.7384e-01,  6.3131e-01,  4.5052e-01,  1.5519e+00],</span></a>
+<a class="sourceLine" id="cb47-109" data-line-number="109"><span class="co">#&gt;         [-5.1358e-01,  1.1155e+00,  1.1660e+00, -1.0210e-01, -2.2397e-01,</span></a>
+<a class="sourceLine" id="cb47-110" data-line-number="110"><span class="co">#&gt;          -3.9628e-01,  1.5203e-01, -1.3097e+00,  2.8066e-01, -5.6791e-01],</span></a>
+<a class="sourceLine" id="cb47-111" data-line-number="111"><span class="co">#&gt;         [-1.2738e+00,  7.9086e-02, -3.9891e-03,  1.5397e+00, -7.3674e-01,</span></a>
+<a class="sourceLine" id="cb47-112" data-line-number="112"><span class="co">#&gt;           6.1104e-01,  7.1447e-01, -1.7785e-01,  6.1296e-02, -4.8645e-01],</span></a>
+<a class="sourceLine" id="cb47-113" data-line-number="113"><span class="co">#&gt;         [ 2.3095e-01, -1.2833e+00, -4.9579e-01,  1.7207e+00, -5.9519e-01,</span></a>
+<a class="sourceLine" id="cb47-114" data-line-number="114"><span class="co">#&gt;           1.4541e+00,  1.4792e-02, -1.3109e+00,  1.0130e+00, -4.9451e-01],</span></a>
+<a class="sourceLine" id="cb47-115" data-line-number="115"><span class="co">#&gt;         [-1.7182e+00,  1.6925e-01,  1.6321e-01,  9.7974e-01, -3.1536e-01,</span></a>
+<a class="sourceLine" id="cb47-116" data-line-number="116"><span class="co">#&gt;           4.6391e-01,  2.4851e-01, -7.6083e-02,  1.5517e-01,  1.6200e-01],</span></a>
+<a class="sourceLine" id="cb47-117" data-line-number="117"><span class="co">#&gt;         [-7.6019e-01, -3.1820e-01,  1.5608e+00, -5.1722e-01,  5.1693e-01,</span></a>
+<a class="sourceLine" id="cb47-118" data-line-number="118"><span class="co">#&gt;          -6.2535e-01,  4.2422e-01, -2.5308e-01, -2.0067e-01, -9.6350e-02],</span></a>
+<a class="sourceLine" id="cb47-119" data-line-number="119"><span class="co">#&gt;         [-1.0175e+00, -2.8630e+00, -1.4266e+00, -8.4325e-02,  2.7806e+00,</span></a>
+<a class="sourceLine" id="cb47-120" data-line-number="120"><span class="co">#&gt;           4.3125e-01, -7.8807e-01,  1.8410e-01,  5.7006e-01,  2.0675e+00],</span></a>
+<a class="sourceLine" id="cb47-121" data-line-number="121"><span class="co">#&gt;         [-1.0477e-01, -1.9615e+00,  5.2095e-01, -6.5989e-01,  2.2995e+00,</span></a>
+<a class="sourceLine" id="cb47-122" data-line-number="122"><span class="co">#&gt;          -8.9685e-01,  1.4286e-01,  5.3579e-01, -3.9015e-01,  1.0578e+00],</span></a>
+<a class="sourceLine" id="cb47-123" data-line-number="123"><span class="co">#&gt;         [-2.4374e-02, -1.0570e+00, -6.4797e-03,  2.7141e-01, -1.2294e-01,</span></a>
+<a class="sourceLine" id="cb47-124" data-line-number="124"><span class="co">#&gt;           4.9626e-01,  2.1431e+00, -1.0676e+00, -1.0022e-01, -4.7496e-01],</span></a>
+<a class="sourceLine" id="cb47-125" data-line-number="125"><span class="co">#&gt;         [ 9.7504e-03, -7.5908e-01, -2.2825e-01,  1.6021e+00, -7.4914e-01,</span></a>
+<a class="sourceLine" id="cb47-126" data-line-number="126"><span class="co">#&gt;           7.6179e-01,  1.1231e-01, -4.3592e-01, -2.4714e-01,  1.0693e-01],</span></a>
+<a class="sourceLine" id="cb47-127" data-line-number="127"><span class="co">#&gt;         [ 5.3156e-01, -1.0530e+00, -1.2359e+00, -3.4150e-02,  9.2791e-01,</span></a>
+<a class="sourceLine" id="cb47-128" data-line-number="128"><span class="co">#&gt;           1.3530e+00,  1.2041e-01, -5.4303e-02,  1.8487e-02,  5.7372e-01],</span></a>
+<a class="sourceLine" id="cb47-129" data-line-number="129"><span class="co">#&gt;         [ 4.5601e-01, -7.3814e-01, -1.9273e-01,  9.8748e-01,  8.7752e-02,</span></a>
+<a class="sourceLine" id="cb47-130" data-line-number="130"><span class="co">#&gt;           6.7049e-01, -3.0913e-01, -5.7902e-01,  3.4912e-01, -4.5773e-01],</span></a>
+<a class="sourceLine" id="cb47-131" data-line-number="131"><span class="co">#&gt;         [ 2.7926e-02, -3.4910e-01,  1.3681e+00, -2.4243e-01,  5.4852e-01,</span></a>
+<a class="sourceLine" id="cb47-132" data-line-number="132"><span class="co">#&gt;          -8.1533e-01,  7.7266e-01, -5.2577e-01, -8.5733e-02, -4.5020e-01],</span></a>
+<a class="sourceLine" id="cb47-133" data-line-number="133"><span class="co">#&gt;         [ 1.4482e+00, -2.4004e+00, -7.1650e-01,  3.4470e-01, -7.3567e-01,</span></a>
+<a class="sourceLine" id="cb47-134" data-line-number="134"><span class="co">#&gt;           8.9620e-01,  3.7560e-01, -1.0735e+00,  1.0301e+00, -2.1497e-01],</span></a>
+<a class="sourceLine" id="cb47-135" data-line-number="135"><span class="co">#&gt;         [-3.3503e-02, -2.6301e+00, -5.0581e-02, -5.0259e-01,  2.6908e+00,</span></a>
+<a class="sourceLine" id="cb47-136" data-line-number="136"><span class="co">#&gt;          -5.5087e-02,  3.4058e-01, -3.2791e-01, -9.1485e-03,  9.9090e-01],</span></a>
+<a class="sourceLine" id="cb47-137" data-line-number="137"><span class="co">#&gt;         [-1.0585e+00,  2.4225e+00,  1.2316e-02,  2.4354e-01, -8.9974e-01,</span></a>
+<a class="sourceLine" id="cb47-138" data-line-number="138"><span class="co">#&gt;          -3.5464e-01, -4.9311e-01, -1.7082e-01,  4.4521e-01, -7.7319e-02],</span></a>
+<a class="sourceLine" id="cb47-139" data-line-number="139"><span class="co">#&gt;         [-2.0924e-01, -2.0230e+00, -1.0030e+00, -8.8953e-01,  1.7047e+00,</span></a>
+<a class="sourceLine" id="cb47-140" data-line-number="140"><span class="co">#&gt;          -4.4611e-01, -9.7379e-02,  1.0313e+00, -2.5284e-01,  2.1995e+00],</span></a>
+<a class="sourceLine" id="cb47-141" data-line-number="141"><span class="co">#&gt;         [ 2.0810e-01,  1.9742e-01, -5.4688e-01, -4.7057e-01,  1.8124e-01,</span></a>
+<a class="sourceLine" id="cb47-142" data-line-number="142"><span class="co">#&gt;           3.4516e-01, -1.9997e-01,  2.5228e-01,  3.0608e-01, -3.2253e-01],</span></a>
+<a class="sourceLine" id="cb47-143" data-line-number="143"><span class="co">#&gt;         [-1.9990e-02, -1.7402e+00, -7.5355e-01,  5.4795e-01, -2.6603e-01,</span></a>
+<a class="sourceLine" id="cb47-144" data-line-number="144"><span class="co">#&gt;           5.5008e-02, -1.8184e-01,  1.9803e+00, -5.2822e-01,  7.6121e-01],</span></a>
+<a class="sourceLine" id="cb47-145" data-line-number="145"><span class="co">#&gt;         [ 1.5174e-01, -1.1414e+00,  1.0376e+00, -1.7337e+00, -8.8466e-02,</span></a>
+<a class="sourceLine" id="cb47-146" data-line-number="146"><span class="co">#&gt;          -1.2514e-01,  7.2047e-01, -8.9726e-01,  1.3801e+00,  1.0920e-01],</span></a>
+<a class="sourceLine" id="cb47-147" data-line-number="147"><span class="co">#&gt;         [-9.5564e-01, -9.9874e-01, -5.0692e-02, -3.2911e-01,  7.0935e-01,</span></a>
+<a class="sourceLine" id="cb47-148" data-line-number="148"><span class="co">#&gt;           2.1814e-01,  7.0445e-02,  1.4332e-02,  5.7027e-01,  9.6758e-01],</span></a>
+<a class="sourceLine" id="cb47-149" data-line-number="149"><span class="co">#&gt;         [-1.1617e+00, -2.8163e-01,  1.1577e+00,  7.7073e-01, -1.8661e-01,</span></a>
+<a class="sourceLine" id="cb47-150" data-line-number="150"><span class="co">#&gt;          -1.8638e-01, -5.3847e-01, -8.1723e-01,  5.2872e-01,  2.3524e-01],</span></a>
+<a class="sourceLine" id="cb47-151" data-line-number="151"><span class="co">#&gt;         [-9.1367e-01, -7.4130e-01,  2.5573e-01, -8.6315e-01,  7.6886e-01,</span></a>
+<a class="sourceLine" id="cb47-152" data-line-number="152"><span class="co">#&gt;          -4.1547e-01, -2.7766e-01,  1.4756e+00,  1.4099e-01,  7.9915e-01],</span></a>
+<a class="sourceLine" id="cb47-153" data-line-number="153"><span class="co">#&gt;         [-1.3410e+00, -7.0106e-01, -5.4121e-01,  4.5470e-01,  5.3891e-01,</span></a>
+<a class="sourceLine" id="cb47-154" data-line-number="154"><span class="co">#&gt;           5.3464e-01,  9.0587e-02, -4.4002e-01,  4.3564e-01,  7.7634e-01],</span></a>
+<a class="sourceLine" id="cb47-155" data-line-number="155"><span class="co">#&gt;         [ 1.3432e-01, -4.6906e-01,  6.8584e-01, -3.2765e-01,  1.4410e-01,</span></a>
+<a class="sourceLine" id="cb47-156" data-line-number="156"><span class="co">#&gt;          -8.1604e-01,  5.2089e-01, -3.1604e-02, -3.2235e-01, -6.0088e-01],</span></a>
+<a class="sourceLine" id="cb47-157" data-line-number="157"><span class="co">#&gt;         [-3.5515e-01, -1.4802e+00,  4.2625e-01, -9.4869e-01,  2.1323e+00,</span></a>
+<a class="sourceLine" id="cb47-158" data-line-number="158"><span class="co">#&gt;          -7.4816e-01, -3.1416e-01,  4.7748e-01,  2.6088e-01,  7.0810e-01],</span></a>
+<a class="sourceLine" id="cb47-159" data-line-number="159"><span class="co">#&gt;         [-1.3884e+00, -4.4294e-01, -5.6397e-01,  2.8608e+00, -6.0199e-01,</span></a>
+<a class="sourceLine" id="cb47-160" data-line-number="160"><span class="co">#&gt;           1.0536e+00, -8.6313e-01, -9.3201e-01,  8.6476e-01, -1.3589e-01],</span></a>
+<a class="sourceLine" id="cb47-161" data-line-number="161"><span class="co">#&gt;         [ 2.7941e+00, -1.5559e+00,  4.6820e-01, -4.6512e-01, -1.4276e+00,</span></a>
+<a class="sourceLine" id="cb47-162" data-line-number="162"><span class="co">#&gt;           5.6523e-01,  3.7274e-01, -6.2821e-02, -1.6117e-01, -5.3084e-01],</span></a>
+<a class="sourceLine" id="cb47-163" data-line-number="163"><span class="co">#&gt;         [ 4.1818e-01, -1.3393e+00, -7.7186e-01, -6.5900e-02, -4.2088e-01,</span></a>
+<a class="sourceLine" id="cb47-164" data-line-number="164"><span class="co">#&gt;          -3.6343e-01, -7.5660e-01,  2.7902e+00, -2.9780e-01,  7.4090e-01],</span></a>
+<a class="sourceLine" id="cb47-165" data-line-number="165"><span class="co">#&gt;         [ 4.4139e+00, -2.8424e+00,  1.0624e+00,  2.2802e-01, -9.3829e-01,</span></a>
+<a class="sourceLine" id="cb47-166" data-line-number="166"><span class="co">#&gt;           9.6753e-01,  1.1386e-01, -1.4224e+00,  4.4668e-01, -1.5901e+00],</span></a>
+<a class="sourceLine" id="cb47-167" data-line-number="167"><span class="co">#&gt;         [ 1.4348e+00, -1.3400e+00,  1.7016e+00,  1.1059e+00, -1.0338e+00,</span></a>
+<a class="sourceLine" id="cb47-168" data-line-number="168"><span class="co">#&gt;           3.6507e-02,  2.7055e-01, -9.9161e-01,  2.0535e-01, -2.0155e+00],</span></a>
+<a class="sourceLine" id="cb47-169" data-line-number="169"><span class="co">#&gt;         [-1.2382e+00,  7.8862e-01,  1.7690e-01, -5.4400e-02, -8.1071e-01,</span></a>
+<a class="sourceLine" id="cb47-170" data-line-number="170"><span class="co">#&gt;          -2.0991e-01, -6.8309e-01,  7.2300e-01,  1.1880e+00,  4.1834e-01],</span></a>
+<a class="sourceLine" id="cb47-171" data-line-number="171"><span class="co">#&gt;         [-1.4316e+00,  2.3316e+00, -3.6985e-01,  9.3468e-02, -9.4679e-01,</span></a>
+<a class="sourceLine" id="cb47-172" data-line-number="172"><span class="co">#&gt;           1.0292e-01,  5.8832e-02, -8.0394e-02,  5.4090e-01, -1.0010e-01],</span></a>
+<a class="sourceLine" id="cb47-173" data-line-number="173"><span class="co">#&gt;         [-1.8803e+00,  7.6669e-01, -5.1807e-01, -6.9751e-01,  6.6270e-01,</span></a>
+<a class="sourceLine" id="cb47-174" data-line-number="174"><span class="co">#&gt;          -4.9804e-01, -6.7105e-01,  1.7735e+00,  4.0947e-02,  8.9120e-01],</span></a>
+<a class="sourceLine" id="cb47-175" data-line-number="175"><span class="co">#&gt;         [-4.2642e-01,  2.4496e-01, -2.4551e-01,  2.1025e+00, -8.7425e-01,</span></a>
+<a class="sourceLine" id="cb47-176" data-line-number="176"><span class="co">#&gt;           1.0748e+00, -5.3831e-01, -1.0216e+00,  5.8069e-01, -8.9904e-01],</span></a>
+<a class="sourceLine" id="cb47-177" data-line-number="177"><span class="co">#&gt;         [-7.2833e-01, -4.0822e-01,  5.6364e-01, -7.5577e-01, -1.6463e-01,</span></a>
+<a class="sourceLine" id="cb47-178" data-line-number="178"><span class="co">#&gt;          -4.1973e-01, -1.8376e-02,  1.6578e+00, -3.6248e-01,  5.0971e-01],</span></a>
+<a class="sourceLine" id="cb47-179" data-line-number="179"><span class="co">#&gt;         [-1.7120e+00,  9.2060e-01, -8.5958e-01, -3.9667e-02, -1.8938e-04,</span></a>
+<a class="sourceLine" id="cb47-180" data-line-number="180"><span class="co">#&gt;           8.6195e-02, -5.9496e-01,  2.7399e-01,  8.0831e-01,  6.2575e-01],</span></a>
+<a class="sourceLine" id="cb47-181" data-line-number="181"><span class="co">#&gt;         [-3.9586e-01, -5.8151e-01, -6.1441e-01, -1.2394e+00, -2.0478e-01,</span></a>
+<a class="sourceLine" id="cb47-182" data-line-number="182"><span class="co">#&gt;          -3.3648e-01, -1.2162e+00,  3.4351e+00,  5.9277e-01,  6.9466e-01],</span></a>
+<a class="sourceLine" id="cb47-183" data-line-number="183"><span class="co">#&gt;         [-5.1061e-01, -1.8433e+00, -1.0254e+00, -1.7644e-01,  8.5297e-01,</span></a>
+<a class="sourceLine" id="cb47-184" data-line-number="184"><span class="co">#&gt;           4.6663e-01, -1.6405e-01,  1.6049e+00, -3.6654e-01,  1.8988e+00],</span></a>
+<a class="sourceLine" id="cb47-185" data-line-number="185"><span class="co">#&gt;         [-8.4503e-02, -1.8858e+00,  4.9776e-01, -5.8133e-01,  1.6762e-01,</span></a>
+<a class="sourceLine" id="cb47-186" data-line-number="186"><span class="co">#&gt;           2.8617e-01,  2.3925e+00, -5.2030e-01, -4.3643e-01,  1.6950e-01],</span></a>
+<a class="sourceLine" id="cb47-187" data-line-number="187"><span class="co">#&gt;         [-4.4103e-01, -1.2531e+00,  3.9313e+00, -2.7768e-01, -1.4696e-01,</span></a>
+<a class="sourceLine" id="cb47-188" data-line-number="188"><span class="co">#&gt;          -1.0511e+00,  7.7232e-01, -1.0716e+00,  3.1575e-01, -1.3959e+00],</span></a>
+<a class="sourceLine" id="cb47-189" data-line-number="189"><span class="co">#&gt;         [-4.3833e-01, -1.8214e+00, -4.6576e-01, -1.9802e-02,  7.7250e-01,</span></a>
+<a class="sourceLine" id="cb47-190" data-line-number="190"><span class="co">#&gt;          -3.1659e-02, -8.0567e-01,  2.2439e+00, -1.2223e-01,  1.6321e+00],</span></a>
+<a class="sourceLine" id="cb47-191" data-line-number="191"><span class="co">#&gt;         [-7.8063e-01,  1.0165e-01, -4.3647e-01, -9.6487e-02,  5.6177e-01,</span></a>
+<a class="sourceLine" id="cb47-192" data-line-number="192"><span class="co">#&gt;           6.9336e-01, -6.3118e-01, -8.4092e-01,  1.0280e+00,  7.9083e-01],</span></a>
+<a class="sourceLine" id="cb47-193" data-line-number="193"><span class="co">#&gt;         [-9.1168e-01, -2.3438e+00, -8.8967e-01,  1.5124e-01,  3.0110e+00,</span></a>
+<a class="sourceLine" id="cb47-194" data-line-number="194"><span class="co">#&gt;           1.2063e-01, -2.4058e-01, -3.3765e-01,  3.7575e-01,  1.3750e+00],</span></a>
+<a class="sourceLine" id="cb47-195" data-line-number="195"><span class="co">#&gt;         [-1.7494e+00,  4.5218e-01, -3.0188e-01, -8.0948e-01, -1.7075e-01,</span></a>
+<a class="sourceLine" id="cb47-196" data-line-number="196"><span class="co">#&gt;          -7.7920e-01, -1.0934e+00,  3.0827e+00,  3.0693e-01,  1.1132e+00],</span></a>
+<a class="sourceLine" id="cb47-197" data-line-number="197"><span class="co">#&gt;         [-3.5912e-02, -1.3433e+00, -1.2369e+00,  1.9211e+00, -4.3099e-01,</span></a>
+<a class="sourceLine" id="cb47-198" data-line-number="198"><span class="co">#&gt;           1.3419e+00,  7.0608e-01, -3.5187e-01, -1.7133e-01, -1.7189e-01],</span></a>
+<a class="sourceLine" id="cb47-199" data-line-number="199"><span class="co">#&gt;         [-8.3716e-02, -1.9420e+00,  7.1671e-01, -1.3966e+00,  1.3341e+00,</span></a>
+<a class="sourceLine" id="cb47-200" data-line-number="200"><span class="co">#&gt;          -6.6783e-01,  2.5330e+00, -6.8972e-02, -4.7711e-01,  3.1217e-01],</span></a>
+<a class="sourceLine" id="cb47-201" data-line-number="201"><span class="co">#&gt;         [-1.7434e+00,  3.0019e+00,  3.9485e-01, -1.0889e-01, -6.9362e-01,</span></a>
+<a class="sourceLine" id="cb47-202" data-line-number="202"><span class="co">#&gt;          -5.3010e-01, -4.3703e-01, -3.4826e-01,  4.4723e-01, -4.6972e-01],</span></a>
+<a class="sourceLine" id="cb47-203" data-line-number="203"><span class="co">#&gt;         [ 3.6722e-01, -7.8927e-01, -1.8396e-01,  2.6694e+00, -1.5186e+00,</span></a>
+<a class="sourceLine" id="cb47-204" data-line-number="204"><span class="co">#&gt;           8.2135e-01, -1.4533e+00, -5.7422e-01,  7.1185e-01, -7.4695e-01],</span></a>
+<a class="sourceLine" id="cb47-205" data-line-number="205"><span class="co">#&gt;         [-9.6626e-01, -7.0417e-01,  1.4091e-01, -8.3716e-01,  2.3661e-01,</span></a>
+<a class="sourceLine" id="cb47-206" data-line-number="206"><span class="co">#&gt;          -1.9684e-01,  2.6743e+00, -1.2383e+00,  1.2457e-01,  1.9535e-01],</span></a>
+<a class="sourceLine" id="cb47-207" data-line-number="207"><span class="co">#&gt;         [-9.2043e-01,  3.5011e-02,  1.1443e-02, -5.0102e-01,  6.8089e-01,</span></a>
+<a class="sourceLine" id="cb47-208" data-line-number="208"><span class="co">#&gt;          -6.6501e-02, -2.4412e-01, -1.7089e-01,  6.7840e-01,  3.5295e-01],</span></a>
+<a class="sourceLine" id="cb47-209" data-line-number="209"><span class="co">#&gt;         [-9.6482e-01, -6.0335e-01, -7.8636e-01,  2.5332e+00, -1.6030e+00,</span></a>
+<a class="sourceLine" id="cb47-210" data-line-number="210"><span class="co">#&gt;           1.2448e+00, -1.0642e+00,  6.7326e-01,  6.0710e-01, -1.5776e-01],</span></a>
+<a class="sourceLine" id="cb47-211" data-line-number="211"><span class="co">#&gt;         [-2.1860e+00,  1.6475e+00,  9.3576e-02,  1.1581e-01, -6.1241e-01,</span></a>
+<a class="sourceLine" id="cb47-212" data-line-number="212"><span class="co">#&gt;           8.0098e-02,  3.8870e-01, -4.1129e-01,  7.3326e-01, -1.2896e-01],</span></a>
+<a class="sourceLine" id="cb47-213" data-line-number="213"><span class="co">#&gt;         [-7.9489e-01, -4.4360e-01, -2.9615e-01, -1.3769e+00,  2.1477e+00,</span></a>
+<a class="sourceLine" id="cb47-214" data-line-number="214"><span class="co">#&gt;          -7.5093e-01,  2.7292e-01,  1.2256e-01, -7.8630e-03,  1.3927e+00],</span></a>
+<a class="sourceLine" id="cb47-215" data-line-number="215"><span class="co">#&gt;         [-1.2420e+00,  3.8800e-01, -3.2523e-01,  5.6335e-01, -2.9817e-01,</span></a>
+<a class="sourceLine" id="cb47-216" data-line-number="216"><span class="co">#&gt;           3.6512e-01,  4.5060e-02,  6.8577e-02,  2.8959e-01,  2.1655e-01],</span></a>
+<a class="sourceLine" id="cb47-217" data-line-number="217"><span class="co">#&gt;         [-1.9600e+00,  1.5355e+00, -7.4175e-01,  6.2178e-02, -2.8662e-01,</span></a>
+<a class="sourceLine" id="cb47-218" data-line-number="218"><span class="co">#&gt;          -6.5968e-02,  2.2115e-02,  9.3884e-01,  2.4363e-02,  4.9749e-01],</span></a>
+<a class="sourceLine" id="cb47-219" data-line-number="219"><span class="co">#&gt;         [ 9.5878e-01, -1.2344e+00,  1.0047e+00, -1.0548e+00, -2.1276e-01,</span></a>
+<a class="sourceLine" id="cb47-220" data-line-number="220"><span class="co">#&gt;           5.5444e-01,  1.8348e+00, -1.1454e+00, -8.9603e-02, -5.3274e-01],</span></a>
+<a class="sourceLine" id="cb47-221" data-line-number="221"><span class="co">#&gt;         [-1.1328e+00, -1.6573e+00,  3.1118e-02, -4.7143e-01,  1.4698e+00,</span></a>
+<a class="sourceLine" id="cb47-222" data-line-number="222"><span class="co">#&gt;          -9.0934e-01, -1.9988e-01,  9.3979e-01,  1.7323e-01,  2.3339e+00]],</span></a>
+<a class="sourceLine" id="cb47-223" data-line-number="223"><span class="co">#&gt;        grad_fn=&lt;AddmmBackward&gt;)</span></a>
+<a class="sourceLine" id="cb47-224" data-line-number="224"><span class="kw">print</span>(predicted)</a>
+<a class="sourceLine" id="cb47-225" data-line-number="225"><span class="co">#&gt; tensor([8, 9, 0, 1, 2, 9, 4, 8, 6, 7, 8, 0, 8, 2, 9, 4, 7, 8, 9, 7, 8, 6, 4, 1,</span></a>
+<a class="sourceLine" id="cb47-226" data-line-number="226"><span class="co">#&gt;         4, 2, 2, 4, 4, 7, 0, 1, 9, 2, 8, 7, 8, 2, 6, 0, 0, 6, 3, 8, 8, 4, 1, 4,</span></a>
+<a class="sourceLine" id="cb47-227" data-line-number="227"><span class="co">#&gt;         0, 6, 1, 0, 0, 0, 0, 8, 1, 7, 7, 3, 4, 6, 0, 7, 0, 3, 6, 8, 7, 1, 3, 2,</span></a>
+<a class="sourceLine" id="cb47-228" data-line-number="228"><span class="co">#&gt;         4, 4, 4, 2, 6, 4, 1, 7, 2, 6, 2, 0, 1, 2, 8, 4, 5, 6, 7, 8, 4, 0, 1, 2,</span></a>
+<a class="sourceLine" id="cb47-229" data-line-number="229"><span class="co">#&gt;         3, 4, 8, 6])</span></a></code></pre></div>
+<div id="printing-output-size" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Printing output size</h3>
+<p>This produces a 100x10 matrix because each iteration has a batch size of 100 and each prediction across the 10 classes, with the largest number indicating the likely number it is predicting.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb48-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb48-11" data-line-number="11">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb48-12" data-line-number="12">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb48-13" data-line-number="13">    </a>
+<a class="sourceLine" id="cb48-14" data-line-number="14">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb48-15" data-line-number="15">        <span class="kw">print</span>(<span class="st">&#39;OUTPUTS&#39;</span>)</a>
+<a class="sourceLine" id="cb48-16" data-line-number="16">        <span class="kw">print</span>(outputs<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb48-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb48-18" data-line-number="18">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb48-19" data-line-number="19">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb48-20" data-line-number="20">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb48-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb48-22" data-line-number="22"><span class="co">#&gt; [1] &quot;OUTPUTS&quot;</span></a>
+<a class="sourceLine" id="cb48-23" data-line-number="23"><span class="co">#&gt; torch.Size([100, 10])</span></a>
+<a class="sourceLine" id="cb48-24" data-line-number="24"><span class="kw">print</span>(predicted<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb48-25" data-line-number="25"><span class="co">#&gt; torch.Size([100])</span></a></code></pre></div>
+<blockquote>
+<p>The <code>predicted</code> and <code>output</code> tensors have the same number of 1D members. It is obvious because <code>predicted</code> is calculated from the <code>output</code> maximum values.</p>
+</blockquote>
+</div>
+<div id="printing-one-output" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Printing one output</h3>
+<p>This would be a 1x10 matrix where the largest number is what the model thinks the image is. Here we can see that in the tensor, position 7 has the largest number, indicating the model thinks the image is 7.</p>
+<pre><code>number 0: -0.4181
+number 1: -1.0784
+...
+number 7: 2.9352</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb50-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb50-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb50-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb50-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb50-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb50-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb50-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb50-11" data-line-number="11">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb50-12" data-line-number="12">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb50-13" data-line-number="13">    </a>
+<a class="sourceLine" id="cb50-14" data-line-number="14">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb50-15" data-line-number="15">        <span class="kw">print</span>(<span class="st">&#39;OUTPUTS&#39;</span>)</a>
+<a class="sourceLine" id="cb50-16" data-line-number="16">        <span class="kw">print</span>(outputs[<span class="dv">1</span>])    <span class="co"># show first tensor of 100</span></a>
+<a class="sourceLine" id="cb50-17" data-line-number="17">        <span class="kw">print</span>(outputs[<span class="dv">99</span>])   <span class="co"># show last tensor of 100</span></a>
+<a class="sourceLine" id="cb50-18" data-line-number="18">    }</a>
+<a class="sourceLine" id="cb50-19" data-line-number="19">    <span class="co"># Get predictions from the maximum value for 100 tensors</span></a>
+<a class="sourceLine" id="cb50-20" data-line-number="20">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb50-21" data-line-number="21">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb50-22" data-line-number="22">}</a>
+<a class="sourceLine" id="cb50-23" data-line-number="23"><span class="co">#&gt; [1] &quot;OUTPUTS&quot;</span></a>
+<a class="sourceLine" id="cb50-24" data-line-number="24"><span class="co">#&gt; Warning in `[.torch.Tensor`(outputs, 1): Incorrect number of dimensions</span></a>
+<a class="sourceLine" id="cb50-25" data-line-number="25"><span class="co">#&gt; supplied. The number of supplied arguments, (not counting any NULL,</span></a>
+<a class="sourceLine" id="cb50-26" data-line-number="26"><span class="co">#&gt; tf$newaxis or np$newaxis) must match thenumber of dimensions in the tensor,</span></a>
+<a class="sourceLine" id="cb50-27" data-line-number="27"><span class="co">#&gt; unless an all_dims() was supplied (this will produce an error in the</span></a>
+<a class="sourceLine" id="cb50-28" data-line-number="28"><span class="co">#&gt; future)</span></a>
+<a class="sourceLine" id="cb50-29" data-line-number="29"><span class="co">#&gt; tensor([-0.2672, -0.9722, -0.3783, -0.2355,  0.0258, -0.3841, -1.0437,  2.9174,</span></a>
+<a class="sourceLine" id="cb50-30" data-line-number="30"><span class="co">#&gt;         -0.1133,  1.0439], grad_fn=&lt;SelectBackward&gt;)</span></a>
+<a class="sourceLine" id="cb50-31" data-line-number="31"><span class="co">#&gt; Warning in `[.torch.Tensor`(outputs, 99): Incorrect number of dimensions</span></a>
+<a class="sourceLine" id="cb50-32" data-line-number="32"><span class="co">#&gt; supplied. The number of supplied arguments, (not counting any NULL,</span></a>
+<a class="sourceLine" id="cb50-33" data-line-number="33"><span class="co">#&gt; tf$newaxis or np$newaxis) must match thenumber of dimensions in the tensor,</span></a>
+<a class="sourceLine" id="cb50-34" data-line-number="34"><span class="co">#&gt; unless an all_dims() was supplied (this will produce an error in the</span></a>
+<a class="sourceLine" id="cb50-35" data-line-number="35"><span class="co">#&gt; future)</span></a>
+<a class="sourceLine" id="cb50-36" data-line-number="36"><span class="co">#&gt; tensor([ 0.9588, -1.2344,  1.0047, -1.0548, -0.2128,  0.5544,  1.8348, -1.1454,</span></a>
+<a class="sourceLine" id="cb50-37" data-line-number="37"><span class="co">#&gt;         -0.0896, -0.5327], grad_fn=&lt;SelectBackward&gt;)</span></a>
+<a class="sourceLine" id="cb50-38" data-line-number="38"><span class="kw">print</span>(predicted)</a>
+<a class="sourceLine" id="cb50-39" data-line-number="39"><span class="co">#&gt; tensor([8, 9, 0, 1, 2, 9, 4, 8, 6, 7, 8, 0, 8, 2, 9, 4, 7, 8, 9, 7, 8, 6, 4, 1,</span></a>
+<a class="sourceLine" id="cb50-40" data-line-number="40"><span class="co">#&gt;         4, 2, 2, 4, 4, 7, 0, 1, 9, 2, 8, 7, 8, 2, 6, 0, 0, 6, 3, 8, 8, 4, 1, 4,</span></a>
+<a class="sourceLine" id="cb50-41" data-line-number="41"><span class="co">#&gt;         0, 6, 1, 0, 0, 0, 0, 8, 1, 7, 7, 3, 4, 6, 0, 7, 0, 3, 6, 8, 7, 1, 3, 2,</span></a>
+<a class="sourceLine" id="cb50-42" data-line-number="42"><span class="co">#&gt;         4, 4, 4, 2, 6, 4, 1, 7, 2, 6, 2, 0, 1, 2, 8, 4, 5, 6, 7, 8, 4, 0, 1, 2,</span></a>
+<a class="sourceLine" id="cb50-43" data-line-number="43"><span class="co">#&gt;         3, 4, 8, 6])</span></a></code></pre></div>
+</div>
+<div id="printing-prediction-output" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> Printing prediction output</h3>
+<p>Because our output is of size 100 (our batch size), our prediction size would also of the size 100.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb51-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb51-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb51-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb51-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb51-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb51-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb51-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb51-11" data-line-number="11">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb51-12" data-line-number="12">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb51-13" data-line-number="13">    </a>
+<a class="sourceLine" id="cb51-14" data-line-number="14">    <span class="co"># Get predictions from the maximum value for a batch</span></a>
+<a class="sourceLine" id="cb51-15" data-line-number="15">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb51-16" data-line-number="16">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb51-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb51-18" data-line-number="18">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb51-19" data-line-number="19">        <span class="kw">print</span>(<span class="st">&#39;PREDICTION&#39;</span>)</a>
+<a class="sourceLine" id="cb51-20" data-line-number="20">        <span class="kw">print</span>(predicted<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb51-21" data-line-number="21">    }</a>
+<a class="sourceLine" id="cb51-22" data-line-number="22">}</a>
+<a class="sourceLine" id="cb51-23" data-line-number="23"><span class="co">#&gt; [1] &quot;PREDICTION&quot;</span></a>
+<a class="sourceLine" id="cb51-24" data-line-number="24"><span class="co">#&gt; torch.Size([100])</span></a></code></pre></div>
+</div>
+<div id="print-prediction-value" class="section level3">
+<h3><span class="header-section-number">1.6.4</span> Print prediction value</h3>
+<p>We are printing our prediction which as verified above, should be digit 7.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb52-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb52-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb52-11" data-line-number="11">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb52-12" data-line-number="12">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb52-13" data-line-number="13">    </a>
+<a class="sourceLine" id="cb52-14" data-line-number="14">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb52-15" data-line-number="15">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb52-16" data-line-number="16">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb52-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb52-18" data-line-number="18">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb52-19" data-line-number="19">        <span class="kw">print</span>(<span class="st">&#39;PREDICTION&#39;</span>)</a>
+<a class="sourceLine" id="cb52-20" data-line-number="20">        <span class="kw">print</span>(predicted[1L])</a>
+<a class="sourceLine" id="cb52-21" data-line-number="21">    }</a>
+<a class="sourceLine" id="cb52-22" data-line-number="22">}</a>
+<a class="sourceLine" id="cb52-23" data-line-number="23"><span class="co">#&gt; [1] &quot;PREDICTION&quot;</span></a>
+<a class="sourceLine" id="cb52-24" data-line-number="24"><span class="co">#&gt; tensor(7)</span></a></code></pre></div>
+</div>
+<div id="print-prediction-label-and-label-size" class="section level3">
+<h3><span class="header-section-number">1.6.5</span> Print prediction, label and label size</h3>
+<p>We are trying to show what we are predicting and the actual values. In this case, we’re predicting the right value 7!</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb53-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb53-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb53-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb53-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb53-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb53-10" data-line-number="10">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb53-11" data-line-number="11">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb53-12" data-line-number="12">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb53-13" data-line-number="13">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb53-14" data-line-number="14">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb53-15" data-line-number="15">    </a>
+<a class="sourceLine" id="cb53-16" data-line-number="16">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb53-17" data-line-number="17">        <span class="kw">print</span>(<span class="st">&#39;PREDICTION&#39;</span>)</a>
+<a class="sourceLine" id="cb53-18" data-line-number="18">        <span class="kw">print</span>(predicted[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb53-19" data-line-number="19">        </a>
+<a class="sourceLine" id="cb53-20" data-line-number="20">        <span class="kw">print</span>(<span class="st">&#39;LABEL SIZE&#39;</span>)</a>
+<a class="sourceLine" id="cb53-21" data-line-number="21">        <span class="kw">print</span>(labels<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb53-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb53-23" data-line-number="23">        <span class="kw">print</span>(<span class="st">&#39;LABEL FOR IMAGE 0&#39;</span>)</a>
+<a class="sourceLine" id="cb53-24" data-line-number="24">        <span class="kw">print</span>(labels[<span class="dv">1</span>]<span class="op">$</span><span class="kw">item</span>())  <span class="co"># extract the scalar part only</span></a>
+<a class="sourceLine" id="cb53-25" data-line-number="25">    }</a>
+<a class="sourceLine" id="cb53-26" data-line-number="26">}</a>
+<a class="sourceLine" id="cb53-27" data-line-number="27"><span class="co">#&gt; [1] &quot;PREDICTION&quot;</span></a>
+<a class="sourceLine" id="cb53-28" data-line-number="28"><span class="co">#&gt; tensor(7)</span></a>
+<a class="sourceLine" id="cb53-29" data-line-number="29"><span class="co">#&gt; [1] &quot;LABEL SIZE&quot;</span></a>
+<a class="sourceLine" id="cb53-30" data-line-number="30"><span class="co">#&gt; torch.Size([100])</span></a>
+<a class="sourceLine" id="cb53-31" data-line-number="31"><span class="co">#&gt; [1] &quot;LABEL FOR IMAGE 0&quot;</span></a>
+<a class="sourceLine" id="cb53-32" data-line-number="32"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
+</div>
+<div id="print-second-prediction-and-ground-truth" class="section level3">
+<h3><span class="header-section-number">1.6.6</span> Print second prediction and ground truth</h3>
+<p>It should be the digit 2.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb54-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb54-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb54-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb54-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb54-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb54-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb54-10" data-line-number="10">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb54-11" data-line-number="11">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb54-12" data-line-number="12">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb54-13" data-line-number="13">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb54-14" data-line-number="14">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb54-15" data-line-number="15">    </a>
+<a class="sourceLine" id="cb54-16" data-line-number="16">    <span class="cf">if</span> (iter_test <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb54-17" data-line-number="17">        <span class="kw">print</span>(<span class="st">&#39;PREDICTION&#39;</span>)</a>
+<a class="sourceLine" id="cb54-18" data-line-number="18">        <span class="kw">print</span>(predicted[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb54-19" data-line-number="19">        </a>
+<a class="sourceLine" id="cb54-20" data-line-number="20">        <span class="kw">print</span>(<span class="st">&#39;LABEL SIZE&#39;</span>)</a>
+<a class="sourceLine" id="cb54-21" data-line-number="21">        <span class="kw">print</span>(labels<span class="op">$</span><span class="kw">size</span>())</a>
+<a class="sourceLine" id="cb54-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb54-23" data-line-number="23">        <span class="kw">print</span>(<span class="st">&#39;LABEL FOR IMAGE 0&#39;</span>)</a>
+<a class="sourceLine" id="cb54-24" data-line-number="24">        <span class="kw">print</span>(labels[<span class="dv">1</span>]<span class="op">$</span><span class="kw">item</span>())</a>
+<a class="sourceLine" id="cb54-25" data-line-number="25">    }</a>
+<a class="sourceLine" id="cb54-26" data-line-number="26">}</a>
+<a class="sourceLine" id="cb54-27" data-line-number="27"><span class="co">#&gt; [1] &quot;PREDICTION&quot;</span></a>
+<a class="sourceLine" id="cb54-28" data-line-number="28"><span class="co">#&gt; tensor(7)</span></a>
+<a class="sourceLine" id="cb54-29" data-line-number="29"><span class="co">#&gt; [1] &quot;LABEL SIZE&quot;</span></a>
+<a class="sourceLine" id="cb54-30" data-line-number="30"><span class="co">#&gt; torch.Size([100])</span></a>
+<a class="sourceLine" id="cb54-31" data-line-number="31"><span class="co">#&gt; [1] &quot;LABEL FOR IMAGE 0&quot;</span></a>
+<a class="sourceLine" id="cb54-32" data-line-number="32"><span class="co">#&gt; [1] 7</span></a></code></pre></div>
+</div>
+<div id="print-accuracy" class="section level3">
+<h3><span class="header-section-number">1.6.7</span> Print accuracy</h3>
+<p>Now we know what each object represents, we can understand how we arrived at our accuracy numbers.</p>
+<p>One last thing to note is that <code>correct.item()</code> has this syntax is because correct is a PyTorch tensor and to get the value to compute with total which is an integer, we need to do this.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="co"># Iterate through test dataset</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2">iter_test &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb55-3" data-line-number="3">iter_test_dataset &lt;-<span class="st"> </span>builtins<span class="op">$</span><span class="kw">enumerate</span>(test_loader) <span class="co"># convert to iterator</span></a>
+<a class="sourceLine" id="cb55-4" data-line-number="4"><span class="cf">for</span> (test_obj <span class="cf">in</span> <span class="kw">iterate</span>(iter_test_dataset)) {</a>
+<a class="sourceLine" id="cb55-5" data-line-number="5">    iter_test &lt;-<span class="st"> </span>iter_test <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb55-6" data-line-number="6">    <span class="co"># Load images to a Torch Variable</span></a>
+<a class="sourceLine" id="cb55-7" data-line-number="7">    images &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb55-8" data-line-number="8">    labels &lt;-<span class="st"> </span>test_obj[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb55-9" data-line-number="9">    images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">view</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)<span class="op">$</span><span class="kw">requires_grad_</span>()</a>
+<a class="sourceLine" id="cb55-10" data-line-number="10">    <span class="co"># Forward pass only to get logits/output</span></a>
+<a class="sourceLine" id="cb55-11" data-line-number="11">    outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb55-12" data-line-number="12">    <span class="co"># Get predictions from the maximum value</span></a>
+<a class="sourceLine" id="cb55-13" data-line-number="13">    .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb55-14" data-line-number="14">    predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb55-15" data-line-number="15">    <span class="co"># Total number of labels</span></a>
+<a class="sourceLine" id="cb55-16" data-line-number="16">    total =<span class="st"> </span>total <span class="op">+</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">size</span>(0L)</a>
+<a class="sourceLine" id="cb55-17" data-line-number="17">    <span class="co"># Total correct predictions</span></a>
+<a class="sourceLine" id="cb55-18" data-line-number="18">    correct =<span class="st"> </span>correct <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>((predicted<span class="op">$</span><span class="kw">numpy</span>() <span class="op">==</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">numpy</span>()))</a>
+<a class="sourceLine" id="cb55-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb55-20" data-line-number="20">accuracy =<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total</a>
+<a class="sourceLine" id="cb55-21" data-line-number="21"><span class="kw">print</span>(accuracy)</a>
+<a class="sourceLine" id="cb55-22" data-line-number="22"><span class="co">#&gt; [1] 82.8</span></a></code></pre></div>
+</div>
+</div>
+<div id="saving-pytorch-model" class="section level2">
+<h2><span class="header-section-number">1.7</span> Saving PyTorch model</h2>
+<p>This is how you save your model.
+Feel free to just change <code>save_model = TRUE</code> to save your model</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">save_model =<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="cf">if</span> (save_model) {</a>
+<a class="sourceLine" id="cb56-3" data-line-number="3">    <span class="co"># Saves only parameters</span></a>
+<a class="sourceLine" id="cb56-4" data-line-number="4">    torch<span class="op">$</span><span class="kw">save</span>(model<span class="op">$</span><span class="kw">state_dict</span>(), <span class="st">&#39;awesome_model.pkl&#39;</span>)</a>
+<a class="sourceLine" id="cb56-5" data-line-number="5">}</a></code></pre></div>
+
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendixA.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["rtorch-book.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

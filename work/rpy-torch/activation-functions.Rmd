@@ -1,0 +1,43 @@
+# Activation Functions
+
+```{r}
+library(rTorch)
+library(ggplot2)
+```
+
+
+```{r sigmoid}
+x <- torch$range(-5., 5., 0.1)
+y <- torch$sigmoid(x)
+
+df <- data.frame(x = x$numpy(), sx = y$numpy())
+df
+
+ggplot(df, aes(x = x, y = sx)) + 
+    geom_point()
+```
+
+```{r tanh}
+x <- torch$range(-5., 5., 0.1)
+y <- torch$tanh(x)
+
+df <- data.frame(x = x$numpy(), tx = y$numpy())
+df
+
+ggplot(df, aes(x = x, y = tx)) + 
+    geom_point()
+```
+
+
+```{r relu}
+relu <- torch$nn$ReLU()
+x <- torch$range(-5., 5., 0.1)
+y <- relu(x)
+
+df <- data.frame(x = x$numpy(), rx = y$numpy())
+df
+
+ggplot(df, aes(x = x, y = rx)) + 
+    geom_point()
+```
+
