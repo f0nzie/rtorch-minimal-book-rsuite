@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | A Minimal rTorch Tutorial</title>
+  <title>Chapter 6 Simple linear regression | A Minimal rTorch Tutorial</title>
   <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | A Minimal rTorch Tutorial" />
+  <meta property="og:title" content="Chapter 6 Simple linear regression | A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | A Minimal rTorch Tutorial" />
+  <meta name="twitter:title" content="Chapter 6 Simple linear regression | A Minimal rTorch Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="appendixA.html"/>
-
+<link rel="prev" href="mnistdigits.html"/>
+<link rel="next" href="rainfall-linear-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -285,16 +285,230 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="simple-linear-regression" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Simple linear regression</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction</h2>
+<p>Source: <a href="https://www.guru99.com/pytorch-tutorial.html" class="uri">https://www.guru99.com/pytorch-tutorial.html</a></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3">nn       &lt;-<span class="st"> </span>torch<span class="op">$</span>nn</a>
+<a class="sourceLine" id="cb80-4" data-line-number="4">Variable &lt;-<span class="st"> </span>torch<span class="op">$</span>autograd<span class="op">$</span>Variable</a>
+<a class="sourceLine" id="cb80-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb80-6" data-line-number="6">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb80-7" data-line-number="7"><span class="co">#&gt; &lt;torch._C.Generator&gt;</span></a></code></pre></div>
+</div>
+<div id="generate-the-dataset" class="section level2">
+<h2><span class="header-section-number">6.2</span> Generate the dataset</h2>
+<p>Before you start the training process, you need to know our data. You make a random function to test our model. <span class="math inline">\(Y = x3 sin(x)+ 3x+0.8 rand(100)\)</span></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2">np<span class="op">$</span>random<span class="op">$</span><span class="kw">seed</span>(123L)</a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4">x =<span class="st"> </span>np<span class="op">$</span>random<span class="op">$</span><span class="kw">rand</span>(100L)</a>
+<a class="sourceLine" id="cb81-5" data-line-number="5">y =<span class="st"> </span>np<span class="op">$</span><span class="kw">sin</span>(x) <span class="op">*</span><span class="st"> </span>np<span class="op">$</span><span class="kw">power</span>(x, 3L) <span class="op">+</span><span class="st"> </span>3L <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>np<span class="op">$</span>random<span class="op">$</span><span class="kw">rand</span>(100L) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span></a>
+<a class="sourceLine" id="cb81-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="kw">plot</span>(x, y)</a></code></pre></div>
+<p><img src="0406-linear_regression-simple_files/figure-html/datasets-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="convert-arrays-to-tensors" class="section level2">
+<h2><span class="header-section-number">6.3</span> Convert arrays to tensors</h2>
+<p>Before you start the training process, you need to convert the numpy array to Variables that supported by Torch and autograd.</p>
+</div>
+<div id="converting-from-numpy-to-tensor" class="section level2">
+<h2><span class="header-section-number">6.4</span> Converting from numpy to tensor</h2>
+<p>Notice that before converting to a Torch tensor, we need first to convert the R numeric vector to a <code>numpy</code> array:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="co"># convert numpy array to tensor in shape of input size</span></a>
+<a class="sourceLine" id="cb82-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(x)</a>
+<a class="sourceLine" id="cb82-3" data-line-number="3">y &lt;-<span class="st"> </span><span class="kw">r_to_py</span>(y)</a>
+<a class="sourceLine" id="cb82-4" data-line-number="4">x =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(x<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 1L))<span class="op">$</span><span class="kw">float</span>()</a>
+<a class="sourceLine" id="cb82-5" data-line-number="5">y =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(y<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 1L))<span class="op">$</span><span class="kw">float</span>()</a>
+<a class="sourceLine" id="cb82-6" data-line-number="6"><span class="kw">print</span>(x, y)</a>
+<a class="sourceLine" id="cb82-7" data-line-number="7"><span class="co">#&gt; tensor([[0.6965],</span></a>
+<a class="sourceLine" id="cb82-8" data-line-number="8"><span class="co">#&gt;         [0.2861],</span></a>
+<a class="sourceLine" id="cb82-9" data-line-number="9"><span class="co">#&gt;         [0.2269],</span></a>
+<a class="sourceLine" id="cb82-10" data-line-number="10"><span class="co">#&gt;         [0.5513],</span></a>
+<a class="sourceLine" id="cb82-11" data-line-number="11"><span class="co">#&gt;         [0.7195],</span></a>
+<a class="sourceLine" id="cb82-12" data-line-number="12"><span class="co">#&gt;         [0.4231],</span></a>
+<a class="sourceLine" id="cb82-13" data-line-number="13"><span class="co">#&gt;         [0.9808],</span></a>
+<a class="sourceLine" id="cb82-14" data-line-number="14"><span class="co">#&gt;         [0.6848],</span></a>
+<a class="sourceLine" id="cb82-15" data-line-number="15"><span class="co">#&gt;         [0.4809],</span></a>
+<a class="sourceLine" id="cb82-16" data-line-number="16"><span class="co">#&gt;         [0.3921],</span></a>
+<a class="sourceLine" id="cb82-17" data-line-number="17"><span class="co">#&gt;         [0.3432],</span></a>
+<a class="sourceLine" id="cb82-18" data-line-number="18"><span class="co">#&gt;         [0.7290],</span></a>
+<a class="sourceLine" id="cb82-19" data-line-number="19"><span class="co">#&gt;         [0.4386],</span></a>
+<a class="sourceLine" id="cb82-20" data-line-number="20"><span class="co">#&gt;         [0.0597],</span></a>
+<a class="sourceLine" id="cb82-21" data-line-number="21"><span class="co">#&gt;         [0.3980],</span></a>
+<a class="sourceLine" id="cb82-22" data-line-number="22"><span class="co">#&gt;         [0.7380],</span></a>
+<a class="sourceLine" id="cb82-23" data-line-number="23"><span class="co">#&gt;         [0.1825],</span></a>
+<a class="sourceLine" id="cb82-24" data-line-number="24"><span class="co">#&gt;         [0.1755],</span></a>
+<a class="sourceLine" id="cb82-25" data-line-number="25"><span class="co">#&gt;         [0.5316],</span></a>
+<a class="sourceLine" id="cb82-26" data-line-number="26"><span class="co">#&gt;         [0.5318],</span></a>
+<a class="sourceLine" id="cb82-27" data-line-number="27"><span class="co">#&gt;         [0.6344],</span></a>
+<a class="sourceLine" id="cb82-28" data-line-number="28"><span class="co">#&gt;         [0.8494],</span></a>
+<a class="sourceLine" id="cb82-29" data-line-number="29"><span class="co">#&gt;         [0.7245],</span></a>
+<a class="sourceLine" id="cb82-30" data-line-number="30"><span class="co">#&gt;         [0.6110],</span></a>
+<a class="sourceLine" id="cb82-31" data-line-number="31"><span class="co">#&gt;         [0.7224],</span></a>
+<a class="sourceLine" id="cb82-32" data-line-number="32"><span class="co">#&gt;         [0.3230],</span></a>
+<a class="sourceLine" id="cb82-33" data-line-number="33"><span class="co">#&gt;         [0.3618],</span></a>
+<a class="sourceLine" id="cb82-34" data-line-number="34"><span class="co">#&gt;         [0.2283],</span></a>
+<a class="sourceLine" id="cb82-35" data-line-number="35"><span class="co">#&gt;         [0.2937],</span></a>
+<a class="sourceLine" id="cb82-36" data-line-number="36"><span class="co">#&gt;         [0.6310],</span></a>
+<a class="sourceLine" id="cb82-37" data-line-number="37"><span class="co">#&gt;         [0.0921],</span></a>
+<a class="sourceLine" id="cb82-38" data-line-number="38"><span class="co">#&gt;         [0.4337],</span></a>
+<a class="sourceLine" id="cb82-39" data-line-number="39"><span class="co">#&gt;         [0.4309],</span></a>
+<a class="sourceLine" id="cb82-40" data-line-number="40"><span class="co">#&gt;         [0.4937],</span></a>
+<a class="sourceLine" id="cb82-41" data-line-number="41"><span class="co">#&gt;         [0.4258],</span></a>
+<a class="sourceLine" id="cb82-42" data-line-number="42"><span class="co">#&gt;         [0.3123],</span></a>
+<a class="sourceLine" id="cb82-43" data-line-number="43"><span class="co">#&gt;         [0.4264],</span></a>
+<a class="sourceLine" id="cb82-44" data-line-number="44"><span class="co">#&gt;         [0.8934],</span></a>
+<a class="sourceLine" id="cb82-45" data-line-number="45"><span class="co">#&gt;         [0.9442],</span></a>
+<a class="sourceLine" id="cb82-46" data-line-number="46"><span class="co">#&gt;         [0.5018],</span></a>
+<a class="sourceLine" id="cb82-47" data-line-number="47"><span class="co">#&gt;         [0.6240],</span></a>
+<a class="sourceLine" id="cb82-48" data-line-number="48"><span class="co">#&gt;         [0.1156],</span></a>
+<a class="sourceLine" id="cb82-49" data-line-number="49"><span class="co">#&gt;         [0.3173],</span></a>
+<a class="sourceLine" id="cb82-50" data-line-number="50"><span class="co">#&gt;         [0.4148],</span></a>
+<a class="sourceLine" id="cb82-51" data-line-number="51"><span class="co">#&gt;         [0.8663],</span></a>
+<a class="sourceLine" id="cb82-52" data-line-number="52"><span class="co">#&gt;         [0.2505],</span></a>
+<a class="sourceLine" id="cb82-53" data-line-number="53"><span class="co">#&gt;         [0.4830],</span></a>
+<a class="sourceLine" id="cb82-54" data-line-number="54"><span class="co">#&gt;         [0.9856],</span></a>
+<a class="sourceLine" id="cb82-55" data-line-number="55"><span class="co">#&gt;         [0.5195],</span></a>
+<a class="sourceLine" id="cb82-56" data-line-number="56"><span class="co">#&gt;         [0.6129],</span></a>
+<a class="sourceLine" id="cb82-57" data-line-number="57"><span class="co">#&gt;         [0.1206],</span></a>
+<a class="sourceLine" id="cb82-58" data-line-number="58"><span class="co">#&gt;         [0.8263],</span></a>
+<a class="sourceLine" id="cb82-59" data-line-number="59"><span class="co">#&gt;         [0.6031],</span></a>
+<a class="sourceLine" id="cb82-60" data-line-number="60"><span class="co">#&gt;         [0.5451],</span></a>
+<a class="sourceLine" id="cb82-61" data-line-number="61"><span class="co">#&gt;         [0.3428],</span></a>
+<a class="sourceLine" id="cb82-62" data-line-number="62"><span class="co">#&gt;         [0.3041],</span></a>
+<a class="sourceLine" id="cb82-63" data-line-number="63"><span class="co">#&gt;         [0.4170],</span></a>
+<a class="sourceLine" id="cb82-64" data-line-number="64"><span class="co">#&gt;         [0.6813],</span></a>
+<a class="sourceLine" id="cb82-65" data-line-number="65"><span class="co">#&gt;         [0.8755],</span></a>
+<a class="sourceLine" id="cb82-66" data-line-number="66"><span class="co">#&gt;         [0.5104],</span></a>
+<a class="sourceLine" id="cb82-67" data-line-number="67"><span class="co">#&gt;         [0.6693],</span></a>
+<a class="sourceLine" id="cb82-68" data-line-number="68"><span class="co">#&gt;         [0.5859],</span></a>
+<a class="sourceLine" id="cb82-69" data-line-number="69"><span class="co">#&gt;         [0.6249],</span></a>
+<a class="sourceLine" id="cb82-70" data-line-number="70"><span class="co">#&gt;         [0.6747],</span></a>
+<a class="sourceLine" id="cb82-71" data-line-number="71"><span class="co">#&gt;         [0.8423],</span></a>
+<a class="sourceLine" id="cb82-72" data-line-number="72"><span class="co">#&gt;         [0.0832],</span></a>
+<a class="sourceLine" id="cb82-73" data-line-number="73"><span class="co">#&gt;         [0.7637],</span></a>
+<a class="sourceLine" id="cb82-74" data-line-number="74"><span class="co">#&gt;         [0.2437],</span></a>
+<a class="sourceLine" id="cb82-75" data-line-number="75"><span class="co">#&gt;         [0.1942],</span></a>
+<a class="sourceLine" id="cb82-76" data-line-number="76"><span class="co">#&gt;         [0.5725],</span></a>
+<a class="sourceLine" id="cb82-77" data-line-number="77"><span class="co">#&gt;         [0.0957],</span></a>
+<a class="sourceLine" id="cb82-78" data-line-number="78"><span class="co">#&gt;         [0.8853],</span></a>
+<a class="sourceLine" id="cb82-79" data-line-number="79"><span class="co">#&gt;         [0.6272],</span></a>
+<a class="sourceLine" id="cb82-80" data-line-number="80"><span class="co">#&gt;         [0.7234],</span></a>
+<a class="sourceLine" id="cb82-81" data-line-number="81"><span class="co">#&gt;         [0.0161],</span></a>
+<a class="sourceLine" id="cb82-82" data-line-number="82"><span class="co">#&gt;         [0.5944],</span></a>
+<a class="sourceLine" id="cb82-83" data-line-number="83"><span class="co">#&gt;         [0.5568],</span></a>
+<a class="sourceLine" id="cb82-84" data-line-number="84"><span class="co">#&gt;         [0.1590],</span></a>
+<a class="sourceLine" id="cb82-85" data-line-number="85"><span class="co">#&gt;         [0.1531],</span></a>
+<a class="sourceLine" id="cb82-86" data-line-number="86"><span class="co">#&gt;         [0.6955],</span></a>
+<a class="sourceLine" id="cb82-87" data-line-number="87"><span class="co">#&gt;         [0.3188],</span></a>
+<a class="sourceLine" id="cb82-88" data-line-number="88"><span class="co">#&gt;         [0.6920],</span></a>
+<a class="sourceLine" id="cb82-89" data-line-number="89"><span class="co">#&gt;         [0.5544],</span></a>
+<a class="sourceLine" id="cb82-90" data-line-number="90"><span class="co">#&gt;         [0.3890],</span></a>
+<a class="sourceLine" id="cb82-91" data-line-number="91"><span class="co">#&gt;         [0.9251],</span></a>
+<a class="sourceLine" id="cb82-92" data-line-number="92"><span class="co">#&gt;         [0.8417],</span></a>
+<a class="sourceLine" id="cb82-93" data-line-number="93"><span class="co">#&gt;         [0.3574],</span></a>
+<a class="sourceLine" id="cb82-94" data-line-number="94"><span class="co">#&gt;         [0.0436],</span></a>
+<a class="sourceLine" id="cb82-95" data-line-number="95"><span class="co">#&gt;         [0.3048],</span></a>
+<a class="sourceLine" id="cb82-96" data-line-number="96"><span class="co">#&gt;         [0.3982],</span></a>
+<a class="sourceLine" id="cb82-97" data-line-number="97"><span class="co">#&gt;         [0.7050],</span></a>
+<a class="sourceLine" id="cb82-98" data-line-number="98"><span class="co">#&gt;         [0.9954],</span></a>
+<a class="sourceLine" id="cb82-99" data-line-number="99"><span class="co">#&gt;         [0.3559],</span></a>
+<a class="sourceLine" id="cb82-100" data-line-number="100"><span class="co">#&gt;         [0.7625],</span></a>
+<a class="sourceLine" id="cb82-101" data-line-number="101"><span class="co">#&gt;         [0.5932],</span></a>
+<a class="sourceLine" id="cb82-102" data-line-number="102"><span class="co">#&gt;         [0.6917],</span></a>
+<a class="sourceLine" id="cb82-103" data-line-number="103"><span class="co">#&gt;         [0.1511],</span></a>
+<a class="sourceLine" id="cb82-104" data-line-number="104"><span class="co">#&gt;         [0.3989],</span></a>
+<a class="sourceLine" id="cb82-105" data-line-number="105"><span class="co">#&gt;         [0.2409],</span></a>
+<a class="sourceLine" id="cb82-106" data-line-number="106"><span class="co">#&gt;         [0.3435]])</span></a></code></pre></div>
+</div>
+<div id="creating-the-network-model" class="section level2">
+<h2><span class="header-section-number">6.5</span> Creating the network model</h2>
+<p>Our network model is a simple Linear layer with an input and an output shape of one.</p>
+<p>And the network output should be like this</p>
+<pre><code>Net(
+  (hidden): Linear(in_features=1, out_features=1, bias=True)
+)</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">py_run_string</span>(<span class="st">&quot;import torch&quot;</span>)</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">main =<span class="st"> </span><span class="kw">py_run_string</span>(</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="st">import torch.nn as nn</span></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6"><span class="st">class Net(nn.Module):</span></a>
+<a class="sourceLine" id="cb84-7" data-line-number="7"><span class="st">   def __init__(self):</span></a>
+<a class="sourceLine" id="cb84-8" data-line-number="8"><span class="st">       super(Net, self).__init__()</span></a>
+<a class="sourceLine" id="cb84-9" data-line-number="9"><span class="st">       self.layer = torch.nn.Linear(1, 1)</span></a>
+<a class="sourceLine" id="cb84-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb84-11" data-line-number="11"><span class="st">   def forward(self, x):</span></a>
+<a class="sourceLine" id="cb84-12" data-line-number="12"><span class="st">       x = self.layer(x)      </span></a>
+<a class="sourceLine" id="cb84-13" data-line-number="13"><span class="st">       return x</span></a>
+<a class="sourceLine" id="cb84-14" data-line-number="14"><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb84-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb84-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb84-17" data-line-number="17"><span class="co"># build a Linear Rgression model</span></a>
+<a class="sourceLine" id="cb84-18" data-line-number="18">net &lt;-<span class="st"> </span>main<span class="op">$</span><span class="kw">Net</span>()</a>
+<a class="sourceLine" id="cb84-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb84-20" data-line-number="20"><span class="kw">print</span>(net)</a>
+<a class="sourceLine" id="cb84-21" data-line-number="21"><span class="co">#&gt; Net(</span></a>
+<a class="sourceLine" id="cb84-22" data-line-number="22"><span class="co">#&gt;   (layer): Linear(in_features=1, out_features=1, bias=True)</span></a>
+<a class="sourceLine" id="cb84-23" data-line-number="23"><span class="co">#&gt; )</span></a></code></pre></div>
+</div>
+<div id="optimizer-and-loss" class="section level2">
+<h2><span class="header-section-number">6.6</span> Optimizer and Loss</h2>
+<p>Next, you should define the Optimizer and the Loss Function for our training process.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="co"># Define Optimizer and Loss Function</span></a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">optimizer &lt;-<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(net<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span><span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3">loss_func &lt;-<span class="st"> </span>torch<span class="op">$</span>nn<span class="op">$</span><span class="kw">MSELoss</span>()</a>
+<a class="sourceLine" id="cb85-4" data-line-number="4"><span class="kw">print</span>(optimizer)</a>
+<a class="sourceLine" id="cb85-5" data-line-number="5"><span class="co">#&gt; SGD (</span></a>
+<a class="sourceLine" id="cb85-6" data-line-number="6"><span class="co">#&gt; Parameter Group 0</span></a>
+<a class="sourceLine" id="cb85-7" data-line-number="7"><span class="co">#&gt;     dampening: 0</span></a>
+<a class="sourceLine" id="cb85-8" data-line-number="8"><span class="co">#&gt;     lr: 0.2</span></a>
+<a class="sourceLine" id="cb85-9" data-line-number="9"><span class="co">#&gt;     momentum: 0</span></a>
+<a class="sourceLine" id="cb85-10" data-line-number="10"><span class="co">#&gt;     nesterov: False</span></a>
+<a class="sourceLine" id="cb85-11" data-line-number="11"><span class="co">#&gt;     weight_decay: 0</span></a>
+<a class="sourceLine" id="cb85-12" data-line-number="12"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb85-13" data-line-number="13"><span class="kw">print</span>(loss_func)</a>
+<a class="sourceLine" id="cb85-14" data-line-number="14"><span class="co">#&gt; MSELoss()</span></a></code></pre></div>
+</div>
+<div id="training-1" class="section level2">
+<h2><span class="header-section-number">6.7</span> Training</h2>
+<p>Now let’s start our training process. With an epoch of 250, you will iterate our data to find the best value for our hyperparameters.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># x = x$type(torch$float)   # make it a a FloatTensor</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2"><span class="co"># y = y$type(torch$float)</span></a>
+<a class="sourceLine" id="cb86-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb86-4" data-line-number="4"><span class="co"># x &lt;- torch$as_tensor(x, dtype = torch$float)</span></a>
+<a class="sourceLine" id="cb86-5" data-line-number="5"><span class="co"># y &lt;- torch$as_tensor(y, dtype = torch$float)</span></a>
+<a class="sourceLine" id="cb86-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb86-7" data-line-number="7">inputs  =<span class="st"> </span><span class="kw">Variable</span>(x)</a>
+<a class="sourceLine" id="cb86-8" data-line-number="8">outputs =<span class="st"> </span><span class="kw">Variable</span>(y)</a>
+<a class="sourceLine" id="cb86-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb86-10" data-line-number="10"><span class="co"># base plot</span></a>
+<a class="sourceLine" id="cb86-11" data-line-number="11"><span class="kw">plot</span>(x<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), y<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb86-12" data-line-number="12"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">250</span>) {</a>
+<a class="sourceLine" id="cb86-13" data-line-number="13">   prediction =<span class="st"> </span><span class="kw">net</span>(inputs)</a>
+<a class="sourceLine" id="cb86-14" data-line-number="14">   loss =<span class="st"> </span><span class="kw">loss_func</span>(prediction, outputs)</a>
+<a class="sourceLine" id="cb86-15" data-line-number="15">   optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
+<a class="sourceLine" id="cb86-16" data-line-number="16">   loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb86-17" data-line-number="17">   optimizer<span class="op">$</span><span class="kw">step</span>()</a>
+<a class="sourceLine" id="cb86-18" data-line-number="18">   </a>
+<a class="sourceLine" id="cb86-19" data-line-number="19">   <span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="cf">break</span></a>
+<a class="sourceLine" id="cb86-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb86-21" data-line-number="21">   <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">10</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb86-22" data-line-number="22">       <span class="co"># plot and show learning process</span></a>
+<a class="sourceLine" id="cb86-23" data-line-number="23">      <span class="co"># points(x$data$numpy(), y$data$numpy())</span></a>
+<a class="sourceLine" id="cb86-24" data-line-number="24">      <span class="kw">points</span>(x<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), prediction<span class="op">$</span>data<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb86-25" data-line-number="25">       <span class="co"># cat(i, loss$data$numpy(), &quot;\n&quot;)</span></a>
+<a class="sourceLine" id="cb86-26" data-line-number="26">   }</a>
+<a class="sourceLine" id="cb86-27" data-line-number="27">}</a></code></pre></div>
+<p><img src="0406-linear_regression-simple_files/figure-html/plot-xy-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="results" class="section level2">
+<h2><span class="header-section-number">6.8</span> Results</h2>
+<p>As you can see below, you successfully performed regression with a neural network. Actually, on every iteration, the red line in the plot will update and change its position to fit the data. But in this picture, you only show you the final result.</p>
 
-<div id="refs" class="references">
-<div>
-<p>Cordes, David, and Marcus Brown. 1991. “The Literate-Programming Paradigm.” <em>Computer</em> 24 (6). Los Alamitos, CA, USA: IEEE Computer Society Press: 52–61. <a href="https://doi.org/10.1109/2.86838">https://doi.org/10.1109/2.86838</a>.</p>
-</div>
-<div>
-<p>Knuth, Donald E. 1983. “Literate Programming.” <em>The Computer Journal</em> 27 (Issue 2): 97–111. <a href="https://doi.org/https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/https://doi.org/10.1093/comjnl/27.2.97</a>.</p>
-</div>
 </div>
 </div>
             </section>
@@ -302,8 +516,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="appendixA.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="mnistdigits.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rainfall-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

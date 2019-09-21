@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bookdown tips | A Minimal rTorch Tutorial</title>
+  <title>Chapter 11 Working with data.frame | A Minimal rTorch Tutorial</title>
   <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bookdown tips | A Minimal rTorch Tutorial" />
+  <meta property="og:title" content="Chapter 11 Working with data.frame | A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bookdown tips | A Minimal rTorch Tutorial" />
+  <meta name="twitter:title" content="Chapter 11 Working with data.frame | A Minimal rTorch Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Alfonso R. Reyes" />
 
 
-<meta name="date" content="2019-09-20" />
+<meta name="date" content="2019-09-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="neural-networks-2.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="working-with-data-table.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -174,11 +174,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="tensors.html"><a href="tensors.html#arithmetic-of-tensors"><i class="fa fa-check"></i><b>3.1</b> Arithmetic of tensors</a></li>
 <li class="chapter" data-level="3.2" data-path="tensors.html"><a href="tensors.html#boolean-operations"><i class="fa fa-check"></i><b>3.2</b> Boolean operations</a></li>
 <li class="chapter" data-level="3.3" data-path="tensors.html"><a href="tensors.html#slicing"><i class="fa fa-check"></i><b>3.3</b> Slicing</a></li>
-<li class="chapter" data-level="3.4" data-path="tensors.html"><a href="tensors.html#example-3"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="tensors.html"><a href="tensors.html#load-the-libraries"><i class="fa fa-check"></i><b>3.4.1</b> Load the libraries</a></li>
-<li class="chapter" data-level="3.4.2" data-path="tensors.html"><a href="tensors.html#datasets"><i class="fa fa-check"></i><b>3.4.2</b> Datasets</a></li>
-<li class="chapter" data-level="3.4.3" data-path="tensors.html"><a href="tensors.html#run-the-model"><i class="fa fa-check"></i><b>3.4.3</b> Run the model</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="linearalgebra.html"><a href="linearalgebra.html"><i class="fa fa-check"></i><b>4</b> Linear Algebra with Torch</a><ul>
 <li class="chapter" data-level="4.1" data-path="linearalgebra.html"><a href="linearalgebra.html#scalars"><i class="fa fa-check"></i><b>4.1</b> Scalars</a></li>
@@ -226,23 +221,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>7.7</b> All together: train for multiple epochs</a></li>
 </ul></li>
 <li class="part"><span><b>V Neural Networks</b></span></li>
-<li class="chapter" data-level="8" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>8</b> A very simple neural network</a><ul>
-<li class="chapter" data-level="8.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>8.2</b> Select device</a></li>
-<li class="chapter" data-level="8.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>8.3</b> Create the dataset</a></li>
-<li class="chapter" data-level="8.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>8.4</b> Define the model</a></li>
-<li class="chapter" data-level="8.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>8.5</b> Loss function</a></li>
-<li class="chapter" data-level="8.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>8.6</b> Iterate through batches</a></li>
+<li class="chapter" data-level="8" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>8</b> A two-layer neural network</a><ul>
+<li class="chapter" data-level="8.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>8.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="8.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>8.2</b> Dataset</a></li>
+<li class="chapter" data-level="8.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>8.3</b> Run the model for 50 iterations</a></li>
+<li class="chapter" data-level="8.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>8.4</b> Run it at 100 iterations</a></li>
+<li class="chapter" data-level="8.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>8.5</b> Original PyTorch code</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>9</b> Neural Networks 2</a><ul>
-<li class="chapter" data-level="9.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>9.1</b> nn2 1</a></li>
-<li class="chapter" data-level="9.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>9.2</b> nn2 2</a></li>
+<li class="chapter" data-level="9" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>9</b> A very simple neural network</a><ul>
+<li class="chapter" data-level="9.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>9.2</b> Select device</a></li>
+<li class="chapter" data-level="9.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>9.3</b> Create the dataset</a></li>
+<li class="chapter" data-level="9.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>9.4</b> Define the model</a></li>
+<li class="chapter" data-level="9.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>9.5</b> Loss function</a></li>
+<li class="chapter" data-level="9.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>9.6</b> Iterate through batches</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="bookdown-tips.html"><a href="bookdown-tips.html"><i class="fa fa-check"></i>Bookdown tips</a><ul>
-<li class="chapter" data-level="" data-path="bookdown-tips.html"><a href="bookdown-tips.html#label-references"><i class="fa fa-check"></i>Label references</a></li>
-<li class="chapter" data-level="" data-path="bookdown-tips.html"><a href="bookdown-tips.html#figures-and-tables-with-references"><i class="fa fa-check"></i>Figures and Tables with references</a></li>
-<li class="chapter" data-level="" data-path="bookdown-tips.html"><a href="bookdown-tips.html#long-captions"><i class="fa fa-check"></i>Long captions</a></li>
-<li class="chapter" data-level="" data-path="bookdown-tips.html"><a href="bookdown-tips.html#citations-and-bibiliography"><i class="fa fa-check"></i>Citations and Bibiliography</a></li>
+<li class="chapter" data-level="10" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>10</b> Neural Networks 2</a><ul>
+<li class="chapter" data-level="10.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>10.1</b> nn2 1</a></li>
+<li class="chapter" data-level="10.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>10.2</b> nn2 2</a></li>
+</ul></li>
+<li class="part"><span><b>VI Image Recognition</b></span></li>
+<li class="part"><span><b>VII PyTorch and R data structures</b></span></li>
+<li class="chapter" data-level="11" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>11</b> Working with data.frame</a><ul>
+<li class="chapter" data-level="11.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>11.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="11.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#dataset-iteration-batch-settings"><i class="fa fa-check"></i><b>11.2</b> Dataset iteration batch settings</a></li>
+<li class="chapter" data-level="11.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>11.3</b> Summary statistics for tensors</a></li>
+<li class="chapter" data-level="11.4" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>11.4</b> using <code>data.frame</code></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>12</b> Working with data.table</a><ul>
+<li class="chapter" data-level="12.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>12.1.1</b> Using `data.table</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
+<li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#mean"><i class="fa fa-check"></i><b>A.1.1</b> Mean</a></li>
+<li class="chapter" data-level="A.1.2" data-path="appendixA.html"><a href="appendixA.html#median"><i class="fa fa-check"></i><b>A.1.2</b> Median</a></li>
+<li class="chapter" data-level="A.1.3" data-path="appendixA.html"><a href="appendixA.html#standard-deviation"><i class="fa fa-check"></i><b>A.1.3</b> Standard deviation</a></li>
+<li class="chapter" data-level="A.1.4" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.4</b> Five-number summary</a></li>
+<li class="chapter" data-level="A.1.5" data-path="appendixA.html"><a href="appendixA.html#distribution"><i class="fa fa-check"></i><b>A.1.5</b> Distribution</a></li>
+<li class="chapter" data-level="A.1.6" data-path="appendixA.html"><a href="appendixA.html#outliers"><i class="fa fa-check"></i><b>A.1.6</b> Outliers</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -265,373 +285,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bookdown-tips" class="section level1 unnumbered">
-<h1>Bookdown tips</h1>
-<div id="label-references" class="section level2 unnumbered">
-<h2>Label references</h2>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">1</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="linearalgebra.html#linearalgebra">4</a>.</p>
-<blockquote>
-<p>Note. For the labels, do not use underscore <code>_</code> or dash <code>-</code>; they will confuse bookdown referencing. Example: avoid <code>linear_algebra</code> or <code>linear-algebra</code> as labels. Preferrably, use one word.</p>
-</blockquote>
+<div id="working-with-data.frame" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Working with data.frame</h1>
+<div id="load-pytorch-libraries" class="section level2">
+<h2><span class="header-section-number">11.1</span> Load PyTorch libraries</h2>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb122-3" data-line-number="3">torch       &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torch&quot;</span>)</a>
+<a class="sourceLine" id="cb122-4" data-line-number="4">torchvision &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision&quot;</span>)</a>
+<a class="sourceLine" id="cb122-5" data-line-number="5">nn          &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torch.nn&quot;</span>)</a>
+<a class="sourceLine" id="cb122-6" data-line-number="6">transforms  &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision.transforms&quot;</span>)</a>
+<a class="sourceLine" id="cb122-7" data-line-number="7">dsets       &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;torchvision.datasets&quot;</span>)</a>
+<a class="sourceLine" id="cb122-8" data-line-number="8">builtins    &lt;-<span class="st"> </span><span class="kw">import_builtins</span>()</a>
+<a class="sourceLine" id="cb122-9" data-line-number="9">np          &lt;-<span class="st"> </span><span class="kw">import</span>(<span class="st">&quot;numpy&quot;</span>)</a></code></pre></div>
 </div>
-<div id="figures-and-tables-with-references" class="section level2 unnumbered">
-<h2>Figures and Tables with references</h2>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</a>
-<a class="sourceLine" id="cb117-2" data-line-number="2"><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="76-bookdown_tips_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 9.1: Here is a nice figure!
-</p>
+<div id="dataset-iteration-batch-settings" class="section level2">
+<h2><span class="header-section-number">11.2</span> Dataset iteration batch settings</h2>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="co"># folders where the images are located</span></a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">train_data_path =<span class="st"> &#39;~/mnist_png_full/training/&#39;</span></a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">test_data_path  =<span class="st"> &#39;~/mnist_png_full/testing/&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="co"># read the datasets without normalization</span></a>
+<a class="sourceLine" id="cb124-2" data-line-number="2">train_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">ImageFolder</span>(<span class="dt">root =</span> train_data_path, </a>
+<a class="sourceLine" id="cb124-3" data-line-number="3">    <span class="dt">transform =</span> torchvision<span class="op">$</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>()</a>
+<a class="sourceLine" id="cb124-4" data-line-number="4">)</a>
+<a class="sourceLine" id="cb124-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb124-6" data-line-number="6"><span class="kw">print</span>(train_dataset)</a>
+<a class="sourceLine" id="cb124-7" data-line-number="7"><span class="co">#&gt; Dataset ImageFolder</span></a>
+<a class="sourceLine" id="cb124-8" data-line-number="8"><span class="co">#&gt;     Number of datapoints: 60000</span></a>
+<a class="sourceLine" id="cb124-9" data-line-number="9"><span class="co">#&gt;     Root location: /home/msfz751/mnist_png_full/training/</span></a></code></pre></div>
 </div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="bookdown-tips.html#fig:nice-fig">9.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="bookdown-tips.html#tab:nice-tab">9.1</a>.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb118-4" data-line-number="4">)</a></code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 9.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
+<div id="summary-statistics-for-tensors" class="section level2">
+<h2><span class="header-section-number">11.3</span> Summary statistics for tensors</h2>
 </div>
-<div id="long-captions" class="section level2 unnumbered">
-<h2>Long captions</h2>
-<p>If you have a <strong>long caption</strong> with Latex included maybe is a good idea to write the caption as a separate paragraph, outside the <code>Rmarkdown</code> chunk. Just like this:</p>
-<pre><code>(ref:ALongCaption) **A base plot of pressure vs. temperature**. This plot   
-shows the pressure readings at different temperatures. The initial temperature,   
-$t_0$, is nearer to the intersection of the axis.</code></pre>
-<p>Then, in the caption reference copy the tag <code>(ref:ALongCaption)</code> enclosing it in quotes or single quotes.</p>
+<div id="using-data.frame" class="section level2">
+<h2><span class="header-section-number">11.4</span> using <code>data.frame</code></h2>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">library</span>(tictoc)</a>
+<a class="sourceLine" id="cb125-2" data-line-number="2"><span class="kw">tic</span>()</a>
+<a class="sourceLine" id="cb125-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb125-4" data-line-number="4">fun_list &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb125-5" data-line-number="5">    <span class="dt">size  =</span> <span class="kw">c</span>(<span class="st">&quot;size&quot;</span>),</a>
+<a class="sourceLine" id="cb125-6" data-line-number="6">    <span class="dt">numel =</span> <span class="kw">c</span>(<span class="st">&quot;numel&quot;</span>),</a>
+<a class="sourceLine" id="cb125-7" data-line-number="7">    <span class="dt">sum   =</span> <span class="kw">c</span>(<span class="st">&quot;sum&quot;</span>,    <span class="st">&quot;item&quot;</span>),</a>
+<a class="sourceLine" id="cb125-8" data-line-number="8">    <span class="dt">mean  =</span> <span class="kw">c</span>(<span class="st">&quot;mean&quot;</span>,   <span class="st">&quot;item&quot;</span>),</a>
+<a class="sourceLine" id="cb125-9" data-line-number="9">    <span class="dt">std   =</span> <span class="kw">c</span>(<span class="st">&quot;std&quot;</span>,    <span class="st">&quot;item&quot;</span>),</a>
+<a class="sourceLine" id="cb125-10" data-line-number="10">    <span class="dt">med   =</span> <span class="kw">c</span>(<span class="st">&quot;median&quot;</span>, <span class="st">&quot;item&quot;</span>),</a>
+<a class="sourceLine" id="cb125-11" data-line-number="11">    <span class="dt">max   =</span> <span class="kw">c</span>(<span class="st">&quot;max&quot;</span>,    <span class="st">&quot;item&quot;</span>),</a>
+<a class="sourceLine" id="cb125-12" data-line-number="12">    <span class="dt">min   =</span> <span class="kw">c</span>(<span class="st">&quot;min&quot;</span>,    <span class="st">&quot;item&quot;</span>)</a>
+<a class="sourceLine" id="cb125-13" data-line-number="13">    )</a>
+<a class="sourceLine" id="cb125-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb125-15" data-line-number="15">idx &lt;-<span class="st"> </span><span class="kw">seq</span>(0L, 599L)    <span class="co"># how many samples</span></a>
+<a class="sourceLine" id="cb125-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb125-17" data-line-number="17">fun_get_tensor &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">py_get_item</span>(train_dataset, x)[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb125-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb125-19" data-line-number="19">stat_fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, str_fun) {</a>
+<a class="sourceLine" id="cb125-20" data-line-number="20">  fun_var &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;fun_get_tensor(x)&quot;</span>, <span class="st">&quot;$&quot;</span>, str_fun, <span class="st">&quot;()&quot;</span>)</a>
+<a class="sourceLine" id="cb125-21" data-line-number="21">  <span class="kw">sapply</span>(idx, <span class="cf">function</span>(x) </a>
+<a class="sourceLine" id="cb125-22" data-line-number="22">    <span class="kw">ifelse</span>(<span class="kw">is.numeric</span>(<span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> fun_var))),  <span class="co"># size return chracater</span></a>
+<a class="sourceLine" id="cb125-23" data-line-number="23">           <span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> fun_var)),              <span class="co"># all else are numeric</span></a>
+<a class="sourceLine" id="cb125-24" data-line-number="24">           <span class="kw">as.character</span>(<span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> fun_var)))))</a>
+<a class="sourceLine" id="cb125-25" data-line-number="25">}  </a>
+<a class="sourceLine" id="cb125-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb125-27" data-line-number="27">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ridx =</span> idx<span class="op">+</span><span class="dv">1</span>,      <span class="co"># index number for the sample</span></a>
+<a class="sourceLine" id="cb125-28" data-line-number="28">  <span class="kw">do.call</span>(data.frame, </a>
+<a class="sourceLine" id="cb125-29" data-line-number="29">          <span class="kw">lapply</span>(</a>
+<a class="sourceLine" id="cb125-30" data-line-number="30">              <span class="kw">sapply</span>(fun_list, <span class="cf">function</span>(x) <span class="kw">paste</span>(x, <span class="dt">collapse =</span> <span class="st">&quot;()$&quot;</span>)), </a>
+<a class="sourceLine" id="cb125-31" data-line-number="31">              <span class="cf">function</span>(y) <span class="kw">stat_fun</span>(<span class="dv">1</span>, y)</a>
+<a class="sourceLine" id="cb125-32" data-line-number="32">          )</a>
+<a class="sourceLine" id="cb125-33" data-line-number="33">  )</a>
+<a class="sourceLine" id="cb125-34" data-line-number="34">)</a>
+<a class="sourceLine" id="cb125-35" data-line-number="35"><span class="kw">head</span>(df)</a>
+<a class="sourceLine" id="cb125-36" data-line-number="36"><span class="co">#&gt;   ridx                    size numel sum  mean   std med max min</span></a>
+<a class="sourceLine" id="cb125-37" data-line-number="37"><span class="co">#&gt; 1    1 torch.Size([3, 28, 28])  2352 366 0.156 0.329   0   1   0</span></a>
+<a class="sourceLine" id="cb125-38" data-line-number="38"><span class="co">#&gt; 2    2 torch.Size([3, 28, 28])  2352 284 0.121 0.297   0   1   0</span></a>
+<a class="sourceLine" id="cb125-39" data-line-number="39"><span class="co">#&gt; 3    3 torch.Size([3, 28, 28])  2352 645 0.274 0.420   0   1   0</span></a>
+<a class="sourceLine" id="cb125-40" data-line-number="40"><span class="co">#&gt; 4    4 torch.Size([3, 28, 28])  2352 410 0.174 0.355   0   1   0</span></a>
+<a class="sourceLine" id="cb125-41" data-line-number="41"><span class="co">#&gt; 5    5 torch.Size([3, 28, 28])  2352 321 0.137 0.312   0   1   0</span></a>
+<a class="sourceLine" id="cb125-42" data-line-number="42"><span class="co">#&gt; 6    6 torch.Size([3, 28, 28])  2352 654 0.278 0.421   0   1   0</span></a>
+<a class="sourceLine" id="cb125-43" data-line-number="43"><span class="kw">toc</span>()</a>
+<a class="sourceLine" id="cb125-44" data-line-number="44"><span class="co">#&gt; 11.27 sec elapsed</span></a>
+<a class="sourceLine" id="cb125-45" data-line-number="45"><span class="co"># 59    1.663s</span></a>
+<a class="sourceLine" id="cb125-46" data-line-number="46"><span class="co">#   599  13.5s</span></a>
+<a class="sourceLine" id="cb125-47" data-line-number="47"><span class="co">#  5999  54.321 sec; 137.6s</span></a>
+<a class="sourceLine" id="cb125-48" data-line-number="48"><span class="co"># 59999 553.489 sec elapsed</span></a></code></pre></div>
 
-<div class="figure" style="text-align: center"><span id="fig:fig-long-caption"></span>
-<img src="76-bookdown_tips_files/figure-html/fig-long-caption-1.png" alt="A base plot of pressure vs. temperature. This plot shows the pressure readings at different temperatures. The initial temperature, \(t_0\), is nearer to the intersection of the axis." width="80%" />
-<p class="caption">
-Figure 9.2: <strong>A base plot of pressure vs. temperature</strong>. This plot shows the pressure readings at different temperatures. The initial temperature, <span class="math inline">\(t_0\)</span>, is nearer to the intersection of the axis.
-</p>
-</div>
-<p>With tables, do the same with long captions.</p>
-<pre><code>(ref:TabLongCaption) The following table shows the numerical data for the
-sepal and petal measurements.</code></pre>
-<p>And then insert the tag reference where the caption should go enclosed in quotes or single quotes.</p>
-
-<table>
-<caption><span id="tab:tab-long-caption">Table 9.2: </span>The following table shows the numerical data for the sepal and petal measurements.</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="citations-and-bibiliography" class="section level2 unnumbered">
-<h2>Citations and Bibiliography</h2>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2019</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
-
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
-</div>
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2019. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
 </div>
 </div>
             </section>
@@ -640,7 +376,7 @@ sepal and petal measurements.</code></pre>
         </div>
       </div>
 <a href="neural-networks-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-data-table.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
