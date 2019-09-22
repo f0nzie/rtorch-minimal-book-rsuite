@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Example 1: MNIST handwritten digits | A Minimal rTorch Tutorial</title>
+  <title>Chapter 7 A classic classification problem | A Minimal rTorch Tutorial</title>
   <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Example 1: MNIST handwritten digits | A Minimal rTorch Tutorial" />
+  <meta property="og:title" content="Chapter 7 A classic classification problem | A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Example 1: MNIST handwritten digits | A Minimal rTorch Tutorial" />
+  <meta name="twitter:title" content="Chapter 7 A classic classification problem | A Minimal rTorch Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linearalgebra.html"/>
-<link rel="next" href="the-sigmoid-function.html"/>
+<link rel="prev" href="the-sigmoid-function.html"/>
+<link rel="next" href="simple-linear-regression.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -324,166 +324,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mnistdigits" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Example 1: MNIST handwritten digits</h1>
-<p>Source: <a href="https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/logistic_regression/main.py" class="uri">https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/logistic_regression/main.py</a></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
-<a class="sourceLine" id="cb160-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb160-3" data-line-number="3">nn          &lt;-<span class="st"> </span>torch<span class="op">$</span>nn</a>
-<a class="sourceLine" id="cb160-4" data-line-number="4">transforms  &lt;-<span class="st"> </span>torchvision<span class="op">$</span>transforms</a>
-<a class="sourceLine" id="cb160-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb160-6" data-line-number="6">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>float)</a></code></pre></div>
-<div id="hyperparameters" class="section level2">
-<h2><span class="header-section-number">5.1</span> Hyperparameters</h2>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co"># Hyper-parameters </span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2">input_size    &lt;-<span class="st"> </span>784L</a>
-<a class="sourceLine" id="cb161-3" data-line-number="3">num_classes   &lt;-<span class="st"> </span>10L</a>
-<a class="sourceLine" id="cb161-4" data-line-number="4">num_epochs    &lt;-<span class="st"> </span>5L</a>
-<a class="sourceLine" id="cb161-5" data-line-number="5">batch_size    &lt;-<span class="st"> </span>100L</a>
-<a class="sourceLine" id="cb161-6" data-line-number="6">learning_rate &lt;-<span class="st"> </span><span class="fl">0.001</span></a></code></pre></div>
-</div>
-<div id="read-datasets" class="section level2">
-<h2><span class="header-section-number">5.2</span> Read datasets</h2>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="co"># MNIST dataset (images and labels)</span></a>
-<a class="sourceLine" id="cb162-2" data-line-number="2"><span class="co"># IDX format</span></a>
-<a class="sourceLine" id="cb162-3" data-line-number="3">local_folder &lt;-<span class="st"> &#39;../datasets/raw_data&#39;</span></a>
-<a class="sourceLine" id="cb162-4" data-line-number="4">train_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
-<a class="sourceLine" id="cb162-5" data-line-number="5">                                           <span class="dt">train=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb162-6" data-line-number="6">                                           <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>(),</a>
-<a class="sourceLine" id="cb162-7" data-line-number="7">                                           <span class="dt">download=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb162-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb162-9" data-line-number="9">test_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
-<a class="sourceLine" id="cb162-10" data-line-number="10">                                          <span class="dt">train=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb162-11" data-line-number="11">                                          <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>())</a>
-<a class="sourceLine" id="cb162-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb162-13" data-line-number="13"><span class="co"># Data loader (input pipeline). Make the datasets iteratble</span></a>
-<a class="sourceLine" id="cb162-14" data-line-number="14">train_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>train_dataset, </a>
-<a class="sourceLine" id="cb162-15" data-line-number="15">                                           <span class="dt">batch_size=</span>batch_size, </a>
-<a class="sourceLine" id="cb162-16" data-line-number="16">                                           <span class="dt">shuffle=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb162-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb162-18" data-line-number="18">test_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>test_dataset, </a>
-<a class="sourceLine" id="cb162-19" data-line-number="19">                                          <span class="dt">batch_size=</span>batch_size, </a>
-<a class="sourceLine" id="cb162-20" data-line-number="20">                                          <span class="dt">shuffle=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">class</span>(train_loader)</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="co">#&gt; [1] &quot;torch.utils.data.dataloader.DataLoader&quot;</span></a>
-<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="co">#&gt; [2] &quot;python.builtin.object&quot;</span></a>
-<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="kw">length</span>(train_loader)</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
-</div>
-<div id="define-the-model" class="section level2">
-<h2><span class="header-section-number">5.3</span> Define the model</h2>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="co"># Logistic regression model</span></a>
-<a class="sourceLine" id="cb164-2" data-line-number="2">model =<span class="st"> </span>nn<span class="op">$</span><span class="kw">Linear</span>(input_size, num_classes)</a>
-<a class="sourceLine" id="cb164-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb164-4" data-line-number="4"><span class="co"># Loss and optimizer</span></a>
-<a class="sourceLine" id="cb164-5" data-line-number="5"><span class="co"># nn.CrossEntropyLoss() computes softmax internally</span></a>
-<a class="sourceLine" id="cb164-6" data-line-number="6">criterion =<span class="st"> </span>nn<span class="op">$</span><span class="kw">CrossEntropyLoss</span>()  </a>
-<a class="sourceLine" id="cb164-7" data-line-number="7">optimizer =<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(model<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span>learning_rate)  </a>
-<a class="sourceLine" id="cb164-8" data-line-number="8"><span class="kw">print</span>(model)</a>
-<a class="sourceLine" id="cb164-9" data-line-number="9"><span class="co">#&gt; Linear(in_features=784, out_features=10, bias=True)</span></a></code></pre></div>
-</div>
-<div id="training" class="section level2">
-<h2><span class="header-section-number">5.4</span> Training</h2>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="co"># Train the model</span></a>
-<a class="sourceLine" id="cb165-2" data-line-number="2">iter_train_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(train_loader)</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3">total_step &lt;-<span class="kw">length</span>(iter_train_loader)</a></code></pre></div>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
-<a class="sourceLine" id="cb166-2" data-line-number="2">    i &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb166-3" data-line-number="3">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_train_loader) {</a>
-<a class="sourceLine" id="cb166-4" data-line-number="4">        </a>
-<a class="sourceLine" id="cb166-5" data-line-number="5">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
-<a class="sourceLine" id="cb166-6" data-line-number="6">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
-<a class="sourceLine" id="cb166-7" data-line-number="7">        <span class="co"># cat(i, &quot;\t&quot;); print(images$shape)</span></a>
-<a class="sourceLine" id="cb166-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb166-9" data-line-number="9">        <span class="co"># Reshape images to (batch_size, input_size)</span></a>
-<a class="sourceLine" id="cb166-10" data-line-number="10">        images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
-<a class="sourceLine" id="cb166-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
-<a class="sourceLine" id="cb166-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb166-13" data-line-number="13">        <span class="co"># Forward pass</span></a>
-<a class="sourceLine" id="cb166-14" data-line-number="14">        outputs &lt;-<span class="st"> </span><span class="kw">model</span>(images)</a>
-<a class="sourceLine" id="cb166-15" data-line-number="15">        loss &lt;-<span class="st"> </span><span class="kw">criterion</span>(outputs, labels)</a>
-<a class="sourceLine" id="cb166-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb166-17" data-line-number="17">        <span class="co"># Backward and optimize</span></a>
-<a class="sourceLine" id="cb166-18" data-line-number="18">        optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
-<a class="sourceLine" id="cb166-19" data-line-number="19">        loss<span class="op">$</span><span class="kw">backward</span>()</a>
-<a class="sourceLine" id="cb166-20" data-line-number="20">        optimizer<span class="op">$</span><span class="kw">step</span>()</a>
-<a class="sourceLine" id="cb166-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb166-22" data-line-number="22">        <span class="cf">if</span> ((i<span class="op">+</span><span class="dv">1</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb166-23" data-line-number="23">            <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Epoch [%d/%d], Step [%d/%d], Loss: %f </span><span class="ch">\n</span><span class="st">&#39;</span>,</a>
-<a class="sourceLine" id="cb166-24" data-line-number="24">                epoch<span class="op">+</span><span class="dv">1</span>, num_epochs, i<span class="op">+</span><span class="dv">1</span>, total_step, loss<span class="op">$</span><span class="kw">item</span>()))</a>
-<a class="sourceLine" id="cb166-25" data-line-number="25">        }</a>
-<a class="sourceLine" id="cb166-26" data-line-number="26">        i &lt;-<span class="st">  </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb166-27" data-line-number="27">    }</a>
-<a class="sourceLine" id="cb166-28" data-line-number="28">}  </a>
-<a class="sourceLine" id="cb166-29" data-line-number="29"><span class="co">#&gt; Epoch [2/5], Step [100/600], Loss: 2.175031 </span></a>
-<a class="sourceLine" id="cb166-30" data-line-number="30"><span class="co">#&gt; Epoch [2/5], Step [200/600], Loss: 2.093698 </span></a>
-<a class="sourceLine" id="cb166-31" data-line-number="31"><span class="co">#&gt; Epoch [2/5], Step [300/600], Loss: 2.010728 </span></a>
-<a class="sourceLine" id="cb166-32" data-line-number="32"><span class="co">#&gt; Epoch [2/5], Step [400/600], Loss: 1.919379 </span></a>
-<a class="sourceLine" id="cb166-33" data-line-number="33"><span class="co">#&gt; Epoch [2/5], Step [500/600], Loss: 1.809128 </span></a>
-<a class="sourceLine" id="cb166-34" data-line-number="34"><span class="co">#&gt; Epoch [2/5], Step [600/600], Loss: 1.810952 </span></a>
-<a class="sourceLine" id="cb166-35" data-line-number="35"><span class="co">#&gt; Epoch [3/5], Step [100/600], Loss: 1.710733 </span></a>
-<a class="sourceLine" id="cb166-36" data-line-number="36"><span class="co">#&gt; Epoch [3/5], Step [200/600], Loss: 1.607757 </span></a>
-<a class="sourceLine" id="cb166-37" data-line-number="37"><span class="co">#&gt; Epoch [3/5], Step [300/600], Loss: 1.598756 </span></a>
-<a class="sourceLine" id="cb166-38" data-line-number="38"><span class="co">#&gt; Epoch [3/5], Step [400/600], Loss: 1.554271 </span></a>
-<a class="sourceLine" id="cb166-39" data-line-number="39"><span class="co">#&gt; Epoch [3/5], Step [500/600], Loss: 1.464945 </span></a>
-<a class="sourceLine" id="cb166-40" data-line-number="40"><span class="co">#&gt; Epoch [3/5], Step [600/600], Loss: 1.491697 </span></a>
-<a class="sourceLine" id="cb166-41" data-line-number="41"><span class="co">#&gt; Epoch [4/5], Step [100/600], Loss: 1.412455 </span></a>
-<a class="sourceLine" id="cb166-42" data-line-number="42"><span class="co">#&gt; Epoch [4/5], Step [200/600], Loss: 1.292850 </span></a>
-<a class="sourceLine" id="cb166-43" data-line-number="43"><span class="co">#&gt; Epoch [4/5], Step [300/600], Loss: 1.340431 </span></a>
-<a class="sourceLine" id="cb166-44" data-line-number="44"><span class="co">#&gt; Epoch [4/5], Step [400/600], Loss: 1.315060 </span></a>
-<a class="sourceLine" id="cb166-45" data-line-number="45"><span class="co">#&gt; Epoch [4/5], Step [500/600], Loss: 1.246835 </span></a>
-<a class="sourceLine" id="cb166-46" data-line-number="46"><span class="co">#&gt; Epoch [4/5], Step [600/600], Loss: 1.282187 </span></a>
-<a class="sourceLine" id="cb166-47" data-line-number="47"><span class="co">#&gt; Epoch [5/5], Step [100/600], Loss: 1.217498 </span></a>
-<a class="sourceLine" id="cb166-48" data-line-number="48"><span class="co">#&gt; Epoch [5/5], Step [200/600], Loss: 1.088097 </span></a>
-<a class="sourceLine" id="cb166-49" data-line-number="49"><span class="co">#&gt; Epoch [5/5], Step [300/600], Loss: 1.171362 </span></a>
-<a class="sourceLine" id="cb166-50" data-line-number="50"><span class="co">#&gt; Epoch [5/5], Step [400/600], Loss: 1.152947 </span></a>
-<a class="sourceLine" id="cb166-51" data-line-number="51"><span class="co">#&gt; Epoch [5/5], Step [500/600], Loss: 1.100762 </span></a>
-<a class="sourceLine" id="cb166-52" data-line-number="52"><span class="co">#&gt; Epoch [5/5], Step [600/600], Loss: 1.138870 </span></a>
-<a class="sourceLine" id="cb166-53" data-line-number="53"><span class="co">#&gt; Epoch [6/5], Step [100/600], Loss: 1.083696 </span></a>
-<a class="sourceLine" id="cb166-54" data-line-number="54"><span class="co">#&gt; Epoch [6/5], Step [200/600], Loss: 0.948392 </span></a>
-<a class="sourceLine" id="cb166-55" data-line-number="55"><span class="co">#&gt; Epoch [6/5], Step [300/600], Loss: 1.054588 </span></a>
-<a class="sourceLine" id="cb166-56" data-line-number="56"><span class="co">#&gt; Epoch [6/5], Step [400/600], Loss: 1.037630 </span></a>
-<a class="sourceLine" id="cb166-57" data-line-number="57"><span class="co">#&gt; Epoch [6/5], Step [500/600], Loss: 0.997384 </span></a>
-<a class="sourceLine" id="cb166-58" data-line-number="58"><span class="co">#&gt; Epoch [6/5], Step [600/600], Loss: 1.036139</span></a></code></pre></div>
-</div>
-<div id="prediction" class="section level2">
-<h2><span class="header-section-number">5.5</span> Prediction</h2>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
-<a class="sourceLine" id="cb167-2" data-line-number="2">iter_test_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(test_loader)</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
-<a class="sourceLine" id="cb167-5" data-line-number="5">    correct &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb167-6" data-line-number="6">    total &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb167-7" data-line-number="7">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_test_loader) {</a>
-<a class="sourceLine" id="cb167-8" data-line-number="8">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
-<a class="sourceLine" id="cb167-9" data-line-number="9">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
-<a class="sourceLine" id="cb167-10" data-line-number="10">        images =<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
-<a class="sourceLine" id="cb167-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
-<a class="sourceLine" id="cb167-12" data-line-number="12">        outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
-<a class="sourceLine" id="cb167-13" data-line-number="13">        .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
-<a class="sourceLine" id="cb167-14" data-line-number="14">        predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
-<a class="sourceLine" id="cb167-15" data-line-number="15">        total =<span class="st"> </span>total <span class="op">+</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">size</span>(0L)</a>
-<a class="sourceLine" id="cb167-16" data-line-number="16">        correct =<span class="st"> </span>correct <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>((predicted<span class="op">$</span><span class="kw">numpy</span>() <span class="op">==</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">numpy</span>()))</a>
-<a class="sourceLine" id="cb167-17" data-line-number="17">    }</a>
-<a class="sourceLine" id="cb167-18" data-line-number="18">    <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Accuracy of the model on the 10000 test images: %f %%&#39;</span>, (<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total)))</a>
-<a class="sourceLine" id="cb167-19" data-line-number="19">  </a>
-<a class="sourceLine" id="cb167-20" data-line-number="20">})</a>
-<a class="sourceLine" id="cb167-21" data-line-number="21"><span class="co">#&gt; Accuracy of the model on the 10000 test images: 83.450000 %</span></a></code></pre></div>
-</div>
-<div id="save-the-model" class="section level2">
-<h2><span class="header-section-number">5.6</span> Save the model</h2>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="co"># Save the model checkpoint</span></a>
-<a class="sourceLine" id="cb168-2" data-line-number="2">torch<span class="op">$</span><span class="kw">save</span>(model<span class="op">$</span><span class="kw">state_dict</span>(), <span class="st">&#39;model.ckpt&#39;</span>)</a></code></pre></div>
+<div id="a-classic-classification-problem" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> A classic classification problem</h1>
+<p>I will combine here R and Python code just to show how easy is integrating R and Python. First thing we have to do is loading the package <code>rTorch</code>. We do that in a chunk:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<p>Then, we proceed to copy the standard Python code but in their own <code>Python</code> chunks. This is a very nice example that I found in the web. It explains the classic challenge of classification.</p>
+<p>When <code>rTorch</code> is loaded, a number of Python libraries are also loaded, which enable us the immediate use of numpy, torch and matplotlib.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="co"># Logistic Regression</span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="co"># https://m-alcu.github.io/blog/2018/02/10/logit-pytorch/</span></a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="im">import</span> torch</a>
+<a class="sourceLine" id="cb173-5" data-line-number="5"><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</a>
+<a class="sourceLine" id="cb173-6" data-line-number="6"><span class="im">from</span> torch.autograd <span class="im">import</span> Variable</a>
+<a class="sourceLine" id="cb173-7" data-line-number="7"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a></code></pre></div>
+<p>The next thing we do is setting a seed to make the example repeatable, in my machine and yours.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb174-1" data-line-number="1">np.random.seed(<span class="dv">2048</span>)</a></code></pre></div>
+<p>Then we generate some random samples.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb175-1" data-line-number="1">N <span class="op">=</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb175-2" data-line-number="2">D <span class="op">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb175-3" data-line-number="3">X <span class="op">=</span> np.random.randn(N, D) <span class="op">*</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb175-4" data-line-number="4">ctr <span class="op">=</span> <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="co"># center the first N/2 points at (-2,-2)</span></a>
+<a class="sourceLine" id="cb175-6" data-line-number="6">X[:ctr,:] <span class="op">=</span> X[:ctr,:] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
+<a class="sourceLine" id="cb175-7" data-line-number="7"><span class="co"># center the last N/2 points at (2, 2)</span></a>
+<a class="sourceLine" id="cb175-8" data-line-number="8">X[ctr:,:] <span class="op">=</span> X[ctr:,:] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
+<a class="sourceLine" id="cb175-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb175-10" data-line-number="10"><span class="co"># labels: first N/2 are 0, last N/2 are 1</span></a>
+<a class="sourceLine" id="cb175-11" data-line-number="11"><span class="co"># mark the first half with 0 and the sceond half with 1</span></a>
+<a class="sourceLine" id="cb175-12" data-line-number="12">T <span class="op">=</span> np.array([<span class="dv">0</span>] <span class="op">*</span> ctr <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> ctr).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</a></code></pre></div>
+<p>And plot the original data for reference.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="co"># plot the data. color the dots using T</span></a>
+<a class="sourceLine" id="cb176-2" data-line-number="2">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb176-3" data-line-number="3">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
+<a class="sourceLine" id="cb176-4" data-line-number="4">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a></code></pre></div>
+<p><img src="0303-logistics_regression_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>What follows is the definition of the model using a neural network and train the model. We set up the model:</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">class</span> Model(torch.nn.Module):</a>
+<a class="sourceLine" id="cb177-2" data-line-number="2">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb177-3" data-line-number="3">        <span class="bu">super</span>(Model, <span class="va">self</span>).<span class="fu">__init__</span>()</a>
+<a class="sourceLine" id="cb177-4" data-line-number="4">        <span class="va">self</span>.linear <span class="op">=</span> torch.nn.Linear(<span class="dv">2</span>, <span class="dv">1</span>) <span class="co"># 2 in and 1 out</span></a>
+<a class="sourceLine" id="cb177-5" data-line-number="5">        </a>
+<a class="sourceLine" id="cb177-6" data-line-number="6">    <span class="kw">def</span> forward(<span class="va">self</span>, x):</a>
+<a class="sourceLine" id="cb177-7" data-line-number="7">        y_pred <span class="op">=</span> torch.sigmoid(<span class="va">self</span>.linear(x))</a>
+<a class="sourceLine" id="cb177-8" data-line-number="8">        <span class="cf">return</span> y_pred</a>
+<a class="sourceLine" id="cb177-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb177-10" data-line-number="10"><span class="co"># Our model    </span></a>
+<a class="sourceLine" id="cb177-11" data-line-number="11">model <span class="op">=</span> Model()</a>
+<a class="sourceLine" id="cb177-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb177-13" data-line-number="13">criterion <span class="op">=</span> torch.nn.BCELoss(reduction<span class="op">=</span><span class="st">&#39;mean&#39;</span>)</a>
+<a class="sourceLine" id="cb177-14" data-line-number="14">optimizer <span class="op">=</span> torch.optim.SGD(model.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</a></code></pre></div>
+<p>Train the model:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb178-1" data-line-number="1">x_data <span class="op">=</span> Variable(torch.Tensor(X))</a>
+<a class="sourceLine" id="cb178-2" data-line-number="2">y_data <span class="op">=</span> Variable(torch.Tensor(T))</a>
+<a class="sourceLine" id="cb178-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb178-4" data-line-number="4"><span class="co"># Training loop</span></a>
+<a class="sourceLine" id="cb178-5" data-line-number="5"><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</a>
+<a class="sourceLine" id="cb178-6" data-line-number="6">    <span class="co"># Forward pass: Compute predicted y by passing x to the model</span></a>
+<a class="sourceLine" id="cb178-7" data-line-number="7">    y_pred <span class="op">=</span> model(x_data)</a>
+<a class="sourceLine" id="cb178-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb178-9" data-line-number="9">    <span class="co"># Compute and print loss</span></a>
+<a class="sourceLine" id="cb178-10" data-line-number="10">    loss <span class="op">=</span> criterion(y_pred, y_data)</a>
+<a class="sourceLine" id="cb178-11" data-line-number="11">    <span class="co"># print(epoch, loss.data[0])</span></a>
+<a class="sourceLine" id="cb178-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb178-13" data-line-number="13">    <span class="co"># Zero gradients, perform a backward pass, and update the weights.</span></a>
+<a class="sourceLine" id="cb178-14" data-line-number="14">    optimizer.zero_grad()</a>
+<a class="sourceLine" id="cb178-15" data-line-number="15">    loss.backward()</a>
+<a class="sourceLine" id="cb178-16" data-line-number="16">    optimizer.step()</a>
+<a class="sourceLine" id="cb178-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb178-18" data-line-number="18">w <span class="op">=</span> <span class="bu">list</span>(model.parameters())</a>
+<a class="sourceLine" id="cb178-19" data-line-number="19">w0 <span class="op">=</span> w[<span class="dv">0</span>].data.numpy()</a>
+<a class="sourceLine" id="cb178-20" data-line-number="20">w1 <span class="op">=</span> w[<span class="dv">1</span>].data.numpy()    </a></code></pre></div>
+<p>Finally, we plot the results, by tracing the line that separates two classes, 0 and 1, which are both colored in the plot.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&quot;Final gradient descend:&quot;</span>, w)</a>
+<a class="sourceLine" id="cb179-2" data-line-number="2"><span class="co"># plot the data and separating line</span></a>
+<a class="sourceLine" id="cb179-3" data-line-number="3"><span class="co">#&gt; Final gradient descend: [Parameter containing:</span></a>
+<a class="sourceLine" id="cb179-4" data-line-number="4"><span class="co">#&gt; tensor([[1.0837, 1.1231]], requires_grad=True), Parameter containing:</span></a>
+<a class="sourceLine" id="cb179-5" data-line-number="5"><span class="co">#&gt; tensor([0.0724], requires_grad=True)]</span></a>
+<a class="sourceLine" id="cb179-6" data-line-number="6">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb179-7" data-line-number="7">x_axis <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb179-8" data-line-number="8">y_axis <span class="op">=</span> <span class="op">-</span>(w1[<span class="dv">0</span>] <span class="op">+</span> x_axis <span class="op">*</span> w0[<span class="dv">0</span>][<span class="dv">0</span>]) <span class="op">/</span> w0[<span class="dv">0</span>][<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb179-9" data-line-number="9">line_up, <span class="op">=</span> plt.plot(x_axis, y_axis,<span class="st">&#39;r--&#39;</span>, label<span class="op">=</span><span class="st">&#39;gradient descent&#39;</span>)</a>
+<a class="sourceLine" id="cb179-10" data-line-number="10">plt.legend(handles<span class="op">=</span>[line_up])</a>
+<a class="sourceLine" id="cb179-11" data-line-number="11">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
+<a class="sourceLine" id="cb179-12" data-line-number="12">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a>
+<a class="sourceLine" id="cb179-13" data-line-number="13">plt.show()</a></code></pre></div>
+<p><img src="0303-logistics_regression_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="linearalgebra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-sigmoid-function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-sigmoid-function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
