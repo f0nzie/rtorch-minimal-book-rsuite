@@ -13,6 +13,8 @@
 * Numbering follows the PART number. Example: 0301-, 0302-, 0303, for consecutive chapters.
 * Folder `work` for temporary books or testing.
 * Main book resides in `rtorch-bookdown`.
+* Moving notebooks that are completed to folder `advanced`.
+* Changed named of repository to `rtorch-minimal-book.git`.
 
 
 ## 0.0.1 (2019-09-10)
