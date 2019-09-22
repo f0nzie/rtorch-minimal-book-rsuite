@@ -5,7 +5,6 @@
 We describe the most important PyTorch methods in this chapter.
 
 
-
 ```{r}
 library(rTorch)
 

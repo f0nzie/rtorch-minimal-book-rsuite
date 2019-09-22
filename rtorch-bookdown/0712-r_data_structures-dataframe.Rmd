@@ -37,7 +37,7 @@ print(train_dataset)
 
 ### using `data.frame`
 
-```{r use-dataframe}
+```{r use-dataframe-599}
 library(tictoc)
 tic()
 

@@ -1,20 +1,3 @@
-```{r include=FALSE, cache=FALSE}
-set.seed(1234)
-options(digits = 3)
-
-knitr::opts_chunk$set(
-    comment = "#>",
-    collapse = TRUE,
-    cache = FALSE,
-    out.width = "70%",
-    fig.align = 'center',
-    fig.width = 6,
-    fig.asp = 0.618,  # 1 / phi
-    fig.show = "hold"
-)
-
-# options(dplyr.print_min = 6, dplyr.print_max = 6)
-```
 # rTorch vs PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
@@ -48,7 +31,7 @@ Then we can proceed to extract classes, methods and functions from the `nn`, `tr
 Sometimes we are interested in knowing the internal components of a class. In that case, we use the reticulate function `py_list_attributes()`.
 
 ```{r mnist-digits-train-dataset}
-local_folder <- '../datasets/mnist_digits'
+local_folder <- './datasets/mnist_digits'
 train_dataset = torchvision$datasets$MNIST(root = local_folder, 
                                            train = TRUE, 
                                            transform = transforms$ToTensor(),
@@ -57,6 +40,7 @@ train_dataset = torchvision$datasets$MNIST(root = local_folder,
 train_dataset
 ```
 
+Show the attributes of `train_dataset`:
 ```{r list-attributes}
 reticulate::py_list_attributes(train_dataset)
 ```
@@ -125,7 +109,9 @@ for (i in 1:py$len(x_train)) {
 > We will find very frequently this kind of iterators when we read a dataset using `torchvision`. There are different ways to iterate through these objects.
 
 ## Zero gradient
-The zero gradient was one of the most difficult to implement in R if we don't pay attention to the content of the objects carrying the weights and biases. This happens when the algorithm written in PyTorch is not immediately translatable to rTorch. This can be appreciated in this example.
+The zero gradient was one of the most difficult to implement in R if we don't pay attention to the content of the objects carrying the weights and biases. This happens when the algorithm written in __PyTorch__ is not immediately translatable to __rTorch__. This can be appreciated in this example.
+
+> We are using the same seed in the PyTorch and rTorch versions, so, we could compare the results.
 
 ### Version in Python
 
@@ -281,8 +267,29 @@ w -= w.grad * 1e-5
 
 In R shows a little bit more convoluted:
 
-```{r r-calc-gradient, eval=FALSE}
+```{r r-calc-gradient1, eval=FALSE}
 w$data <- torch$sub(w$data, torch$mul(w$grad, torch$scalar_tensor(1e-5)))
+```
+
+Which is simpliefied when we use the generic methods from rTorch as:
+
+
+```{r r-calc-gradient2, eval=FALSE}
+w$data <- w$data - w$grad * 1e-5
+```
+
+
+These two expression are equivalent, with the first being the long version natural way of doing it in __PyTorch__. The second is using the generics in R for subtraction, multiplication and scalar conversion.
+
+```
+param$data <- torch$sub(param$data,
+                        torch$mul(param$grad$float(),
+                          torch$scalar_tensor(learning_rate)))
+}
+```
+
+```
+param$data <- param$data - param$grad * learning_rate
 ```
 
 
@@ -292,12 +299,55 @@ Why is this important?
 
 
 ## Build a model class
-PyTorch classes cannot not directly instantiated from `R`. We need an intermediate step to create a class. For this, we use `reticulate` functions that will read the class implementation in `Python` code.
+PyTorch classes cannot not directly be instantiated from `R`. We need an intermediate step to create a class. For this, we use `reticulate` functions that will read the class implementation in `Python` code.
 
 
 ### Example 1
 
-### Example 2
+```{r class-linreg, eval=FALSE}
+py_run_string("import torch")
+main = py_run_string(
+"
+import torch.nn as nn
+
+class Net(nn.Module):
+   def __init__(self):
+       super(Net, self).__init__()
+       self.layer = torch.nn.Linear(1, 1)
+
+   def forward(self, x):
+       x = self.layer(x)      
+       return x
+")
+
+
+# build a Linear Rgression model
+net <- main$Net()
+```
+
+
+
+### Example 2: Logistic Regression
+
+```{r class-logreg, eval=FALSE}
+main <- py_run_string(
+"
+import torch.nn as nn
+
+class LogisticRegressionModel(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(LogisticRegressionModel, self).__init__()
+        self.linear = nn.Linear(input_dim, output_dim)
+
+    def forward(self, x):
+        out = self.linear(x)
+        return out
+")
+
+# build a Logistic Rgression model
+LogisticRegressionModel <- main$LogisticRegressionModel
+```
+
 
 
 ## Convert a tensor to `numpy` object
