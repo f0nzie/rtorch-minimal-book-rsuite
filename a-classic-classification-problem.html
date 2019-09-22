@@ -142,10 +142,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#getting-the-pytorch-version"><i class="fa fa-check"></i><b>1.2.1</b> Getting the PyTorch version</a></li>
 <li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#pytorch-configuration"><i class="fa fa-check"></i><b>1.2.2</b> PyTorch configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a><ul>
-<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.3.1</b> The <code>torchvision</code> module</a></li>
-<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.3.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
-<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.3.3</b> Python built-in functions</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#callable-pytorch-modules"><i class="fa fa-check"></i><b>1.4</b> Callable PyTorch modules</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.4.1</b> The <code>torchvision</code> module</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.4.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.4.3</b> Python built-in functions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html"><i class="fa fa-check"></i><b>2</b> rTorch vs PyTorch: What’s different</a><ul>
@@ -164,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#transform-a-tensor"><i class="fa fa-check"></i><b>2.7</b> Transform a tensor</a></li>
 <li class="chapter" data-level="2.8" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#build-a-model-class"><i class="fa fa-check"></i><b>2.8</b> Build a model class</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-1"><i class="fa fa-check"></i><b>2.8.1</b> Example 1</a></li>
-<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2"><i class="fa fa-check"></i><b>2.8.2</b> Example 2</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2-logistic-regression"><i class="fa fa-check"></i><b>2.8.2</b> Example 2: Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>2.9</b> Convert a tensor to <code>numpy</code> object</a></li>
 <li class="chapter" data-level="2.10" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>2.10</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
@@ -327,87 +328,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-classic-classification-problem" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> A classic classification problem</h1>
 <p>I will combine here R and Python code just to show how easy is integrating R and Python. First thing we have to do is loading the package <code>rTorch</code>. We do that in a chunk:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
 <p>Then, we proceed to copy the standard Python code but in their own <code>Python</code> chunks. This is a very nice example that I found in the web. It explains the classic challenge of classification.</p>
 <p>When <code>rTorch</code> is loaded, a number of Python libraries are also loaded, which enable us the immediate use of numpy, torch and matplotlib.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="co"># Logistic Regression</span></a>
-<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="co"># https://m-alcu.github.io/blog/2018/02/10/logit-pytorch/</span></a>
-<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb173-4" data-line-number="4"><span class="im">import</span> torch</a>
-<a class="sourceLine" id="cb173-5" data-line-number="5"><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</a>
-<a class="sourceLine" id="cb173-6" data-line-number="6"><span class="im">from</span> torch.autograd <span class="im">import</span> Variable</a>
-<a class="sourceLine" id="cb173-7" data-line-number="7"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="co"># Logistic Regression</span></a>
+<a class="sourceLine" id="cb178-2" data-line-number="2"><span class="co"># https://m-alcu.github.io/blog/2018/02/10/logit-pytorch/</span></a>
+<a class="sourceLine" id="cb178-3" data-line-number="3"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb178-4" data-line-number="4"><span class="im">import</span> torch</a>
+<a class="sourceLine" id="cb178-5" data-line-number="5"><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</a>
+<a class="sourceLine" id="cb178-6" data-line-number="6"><span class="im">from</span> torch.autograd <span class="im">import</span> Variable</a>
+<a class="sourceLine" id="cb178-7" data-line-number="7"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a></code></pre></div>
 <p>The next thing we do is setting a seed to make the example repeatable, in my machine and yours.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb174-1" data-line-number="1">np.random.seed(<span class="dv">2048</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb179-1" data-line-number="1">np.random.seed(<span class="dv">2048</span>)</a></code></pre></div>
 <p>Then we generate some random samples.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb175-1" data-line-number="1">N <span class="op">=</span> <span class="dv">100</span></a>
-<a class="sourceLine" id="cb175-2" data-line-number="2">D <span class="op">=</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb175-3" data-line-number="3">X <span class="op">=</span> np.random.randn(N, D) <span class="op">*</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb175-4" data-line-number="4">ctr <span class="op">=</span> <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb175-5" data-line-number="5"><span class="co"># center the first N/2 points at (-2,-2)</span></a>
-<a class="sourceLine" id="cb175-6" data-line-number="6">X[:ctr,:] <span class="op">=</span> X[:ctr,:] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
-<a class="sourceLine" id="cb175-7" data-line-number="7"><span class="co"># center the last N/2 points at (2, 2)</span></a>
-<a class="sourceLine" id="cb175-8" data-line-number="8">X[ctr:,:] <span class="op">=</span> X[ctr:,:] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
-<a class="sourceLine" id="cb175-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb175-10" data-line-number="10"><span class="co"># labels: first N/2 are 0, last N/2 are 1</span></a>
-<a class="sourceLine" id="cb175-11" data-line-number="11"><span class="co"># mark the first half with 0 and the sceond half with 1</span></a>
-<a class="sourceLine" id="cb175-12" data-line-number="12">T <span class="op">=</span> np.array([<span class="dv">0</span>] <span class="op">*</span> ctr <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> ctr).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb180-1" data-line-number="1">N <span class="op">=</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb180-2" data-line-number="2">D <span class="op">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb180-3" data-line-number="3">X <span class="op">=</span> np.random.randn(N, D) <span class="op">*</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb180-4" data-line-number="4">ctr <span class="op">=</span> <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="co"># center the first N/2 points at (-2,-2)</span></a>
+<a class="sourceLine" id="cb180-6" data-line-number="6">X[:ctr,:] <span class="op">=</span> X[:ctr,:] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
+<a class="sourceLine" id="cb180-7" data-line-number="7"><span class="co"># center the last N/2 points at (2, 2)</span></a>
+<a class="sourceLine" id="cb180-8" data-line-number="8">X[ctr:,:] <span class="op">=</span> X[ctr:,:] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.ones((ctr, D))</a>
+<a class="sourceLine" id="cb180-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb180-10" data-line-number="10"><span class="co"># labels: first N/2 are 0, last N/2 are 1</span></a>
+<a class="sourceLine" id="cb180-11" data-line-number="11"><span class="co"># mark the first half with 0 and the sceond half with 1</span></a>
+<a class="sourceLine" id="cb180-12" data-line-number="12">T <span class="op">=</span> np.array([<span class="dv">0</span>] <span class="op">*</span> ctr <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> ctr).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>And plot the original data for reference.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="co"># plot the data. color the dots using T</span></a>
-<a class="sourceLine" id="cb176-2" data-line-number="2">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb176-3" data-line-number="3">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
-<a class="sourceLine" id="cb176-4" data-line-number="4">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="co"># plot the data. color the dots using T</span></a>
+<a class="sourceLine" id="cb181-2" data-line-number="2">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb181-3" data-line-number="3">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
+<a class="sourceLine" id="cb181-4" data-line-number="4">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a></code></pre></div>
 <p><img src="0303-logistics_regression_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>What follows is the definition of the model using a neural network and train the model. We set up the model:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">class</span> Model(torch.nn.Module):</a>
-<a class="sourceLine" id="cb177-2" data-line-number="2">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
-<a class="sourceLine" id="cb177-3" data-line-number="3">        <span class="bu">super</span>(Model, <span class="va">self</span>).<span class="fu">__init__</span>()</a>
-<a class="sourceLine" id="cb177-4" data-line-number="4">        <span class="va">self</span>.linear <span class="op">=</span> torch.nn.Linear(<span class="dv">2</span>, <span class="dv">1</span>) <span class="co"># 2 in and 1 out</span></a>
-<a class="sourceLine" id="cb177-5" data-line-number="5">        </a>
-<a class="sourceLine" id="cb177-6" data-line-number="6">    <span class="kw">def</span> forward(<span class="va">self</span>, x):</a>
-<a class="sourceLine" id="cb177-7" data-line-number="7">        y_pred <span class="op">=</span> torch.sigmoid(<span class="va">self</span>.linear(x))</a>
-<a class="sourceLine" id="cb177-8" data-line-number="8">        <span class="cf">return</span> y_pred</a>
-<a class="sourceLine" id="cb177-9" data-line-number="9">    </a>
-<a class="sourceLine" id="cb177-10" data-line-number="10"><span class="co"># Our model    </span></a>
-<a class="sourceLine" id="cb177-11" data-line-number="11">model <span class="op">=</span> Model()</a>
-<a class="sourceLine" id="cb177-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb177-13" data-line-number="13">criterion <span class="op">=</span> torch.nn.BCELoss(reduction<span class="op">=</span><span class="st">&#39;mean&#39;</span>)</a>
-<a class="sourceLine" id="cb177-14" data-line-number="14">optimizer <span class="op">=</span> torch.optim.SGD(model.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">class</span> Model(torch.nn.Module):</a>
+<a class="sourceLine" id="cb182-2" data-line-number="2">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb182-3" data-line-number="3">        <span class="bu">super</span>(Model, <span class="va">self</span>).<span class="fu">__init__</span>()</a>
+<a class="sourceLine" id="cb182-4" data-line-number="4">        <span class="va">self</span>.linear <span class="op">=</span> torch.nn.Linear(<span class="dv">2</span>, <span class="dv">1</span>) <span class="co"># 2 in and 1 out</span></a>
+<a class="sourceLine" id="cb182-5" data-line-number="5">        </a>
+<a class="sourceLine" id="cb182-6" data-line-number="6">    <span class="kw">def</span> forward(<span class="va">self</span>, x):</a>
+<a class="sourceLine" id="cb182-7" data-line-number="7">        y_pred <span class="op">=</span> torch.sigmoid(<span class="va">self</span>.linear(x))</a>
+<a class="sourceLine" id="cb182-8" data-line-number="8">        <span class="cf">return</span> y_pred</a>
+<a class="sourceLine" id="cb182-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb182-10" data-line-number="10"><span class="co"># Our model    </span></a>
+<a class="sourceLine" id="cb182-11" data-line-number="11">model <span class="op">=</span> Model()</a>
+<a class="sourceLine" id="cb182-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb182-13" data-line-number="13">criterion <span class="op">=</span> torch.nn.BCELoss(reduction<span class="op">=</span><span class="st">&#39;mean&#39;</span>)</a>
+<a class="sourceLine" id="cb182-14" data-line-number="14">optimizer <span class="op">=</span> torch.optim.SGD(model.parameters(), lr<span class="op">=</span><span class="fl">0.01</span>)</a></code></pre></div>
 <p>Train the model:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb178-1" data-line-number="1">x_data <span class="op">=</span> Variable(torch.Tensor(X))</a>
-<a class="sourceLine" id="cb178-2" data-line-number="2">y_data <span class="op">=</span> Variable(torch.Tensor(T))</a>
-<a class="sourceLine" id="cb178-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb178-4" data-line-number="4"><span class="co"># Training loop</span></a>
-<a class="sourceLine" id="cb178-5" data-line-number="5"><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</a>
-<a class="sourceLine" id="cb178-6" data-line-number="6">    <span class="co"># Forward pass: Compute predicted y by passing x to the model</span></a>
-<a class="sourceLine" id="cb178-7" data-line-number="7">    y_pred <span class="op">=</span> model(x_data)</a>
-<a class="sourceLine" id="cb178-8" data-line-number="8">    </a>
-<a class="sourceLine" id="cb178-9" data-line-number="9">    <span class="co"># Compute and print loss</span></a>
-<a class="sourceLine" id="cb178-10" data-line-number="10">    loss <span class="op">=</span> criterion(y_pred, y_data)</a>
-<a class="sourceLine" id="cb178-11" data-line-number="11">    <span class="co"># print(epoch, loss.data[0])</span></a>
-<a class="sourceLine" id="cb178-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb178-13" data-line-number="13">    <span class="co"># Zero gradients, perform a backward pass, and update the weights.</span></a>
-<a class="sourceLine" id="cb178-14" data-line-number="14">    optimizer.zero_grad()</a>
-<a class="sourceLine" id="cb178-15" data-line-number="15">    loss.backward()</a>
-<a class="sourceLine" id="cb178-16" data-line-number="16">    optimizer.step()</a>
-<a class="sourceLine" id="cb178-17" data-line-number="17">    </a>
-<a class="sourceLine" id="cb178-18" data-line-number="18">w <span class="op">=</span> <span class="bu">list</span>(model.parameters())</a>
-<a class="sourceLine" id="cb178-19" data-line-number="19">w0 <span class="op">=</span> w[<span class="dv">0</span>].data.numpy()</a>
-<a class="sourceLine" id="cb178-20" data-line-number="20">w1 <span class="op">=</span> w[<span class="dv">1</span>].data.numpy()    </a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb183-1" data-line-number="1">x_data <span class="op">=</span> Variable(torch.Tensor(X))</a>
+<a class="sourceLine" id="cb183-2" data-line-number="2">y_data <span class="op">=</span> Variable(torch.Tensor(T))</a>
+<a class="sourceLine" id="cb183-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb183-4" data-line-number="4"><span class="co"># Training loop</span></a>
+<a class="sourceLine" id="cb183-5" data-line-number="5"><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</a>
+<a class="sourceLine" id="cb183-6" data-line-number="6">    <span class="co"># Forward pass: Compute predicted y by passing x to the model</span></a>
+<a class="sourceLine" id="cb183-7" data-line-number="7">    y_pred <span class="op">=</span> model(x_data)</a>
+<a class="sourceLine" id="cb183-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb183-9" data-line-number="9">    <span class="co"># Compute and print loss</span></a>
+<a class="sourceLine" id="cb183-10" data-line-number="10">    loss <span class="op">=</span> criterion(y_pred, y_data)</a>
+<a class="sourceLine" id="cb183-11" data-line-number="11">    <span class="co"># print(epoch, loss.data[0])</span></a>
+<a class="sourceLine" id="cb183-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb183-13" data-line-number="13">    <span class="co"># Zero gradients, perform a backward pass, and update the weights.</span></a>
+<a class="sourceLine" id="cb183-14" data-line-number="14">    optimizer.zero_grad()</a>
+<a class="sourceLine" id="cb183-15" data-line-number="15">    loss.backward()</a>
+<a class="sourceLine" id="cb183-16" data-line-number="16">    optimizer.step()</a>
+<a class="sourceLine" id="cb183-17" data-line-number="17">    </a>
+<a class="sourceLine" id="cb183-18" data-line-number="18">w <span class="op">=</span> <span class="bu">list</span>(model.parameters())</a>
+<a class="sourceLine" id="cb183-19" data-line-number="19">w0 <span class="op">=</span> w[<span class="dv">0</span>].data.numpy()</a>
+<a class="sourceLine" id="cb183-20" data-line-number="20">w1 <span class="op">=</span> w[<span class="dv">1</span>].data.numpy()    </a></code></pre></div>
 <p>Finally, we plot the results, by tracing the line that separates two classes, 0 and 1, which are both colored in the plot.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&quot;Final gradient descend:&quot;</span>, w)</a>
-<a class="sourceLine" id="cb179-2" data-line-number="2"><span class="co"># plot the data and separating line</span></a>
-<a class="sourceLine" id="cb179-3" data-line-number="3"><span class="co">#&gt; Final gradient descend: [Parameter containing:</span></a>
-<a class="sourceLine" id="cb179-4" data-line-number="4"><span class="co">#&gt; tensor([[1.0837, 1.1231]], requires_grad=True), Parameter containing:</span></a>
-<a class="sourceLine" id="cb179-5" data-line-number="5"><span class="co">#&gt; tensor([0.0724], requires_grad=True)]</span></a>
-<a class="sourceLine" id="cb179-6" data-line-number="6">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb179-7" data-line-number="7">x_axis <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb179-8" data-line-number="8">y_axis <span class="op">=</span> <span class="op">-</span>(w1[<span class="dv">0</span>] <span class="op">+</span> x_axis <span class="op">*</span> w0[<span class="dv">0</span>][<span class="dv">0</span>]) <span class="op">/</span> w0[<span class="dv">0</span>][<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb179-9" data-line-number="9">line_up, <span class="op">=</span> plt.plot(x_axis, y_axis,<span class="st">&#39;r--&#39;</span>, label<span class="op">=</span><span class="st">&#39;gradient descent&#39;</span>)</a>
-<a class="sourceLine" id="cb179-10" data-line-number="10">plt.legend(handles<span class="op">=</span>[line_up])</a>
-<a class="sourceLine" id="cb179-11" data-line-number="11">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
-<a class="sourceLine" id="cb179-12" data-line-number="12">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a>
-<a class="sourceLine" id="cb179-13" data-line-number="13">plt.show()</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&quot;Final gradient descend:&quot;</span>, w)</a>
+<a class="sourceLine" id="cb184-2" data-line-number="2"><span class="co"># plot the data and separating line</span></a>
+<a class="sourceLine" id="cb184-3" data-line-number="3"><span class="co">#&gt; Final gradient descend: [Parameter containing:</span></a>
+<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="co">#&gt; tensor([[1.1240, 1.1698]], requires_grad=True), Parameter containing:</span></a>
+<a class="sourceLine" id="cb184-5" data-line-number="5"><span class="co">#&gt; tensor([0.3778], requires_grad=True)]</span></a>
+<a class="sourceLine" id="cb184-6" data-line-number="6">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb184-7" data-line-number="7">x_axis <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb184-8" data-line-number="8">y_axis <span class="op">=</span> <span class="op">-</span>(w1[<span class="dv">0</span>] <span class="op">+</span> x_axis <span class="op">*</span> w0[<span class="dv">0</span>][<span class="dv">0</span>]) <span class="op">/</span> w0[<span class="dv">0</span>][<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb184-9" data-line-number="9">line_up, <span class="op">=</span> plt.plot(x_axis, y_axis,<span class="st">&#39;r--&#39;</span>, label<span class="op">=</span><span class="st">&#39;gradient descent&#39;</span>)</a>
+<a class="sourceLine" id="cb184-10" data-line-number="10">plt.legend(handles<span class="op">=</span>[line_up])</a>
+<a class="sourceLine" id="cb184-11" data-line-number="11">plt.xlabel(<span class="st">&#39;X(1)&#39;</span>)</a>
+<a class="sourceLine" id="cb184-12" data-line-number="12">plt.ylabel(<span class="st">&#39;X(2)&#39;</span>)</a>
+<a class="sourceLine" id="cb184-13" data-line-number="13">plt.show()</a></code></pre></div>
 <p><img src="0303-logistics_regression_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>

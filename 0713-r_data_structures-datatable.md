@@ -1,5 +1,4 @@
 
-
 # Working with data.table
 
 ## Load PyTorch libraries
@@ -99,7 +98,7 @@ Elapsed time per size of sample:
 
 ```r
 toc()
-#> 101.182 sec elapsed
+#> 102.482 sec elapsed
 
 #    60    1.266 sec elapsed
 #   600   11.798 sec elapsed;
