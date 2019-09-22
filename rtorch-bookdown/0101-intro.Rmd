@@ -12,14 +12,11 @@ Yes. I could have worked directly with PyTorch in a native Python environment, s
 This has the additional benefit of giving the ability to write combination of Python and R code together in the same document. There will times when it is better to create a class in Python; and other times where R will be more convenient to handle a data structure.
 
 
-
 ## How do we start using `rTorch`
 Start using `rTorch` is very simple. After installing the minimum system requirements, you just call it with:
 
 ```{r call-rtorch}
 library(rTorch)
-
-transforms  <- torchvision$transforms
 ```
 
 There are several way of testing that `rTorch` is up and running. Let's see some of them:
@@ -38,16 +35,21 @@ rTorch::torch_config()
 ```
 
 
-
 ## What can you do with `rTorch`
-Practically, you can do everything you could with PyTorch within the R ecosystem.
+Practically, you can do everything you could with __PyTorch__ within the __R__ ecosystem.
 Additionally to the `rTorch` module, from where you can extract methods, functions and classes, there are available two more modules: `torchvision` and `np`, which is short for `numpy`.
 
+## Callable PyTorch modules
+
 ### The `torchvision` module
-This is an example of using the `torchvision` module. With `torchvision` we could download any of the datasets available. In this case, we will be downloading the training dataset of the **MNIST** handwritten digits. There are 60,000 images in the training set.
+This is an example of using the `torchvision` module. With `torchvision` we could download any of the datasets made available by PyTorch. In this example, we will be downloading the training dataset of the **MNIST** handwritten digits. There are 60,000 images in the training set and 10,000 images in the test set.
 
 ```{r}
-local_folder <- '../datasets/mnist_digits'
+transforms  <- torchvision$transforms
+
+# this is the folder where the datasets will be downloaded
+local_folder <- './datasets/mnist_digits'
+
 train_dataset = torchvision$datasets$MNIST(root = local_folder, 
                                            train = TRUE, 
                                            transform = transforms$ToTensor(),
