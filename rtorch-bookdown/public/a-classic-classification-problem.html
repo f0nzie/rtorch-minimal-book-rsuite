@@ -399,8 +399,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&quot;Final gradient descend:&quot;</span>, w)</a>
 <a class="sourceLine" id="cb184-2" data-line-number="2"><span class="co"># plot the data and separating line</span></a>
 <a class="sourceLine" id="cb184-3" data-line-number="3"><span class="co">#&gt; Final gradient descend: [Parameter containing:</span></a>
-<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="co">#&gt; tensor([[1.1240, 1.1698]], requires_grad=True), Parameter containing:</span></a>
-<a class="sourceLine" id="cb184-5" data-line-number="5"><span class="co">#&gt; tensor([0.3778], requires_grad=True)]</span></a>
+<a class="sourceLine" id="cb184-4" data-line-number="4"><span class="co">#&gt; tensor([[1.0967, 1.1507]], requires_grad=True), Parameter containing:</span></a>
+<a class="sourceLine" id="cb184-5" data-line-number="5"><span class="co">#&gt; tensor([0.2308], requires_grad=True)]</span></a>
 <a class="sourceLine" id="cb184-6" data-line-number="6">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb184-7" data-line-number="7">x_axis <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb184-8" data-line-number="8">y_axis <span class="op">=</span> <span class="op">-</span>(w1[<span class="dv">0</span>] <span class="op">+</span> x_axis <span class="op">*</span> w0[<span class="dv">0</span>][<span class="dv">0</span>]) <span class="op">/</span> w0[<span class="dv">0</span>][<span class="dv">1</span>]</a>
