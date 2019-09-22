@@ -1,5 +1,4 @@
 
-
 # rTorch vs PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
@@ -38,7 +37,7 @@ Sometimes we are interested in knowing the internal components of a class. In th
 
 
 ```r
-local_folder <- '../datasets/mnist_digits'
+local_folder <- './datasets/mnist_digits'
 train_dataset = torchvision$datasets$MNIST(root = local_folder, 
                                            train = TRUE, 
                                            transform = transforms$ToTensor(),
@@ -47,10 +46,11 @@ train_dataset = torchvision$datasets$MNIST(root = local_folder,
 train_dataset
 #> Dataset MNIST
 #>     Number of datapoints: 60000
-#>     Root location: ../datasets/mnist_digits
+#>     Root location: ./datasets/mnist_digits
 #>     Split: Train
 ```
 
+Show the attributes of `train_dataset`:
 
 ```r
 reticulate::py_list_attributes(train_dataset)
@@ -305,7 +305,9 @@ for (i in 1:py$len(x_train)) {
 > We will find very frequently this kind of iterators when we read a dataset using `torchvision`. There are different ways to iterate through these objects.
 
 ## Zero gradient
-The zero gradient was one of the most difficult to implement in R if we don't pay attention to the content of the objects carrying the weights and biases. This happens when the algorithm written in PyTorch is not immediately translatable to rTorch. This can be appreciated in this example.
+The zero gradient was one of the most difficult to implement in R if we don't pay attention to the content of the objects carrying the weights and biases. This happens when the algorithm written in __PyTorch__ is not immediately translatable to __rTorch__. This can be appreciated in this example.
+
+> We are using the same seed in the PyTorch and rTorch versions, so, we could compare the results.
 
 ### Version in Python
 
@@ -317,7 +319,7 @@ import torch
 torch.manual_seed(0)  # reproducible
 
 # Input (temp, rainfall, humidity)
-#> <torch._C.Generator object at 0x7f5dfb64ce10>
+#> <torch._C.Generator object at 0x7f138bea7e10>
 inputs = np.array([[73, 67, 43],
                    [91, 88, 64],
                    [87, 134, 58],
@@ -502,6 +504,28 @@ In R shows a little bit more convoluted:
 w$data <- torch$sub(w$data, torch$mul(w$grad, torch$scalar_tensor(1e-5)))
 ```
 
+Which is simpliefied when we use the generic methods from rTorch as:
+
+
+
+```r
+w$data <- w$data - w$grad * 1e-5
+```
+
+
+These two expression are equivalent, with the first being the long version natural way of doing it in __PyTorch__. The second is using the generics in R for subtraction, multiplication and scalar conversion.
+
+```
+param$data <- torch$sub(param$data,
+                        torch$mul(param$grad$float(),
+                          torch$scalar_tensor(learning_rate)))
+}
+```
+
+```
+param$data <- param$data - param$grad * learning_rate
+```
+
 
 ## Transform a tensor
 Explain how transform a tensor back and forth to `numpy`.
@@ -509,12 +533,57 @@ Why is this important?
 
 
 ## Build a model class
-PyTorch classes cannot not directly instantiated from `R`. We need an intermediate step to create a class. For this, we use `reticulate` functions that will read the class implementation in `Python` code.
+PyTorch classes cannot not directly be instantiated from `R`. We need an intermediate step to create a class. For this, we use `reticulate` functions that will read the class implementation in `Python` code.
 
 
 ### Example 1
 
-### Example 2
+
+```r
+py_run_string("import torch")
+main = py_run_string(
+"
+import torch.nn as nn
+
+class Net(nn.Module):
+   def __init__(self):
+       super(Net, self).__init__()
+       self.layer = torch.nn.Linear(1, 1)
+
+   def forward(self, x):
+       x = self.layer(x)      
+       return x
+")
+
+
+# build a Linear Rgression model
+net <- main$Net()
+```
+
+
+
+### Example 2: Logistic Regression
+
+
+```r
+main <- py_run_string(
+"
+import torch.nn as nn
+
+class LogisticRegressionModel(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(LogisticRegressionModel, self).__init__()
+        self.linear = nn.Linear(input_dim, output_dim)
+
+    def forward(self, x):
+        out = self.linear(x)
+        return out
+")
+
+# build a Logistic Rgression model
+LogisticRegressionModel <- main$LogisticRegressionModel
+```
+
 
 
 ## Convert a tensor to `numpy` object
