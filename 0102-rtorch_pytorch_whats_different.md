@@ -1,4 +1,5 @@
 
+
 # rTorch vs PyTorch: What's different
 This chapter will explain the main differences between `PyTorch` and `rTorch`.
 Most of the things work directly in `PyTorch` but we need to be aware of some minor differences when working with rTorch.
@@ -316,7 +317,7 @@ import torch
 torch.manual_seed(0)  # reproducible
 
 # Input (temp, rainfall, humidity)
-#> <torch._C.Generator object at 0x7f5cf437de10>
+#> <torch._C.Generator object at 0x7f8d99bcae10>
 inputs = np.array([[73, 67, 43],
                    [91, 88, 64],
                    [87, 134, 58],
