@@ -3,6 +3,8 @@
 ## 0.0.2.9000 (2019-09-22)
 * Remove folders `data` and `datasets` from master project.
 * Save datasets inside book project, not outside
+* Rename notebooks to restart at each chapter
+* Run example from Udacity in `work/one-at-time`
 
 ## 0.0.2 (2019-09-22)
 * Modify structure for the book using PART to separate main sections.
