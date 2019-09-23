@@ -1,0 +1,9 @@
+*
+!.gitignore
+!*.Rproj
+!*.Rmd
+!README.md
+!*.yml
+!*.bib
+!style.css
+!preamble.tex
