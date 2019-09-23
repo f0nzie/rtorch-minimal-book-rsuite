@@ -1,5 +1,8 @@
 # CHANGES
 
+## 0.0.2.9001 (2019-09-22)
+* Add examples from DTU
+
 ## 0.0.2.9000 (2019-09-22)
 * Remove folders `data` and `datasets` from master project.
 * Save datasets inside book project, not outside

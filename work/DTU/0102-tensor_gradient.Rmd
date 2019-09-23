@@ -1,0 +1,52 @@
+# Gradient of a tensor
+
+```{r}
+library(rTorch)
+```
+
+```{python}
+import torch
+
+x = torch.ones(2, 2, requires_grad=True)
+print(x)
+```
+
+Add a scalar tot he tensor:
+```{python}
+y = x + 2
+print(y)
+```
+
+
+```{python}
+# more operations
+z = y * y * 3
+print(z)
+```
+
+```{python}
+out = z.mean()
+print(out)
+```
+
+```{python}
+out.backward()
+```
+
+```{python}
+print(x.grad)
+```
+
+This will throw an error because `y` has not been defined to have a gradient:
+
+```{python, eval=FALSE}
+print(y.grad())
+```
+
+```
+TypeError: 'NoneType' object is not callable
+
+Detailed traceback: 
+  File "<string>", line 1, in <module>
+```  
+
