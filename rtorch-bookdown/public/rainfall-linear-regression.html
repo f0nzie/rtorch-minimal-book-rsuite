@@ -142,10 +142,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#getting-the-pytorch-version"><i class="fa fa-check"></i><b>1.2.1</b> Getting the PyTorch version</a></li>
 <li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#pytorch-configuration"><i class="fa fa-check"></i><b>1.2.2</b> PyTorch configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a><ul>
-<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.3.1</b> The <code>torchvision</code> module</a></li>
-<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.3.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
-<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.3.3</b> Python built-in functions</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#callable-pytorch-modules"><i class="fa fa-check"></i><b>1.4</b> Callable PyTorch modules</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.4.1</b> The <code>torchvision</code> module</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.4.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.4.3</b> Python built-in functions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html"><i class="fa fa-check"></i><b>2</b> rTorch vs PyTorch: What’s different</a><ul>
@@ -164,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#transform-a-tensor"><i class="fa fa-check"></i><b>2.7</b> Transform a tensor</a></li>
 <li class="chapter" data-level="2.8" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#build-a-model-class"><i class="fa fa-check"></i><b>2.8</b> Build a model class</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-1"><i class="fa fa-check"></i><b>2.8.1</b> Example 1</a></li>
-<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2"><i class="fa fa-check"></i><b>2.8.2</b> Example 2</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2-logistic-regression"><i class="fa fa-check"></i><b>2.8.2</b> Example 2: Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>2.9</b> Convert a tensor to <code>numpy</code> object</a></li>
 <li class="chapter" data-level="2.10" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>2.10</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
@@ -326,87 +327,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="rainfall.-linear-regression" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Rainfall. Linear Regression</h1>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
 <p>Select the device: CPU or GPU</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb188-2" data-line-number="2"><span class="co">#&gt; &lt;torch._C.Generator&gt;</span></a>
-<a class="sourceLine" id="cb188-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb188-4" data-line-number="4">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">torch<span class="op">$</span><span class="kw">manual_seed</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb193-2" data-line-number="2"><span class="co">#&gt; &lt;torch._C.Generator&gt;</span></a>
+<a class="sourceLine" id="cb193-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb193-4" data-line-number="4">device =<span class="st"> </span>torch<span class="op">$</span><span class="kw">device</span>(<span class="st">&#39;cpu&#39;</span>)</a></code></pre></div>
 <div id="training-data" class="section level2">
 <h2><span class="header-section-number">9.1</span> Training data</h2>
 <p>The training data can be represented using 2 matrices (inputs and targets), each with one row per observation, and one column per variable.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="co"># Input (temp, rainfall, humidity)</span></a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">inputs =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">43</span>),</a>
-<a class="sourceLine" id="cb189-3" data-line-number="3">                   <span class="kw">list</span>(<span class="dv">91</span>, <span class="dv">88</span>, <span class="dv">64</span>),</a>
-<a class="sourceLine" id="cb189-4" data-line-number="4">                   <span class="kw">list</span>(<span class="dv">87</span>, <span class="dv">134</span>, <span class="dv">58</span>),</a>
-<a class="sourceLine" id="cb189-5" data-line-number="5">                   <span class="kw">list</span>(<span class="dv">102</span>, <span class="dv">43</span>, <span class="dv">37</span>),</a>
-<a class="sourceLine" id="cb189-6" data-line-number="6">                   <span class="kw">list</span>(<span class="dv">69</span>, <span class="dv">96</span>, <span class="dv">70</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a>
-<a class="sourceLine" id="cb189-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb189-8" data-line-number="8"><span class="co"># Targets (apples, oranges)</span></a>
-<a class="sourceLine" id="cb189-9" data-line-number="9">targets =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">56</span>, <span class="dv">70</span>), </a>
-<a class="sourceLine" id="cb189-10" data-line-number="10">                    <span class="kw">list</span>(<span class="dv">81</span>, <span class="dv">101</span>),</a>
-<a class="sourceLine" id="cb189-11" data-line-number="11">                    <span class="kw">list</span>(<span class="dv">119</span>, <span class="dv">133</span>),</a>
-<a class="sourceLine" id="cb189-12" data-line-number="12">                    <span class="kw">list</span>(<span class="dv">22</span>, <span class="dv">37</span>), </a>
-<a class="sourceLine" id="cb189-13" data-line-number="13">                    <span class="kw">list</span>(<span class="dv">103</span>, <span class="dv">119</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="co"># Input (temp, rainfall, humidity)</span></a>
+<a class="sourceLine" id="cb194-2" data-line-number="2">inputs =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">43</span>),</a>
+<a class="sourceLine" id="cb194-3" data-line-number="3">                   <span class="kw">list</span>(<span class="dv">91</span>, <span class="dv">88</span>, <span class="dv">64</span>),</a>
+<a class="sourceLine" id="cb194-4" data-line-number="4">                   <span class="kw">list</span>(<span class="dv">87</span>, <span class="dv">134</span>, <span class="dv">58</span>),</a>
+<a class="sourceLine" id="cb194-5" data-line-number="5">                   <span class="kw">list</span>(<span class="dv">102</span>, <span class="dv">43</span>, <span class="dv">37</span>),</a>
+<a class="sourceLine" id="cb194-6" data-line-number="6">                   <span class="kw">list</span>(<span class="dv">69</span>, <span class="dv">96</span>, <span class="dv">70</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a>
+<a class="sourceLine" id="cb194-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb194-8" data-line-number="8"><span class="co"># Targets (apples, oranges)</span></a>
+<a class="sourceLine" id="cb194-9" data-line-number="9">targets =<span class="st"> </span>np<span class="op">$</span><span class="kw">array</span>(<span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">56</span>, <span class="dv">70</span>), </a>
+<a class="sourceLine" id="cb194-10" data-line-number="10">                    <span class="kw">list</span>(<span class="dv">81</span>, <span class="dv">101</span>),</a>
+<a class="sourceLine" id="cb194-11" data-line-number="11">                    <span class="kw">list</span>(<span class="dv">119</span>, <span class="dv">133</span>),</a>
+<a class="sourceLine" id="cb194-12" data-line-number="12">                    <span class="kw">list</span>(<span class="dv">22</span>, <span class="dv">37</span>), </a>
+<a class="sourceLine" id="cb194-13" data-line-number="13">                    <span class="kw">list</span>(<span class="dv">103</span>, <span class="dv">119</span>)), <span class="dt">dtype=</span><span class="st">&#39;float32&#39;</span>)</a></code></pre></div>
 </div>
 <div id="convert-arrays-to-tensors-1" class="section level2">
 <h2><span class="header-section-number">9.2</span> Convert arrays to tensors</h2>
 <p>Before we build a model, we need to convert inputs and targets to PyTorch tensors.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="co"># Convert inputs and targets to tensors</span></a>
-<a class="sourceLine" id="cb190-2" data-line-number="2">inputs =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(inputs)</a>
-<a class="sourceLine" id="cb190-3" data-line-number="3">targets =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(targets)</a>
-<a class="sourceLine" id="cb190-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb190-5" data-line-number="5"><span class="kw">print</span>(inputs)</a>
-<a class="sourceLine" id="cb190-6" data-line-number="6"><span class="co">#&gt; tensor([[ 73.,  67.,  43.],</span></a>
-<a class="sourceLine" id="cb190-7" data-line-number="7"><span class="co">#&gt;         [ 91.,  88.,  64.],</span></a>
-<a class="sourceLine" id="cb190-8" data-line-number="8"><span class="co">#&gt;         [ 87., 134.,  58.],</span></a>
-<a class="sourceLine" id="cb190-9" data-line-number="9"><span class="co">#&gt;         [102.,  43.,  37.],</span></a>
-<a class="sourceLine" id="cb190-10" data-line-number="10"><span class="co">#&gt;         [ 69.,  96.,  70.]], dtype=torch.float64)</span></a>
-<a class="sourceLine" id="cb190-11" data-line-number="11"><span class="kw">print</span>(targets)</a>
-<a class="sourceLine" id="cb190-12" data-line-number="12"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
-<a class="sourceLine" id="cb190-13" data-line-number="13"><span class="co">#&gt;         [ 81., 101.],</span></a>
-<a class="sourceLine" id="cb190-14" data-line-number="14"><span class="co">#&gt;         [119., 133.],</span></a>
-<a class="sourceLine" id="cb190-15" data-line-number="15"><span class="co">#&gt;         [ 22.,  37.],</span></a>
-<a class="sourceLine" id="cb190-16" data-line-number="16"><span class="co">#&gt;         [103., 119.]], dtype=torch.float64)</span></a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="co"># Convert inputs and targets to tensors</span></a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">inputs =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(inputs)</a>
+<a class="sourceLine" id="cb195-3" data-line-number="3">targets =<span class="st"> </span>torch<span class="op">$</span><span class="kw">from_numpy</span>(targets)</a>
+<a class="sourceLine" id="cb195-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb195-5" data-line-number="5"><span class="kw">print</span>(inputs)</a>
+<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="co">#&gt; tensor([[ 73.,  67.,  43.],</span></a>
+<a class="sourceLine" id="cb195-7" data-line-number="7"><span class="co">#&gt;         [ 91.,  88.,  64.],</span></a>
+<a class="sourceLine" id="cb195-8" data-line-number="8"><span class="co">#&gt;         [ 87., 134.,  58.],</span></a>
+<a class="sourceLine" id="cb195-9" data-line-number="9"><span class="co">#&gt;         [102.,  43.,  37.],</span></a>
+<a class="sourceLine" id="cb195-10" data-line-number="10"><span class="co">#&gt;         [ 69.,  96.,  70.]], dtype=torch.float64)</span></a>
+<a class="sourceLine" id="cb195-11" data-line-number="11"><span class="kw">print</span>(targets)</a>
+<a class="sourceLine" id="cb195-12" data-line-number="12"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
+<a class="sourceLine" id="cb195-13" data-line-number="13"><span class="co">#&gt;         [ 81., 101.],</span></a>
+<a class="sourceLine" id="cb195-14" data-line-number="14"><span class="co">#&gt;         [119., 133.],</span></a>
+<a class="sourceLine" id="cb195-15" data-line-number="15"><span class="co">#&gt;         [ 22.,  37.],</span></a>
+<a class="sourceLine" id="cb195-16" data-line-number="16"><span class="co">#&gt;         [103., 119.]], dtype=torch.float64)</span></a></code></pre></div>
 <p>The weights and biases can also be represented as matrices, initialized with random values. The first row of <span class="math inline">\(w\)</span> and the first element of <span class="math inline">\(b\)</span> are used to predict the first target variable, i.e. yield for apples, and, similarly, the second for oranges.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="co"># random numbers for weights and biases. Then convert to double()</span></a>
-<a class="sourceLine" id="cb191-2" data-line-number="2">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>double)</a>
-<a class="sourceLine" id="cb191-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb191-4" data-line-number="4">w =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, 3L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)  <span class="co">#$double()</span></a>
-<a class="sourceLine" id="cb191-5" data-line-number="5">b =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)      <span class="co">#$double()</span></a>
-<a class="sourceLine" id="cb191-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb191-7" data-line-number="7"><span class="kw">print</span>(w)</a>
-<a class="sourceLine" id="cb191-8" data-line-number="8"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
-<a class="sourceLine" id="cb191-9" data-line-number="9"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb191-10" data-line-number="10"><span class="kw">print</span>(b)</a>
-<a class="sourceLine" id="cb191-11" data-line-number="11"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="co"># random numbers for weights and biases. Then convert to double()</span></a>
+<a class="sourceLine" id="cb196-2" data-line-number="2">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>double)</a>
+<a class="sourceLine" id="cb196-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb196-4" data-line-number="4">w =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, 3L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)  <span class="co">#$double()</span></a>
+<a class="sourceLine" id="cb196-5" data-line-number="5">b =<span class="st"> </span>torch<span class="op">$</span><span class="kw">randn</span>(2L, <span class="dt">requires_grad=</span><span class="ot">TRUE</span>)      <span class="co">#$double()</span></a>
+<a class="sourceLine" id="cb196-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb196-7" data-line-number="7"><span class="kw">print</span>(w)</a>
+<a class="sourceLine" id="cb196-8" data-line-number="8"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
+<a class="sourceLine" id="cb196-9" data-line-number="9"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb196-10" data-line-number="10"><span class="kw">print</span>(b)</a>
+<a class="sourceLine" id="cb196-11" data-line-number="11"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a></code></pre></div>
 </div>
 <div id="build-the-model" class="section level2">
 <h2><span class="header-section-number">9.3</span> Build the model</h2>
 <p>The model is simply a function that performs a matrix multiplication of the input <span class="math inline">\(x\)</span> and the weights <span class="math inline">\(w\)</span> (transposed), and adds the bias <span class="math inline">\(b\)</span> (replicated for each observation).</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb192-2" data-line-number="2">  wt &lt;-<span class="st"> </span>w<span class="op">$</span><span class="kw">t</span>()</a>
-<a class="sourceLine" id="cb192-3" data-line-number="3">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">add</span>(torch<span class="op">$</span><span class="kw">mm</span>(x, wt), b))</a>
-<a class="sourceLine" id="cb192-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">model &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb197-2" data-line-number="2">  wt &lt;-<span class="st"> </span>w<span class="op">$</span><span class="kw">t</span>()</a>
+<a class="sourceLine" id="cb197-3" data-line-number="3">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">add</span>(torch<span class="op">$</span><span class="kw">mm</span>(x, wt), b))</a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">}</a></code></pre></div>
 </div>
 <div id="generate-predictions" class="section level2">
 <h2><span class="header-section-number">9.4</span> Generate predictions</h2>
 <p>The matrix obtained by passing the input data to the model is a set of predictions for the target variables.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
-<a class="sourceLine" id="cb193-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
-<a class="sourceLine" id="cb193-3" data-line-number="3"><span class="kw">print</span>(preds)</a>
-<a class="sourceLine" id="cb193-4" data-line-number="4"><span class="co">#&gt; tensor([[  -0.4516,  -90.4691],</span></a>
-<a class="sourceLine" id="cb193-5" data-line-number="5"><span class="co">#&gt;         [ -24.6303, -132.3828],</span></a>
-<a class="sourceLine" id="cb193-6" data-line-number="6"><span class="co">#&gt;         [ -31.2192, -176.1530],</span></a>
-<a class="sourceLine" id="cb193-7" data-line-number="7"><span class="co">#&gt;         [  64.3523,  -39.5645],</span></a>
-<a class="sourceLine" id="cb193-8" data-line-number="8"><span class="co">#&gt;         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="co"># Compare with targets</span></a>
-<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">print</span>(targets)</a>
-<a class="sourceLine" id="cb194-3" data-line-number="3"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
-<a class="sourceLine" id="cb194-4" data-line-number="4"><span class="co">#&gt;         [ 81., 101.],</span></a>
-<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="co">#&gt;         [119., 133.],</span></a>
-<a class="sourceLine" id="cb194-6" data-line-number="6"><span class="co">#&gt;         [ 22.,  37.],</span></a>
-<a class="sourceLine" id="cb194-7" data-line-number="7"><span class="co">#&gt;         [103., 119.]])</span></a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
+<a class="sourceLine" id="cb198-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb198-3" data-line-number="3"><span class="kw">print</span>(preds)</a>
+<a class="sourceLine" id="cb198-4" data-line-number="4"><span class="co">#&gt; tensor([[  -0.4516,  -90.4691],</span></a>
+<a class="sourceLine" id="cb198-5" data-line-number="5"><span class="co">#&gt;         [ -24.6303, -132.3828],</span></a>
+<a class="sourceLine" id="cb198-6" data-line-number="6"><span class="co">#&gt;         [ -31.2192, -176.1530],</span></a>
+<a class="sourceLine" id="cb198-7" data-line-number="7"><span class="co">#&gt;         [  64.3523,  -39.5645],</span></a>
+<a class="sourceLine" id="cb198-8" data-line-number="8"><span class="co">#&gt;         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co"># Compare with targets</span></a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="kw">print</span>(targets)</a>
+<a class="sourceLine" id="cb199-3" data-line-number="3"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
+<a class="sourceLine" id="cb199-4" data-line-number="4"><span class="co">#&gt;         [ 81., 101.],</span></a>
+<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="co">#&gt;         [119., 133.],</span></a>
+<a class="sourceLine" id="cb199-6" data-line-number="6"><span class="co">#&gt;         [ 22.,  37.],</span></a>
+<a class="sourceLine" id="cb199-7" data-line-number="7"><span class="co">#&gt;         [103., 119.]])</span></a></code></pre></div>
 <p>Because we’ve started with random weights and biases, the model does not a very good job of predicting the target variables.</p>
 </div>
 <div id="loss-function" class="section level2">
@@ -418,50 +419,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Calculate the average of the elements in the resulting matrix.</li>
 </ul>
 <p>The result is a single number, known as the mean squared error (MSE).</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="co"># MSE loss</span></a>
-<a class="sourceLine" id="cb195-2" data-line-number="2">mse =<span class="st"> </span><span class="cf">function</span>(t1, t2) {</a>
-<a class="sourceLine" id="cb195-3" data-line-number="3">  diff &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(t1, t2)</a>
-<a class="sourceLine" id="cb195-4" data-line-number="4">  mul &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sum</span>(torch<span class="op">$</span><span class="kw">mul</span>(diff, diff))</a>
-<a class="sourceLine" id="cb195-5" data-line-number="5">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">div</span>(mul, diff<span class="op">$</span><span class="kw">numel</span>()))</a>
-<a class="sourceLine" id="cb195-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb195-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb195-8" data-line-number="8"><span class="kw">print</span>(mse)</a>
-<a class="sourceLine" id="cb195-9" data-line-number="9"><span class="co">#&gt; function(t1, t2) {</span></a>
-<a class="sourceLine" id="cb195-10" data-line-number="10"><span class="co">#&gt;   diff &lt;- torch$sub(t1, t2)</span></a>
-<a class="sourceLine" id="cb195-11" data-line-number="11"><span class="co">#&gt;   mul &lt;- torch$sum(torch$mul(diff, diff))</span></a>
-<a class="sourceLine" id="cb195-12" data-line-number="12"><span class="co">#&gt;   return(torch$div(mul, diff$numel()))</span></a>
-<a class="sourceLine" id="cb195-13" data-line-number="13"><span class="co">#&gt; }</span></a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="co"># MSE loss</span></a>
+<a class="sourceLine" id="cb200-2" data-line-number="2">mse =<span class="st"> </span><span class="cf">function</span>(t1, t2) {</a>
+<a class="sourceLine" id="cb200-3" data-line-number="3">  diff &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(t1, t2)</a>
+<a class="sourceLine" id="cb200-4" data-line-number="4">  mul &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sum</span>(torch<span class="op">$</span><span class="kw">mul</span>(diff, diff))</a>
+<a class="sourceLine" id="cb200-5" data-line-number="5">  <span class="kw">return</span>(torch<span class="op">$</span><span class="kw">div</span>(mul, diff<span class="op">$</span><span class="kw">numel</span>()))</a>
+<a class="sourceLine" id="cb200-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb200-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb200-8" data-line-number="8"><span class="kw">print</span>(mse)</a>
+<a class="sourceLine" id="cb200-9" data-line-number="9"><span class="co">#&gt; function(t1, t2) {</span></a>
+<a class="sourceLine" id="cb200-10" data-line-number="10"><span class="co">#&gt;   diff &lt;- torch$sub(t1, t2)</span></a>
+<a class="sourceLine" id="cb200-11" data-line-number="11"><span class="co">#&gt;   mul &lt;- torch$sum(torch$mul(diff, diff))</span></a>
+<a class="sourceLine" id="cb200-12" data-line-number="12"><span class="co">#&gt;   return(torch$div(mul, diff$numel()))</span></a>
+<a class="sourceLine" id="cb200-13" data-line-number="13"><span class="co">#&gt; }</span></a></code></pre></div>
 </div>
 <div id="step-by-step-process" class="section level2">
 <h2><span class="header-section-number">9.6</span> Step by step process</h2>
 <div id="compute-the-losses" class="section level3">
 <h3><span class="header-section-number">9.6.1</span> Compute the losses</h3>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="co"># Compute loss</span></a>
-<a class="sourceLine" id="cb196-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
-<a class="sourceLine" id="cb196-3" data-line-number="3"><span class="kw">print</span>(loss)</a>
-<a class="sourceLine" id="cb196-4" data-line-number="4"><span class="co">#&gt; tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</span></a>
-<a class="sourceLine" id="cb196-5" data-line-number="5"><span class="co"># 46194</span></a>
-<a class="sourceLine" id="cb196-6" data-line-number="6"><span class="co"># 33060.8070</span></a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Compute loss</span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb201-3" data-line-number="3"><span class="kw">print</span>(loss)</a>
+<a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co">#&gt; tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</span></a>
+<a class="sourceLine" id="cb201-5" data-line-number="5"><span class="co"># 46194</span></a>
+<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="co"># 33060.8070</span></a></code></pre></div>
 <p>The resulting number is called the <strong>loss</strong>, because it indicates how bad the model is at predicting the target variables. Lower the loss, better the model.</p>
 </div>
 <div id="compute-gradients" class="section level3">
 <h3><span class="header-section-number">9.6.2</span> Compute Gradients</h3>
 <p>With PyTorch, we can automatically compute the gradient or derivative of the loss w.r.t. to the weights and biases, because they have <code>requires_grad</code> set to True.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
-<a class="sourceLine" id="cb197-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
+<a class="sourceLine" id="cb202-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a></code></pre></div>
 <p>The gradients are stored in the .grad property of the respective tensors.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="co"># Gradients for weights</span></a>
-<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">print</span>(w)</a>
-<a class="sourceLine" id="cb198-3" data-line-number="3"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
-<a class="sourceLine" id="cb198-4" data-line-number="4"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb198-5" data-line-number="5"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb198-6" data-line-number="6"><span class="co">#&gt; tensor([[ -6938.4351,  -9674.6757,  -5744.0206],</span></a>
-<a class="sourceLine" id="cb198-7" data-line-number="7"><span class="co">#&gt;         [-17408.7861, -20595.9333, -12453.4702]])</span></a></code></pre></div>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co"># Gradients for bias</span></a>
-<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="kw">print</span>(b)</a>
-<a class="sourceLine" id="cb199-3" data-line-number="3"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb199-4" data-line-number="4"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb199-5" data-line-number="5"><span class="co">#&gt; tensor([ -89.3802, -212.1051])</span></a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="co"># Gradients for weights</span></a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="kw">print</span>(w)</a>
+<a class="sourceLine" id="cb203-3" data-line-number="3"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
+<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="co">#&gt; tensor([[ -6938.4351,  -9674.6757,  -5744.0206],</span></a>
+<a class="sourceLine" id="cb203-7" data-line-number="7"><span class="co">#&gt;         [-17408.7861, -20595.9333, -12453.4702]])</span></a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="co"># Gradients for bias</span></a>
+<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="kw">print</span>(b)</a>
+<a class="sourceLine" id="cb204-3" data-line-number="3"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb204-4" data-line-number="4"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb204-5" data-line-number="5"><span class="co">#&gt; tensor([ -89.3802, -212.1051])</span></a></code></pre></div>
 <p>A key insight from calculus is that the gradient indicates the rate of change of the loss, or the slope of the loss function w.r.t. the weights and biases.</p>
 <ul>
 <li>If a gradient element is positive:
@@ -480,18 +481,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="reset-the-gradients" class="section level3">
 <h3><span class="header-section-number">9.6.3</span> Reset the gradients</h3>
 <p>Finally, we’ll reset the gradients to zero before moving forward, because PyTorch accumulates gradients.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="co"># Reset the gradients</span></a>
-<a class="sourceLine" id="cb200-2" data-line-number="2">w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
-<a class="sourceLine" id="cb200-3" data-line-number="3"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
-<a class="sourceLine" id="cb200-4" data-line-number="4"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
-<a class="sourceLine" id="cb200-5" data-line-number="5">b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
-<a class="sourceLine" id="cb200-6" data-line-number="6"><span class="co">#&gt; tensor([0., 0.])</span></a>
-<a class="sourceLine" id="cb200-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb200-8" data-line-number="8"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb200-9" data-line-number="9"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
-<a class="sourceLine" id="cb200-10" data-line-number="10"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
-<a class="sourceLine" id="cb200-11" data-line-number="11"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb200-12" data-line-number="12"><span class="co">#&gt; tensor([0., 0.])</span></a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># Reset the gradients</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2">w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb205-3" data-line-number="3"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
+<a class="sourceLine" id="cb205-4" data-line-number="4"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
+<a class="sourceLine" id="cb205-5" data-line-number="5">b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb205-6" data-line-number="6"><span class="co">#&gt; tensor([0., 0.])</span></a>
+<a class="sourceLine" id="cb205-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb205-8" data-line-number="8"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb205-9" data-line-number="9"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
+<a class="sourceLine" id="cb205-10" data-line-number="10"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
+<a class="sourceLine" id="cb205-11" data-line-number="11"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb205-12" data-line-number="12"><span class="co">#&gt; tensor([0., 0.])</span></a></code></pre></div>
 <div id="adjust-weights-and-biases-using-gradient-descent" class="section level4">
 <h4><span class="header-section-number">9.6.3.1</span> Adjust weights and biases using gradient descent</h4>
 <p>We’ll reduce the loss and improve our model using the gradient descent algorithm, which has the following steps:</p>
@@ -502,104 +503,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Adjust the weights by subtracting a small quantity proportional to the gradient</li>
 <li>Reset the gradients to zero</li>
 </ol>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
-<a class="sourceLine" id="cb201-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
-<a class="sourceLine" id="cb201-3" data-line-number="3"><span class="kw">print</span>(preds)</a>
-<a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co">#&gt; tensor([[  -0.4516,  -90.4691],</span></a>
-<a class="sourceLine" id="cb201-5" data-line-number="5"><span class="co">#&gt;         [ -24.6303, -132.3828],</span></a>
-<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="co">#&gt;         [ -31.2192, -176.1530],</span></a>
-<a class="sourceLine" id="cb201-7" data-line-number="7"><span class="co">#&gt;         [  64.3523,  -39.5645],</span></a>
-<a class="sourceLine" id="cb201-8" data-line-number="8"><span class="co">#&gt;         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="co"># Calculate the loss</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
-<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="kw">print</span>(loss)</a>
-<a class="sourceLine" id="cb202-4" data-line-number="4"><span class="co">#&gt; tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</span></a></code></pre></div>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
-<a class="sourceLine" id="cb203-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a>
-<a class="sourceLine" id="cb203-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb203-4" data-line-number="4"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb203-5" data-line-number="5"><span class="co">#&gt; tensor([[ -6938.4351,  -9674.6757,  -5744.0206],</span></a>
-<a class="sourceLine" id="cb203-6" data-line-number="6"><span class="co">#&gt;         [-17408.7861, -20595.9333, -12453.4702]])</span></a>
-<a class="sourceLine" id="cb203-7" data-line-number="7"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
-<a class="sourceLine" id="cb203-8" data-line-number="8"><span class="co">#&gt; tensor([ -89.3802, -212.1051])</span></a></code></pre></div>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
-<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
-<a class="sourceLine" id="cb204-3" data-line-number="3">  <span class="kw">print</span>(w); <span class="kw">print</span>(b)    <span class="co"># requires_grad attribute remains</span></a>
-<a class="sourceLine" id="cb204-4" data-line-number="4">  w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
-<a class="sourceLine" id="cb204-5" data-line-number="5">  b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
-<a class="sourceLine" id="cb204-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb204-7" data-line-number="7">  <span class="kw">print</span>(w<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
-<a class="sourceLine" id="cb204-8" data-line-number="8">  <span class="kw">print</span>(b<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
-<a class="sourceLine" id="cb204-9" data-line-number="9">})</a>
-<a class="sourceLine" id="cb204-10" data-line-number="10"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
-<a class="sourceLine" id="cb204-11" data-line-number="11"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb204-12" data-line-number="12"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb204-13" data-line-number="13"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
-<a class="sourceLine" id="cb204-14" data-line-number="14"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
-<a class="sourceLine" id="cb204-15" data-line-number="15"><span class="co">#&gt; tensor([0., 0.])</span></a>
-<a class="sourceLine" id="cb204-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb204-17" data-line-number="17"><span class="kw">print</span>(w)</a>
-<a class="sourceLine" id="cb204-18" data-line-number="18"><span class="co">#&gt; tensor([[ 1.6104, -0.1967, -2.1213],</span></a>
-<a class="sourceLine" id="cb204-19" data-line-number="19"><span class="co">#&gt;         [ 0.7425, -0.8786, -1.2741]], requires_grad=True)</span></a>
-<a class="sourceLine" id="cb204-20" data-line-number="20"><span class="kw">print</span>(b)</a>
-<a class="sourceLine" id="cb204-21" data-line-number="21"><span class="co">#&gt; tensor([0.4042, 0.8401], requires_grad=True)</span></a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="co"># Generate predictions</span></a>
+<a class="sourceLine" id="cb206-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb206-3" data-line-number="3"><span class="kw">print</span>(preds)</a>
+<a class="sourceLine" id="cb206-4" data-line-number="4"><span class="co">#&gt; tensor([[  -0.4516,  -90.4691],</span></a>
+<a class="sourceLine" id="cb206-5" data-line-number="5"><span class="co">#&gt;         [ -24.6303, -132.3828],</span></a>
+<a class="sourceLine" id="cb206-6" data-line-number="6"><span class="co">#&gt;         [ -31.2192, -176.1530],</span></a>
+<a class="sourceLine" id="cb206-7" data-line-number="7"><span class="co">#&gt;         [  64.3523,  -39.5645],</span></a>
+<a class="sourceLine" id="cb206-8" data-line-number="8"><span class="co">#&gt;         [ -73.9524, -161.9560]], grad_fn=&lt;AddBackward0&gt;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="co"># Calculate the loss</span></a>
+<a class="sourceLine" id="cb207-2" data-line-number="2">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb207-3" data-line-number="3"><span class="kw">print</span>(loss)</a>
+<a class="sourceLine" id="cb207-4" data-line-number="4"><span class="co">#&gt; tensor(33060.8053, grad_fn=&lt;DivBackward0&gt;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="co"># Compute gradients</span></a>
+<a class="sourceLine" id="cb208-2" data-line-number="2">loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb208-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb208-4" data-line-number="4"><span class="kw">print</span>(w<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb208-5" data-line-number="5"><span class="co">#&gt; tensor([[ -6938.4351,  -9674.6757,  -5744.0206],</span></a>
+<a class="sourceLine" id="cb208-6" data-line-number="6"><span class="co">#&gt;         [-17408.7861, -20595.9333, -12453.4702]])</span></a>
+<a class="sourceLine" id="cb208-7" data-line-number="7"><span class="kw">print</span>(b<span class="op">$</span>grad)</a>
+<a class="sourceLine" id="cb208-8" data-line-number="8"><span class="co">#&gt; tensor([ -89.3802, -212.1051])</span></a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
+<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb209-3" data-line-number="3">  <span class="kw">print</span>(w); <span class="kw">print</span>(b)    <span class="co"># requires_grad attribute remains</span></a>
+<a class="sourceLine" id="cb209-4" data-line-number="4">  w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb209-5" data-line-number="5">  b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb209-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb209-7" data-line-number="7">  <span class="kw">print</span>(w<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
+<a class="sourceLine" id="cb209-8" data-line-number="8">  <span class="kw">print</span>(b<span class="op">$</span>grad<span class="op">$</span>data<span class="op">$</span><span class="kw">zero_</span>())</a>
+<a class="sourceLine" id="cb209-9" data-line-number="9">})</a>
+<a class="sourceLine" id="cb209-10" data-line-number="10"><span class="co">#&gt; tensor([[ 1.5410, -0.2934, -2.1788],</span></a>
+<a class="sourceLine" id="cb209-11" data-line-number="11"><span class="co">#&gt;         [ 0.5684, -1.0845, -1.3986]], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb209-12" data-line-number="12"><span class="co">#&gt; tensor([0.4033, 0.8380], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb209-13" data-line-number="13"><span class="co">#&gt; tensor([[0., 0., 0.],</span></a>
+<a class="sourceLine" id="cb209-14" data-line-number="14"><span class="co">#&gt;         [0., 0., 0.]])</span></a>
+<a class="sourceLine" id="cb209-15" data-line-number="15"><span class="co">#&gt; tensor([0., 0.])</span></a>
+<a class="sourceLine" id="cb209-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb209-17" data-line-number="17"><span class="kw">print</span>(w)</a>
+<a class="sourceLine" id="cb209-18" data-line-number="18"><span class="co">#&gt; tensor([[ 1.6104, -0.1967, -2.1213],</span></a>
+<a class="sourceLine" id="cb209-19" data-line-number="19"><span class="co">#&gt;         [ 0.7425, -0.8786, -1.2741]], requires_grad=True)</span></a>
+<a class="sourceLine" id="cb209-20" data-line-number="20"><span class="kw">print</span>(b)</a>
+<a class="sourceLine" id="cb209-21" data-line-number="21"><span class="co">#&gt; tensor([0.4042, 0.8401], requires_grad=True)</span></a></code></pre></div>
 <p>With the new weights and biases, the model should have a lower loss.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="co"># Calculate loss</span></a>
-<a class="sourceLine" id="cb205-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
-<a class="sourceLine" id="cb205-3" data-line-number="3">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
-<a class="sourceLine" id="cb205-4" data-line-number="4"><span class="kw">print</span>(loss)</a>
-<a class="sourceLine" id="cb205-5" data-line-number="5"><span class="co">#&gt; tensor(23432.4894, grad_fn=&lt;DivBackward0&gt;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" data-line-number="1"><span class="co"># Calculate loss</span></a>
+<a class="sourceLine" id="cb210-2" data-line-number="2">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb210-3" data-line-number="3">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb210-4" data-line-number="4"><span class="kw">print</span>(loss)</a>
+<a class="sourceLine" id="cb210-5" data-line-number="5"><span class="co">#&gt; tensor(23432.4894, grad_fn=&lt;DivBackward0&gt;)</span></a></code></pre></div>
 </div>
 </div>
 </div>
 <div id="all-together-train-for-multiple-epochs" class="section level2">
 <h2><span class="header-section-number">9.7</span> All together: train for multiple epochs</h2>
 <p>To reduce the loss further, we repeat the process of adjusting the weights and biases using the gradients multiple times. Each iteration is called an <strong>epoch</strong>.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="co"># Running all together</span></a>
-<a class="sourceLine" id="cb206-2" data-line-number="2"><span class="co"># Adjust weights and reset gradients</span></a>
-<a class="sourceLine" id="cb206-3" data-line-number="3">num_epochs &lt;-<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb206-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb206-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
-<a class="sourceLine" id="cb206-6" data-line-number="6">  preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
-<a class="sourceLine" id="cb206-7" data-line-number="7">  loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
-<a class="sourceLine" id="cb206-8" data-line-number="8">  loss<span class="op">$</span><span class="kw">backward</span>()</a>
-<a class="sourceLine" id="cb206-9" data-line-number="9">  <span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
-<a class="sourceLine" id="cb206-10" data-line-number="10">    w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
-<a class="sourceLine" id="cb206-11" data-line-number="11">    b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
-<a class="sourceLine" id="cb206-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb206-13" data-line-number="13">    w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
-<a class="sourceLine" id="cb206-14" data-line-number="14">    b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
-<a class="sourceLine" id="cb206-15" data-line-number="15">  })</a>
-<a class="sourceLine" id="cb206-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb206-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb206-18" data-line-number="18"><span class="co"># Calculate loss</span></a>
-<a class="sourceLine" id="cb206-19" data-line-number="19">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
-<a class="sourceLine" id="cb206-20" data-line-number="20">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
-<a class="sourceLine" id="cb206-21" data-line-number="21"><span class="kw">print</span>(loss)</a>
-<a class="sourceLine" id="cb206-22" data-line-number="22"><span class="co">#&gt; tensor(1258.0216, grad_fn=&lt;DivBackward0&gt;)</span></a>
-<a class="sourceLine" id="cb206-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb206-24" data-line-number="24"><span class="co"># predictions</span></a>
-<a class="sourceLine" id="cb206-25" data-line-number="25">preds</a>
-<a class="sourceLine" id="cb206-26" data-line-number="26"><span class="co">#&gt; tensor([[ 69.2462,  80.2082],</span></a>
-<a class="sourceLine" id="cb206-27" data-line-number="27"><span class="co">#&gt;         [ 73.7183,  97.2052],</span></a>
-<a class="sourceLine" id="cb206-28" data-line-number="28"><span class="co">#&gt;         [118.5780, 124.9272],</span></a>
-<a class="sourceLine" id="cb206-29" data-line-number="29"><span class="co">#&gt;         [ 89.2282,  92.7052],</span></a>
-<a class="sourceLine" id="cb206-30" data-line-number="30"><span class="co">#&gt;         [ 47.4648,  80.7782]], grad_fn=&lt;AddBackward0&gt;)</span></a>
-<a class="sourceLine" id="cb206-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb206-32" data-line-number="32"><span class="co"># Targets</span></a>
-<a class="sourceLine" id="cb206-33" data-line-number="33">targets</a>
-<a class="sourceLine" id="cb206-34" data-line-number="34"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
-<a class="sourceLine" id="cb206-35" data-line-number="35"><span class="co">#&gt;         [ 81., 101.],</span></a>
-<a class="sourceLine" id="cb206-36" data-line-number="36"><span class="co">#&gt;         [119., 133.],</span></a>
-<a class="sourceLine" id="cb206-37" data-line-number="37"><span class="co">#&gt;         [ 22.,  37.],</span></a>
-<a class="sourceLine" id="cb206-38" data-line-number="38"><span class="co">#&gt;         [103., 119.]])</span></a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="co"># Running all together</span></a>
+<a class="sourceLine" id="cb211-2" data-line-number="2"><span class="co"># Adjust weights and reset gradients</span></a>
+<a class="sourceLine" id="cb211-3" data-line-number="3">num_epochs &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb211-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb211-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
+<a class="sourceLine" id="cb211-6" data-line-number="6">  preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb211-7" data-line-number="7">  loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb211-8" data-line-number="8">  loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb211-9" data-line-number="9">  <span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb211-10" data-line-number="10">    w<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(w<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(w<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb211-11" data-line-number="11">    b<span class="op">$</span>data &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sub</span>(b<span class="op">$</span>data, torch<span class="op">$</span><span class="kw">mul</span>(b<span class="op">$</span>grad, torch<span class="op">$</span><span class="kw">scalar_tensor</span>(<span class="fl">1e-5</span>)))</a>
+<a class="sourceLine" id="cb211-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb211-13" data-line-number="13">    w<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb211-14" data-line-number="14">    b<span class="op">$</span>grad<span class="op">$</span><span class="kw">zero_</span>()</a>
+<a class="sourceLine" id="cb211-15" data-line-number="15">  })</a>
+<a class="sourceLine" id="cb211-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb211-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb211-18" data-line-number="18"><span class="co"># Calculate loss</span></a>
+<a class="sourceLine" id="cb211-19" data-line-number="19">preds =<span class="st"> </span><span class="kw">model</span>(inputs)</a>
+<a class="sourceLine" id="cb211-20" data-line-number="20">loss =<span class="st"> </span><span class="kw">mse</span>(preds, targets)</a>
+<a class="sourceLine" id="cb211-21" data-line-number="21"><span class="kw">print</span>(loss)</a>
+<a class="sourceLine" id="cb211-22" data-line-number="22"><span class="co">#&gt; tensor(1258.0216, grad_fn=&lt;DivBackward0&gt;)</span></a>
+<a class="sourceLine" id="cb211-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb211-24" data-line-number="24"><span class="co"># predictions</span></a>
+<a class="sourceLine" id="cb211-25" data-line-number="25">preds</a>
+<a class="sourceLine" id="cb211-26" data-line-number="26"><span class="co">#&gt; tensor([[ 69.2462,  80.2082],</span></a>
+<a class="sourceLine" id="cb211-27" data-line-number="27"><span class="co">#&gt;         [ 73.7183,  97.2052],</span></a>
+<a class="sourceLine" id="cb211-28" data-line-number="28"><span class="co">#&gt;         [118.5780, 124.9272],</span></a>
+<a class="sourceLine" id="cb211-29" data-line-number="29"><span class="co">#&gt;         [ 89.2282,  92.7052],</span></a>
+<a class="sourceLine" id="cb211-30" data-line-number="30"><span class="co">#&gt;         [ 47.4648,  80.7782]], grad_fn=&lt;AddBackward0&gt;)</span></a>
+<a class="sourceLine" id="cb211-31" data-line-number="31"></a>
+<a class="sourceLine" id="cb211-32" data-line-number="32"><span class="co"># Targets</span></a>
+<a class="sourceLine" id="cb211-33" data-line-number="33">targets</a>
+<a class="sourceLine" id="cb211-34" data-line-number="34"><span class="co">#&gt; tensor([[ 56.,  70.],</span></a>
+<a class="sourceLine" id="cb211-35" data-line-number="35"><span class="co">#&gt;         [ 81., 101.],</span></a>
+<a class="sourceLine" id="cb211-36" data-line-number="36"><span class="co">#&gt;         [119., 133.],</span></a>
+<a class="sourceLine" id="cb211-37" data-line-number="37"><span class="co">#&gt;         [ 22.,  37.],</span></a>
+<a class="sourceLine" id="cb211-38" data-line-number="38"><span class="co">#&gt;         [103., 119.]])</span></a></code></pre></div>
 
 </div>
 </div>
 
 
 
-</div>
             </section>
 
           </div>

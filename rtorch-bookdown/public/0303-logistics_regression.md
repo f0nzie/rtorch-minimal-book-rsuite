@@ -112,8 +112,8 @@ Finally, we plot the results, by tracing the line that separates two classes, 0 
 print("Final gradient descend:", w)
 # plot the data and separating line
 #> Final gradient descend: [Parameter containing:
-#> tensor([[1.0837, 1.1231]], requires_grad=True), Parameter containing:
-#> tensor([0.0724], requires_grad=True)]
+#> tensor([[1.0967, 1.1507]], requires_grad=True), Parameter containing:
+#> tensor([0.2308], requires_grad=True)]
 plt.scatter(X[:,0], X[:,1], c=T.reshape(N), s=100, alpha=0.5)
 x_axis = np.linspace(-6, 6, 100)
 y_axis = -(w1[0] + x_axis * w0[0][0]) / w0[0][1]

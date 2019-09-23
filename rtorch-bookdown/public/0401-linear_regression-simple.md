@@ -33,9 +33,7 @@ y = np$sin(x) * np$power(x, 3L) + 3L * x + np$random$rand(100L) * 0.8
 plot(x, y)
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{0406-linear_regression-simple_files/figure-latex/datasets-1} \end{center}
+<img src="0401-linear_regression-simple_files/figure-html/datasets-1.png" width="70%" style="display: block; margin: auto;" />
 
 ## Convert arrays to tensors
 
@@ -250,9 +248,7 @@ for (i in 1:250) {
 }
 ```
 
-
-
-\begin{center}\includegraphics[width=0.7\linewidth]{0406-linear_regression-simple_files/figure-latex/plot-xy-1} \end{center}
+<img src="0401-linear_regression-simple_files/figure-html/plot-xy-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ## Results
