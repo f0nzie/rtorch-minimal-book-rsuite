@@ -2,6 +2,7 @@
 !.gitignore
 !*.Rproj
 !*.Rmd
+!*.R
 !README.md
 !*.yml
 !*.bib
