@@ -1,6 +1,4 @@
 
-
-
 \cleardoublepage
 
 
@@ -146,7 +144,7 @@ x <- seq(-5, 5, 0.01)
 plot(x, sigmoid(x), col = 'blue', cex = 0.5, main = "Sigmoid")
 ```
 
-<img src="9992-appendixB_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="9992-appendixB_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
 
 ## The ReLU function
 
@@ -190,7 +188,7 @@ ggplot(df, aes(x = x, y = sx)) +
 
 ## The Softmax Activation function
 
-Using the PyTorch `tanh()` function:
+Using the PyTorch `softmax()` function:
 
 
 ```r
@@ -301,7 +299,7 @@ def ReLU(x, derivative=False):
 ```
 
 
-### Visualization {-}
+### Visualization with `matplotlib` {-}
 Plotting using `matplotlib`:
 
 
@@ -324,7 +322,7 @@ plt.xlim([-6, 6])
 plt.show()
 ```
 
-<img src="9992-appendixB_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="9992-appendixB_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 ## Softmax in Python
@@ -369,5 +367,5 @@ print("Graph Y readings: {}".format(graph_y))
 line_graph(graph_x, graph_y, "Inputs", "Softmax Scores")
 ```
 
-<img src="9992-appendixB_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="9992-appendixB_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" />
 

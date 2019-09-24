@@ -313,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#sigmoid-activation"><i class="fa fa-check"></i>Sigmoid activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#hyperbolic-tangent-activation"><i class="fa fa-check"></i>Hyperbolic Tangent activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#rectifier-linear-unit-relu"><i class="fa fa-check"></i>Rectifier linear unit (ReLU)</a></li>
-<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li><a href="appendixB.html#visualization-with-matplotlib">Visualization with <code>matplotlib</code></a></li>
 </ul></li>
 <li class="chapter" data-level="B.6" data-path="appendixB.html"><a href="appendixB.html#softmax-in-python"><i class="fa fa-check"></i><b>B.6</b> Softmax in Python</a></li>
 </ul></li>
@@ -429,36 +429,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb171-26" data-line-number="26">        i &lt;-<span class="st">  </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb171-27" data-line-number="27">    }</a>
 <a class="sourceLine" id="cb171-28" data-line-number="28">}  </a>
-<a class="sourceLine" id="cb171-29" data-line-number="29"><span class="co">#&gt; Epoch [2/5], Step [100/600], Loss: 2.207937 </span></a>
-<a class="sourceLine" id="cb171-30" data-line-number="30"><span class="co">#&gt; Epoch [2/5], Step [200/600], Loss: 2.129730 </span></a>
-<a class="sourceLine" id="cb171-31" data-line-number="31"><span class="co">#&gt; Epoch [2/5], Step [300/600], Loss: 2.020010 </span></a>
-<a class="sourceLine" id="cb171-32" data-line-number="32"><span class="co">#&gt; Epoch [2/5], Step [400/600], Loss: 1.921782 </span></a>
-<a class="sourceLine" id="cb171-33" data-line-number="33"><span class="co">#&gt; Epoch [2/5], Step [500/600], Loss: 1.842267 </span></a>
-<a class="sourceLine" id="cb171-34" data-line-number="34"><span class="co">#&gt; Epoch [2/5], Step [600/600], Loss: 1.849545 </span></a>
-<a class="sourceLine" id="cb171-35" data-line-number="35"><span class="co">#&gt; Epoch [3/5], Step [100/600], Loss: 1.752690 </span></a>
-<a class="sourceLine" id="cb171-36" data-line-number="36"><span class="co">#&gt; Epoch [3/5], Step [200/600], Loss: 1.671137 </span></a>
-<a class="sourceLine" id="cb171-37" data-line-number="37"><span class="co">#&gt; Epoch [3/5], Step [300/600], Loss: 1.618696 </span></a>
-<a class="sourceLine" id="cb171-38" data-line-number="38"><span class="co">#&gt; Epoch [3/5], Step [400/600], Loss: 1.548630 </span></a>
-<a class="sourceLine" id="cb171-39" data-line-number="39"><span class="co">#&gt; Epoch [3/5], Step [500/600], Loss: 1.447902 </span></a>
-<a class="sourceLine" id="cb171-40" data-line-number="40"><span class="co">#&gt; Epoch [3/5], Step [600/600], Loss: 1.540873 </span></a>
-<a class="sourceLine" id="cb171-41" data-line-number="41"><span class="co">#&gt; Epoch [4/5], Step [100/600], Loss: 1.462256 </span></a>
-<a class="sourceLine" id="cb171-42" data-line-number="42"><span class="co">#&gt; Epoch [4/5], Step [200/600], Loss: 1.385923 </span></a>
-<a class="sourceLine" id="cb171-43" data-line-number="43"><span class="co">#&gt; Epoch [4/5], Step [300/600], Loss: 1.361354 </span></a>
-<a class="sourceLine" id="cb171-44" data-line-number="44"><span class="co">#&gt; Epoch [4/5], Step [400/600], Loss: 1.314525 </span></a>
-<a class="sourceLine" id="cb171-45" data-line-number="45"><span class="co">#&gt; Epoch [4/5], Step [500/600], Loss: 1.196100 </span></a>
-<a class="sourceLine" id="cb171-46" data-line-number="46"><span class="co">#&gt; Epoch [4/5], Step [600/600], Loss: 1.338717 </span></a>
-<a class="sourceLine" id="cb171-47" data-line-number="47"><span class="co">#&gt; Epoch [5/5], Step [100/600], Loss: 1.272773 </span></a>
-<a class="sourceLine" id="cb171-48" data-line-number="48"><span class="co">#&gt; Epoch [5/5], Step [200/600], Loss: 1.201425 </span></a>
-<a class="sourceLine" id="cb171-49" data-line-number="49"><span class="co">#&gt; Epoch [5/5], Step [300/600], Loss: 1.194291 </span></a>
-<a class="sourceLine" id="cb171-50" data-line-number="50"><span class="co">#&gt; Epoch [5/5], Step [400/600], Loss: 1.157681 </span></a>
-<a class="sourceLine" id="cb171-51" data-line-number="51"><span class="co">#&gt; Epoch [5/5], Step [500/600], Loss: 1.029743 </span></a>
-<a class="sourceLine" id="cb171-52" data-line-number="52"><span class="co">#&gt; Epoch [5/5], Step [600/600], Loss: 1.199558 </span></a>
-<a class="sourceLine" id="cb171-53" data-line-number="53"><span class="co">#&gt; Epoch [6/5], Step [100/600], Loss: 1.144258 </span></a>
-<a class="sourceLine" id="cb171-54" data-line-number="54"><span class="co">#&gt; Epoch [6/5], Step [200/600], Loss: 1.076404 </span></a>
-<a class="sourceLine" id="cb171-55" data-line-number="55"><span class="co">#&gt; Epoch [6/5], Step [300/600], Loss: 1.080425 </span></a>
-<a class="sourceLine" id="cb171-56" data-line-number="56"><span class="co">#&gt; Epoch [6/5], Step [400/600], Loss: 1.046417 </span></a>
-<a class="sourceLine" id="cb171-57" data-line-number="57"><span class="co">#&gt; Epoch [6/5], Step [500/600], Loss: 0.914617 </span></a>
-<a class="sourceLine" id="cb171-58" data-line-number="58"><span class="co">#&gt; Epoch [6/5], Step [600/600], Loss: 1.098780</span></a></code></pre></div>
+<a class="sourceLine" id="cb171-29" data-line-number="29"><span class="co">#&gt; Epoch [2/5], Step [100/600], Loss: 2.253445 </span></a>
+<a class="sourceLine" id="cb171-30" data-line-number="30"><span class="co">#&gt; Epoch [2/5], Step [200/600], Loss: 2.120087 </span></a>
+<a class="sourceLine" id="cb171-31" data-line-number="31"><span class="co">#&gt; Epoch [2/5], Step [300/600], Loss: 2.069138 </span></a>
+<a class="sourceLine" id="cb171-32" data-line-number="32"><span class="co">#&gt; Epoch [2/5], Step [400/600], Loss: 1.973958 </span></a>
+<a class="sourceLine" id="cb171-33" data-line-number="33"><span class="co">#&gt; Epoch [2/5], Step [500/600], Loss: 1.897016 </span></a>
+<a class="sourceLine" id="cb171-34" data-line-number="34"><span class="co">#&gt; Epoch [2/5], Step [600/600], Loss: 1.806162 </span></a>
+<a class="sourceLine" id="cb171-35" data-line-number="35"><span class="co">#&gt; Epoch [3/5], Step [100/600], Loss: 1.707361 </span></a>
+<a class="sourceLine" id="cb171-36" data-line-number="36"><span class="co">#&gt; Epoch [3/5], Step [200/600], Loss: 1.623102 </span></a>
+<a class="sourceLine" id="cb171-37" data-line-number="37"><span class="co">#&gt; Epoch [3/5], Step [300/600], Loss: 1.663953 </span></a>
+<a class="sourceLine" id="cb171-38" data-line-number="38"><span class="co">#&gt; Epoch [3/5], Step [400/600], Loss: 1.590802 </span></a>
+<a class="sourceLine" id="cb171-39" data-line-number="39"><span class="co">#&gt; Epoch [3/5], Step [500/600], Loss: 1.541509 </span></a>
+<a class="sourceLine" id="cb171-40" data-line-number="40"><span class="co">#&gt; Epoch [3/5], Step [600/600], Loss: 1.465221 </span></a>
+<a class="sourceLine" id="cb171-41" data-line-number="41"><span class="co">#&gt; Epoch [4/5], Step [100/600], Loss: 1.369069 </span></a>
+<a class="sourceLine" id="cb171-42" data-line-number="42"><span class="co">#&gt; Epoch [4/5], Step [200/600], Loss: 1.317279 </span></a>
+<a class="sourceLine" id="cb171-43" data-line-number="43"><span class="co">#&gt; Epoch [4/5], Step [300/600], Loss: 1.392157 </span></a>
+<a class="sourceLine" id="cb171-44" data-line-number="44"><span class="co">#&gt; Epoch [4/5], Step [400/600], Loss: 1.344169 </span></a>
+<a class="sourceLine" id="cb171-45" data-line-number="45"><span class="co">#&gt; Epoch [4/5], Step [500/600], Loss: 1.307677 </span></a>
+<a class="sourceLine" id="cb171-46" data-line-number="46"><span class="co">#&gt; Epoch [4/5], Step [600/600], Loss: 1.239510 </span></a>
+<a class="sourceLine" id="cb171-47" data-line-number="47"><span class="co">#&gt; Epoch [5/5], Step [100/600], Loss: 1.154597 </span></a>
+<a class="sourceLine" id="cb171-48" data-line-number="48"><span class="co">#&gt; Epoch [5/5], Step [200/600], Loss: 1.119725 </span></a>
+<a class="sourceLine" id="cb171-49" data-line-number="49"><span class="co">#&gt; Epoch [5/5], Step [300/600], Loss: 1.206795 </span></a>
+<a class="sourceLine" id="cb171-50" data-line-number="50"><span class="co">#&gt; Epoch [5/5], Step [400/600], Loss: 1.179843 </span></a>
+<a class="sourceLine" id="cb171-51" data-line-number="51"><span class="co">#&gt; Epoch [5/5], Step [500/600], Loss: 1.147777 </span></a>
+<a class="sourceLine" id="cb171-52" data-line-number="52"><span class="co">#&gt; Epoch [5/5], Step [600/600], Loss: 1.083019 </span></a>
+<a class="sourceLine" id="cb171-53" data-line-number="53"><span class="co">#&gt; Epoch [6/5], Step [100/600], Loss: 1.012402 </span></a>
+<a class="sourceLine" id="cb171-54" data-line-number="54"><span class="co">#&gt; Epoch [6/5], Step [200/600], Loss: 0.984670 </span></a>
+<a class="sourceLine" id="cb171-55" data-line-number="55"><span class="co">#&gt; Epoch [6/5], Step [300/600], Loss: 1.074869 </span></a>
+<a class="sourceLine" id="cb171-56" data-line-number="56"><span class="co">#&gt; Epoch [6/5], Step [400/600], Loss: 1.064660 </span></a>
+<a class="sourceLine" id="cb171-57" data-line-number="57"><span class="co">#&gt; Epoch [6/5], Step [500/600], Loss: 1.032867 </span></a>
+<a class="sourceLine" id="cb171-58" data-line-number="58"><span class="co">#&gt; Epoch [6/5], Step [600/600], Loss: 0.969446</span></a></code></pre></div>
 </div>
 <div id="prediction" class="section level2">
 <h2><span class="header-section-number">5.5</span> Prediction</h2>
@@ -482,7 +482,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb172-18" data-line-number="18">    <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Accuracy of the model on the 10000 test images: %f %%&#39;</span>, (<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total)))</a>
 <a class="sourceLine" id="cb172-19" data-line-number="19">  </a>
 <a class="sourceLine" id="cb172-20" data-line-number="20">})</a>
-<a class="sourceLine" id="cb172-21" data-line-number="21"><span class="co">#&gt; Accuracy of the model on the 10000 test images: 83.360000 %</span></a></code></pre></div>
+<a class="sourceLine" id="cb172-21" data-line-number="21"><span class="co">#&gt; Accuracy of the model on the 10000 test images: 82.780000 %</span></a></code></pre></div>
 </div>
 <div id="save-the-model" class="section level2">
 <h2><span class="header-section-number">5.6</span> Save the model</h2>

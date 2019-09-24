@@ -313,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#sigmoid-activation"><i class="fa fa-check"></i>Sigmoid activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#hyperbolic-tangent-activation"><i class="fa fa-check"></i>Hyperbolic Tangent activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#rectifier-linear-unit-relu"><i class="fa fa-check"></i>Rectifier linear unit (ReLU)</a></li>
-<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li><a href="appendixB.html#visualization-with-matplotlib">Visualization with <code>matplotlib</code></a></li>
 </ul></li>
 <li class="chapter" data-level="B.6" data-path="appendixB.html"><a href="appendixB.html#softmax-in-python"><i class="fa fa-check"></i><b>B.6</b> Softmax in Python</a></li>
 </ul></li>
@@ -412,8 +412,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="bu">print</span>(<span class="st">&quot;Final gradient descend:&quot;</span>, w)</a>
 <a class="sourceLine" id="cb181-2" data-line-number="2"><span class="co"># plot the data and separating line</span></a>
 <a class="sourceLine" id="cb181-3" data-line-number="3"><span class="co">#&gt; Final gradient descend: [Parameter containing:</span></a>
-<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co">#&gt; tensor([[1.0932, 1.1070]], requires_grad=True), Parameter containing:</span></a>
-<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="co">#&gt; tensor([0.2259], requires_grad=True)]</span></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="co">#&gt; tensor([[1.0890, 1.1522]], requires_grad=True), Parameter containing:</span></a>
+<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="co">#&gt; tensor([0.0393], requires_grad=True)]</span></a>
 <a class="sourceLine" id="cb181-6" data-line-number="6">plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], c<span class="op">=</span>T.reshape(N), s<span class="op">=</span><span class="dv">100</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb181-7" data-line-number="7">x_axis <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb181-8" data-line-number="8">y_axis <span class="op">=</span> <span class="op">-</span>(w1[<span class="dv">0</span>] <span class="op">+</span> x_axis <span class="op">*</span> w0[<span class="dv">0</span>][<span class="dv">0</span>]) <span class="op">/</span> w0[<span class="dv">0</span>][<span class="dv">1</span>]</a>

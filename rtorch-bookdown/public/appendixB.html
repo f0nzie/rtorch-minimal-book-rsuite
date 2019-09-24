@@ -313,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#sigmoid-activation"><i class="fa fa-check"></i>Sigmoid activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#hyperbolic-tangent-activation"><i class="fa fa-check"></i>Hyperbolic Tangent activation</a></li>
 <li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#rectifier-linear-unit-relu"><i class="fa fa-check"></i>Rectifier linear unit (ReLU)</a></li>
-<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li><a href="appendixB.html#visualization-with-matplotlib">Visualization with <code>matplotlib</code></a></li>
 </ul></li>
 <li class="chapter" data-level="B.6" data-path="appendixB.html"><a href="appendixB.html#softmax-in-python"><i class="fa fa-check"></i><b>B.6</b> Softmax in Python</a></li>
 </ul></li>
@@ -464,7 +464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb238-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb238-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.01</span>)</a>
 <a class="sourceLine" id="cb238-6" data-line-number="6"><span class="kw">plot</span>(x, <span class="kw">sigmoid</span>(x), <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">main =</span> <span class="st">&quot;Sigmoid&quot;</span>)</a></code></pre></div>
-<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="the-relu-function" class="section level2">
 <h2><span class="header-section-number">B.2</span> The ReLU function</h2>
@@ -496,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-softmax-activation-function" class="section level2">
 <h2><span class="header-section-number">B.4</span> The Softmax Activation function</h2>
-<p>Using the PyTorch <code>tanh()</code> function:</p>
+<p>Using the PyTorch <code>softmax()</code> function:</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" data-line-number="1">x &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">range</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb241-2" data-line-number="2">y &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">softmax</span>(x, <span class="dt">dim=</span>0L)</a>
 <a class="sourceLine" id="cb241-3" data-line-number="3"></a>
@@ -575,8 +575,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb247-11" data-line-number="11">    <span class="cf">else</span>:                       <span class="co"># Return forward pass of the function at x</span></a>
 <a class="sourceLine" id="cb247-12" data-line-number="12">        <span class="cf">return</span> np.maximum(x, <span class="dv">0</span>)</a></code></pre></div>
 </div>
-<div id="visualization" class="section level3 unnumbered">
-<h3>Visualization</h3>
+<div id="visualization-with-matplotlib" class="section level3 unnumbered">
+<h3>Visualization with <code>matplotlib</code></h3>
 <p>Plotting using <code>matplotlib</code>:</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb248-1" data-line-number="1">x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb248-2" data-line-number="2">units <span class="op">=</span> {</a>
@@ -594,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb248-14" data-line-number="14">plt.ylim([<span class="op">-</span><span class="dv">2</span>, <span class="dv">5</span>])</a>
 <a class="sourceLine" id="cb248-15" data-line-number="15">plt.xlim([<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>])</a>
 <a class="sourceLine" id="cb248-16" data-line-number="16">plt.show()</a></code></pre></div>
-<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="softmax-in-python" class="section level2">
@@ -635,7 +635,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb249-34" data-line-number="34"><span class="bu">print</span>(<span class="st">&quot;Graph Y readings: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(graph_y))</a>
 <a class="sourceLine" id="cb249-35" data-line-number="35"> </a>
 <a class="sourceLine" id="cb249-36" data-line-number="36">line_graph(graph_x, graph_y, <span class="st">&quot;Inputs&quot;</span>, <span class="st">&quot;Softmax Scores&quot;</span>)</a></code></pre></div>
-<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
