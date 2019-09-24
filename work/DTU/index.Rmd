@@ -13,7 +13,6 @@ description: "This is a minimal example of using the bookdown package to write a
 # Examples from DTU {-}
 
 
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(

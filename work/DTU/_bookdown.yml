@@ -1,5 +1,6 @@
 book_filename: "DTU"
 delete_merged_file: true
+new_session: yes
 language:
   ui:
     chapter_name: "Chapter "

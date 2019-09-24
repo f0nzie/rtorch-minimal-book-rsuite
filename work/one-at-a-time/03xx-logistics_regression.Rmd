@@ -1,8 +1,14 @@
+# (PART) PART 1 {-}
+
+# Logistics Regression (draft)
+Published as `A classic classification problem`.
+
 
 ```{r}
 library(rTorch)
 ```
 
+## Neural Network with PyTorch
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -123,7 +129,7 @@ errors
 ```
 
 
-## Neural Network with PyTorch
+## Neural Network with rTorch
 
 ```{r}
 library(rTorch)

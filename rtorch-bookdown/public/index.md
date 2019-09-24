@@ -2,7 +2,7 @@
 --- 
 title: "A Minimal rTorch Tutorial"
 author: "Alfonso R. Reyes"
-date: "2019-09-22"
+date: "2019-09-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

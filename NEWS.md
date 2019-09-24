@@ -1,7 +1,14 @@
 # CHANGES
 
+## 0.0.3 (2019-09-24)
+* Add appendix. Add activation functions.
+* Move Sigmoid function to appendix.
+
 ## 0.0.2.9001 (2019-09-22)
-* Add examples from DTU
+* Add examples at `work/DTU` folder
+* Two Convolutional networks using MNIST digits (advanced)
+* Save datasets locally to the project, not the master project
+
 
 ## 0.0.2.9000 (2019-09-22)
 * Remove folders `data` and `datasets` from master project.

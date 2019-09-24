@@ -189,7 +189,7 @@ test_loader = torch.utils.data.DataLoader(
 
 ## Replace not working network by one that works
 
-```{python, setup-net}
+```{python, pysetup-net-works}
 # Source: https://github.com/floydhub/mnist/blob/master/main.py
 
 class Net(nn.Module):
