@@ -7,6 +7,7 @@ library(rTorch)
 library(ggplot2)
 ```
 
+## PyTorch `sigmoid()` function
 Using PyTorch functions:
 
 
@@ -120,11 +121,14 @@ df
 #> 101  5.0 0.99331
 
 ggplot(df, aes(x = x, y = sx)) + 
-    geom_point()
+    geom_point() +
+    ggtitle("Sigmoid")
 ```
 
 <img src="0302-logistics_regression_files/figure-html/sigmoid-1.png" width="70%" style="display: block; margin: auto;" />
 
+
+## R custom-made function
 Plot the sigmoid function using an R function:
 
 
@@ -134,7 +138,7 @@ sigmoid = function(x) {
 }
 
 x <- seq(-5, 5, 0.01)
-plot(x, sigmoid(x), col = 'blue', cex = 0.5)
+plot(x, sigmoid(x), col = 'blue', cex = 0.5, main = "Sigmoid")
 ```
 
 <img src="0302-logistics_regression_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />

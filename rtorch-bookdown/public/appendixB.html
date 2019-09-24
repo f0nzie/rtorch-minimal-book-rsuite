@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 The Sigmoid function | A Minimal rTorch Tutorial</title>
+  <title>B Activation Functions | A Minimal rTorch Tutorial</title>
   <meta name="description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 The Sigmoid function | A Minimal rTorch Tutorial" />
+  <meta property="og:title" content="B Activation Functions | A Minimal rTorch Tutorial" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 The Sigmoid function | A Minimal rTorch Tutorial" />
+  <meta name="twitter:title" content="B Activation Functions | A Minimal rTorch Tutorial" />
   
   <meta name="twitter:description" content="This is a minimal tutorial of using the rTorch package to have fun while doing machine learning. This book was produced with bookdown." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mnistdigits.html"/>
-<link rel="next" href="a-classic-classification-problem.html"/>
+<link rel="prev" href="appendixA.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -238,74 +238,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="mnistdigits.html"><a href="mnistdigits.html#prediction"><i class="fa fa-check"></i><b>5.5</b> Prediction</a></li>
 <li class="chapter" data-level="5.6" data-path="mnistdigits.html"><a href="mnistdigits.html#save-the-model"><i class="fa fa-check"></i><b>5.6</b> Save the model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-sigmoid-function.html"><a href="the-sigmoid-function.html"><i class="fa fa-check"></i><b>6</b> The Sigmoid function</a><ul>
-<li class="chapter" data-level="6.1" data-path="the-sigmoid-function.html"><a href="the-sigmoid-function.html#pytorch-sigmoid-function"><i class="fa fa-check"></i><b>6.1</b> PyTorch <code>sigmoid()</code> function</a></li>
-<li class="chapter" data-level="6.2" data-path="the-sigmoid-function.html"><a href="the-sigmoid-function.html#r-custom-made-function"><i class="fa fa-check"></i><b>6.2</b> R custom-made function</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="a-classic-classification-problem.html"><a href="a-classic-classification-problem.html"><i class="fa fa-check"></i><b>7</b> A classic classification problem</a></li>
+<li class="chapter" data-level="6" data-path="a-classic-classification-problem.html"><a href="a-classic-classification-problem.html"><i class="fa fa-check"></i><b>6</b> A classic classification problem</a></li>
 <li class="part"><span><b>IV Linear Regression</b></span></li>
-<li class="chapter" data-level="8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Simple linear regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#generate-the-dataset"><i class="fa fa-check"></i><b>8.2</b> Generate the dataset</a></li>
-<li class="chapter" data-level="8.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#convert-arrays-to-tensors"><i class="fa fa-check"></i><b>8.3</b> Convert arrays to tensors</a></li>
-<li class="chapter" data-level="8.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>8.4</b> Converting from numpy to tensor</a></li>
-<li class="chapter" data-level="8.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>8.5</b> Creating the network model</a></li>
-<li class="chapter" data-level="8.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>8.6</b> Optimizer and Loss</a></li>
-<li class="chapter" data-level="8.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#training-1"><i class="fa fa-check"></i><b>8.7</b> Training</a></li>
-<li class="chapter" data-level="8.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#results"><i class="fa fa-check"></i><b>8.8</b> Results</a></li>
+<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple linear regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#generate-the-dataset"><i class="fa fa-check"></i><b>7.2</b> Generate the dataset</a></li>
+<li class="chapter" data-level="7.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#convert-arrays-to-tensors"><i class="fa fa-check"></i><b>7.3</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="7.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>7.4</b> Converting from numpy to tensor</a></li>
+<li class="chapter" data-level="7.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>7.5</b> Creating the network model</a></li>
+<li class="chapter" data-level="7.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>7.6</b> Optimizer and Loss</a></li>
+<li class="chapter" data-level="7.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#training-1"><i class="fa fa-check"></i><b>7.7</b> Training</a></li>
+<li class="chapter" data-level="7.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#results"><i class="fa fa-check"></i><b>7.8</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html"><i class="fa fa-check"></i><b>9</b> Rainfall. Linear Regression</a><ul>
-<li class="chapter" data-level="9.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#training-data"><i class="fa fa-check"></i><b>9.1</b> Training data</a></li>
-<li class="chapter" data-level="9.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#convert-arrays-to-tensors-1"><i class="fa fa-check"></i><b>9.2</b> Convert arrays to tensors</a></li>
-<li class="chapter" data-level="9.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>9.3</b> Build the model</a></li>
-<li class="chapter" data-level="9.4" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>9.4</b> Generate predictions</a></li>
-<li class="chapter" data-level="9.5" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#loss-function"><i class="fa fa-check"></i><b>9.5</b> Loss Function</a></li>
-<li class="chapter" data-level="9.6" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#step-by-step-process"><i class="fa fa-check"></i><b>9.6</b> Step by step process</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-the-losses"><i class="fa fa-check"></i><b>9.6.1</b> Compute the losses</a></li>
-<li class="chapter" data-level="9.6.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>9.6.2</b> Compute Gradients</a></li>
-<li class="chapter" data-level="9.6.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#reset-the-gradients"><i class="fa fa-check"></i><b>9.6.3</b> Reset the gradients</a></li>
+<li class="chapter" data-level="8" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Rainfall. Linear Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#training-data"><i class="fa fa-check"></i><b>8.1</b> Training data</a></li>
+<li class="chapter" data-level="8.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#convert-arrays-to-tensors-1"><i class="fa fa-check"></i><b>8.2</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="8.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>8.3</b> Build the model</a></li>
+<li class="chapter" data-level="8.4" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>8.4</b> Generate predictions</a></li>
+<li class="chapter" data-level="8.5" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#loss-function"><i class="fa fa-check"></i><b>8.5</b> Loss Function</a></li>
+<li class="chapter" data-level="8.6" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#step-by-step-process"><i class="fa fa-check"></i><b>8.6</b> Step by step process</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-the-losses"><i class="fa fa-check"></i><b>8.6.1</b> Compute the losses</a></li>
+<li class="chapter" data-level="8.6.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>8.6.2</b> Compute Gradients</a></li>
+<li class="chapter" data-level="8.6.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#reset-the-gradients"><i class="fa fa-check"></i><b>8.6.3</b> Reset the gradients</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>9.7</b> All together: train for multiple epochs</a></li>
+<li class="chapter" data-level="8.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>8.7</b> All together: train for multiple epochs</a></li>
 </ul></li>
 <li class="part"><span><b>V Neural Networks</b></span></li>
-<li class="chapter" data-level="10" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>10</b> A two-layer neural network</a><ul>
-<li class="chapter" data-level="10.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>10.1</b> Load the libraries</a></li>
-<li class="chapter" data-level="10.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>10.2</b> Dataset</a></li>
-<li class="chapter" data-level="10.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>10.3</b> Run the model for 50 iterations</a></li>
-<li class="chapter" data-level="10.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>10.4</b> Run it at 100 iterations</a></li>
-<li class="chapter" data-level="10.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>10.5</b> Original PyTorch code</a></li>
+<li class="chapter" data-level="9" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>9</b> A two-layer neural network</a><ul>
+<li class="chapter" data-level="9.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>9.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="9.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>9.2</b> Dataset</a></li>
+<li class="chapter" data-level="9.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>9.3</b> Run the model for 50 iterations</a></li>
+<li class="chapter" data-level="9.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>9.4</b> Run it at 100 iterations</a></li>
+<li class="chapter" data-level="9.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>9.5</b> Original PyTorch code</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>11</b> A very simple neural network</a><ul>
-<li class="chapter" data-level="11.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
-<li class="chapter" data-level="11.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>11.2</b> Select device</a></li>
-<li class="chapter" data-level="11.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>11.3</b> Create the dataset</a></li>
-<li class="chapter" data-level="11.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>11.4</b> Define the model</a></li>
-<li class="chapter" data-level="11.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>11.5</b> Loss function</a></li>
-<li class="chapter" data-level="11.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>11.6</b> Iterate through batches</a></li>
+<li class="chapter" data-level="10" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>10</b> A very simple neural network</a><ul>
+<li class="chapter" data-level="10.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>10.2</b> Select device</a></li>
+<li class="chapter" data-level="10.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>10.3</b> Create the dataset</a></li>
+<li class="chapter" data-level="10.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>10.4</b> Define the model</a></li>
+<li class="chapter" data-level="10.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>10.5</b> Loss function</a></li>
+<li class="chapter" data-level="10.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>10.6</b> Iterate through batches</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>12</b> Neural Networks 2</a><ul>
-<li class="chapter" data-level="12.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>12.1</b> nn2 1</a></li>
-<li class="chapter" data-level="12.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>12.2</b> nn2 2</a></li>
+<li class="chapter" data-level="11" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>11</b> Neural Networks 2</a><ul>
+<li class="chapter" data-level="11.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>11.1</b> nn2 1</a></li>
+<li class="chapter" data-level="11.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>11.2</b> nn2 2</a></li>
 </ul></li>
 <li class="part"><span><b>VI PyTorch and R data structures</b></span></li>
-<li class="chapter" data-level="13" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>13</b> Working with data.frame</a><ul>
-<li class="chapter" data-level="13.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>13.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="13.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>13.2</b> Load dataset</a></li>
-<li class="chapter" data-level="13.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>13.3</b> Summary statistics for tensors</a><ul>
-<li class="chapter" data-level="13.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>13.3.1</b> using <code>data.frame</code></a></li>
+<li class="chapter" data-level="12" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>12</b> Working with data.frame</a><ul>
+<li class="chapter" data-level="12.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="12.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>12.2</b> Load dataset</a></li>
+<li class="chapter" data-level="12.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>12.3</b> Summary statistics for tensors</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>12.3.1</b> using <code>data.frame</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>14</b> Working with data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>14.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="14.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>14.2</b> Load dataset</a></li>
-<li class="chapter" data-level="14.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>14.3</b> Read the datasets without normalization</a></li>
-<li class="chapter" data-level="14.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>14.4</b> Using <code>data.table</code></a></li>
+<li class="chapter" data-level="13" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>13</b> Working with data.table</a><ul>
+<li class="chapter" data-level="13.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>13.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="13.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>13.2</b> Load dataset</a></li>
+<li class="chapter" data-level="13.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>13.3</b> Read the datasets without normalization</a></li>
+<li class="chapter" data-level="13.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>13.4</b> Using <code>data.table</code></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
 <li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
 <li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.1</b> Five-number summary</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Activation Functions</a><ul>
+<li class="chapter" data-level="B.1" data-path="appendixB.html"><a href="appendixB.html#the-sigmoid-function"><i class="fa fa-check"></i><b>B.1</b> The Sigmoid function</a></li>
+<li class="chapter" data-level="B.2" data-path="appendixB.html"><a href="appendixB.html#the-relu-function"><i class="fa fa-check"></i><b>B.2</b> The ReLU function</a></li>
+<li class="chapter" data-level="B.3" data-path="appendixB.html"><a href="appendixB.html#the-tanh-function"><i class="fa fa-check"></i><b>B.3</b> The tanh function</a></li>
+<li class="chapter" data-level="B.4" data-path="appendixB.html"><a href="appendixB.html#the-softmax-activation-function"><i class="fa fa-check"></i><b>B.4</b> The Softmax Activation function</a></li>
+<li class="chapter" data-level="B.5" data-path="appendixB.html"><a href="appendixB.html#coding-your-own-activation-functions-in-python"><i class="fa fa-check"></i><b>B.5</b> Coding your own activation functions in Python</a><ul>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#linear-activation"><i class="fa fa-check"></i>Linear activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#sigmoid-activation"><i class="fa fa-check"></i>Sigmoid activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#hyperbolic-tangent-activation"><i class="fa fa-check"></i>Hyperbolic Tangent activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#rectifier-linear-unit-relu"><i class="fa fa-check"></i>Rectifier linear unit (ReLU)</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="B.6" data-path="appendixB.html"><a href="appendixB.html#softmax-in-python"><i class="fa fa-check"></i><b>B.6</b> Softmax in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -328,13 +338,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-sigmoid-function" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> The Sigmoid function</h1>
+<div id="appendixB" class="section level1">
+<h1><span class="header-section-number">B</span> Activation Functions</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
-<div id="pytorch-sigmoid-function" class="section level2">
-<h2><span class="header-section-number">6.1</span> PyTorch <code>sigmoid()</code> function</h2>
-<p>Using PyTorch functions:</p>
+<div id="the-sigmoid-function" class="section level2">
+<h2><span class="header-section-number">B.1</span> The Sigmoid function</h2>
+<p>Using the PyTorch <code>sigmoid()</code> function:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">x &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">range</span>(<span class="op">-</span><span class="fl">5.</span>, <span class="fl">5.</span>, <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">y &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">sigmoid</span>(x)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"></a>
@@ -446,18 +456,186 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-109" data-line-number="109"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> sx)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-110" data-line-number="110"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb2-111" data-line-number="111"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sigmoid&quot;</span>)</a></code></pre></div>
-<p><img src="0302-logistics_regression_files/figure-html/sigmoid-1.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="r-custom-made-function" class="section level2">
-<h2><span class="header-section-number">6.2</span> R custom-made function</h2>
-<p>Plot the sigmoid function using an R function:</p>
+<p><img src="9992-appendixB_files/figure-html/sigmoid-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Plot the sigmoid function using an R custom-made function:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">sigmoid =<span class="st"> </span><span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">   <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>x))</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">}</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="fl">0.01</span>)</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">plot</span>(x, <span class="kw">sigmoid</span>(x), <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">cex =</span> <span class="fl">0.5</span>, <span class="dt">main =</span> <span class="st">&quot;Sigmoid&quot;</span>)</a></code></pre></div>
-<p><img src="0302-logistics_regression_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-relu-function" class="section level2">
+<h2><span class="header-section-number">B.2</span> The ReLU function</h2>
+<p>Using the PyTorch <code>relu()</code> function:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">range</span>(<span class="op">-</span><span class="fl">5.</span>, <span class="fl">5.</span>, <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">y &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">relu</span>(x)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">sx =</span> y<span class="op">$</span><span class="kw">numpy</span>())</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">df</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> sx)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;ReLU&quot;</span>)</a></code></pre></div>
+<p><img src="9992-appendixB_files/figure-html/relu-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-tanh-function" class="section level2">
+<h2><span class="header-section-number">B.3</span> The tanh function</h2>
+<p>Using the PyTorch <code>tanh()</code> function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">range</span>(<span class="op">-</span><span class="fl">5.</span>, <span class="fl">5.</span>, <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">y &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">tanh</span>(x)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">sx =</span> y<span class="op">$</span><span class="kw">numpy</span>())</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">df</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> sx)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;tanh&quot;</span>)</a></code></pre></div>
+<p><img src="9992-appendixB_files/figure-html/tanh-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-softmax-activation-function" class="section level2">
+<h2><span class="header-section-number">B.4</span> The Softmax Activation function</h2>
+<p>Using the PyTorch <code>tanh()</code> function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">x &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">range</span>(<span class="op">-</span><span class="fl">5.0</span>, <span class="fl">5.0</span>, <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">y &lt;-<span class="st"> </span>torch<span class="op">$</span><span class="kw">softmax</span>(x, <span class="dt">dim=</span>0L)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x<span class="op">$</span><span class="kw">numpy</span>(), <span class="dt">sx =</span> y<span class="op">$</span><span class="kw">numpy</span>())</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> sx)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Softmax&quot;</span>)</a></code></pre></div>
+<p><img src="9992-appendixB_files/figure-html/softmax-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="coding-your-own-activation-functions-in-python" class="section level2">
+<h2><span class="header-section-number">B.5</span> Coding your own activation functions in Python</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">np.random.seed(<span class="dv">42</span>)</a></code></pre></div>
+<div id="linear-activation" class="section level3 unnumbered">
+<h3>Linear activation</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">def</span> Linear(x, derivative<span class="op">=</span><span class="va">False</span>):</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">    Computes the Linear activation function for array x</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">    inputs:</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">    x: array</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">    derivative: if True, return the derivative else the forward pass</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">    <span class="cf">if</span> derivative:              <span class="co"># Return derivative of the function at x</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">        <span class="cf">return</span> np.ones_like(x)</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">    <span class="cf">else</span>:                       <span class="co"># Return forward pass of the function at x</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">        <span class="cf">return</span> x</a></code></pre></div>
+</div>
+<div id="sigmoid-activation" class="section level3 unnumbered">
+<h3>Sigmoid activation</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">def</span> Sigmoid(x, derivative<span class="op">=</span><span class="va">False</span>):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">    Computes the Sigmoid activation function for array x</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">    inputs:</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">    x: array </span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">    derivative: if True, return the derivative else the forward pass</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">    f <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">+</span>np.exp(<span class="op">-</span>x))</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">    <span class="cf">if</span> derivative:              <span class="co"># Return derivative of the function at x</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">        <span class="cf">return</span> f<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>f)</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">    <span class="cf">else</span>:                       <span class="co"># Return forward pass of the function at x</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">        <span class="cf">return</span> f</a></code></pre></div>
+</div>
+<div id="hyperbolic-tangent-activation" class="section level3 unnumbered">
+<h3>Hyperbolic Tangent activation</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">def</span> Tanh(x, derivative<span class="op">=</span><span class="va">False</span>):</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">    Computes the Hyperbolic Tangent activation function for array x</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">    inputs:</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">    x: array </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">    derivative: if True, return the derivative else the forward pass</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">    f <span class="op">=</span> (np.exp(x)<span class="op">-</span>np.exp(<span class="op">-</span>x))<span class="op">/</span>(np.exp(x)<span class="op">+</span>np.exp(<span class="op">-</span>x))</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">    </a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">    <span class="cf">if</span> derivative:              <span class="co"># Return  derivative of the function at x</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">        <span class="cf">return</span> <span class="dv">1</span><span class="op">-</span>f<span class="op">**</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">    <span class="cf">else</span>:                       <span class="co"># Return the forward pass of the function at x</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">        <span class="cf">return</span> f</a></code></pre></div>
+</div>
+<div id="rectifier-linear-unit-relu" class="section level3 unnumbered">
+<h3>Rectifier linear unit (ReLU)</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">def</span> ReLU(x, derivative<span class="op">=</span><span class="va">False</span>):</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">    Computes the Rectifier Linear Unit activation function for array x</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">    inputs:</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">    x: array</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">    derivative: if True, return the derivative else the forward pass</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">    <span class="cf">if</span> derivative:              <span class="co"># Return derivative of the function at x</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">        <span class="cf">return</span> (x<span class="op">&gt;</span><span class="dv">0</span>).astype(<span class="bu">int</span>)</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">    <span class="cf">else</span>:                       <span class="co"># Return forward pass of the function at x</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">        <span class="cf">return</span> np.maximum(x, <span class="dv">0</span>)</a></code></pre></div>
+</div>
+<div id="visualization" class="section level3 unnumbered">
+<h3>Visualization</h3>
+<p>Plotting using <code>matplotlib</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1">x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">units <span class="op">=</span> {</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="st">&quot;Linear&quot;</span>: <span class="kw">lambda</span> x: Linear(x),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="st">&quot;Sigmoid&quot;</span>: <span class="kw">lambda</span> x: Sigmoid(x),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="st">&quot;ReLU&quot;</span>: <span class="kw">lambda</span> x: ReLU(x),</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="st">&quot;tanh&quot;</span>: <span class="kw">lambda</span> x: Tanh(x)</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">[plt.plot(x, unit(x), label<span class="op">=</span>unit_name, lw<span class="op">=</span><span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">    <span class="cf">for</span> unit_name, unit <span class="kw">in</span> units.items()]</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">plt.legend(loc<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">plt.title(<span class="st">&#39;Activation functions&#39;</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">plt.ylim([<span class="op">-</span><span class="dv">2</span>, <span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">plt.xlim([<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>])</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">plt.show()</a></code></pre></div>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="softmax-in-python" class="section level2">
+<h2><span class="header-section-number">B.6</span> Softmax in Python</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># Source: https://dataaspirant.com/2017/03/07/difference-between-softmax-function-and-sigmoid-function/</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"> </a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">def</span> softmax(inputs):</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">    Calculate the softmax for the give inputs (array)</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">    :param inputs:</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">    :return:</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">    <span class="cf">return</span> np.exp(inputs) <span class="op">/</span> <span class="bu">float</span>(<span class="bu">sum</span>(np.exp(inputs)))</a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"> </a>
+<a class="sourceLine" id="cb14-14" data-line-number="14"> </a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="kw">def</span> line_graph(x, y, x_title, y_title):</a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">    <span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co">    Draw line graph with x and y values</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18"><span class="co">    :param x:</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="co">    :param y:</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co">    :param x_title:</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co">    :param y_title:</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="co">    :return:</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="co">    &quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">    plt.plot(x, y)</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">    plt.xlabel(x_title)</a>
+<a class="sourceLine" id="cb14-26" data-line-number="26">    plt.ylabel(y_title)</a>
+<a class="sourceLine" id="cb14-27" data-line-number="27">    plt.show()</a>
+<a class="sourceLine" id="cb14-28" data-line-number="28"> </a>
+<a class="sourceLine" id="cb14-29" data-line-number="29"> </a>
+<a class="sourceLine" id="cb14-30" data-line-number="30">graph_x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb14-31" data-line-number="31">graph_y <span class="op">=</span> softmax(graph_x)</a>
+<a class="sourceLine" id="cb14-32" data-line-number="32"> </a>
+<a class="sourceLine" id="cb14-33" data-line-number="33"><span class="bu">print</span>(<span class="st">&quot;Graph X readings: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(graph_x))</a>
+<a class="sourceLine" id="cb14-34" data-line-number="34"><span class="bu">print</span>(<span class="st">&quot;Graph Y readings: </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(graph_y))</a>
+<a class="sourceLine" id="cb14-35" data-line-number="35"> </a>
+<a class="sourceLine" id="cb14-36" data-line-number="36">line_graph(graph_x, graph_y, <span class="st">&quot;Inputs&quot;</span>, <span class="st">&quot;Softmax Scores&quot;</span>)</a></code></pre></div>
+<p><img src="9992-appendixB_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -466,8 +644,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="mnistdigits.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-classic-classification-problem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="appendixA.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
