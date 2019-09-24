@@ -1,5 +1,8 @@
 # CHANGES
 
+## 0.0.3.9000 (2019-09-24)
+* Fix tanh -> softmax
+
 ## 0.0.3 (2019-09-24)
 * Add appendix. Add activation functions.
 * Move Sigmoid function to appendix.

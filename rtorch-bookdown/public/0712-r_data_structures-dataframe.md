@@ -116,7 +116,7 @@ Elapsed time per size of sample:
 
 ```r
 toc()
-#> 12.202 sec elapsed
+#> 11.832 sec elapsed
 #    60   1.663s
 #   600  13.5s
 #  6000  54.321 sec;
