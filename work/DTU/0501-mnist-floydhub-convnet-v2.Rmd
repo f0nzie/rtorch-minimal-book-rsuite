@@ -79,7 +79,7 @@ test_loader = torch.utils.data.DataLoader(
 
 ## Set up model
 
-```{python, setup-net}
+```{python, setup-neural-net}
 # Source: https://github.com/floydhub/mnist/blob/master/main.py
 
 class Net(nn.Module):
