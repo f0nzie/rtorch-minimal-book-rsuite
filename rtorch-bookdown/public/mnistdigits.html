@@ -24,7 +24,7 @@
 <meta name="author" content="Alfonso R. Reyes" />
 
 
-<meta name="date" content="2019-09-22" />
+<meta name="date" content="2019-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="linearalgebra.html"/>
-<link rel="next" href="the-sigmoid-function.html"/>
+<link rel="next" href="a-classic-classification-problem.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -142,10 +142,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#getting-the-pytorch-version"><i class="fa fa-check"></i><b>1.2.1</b> Getting the PyTorch version</a></li>
 <li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#pytorch-configuration"><i class="fa fa-check"></i><b>1.2.2</b> PyTorch configuration</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a><ul>
-<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.3.1</b> The <code>torchvision</code> module</a></li>
-<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.3.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
-<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.3.3</b> Python built-in functions</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#what-can-you-do-with-rtorch"><i class="fa fa-check"></i><b>1.3</b> What can you do with <code>rTorch</code></a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#callable-pytorch-modules"><i class="fa fa-check"></i><b>1.4</b> Callable PyTorch modules</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#the-torchvision-module"><i class="fa fa-check"></i><b>1.4.1</b> The <code>torchvision</code> module</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#np-the-numpy-module"><i class="fa fa-check"></i><b>1.4.2</b> <code>np</code>: the <code>numpy</code> module</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#python-built-in-functions"><i class="fa fa-check"></i><b>1.4.3</b> Python built-in functions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html"><i class="fa fa-check"></i><b>2</b> rTorch vs PyTorch: What’s different</a><ul>
@@ -164,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#transform-a-tensor"><i class="fa fa-check"></i><b>2.7</b> Transform a tensor</a></li>
 <li class="chapter" data-level="2.8" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#build-a-model-class"><i class="fa fa-check"></i><b>2.8</b> Build a model class</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-1"><i class="fa fa-check"></i><b>2.8.1</b> Example 1</a></li>
-<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2"><i class="fa fa-check"></i><b>2.8.2</b> Example 2</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#example-2-logistic-regression"><i class="fa fa-check"></i><b>2.8.2</b> Example 2: Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-tensor-to-numpy-object"><i class="fa fa-check"></i><b>2.9</b> Convert a tensor to <code>numpy</code> object</a></li>
 <li class="chapter" data-level="2.10" data-path="rtorch-vs-pytorch-whats-different.html"><a href="rtorch-vs-pytorch-whats-different.html#convert-a-numpy-object-to-an-r-object"><i class="fa fa-check"></i><b>2.10</b> Convert a <code>numpy</code> object to an <code>R</code> object</a></li>
@@ -237,71 +238,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="mnistdigits.html"><a href="mnistdigits.html#prediction"><i class="fa fa-check"></i><b>5.5</b> Prediction</a></li>
 <li class="chapter" data-level="5.6" data-path="mnistdigits.html"><a href="mnistdigits.html#save-the-model"><i class="fa fa-check"></i><b>5.6</b> Save the model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-sigmoid-function.html"><a href="the-sigmoid-function.html"><i class="fa fa-check"></i><b>6</b> The Sigmoid function</a></li>
-<li class="chapter" data-level="7" data-path="a-classic-classification-problem.html"><a href="a-classic-classification-problem.html"><i class="fa fa-check"></i><b>7</b> A classic classification problem</a></li>
+<li class="chapter" data-level="6" data-path="a-classic-classification-problem.html"><a href="a-classic-classification-problem.html"><i class="fa fa-check"></i><b>6</b> A classic classification problem</a></li>
 <li class="part"><span><b>IV Linear Regression</b></span></li>
-<li class="chapter" data-level="8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Simple linear regression</a><ul>
-<li class="chapter" data-level="8.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#generate-the-dataset"><i class="fa fa-check"></i><b>8.2</b> Generate the dataset</a></li>
-<li class="chapter" data-level="8.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#convert-arrays-to-tensors"><i class="fa fa-check"></i><b>8.3</b> Convert arrays to tensors</a></li>
-<li class="chapter" data-level="8.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>8.4</b> Converting from numpy to tensor</a></li>
-<li class="chapter" data-level="8.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>8.5</b> Creating the network model</a></li>
-<li class="chapter" data-level="8.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>8.6</b> Optimizer and Loss</a></li>
-<li class="chapter" data-level="8.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#training-1"><i class="fa fa-check"></i><b>8.7</b> Training</a></li>
-<li class="chapter" data-level="8.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#results"><i class="fa fa-check"></i><b>8.8</b> Results</a></li>
+<li class="chapter" data-level="7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>7</b> Simple linear regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#generate-the-dataset"><i class="fa fa-check"></i><b>7.2</b> Generate the dataset</a></li>
+<li class="chapter" data-level="7.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#convert-arrays-to-tensors"><i class="fa fa-check"></i><b>7.3</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="7.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#converting-from-numpy-to-tensor"><i class="fa fa-check"></i><b>7.4</b> Converting from numpy to tensor</a></li>
+<li class="chapter" data-level="7.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#creating-the-network-model"><i class="fa fa-check"></i><b>7.5</b> Creating the network model</a></li>
+<li class="chapter" data-level="7.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#optimizer-and-loss"><i class="fa fa-check"></i><b>7.6</b> Optimizer and Loss</a></li>
+<li class="chapter" data-level="7.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#training-1"><i class="fa fa-check"></i><b>7.7</b> Training</a></li>
+<li class="chapter" data-level="7.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#results"><i class="fa fa-check"></i><b>7.8</b> Results</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html"><i class="fa fa-check"></i><b>9</b> Rainfall. Linear Regression</a><ul>
-<li class="chapter" data-level="9.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#training-data"><i class="fa fa-check"></i><b>9.1</b> Training data</a></li>
-<li class="chapter" data-level="9.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#convert-arrays-to-tensors-1"><i class="fa fa-check"></i><b>9.2</b> Convert arrays to tensors</a></li>
-<li class="chapter" data-level="9.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>9.3</b> Build the model</a></li>
-<li class="chapter" data-level="9.4" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>9.4</b> Generate predictions</a></li>
-<li class="chapter" data-level="9.5" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#loss-function"><i class="fa fa-check"></i><b>9.5</b> Loss Function</a></li>
-<li class="chapter" data-level="9.6" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#step-by-step-process"><i class="fa fa-check"></i><b>9.6</b> Step by step process</a><ul>
-<li class="chapter" data-level="9.6.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-the-losses"><i class="fa fa-check"></i><b>9.6.1</b> Compute the losses</a></li>
-<li class="chapter" data-level="9.6.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>9.6.2</b> Compute Gradients</a></li>
-<li class="chapter" data-level="9.6.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#reset-the-gradients"><i class="fa fa-check"></i><b>9.6.3</b> Reset the gradients</a></li>
+<li class="chapter" data-level="8" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html"><i class="fa fa-check"></i><b>8</b> Rainfall. Linear Regression</a><ul>
+<li class="chapter" data-level="8.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#training-data"><i class="fa fa-check"></i><b>8.1</b> Training data</a></li>
+<li class="chapter" data-level="8.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#convert-arrays-to-tensors-1"><i class="fa fa-check"></i><b>8.2</b> Convert arrays to tensors</a></li>
+<li class="chapter" data-level="8.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#build-the-model"><i class="fa fa-check"></i><b>8.3</b> Build the model</a></li>
+<li class="chapter" data-level="8.4" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#generate-predictions"><i class="fa fa-check"></i><b>8.4</b> Generate predictions</a></li>
+<li class="chapter" data-level="8.5" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#loss-function"><i class="fa fa-check"></i><b>8.5</b> Loss Function</a></li>
+<li class="chapter" data-level="8.6" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#step-by-step-process"><i class="fa fa-check"></i><b>8.6</b> Step by step process</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-the-losses"><i class="fa fa-check"></i><b>8.6.1</b> Compute the losses</a></li>
+<li class="chapter" data-level="8.6.2" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#compute-gradients"><i class="fa fa-check"></i><b>8.6.2</b> Compute Gradients</a></li>
+<li class="chapter" data-level="8.6.3" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#reset-the-gradients"><i class="fa fa-check"></i><b>8.6.3</b> Reset the gradients</a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>9.7</b> All together: train for multiple epochs</a></li>
+<li class="chapter" data-level="8.7" data-path="rainfall-linear-regression.html"><a href="rainfall-linear-regression.html#all-together-train-for-multiple-epochs"><i class="fa fa-check"></i><b>8.7</b> All together: train for multiple epochs</a></li>
 </ul></li>
 <li class="part"><span><b>V Neural Networks</b></span></li>
-<li class="chapter" data-level="10" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>10</b> A two-layer neural network</a><ul>
-<li class="chapter" data-level="10.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>10.1</b> Load the libraries</a></li>
-<li class="chapter" data-level="10.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>10.2</b> Dataset</a></li>
-<li class="chapter" data-level="10.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>10.3</b> Run the model for 50 iterations</a></li>
-<li class="chapter" data-level="10.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>10.4</b> Run it at 100 iterations</a></li>
-<li class="chapter" data-level="10.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>10.5</b> Original PyTorch code</a></li>
+<li class="chapter" data-level="9" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html"><i class="fa fa-check"></i><b>9</b> A two-layer neural network</a><ul>
+<li class="chapter" data-level="9.1" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#load-the-libraries"><i class="fa fa-check"></i><b>9.1</b> Load the libraries</a></li>
+<li class="chapter" data-level="9.2" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#dataset"><i class="fa fa-check"></i><b>9.2</b> Dataset</a></li>
+<li class="chapter" data-level="9.3" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-the-model-for-50-iterations"><i class="fa fa-check"></i><b>9.3</b> Run the model for 50 iterations</a></li>
+<li class="chapter" data-level="9.4" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#run-it-at-100-iterations"><i class="fa fa-check"></i><b>9.4</b> Run it at 100 iterations</a></li>
+<li class="chapter" data-level="9.5" data-path="a-two-layer-neural-network.html"><a href="a-two-layer-neural-network.html#original-pytorch-code"><i class="fa fa-check"></i><b>9.5</b> Original PyTorch code</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>11</b> A very simple neural network</a><ul>
-<li class="chapter" data-level="11.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
-<li class="chapter" data-level="11.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>11.2</b> Select device</a></li>
-<li class="chapter" data-level="11.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>11.3</b> Create the dataset</a></li>
-<li class="chapter" data-level="11.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>11.4</b> Define the model</a></li>
-<li class="chapter" data-level="11.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>11.5</b> Loss function</a></li>
-<li class="chapter" data-level="11.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>11.6</b> Iterate through batches</a></li>
+<li class="chapter" data-level="10" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html"><i class="fa fa-check"></i><b>10</b> A very simple neural network</a><ul>
+<li class="chapter" data-level="10.1" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#introduction-1"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#select-device"><i class="fa fa-check"></i><b>10.2</b> Select device</a></li>
+<li class="chapter" data-level="10.3" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#create-the-dataset"><i class="fa fa-check"></i><b>10.3</b> Create the dataset</a></li>
+<li class="chapter" data-level="10.4" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#define-the-model-1"><i class="fa fa-check"></i><b>10.4</b> Define the model</a></li>
+<li class="chapter" data-level="10.5" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#loss-function-1"><i class="fa fa-check"></i><b>10.5</b> Loss function</a></li>
+<li class="chapter" data-level="10.6" data-path="a-very-simple-neural-network.html"><a href="a-very-simple-neural-network.html#iterate-through-batches"><i class="fa fa-check"></i><b>10.6</b> Iterate through batches</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>12</b> Neural Networks 2</a><ul>
-<li class="chapter" data-level="12.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>12.1</b> nn2 1</a></li>
-<li class="chapter" data-level="12.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>12.2</b> nn2 2</a></li>
+<li class="chapter" data-level="11" data-path="neural-networks-2.html"><a href="neural-networks-2.html"><i class="fa fa-check"></i><b>11</b> Neural Networks 2</a><ul>
+<li class="chapter" data-level="11.1" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-1"><i class="fa fa-check"></i><b>11.1</b> nn2 1</a></li>
+<li class="chapter" data-level="11.2" data-path="neural-networks-2.html"><a href="neural-networks-2.html#nn2-2"><i class="fa fa-check"></i><b>11.2</b> nn2 2</a></li>
 </ul></li>
 <li class="part"><span><b>VI PyTorch and R data structures</b></span></li>
-<li class="chapter" data-level="13" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>13</b> Working with data.frame</a><ul>
-<li class="chapter" data-level="13.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>13.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="13.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>13.2</b> Load dataset</a></li>
-<li class="chapter" data-level="13.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>13.3</b> Summary statistics for tensors</a><ul>
-<li class="chapter" data-level="13.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>13.3.1</b> using <code>data.frame</code></a></li>
+<li class="chapter" data-level="12" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html"><i class="fa fa-check"></i><b>12</b> Working with data.frame</a><ul>
+<li class="chapter" data-level="12.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-pytorch-libraries"><i class="fa fa-check"></i><b>12.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="12.2" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#load-dataset"><i class="fa fa-check"></i><b>12.2</b> Load dataset</a></li>
+<li class="chapter" data-level="12.3" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#summary-statistics-for-tensors"><i class="fa fa-check"></i><b>12.3</b> Summary statistics for tensors</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="working-with-data-frame.html"><a href="working-with-data-frame.html#using-data.frame"><i class="fa fa-check"></i><b>12.3.1</b> using <code>data.frame</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>14</b> Working with data.table</a><ul>
-<li class="chapter" data-level="14.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>14.1</b> Load PyTorch libraries</a></li>
-<li class="chapter" data-level="14.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>14.2</b> Load dataset</a></li>
-<li class="chapter" data-level="14.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>14.3</b> Read the datasets without normalization</a></li>
-<li class="chapter" data-level="14.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>14.4</b> Using <code>data.table</code></a></li>
+<li class="chapter" data-level="13" data-path="working-with-data-table.html"><a href="working-with-data-table.html"><i class="fa fa-check"></i><b>13</b> Working with data.table</a><ul>
+<li class="chapter" data-level="13.1" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-pytorch-libraries-1"><i class="fa fa-check"></i><b>13.1</b> Load PyTorch libraries</a></li>
+<li class="chapter" data-level="13.2" data-path="working-with-data-table.html"><a href="working-with-data-table.html#load-dataset-1"><i class="fa fa-check"></i><b>13.2</b> Load dataset</a></li>
+<li class="chapter" data-level="13.3" data-path="working-with-data-table.html"><a href="working-with-data-table.html#read-the-datasets-without-normalization"><i class="fa fa-check"></i><b>13.3</b> Read the datasets without normalization</a></li>
+<li class="chapter" data-level="13.4" data-path="working-with-data-table.html"><a href="working-with-data-table.html#using-data.table"><i class="fa fa-check"></i><b>13.4</b> Using <code>data.table</code></a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Statistical Background</a><ul>
 <li class="chapter" data-level="A.1" data-path="appendixA.html"><a href="appendixA.html#basic-statistical-terms"><i class="fa fa-check"></i><b>A.1</b> Basic statistical terms</a><ul>
 <li class="chapter" data-level="A.1.1" data-path="appendixA.html"><a href="appendixA.html#five-number-summary"><i class="fa fa-check"></i><b>A.1.1</b> Five-number summary</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Activation Functions</a><ul>
+<li class="chapter" data-level="B.1" data-path="appendixB.html"><a href="appendixB.html#the-sigmoid-function"><i class="fa fa-check"></i><b>B.1</b> The Sigmoid function</a></li>
+<li class="chapter" data-level="B.2" data-path="appendixB.html"><a href="appendixB.html#the-relu-function"><i class="fa fa-check"></i><b>B.2</b> The ReLU function</a></li>
+<li class="chapter" data-level="B.3" data-path="appendixB.html"><a href="appendixB.html#the-tanh-function"><i class="fa fa-check"></i><b>B.3</b> The tanh function</a></li>
+<li class="chapter" data-level="B.4" data-path="appendixB.html"><a href="appendixB.html#the-softmax-activation-function"><i class="fa fa-check"></i><b>B.4</b> The Softmax Activation function</a></li>
+<li class="chapter" data-level="B.5" data-path="appendixB.html"><a href="appendixB.html#coding-your-own-activation-functions-in-python"><i class="fa fa-check"></i><b>B.5</b> Coding your own activation functions in Python</a><ul>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#linear-activation"><i class="fa fa-check"></i>Linear activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#sigmoid-activation"><i class="fa fa-check"></i>Sigmoid activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#hyperbolic-tangent-activation"><i class="fa fa-check"></i>Hyperbolic Tangent activation</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#rectifier-linear-unit-relu"><i class="fa fa-check"></i>Rectifier linear unit (ReLU)</a></li>
+<li class="chapter" data-level="" data-path="appendixB.html"><a href="appendixB.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="B.6" data-path="appendixB.html"><a href="appendixB.html#softmax-in-python"><i class="fa fa-check"></i><b>B.6</b> Softmax in Python</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -327,153 +341,153 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mnistdigits" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Example 1: MNIST handwritten digits</h1>
 <p>Source: <a href="https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/logistic_regression/main.py" class="uri">https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/01-basics/logistic_regression/main.py</a></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
-<a class="sourceLine" id="cb160-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb160-3" data-line-number="3">nn          &lt;-<span class="st"> </span>torch<span class="op">$</span>nn</a>
-<a class="sourceLine" id="cb160-4" data-line-number="4">transforms  &lt;-<span class="st"> </span>torchvision<span class="op">$</span>transforms</a>
-<a class="sourceLine" id="cb160-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb160-6" data-line-number="6">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>float)</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">library</span>(rTorch)</a>
+<a class="sourceLine" id="cb165-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb165-3" data-line-number="3">nn          &lt;-<span class="st"> </span>torch<span class="op">$</span>nn</a>
+<a class="sourceLine" id="cb165-4" data-line-number="4">transforms  &lt;-<span class="st"> </span>torchvision<span class="op">$</span>transforms</a>
+<a class="sourceLine" id="cb165-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb165-6" data-line-number="6">torch<span class="op">$</span><span class="kw">set_default_dtype</span>(torch<span class="op">$</span>float)</a></code></pre></div>
 <div id="hyperparameters" class="section level2">
 <h2><span class="header-section-number">5.1</span> Hyperparameters</h2>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co"># Hyper-parameters </span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2">input_size    &lt;-<span class="st"> </span>784L</a>
-<a class="sourceLine" id="cb161-3" data-line-number="3">num_classes   &lt;-<span class="st"> </span>10L</a>
-<a class="sourceLine" id="cb161-4" data-line-number="4">num_epochs    &lt;-<span class="st"> </span>5L</a>
-<a class="sourceLine" id="cb161-5" data-line-number="5">batch_size    &lt;-<span class="st"> </span>100L</a>
-<a class="sourceLine" id="cb161-6" data-line-number="6">learning_rate &lt;-<span class="st"> </span><span class="fl">0.001</span></a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="co"># Hyper-parameters </span></a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">input_size    &lt;-<span class="st"> </span>784L</a>
+<a class="sourceLine" id="cb166-3" data-line-number="3">num_classes   &lt;-<span class="st"> </span>10L</a>
+<a class="sourceLine" id="cb166-4" data-line-number="4">num_epochs    &lt;-<span class="st"> </span>5L</a>
+<a class="sourceLine" id="cb166-5" data-line-number="5">batch_size    &lt;-<span class="st"> </span>100L</a>
+<a class="sourceLine" id="cb166-6" data-line-number="6">learning_rate &lt;-<span class="st"> </span><span class="fl">0.001</span></a></code></pre></div>
 </div>
 <div id="read-datasets" class="section level2">
 <h2><span class="header-section-number">5.2</span> Read datasets</h2>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="co"># MNIST dataset (images and labels)</span></a>
-<a class="sourceLine" id="cb162-2" data-line-number="2"><span class="co"># IDX format</span></a>
-<a class="sourceLine" id="cb162-3" data-line-number="3">local_folder &lt;-<span class="st"> &#39;../datasets/raw_data&#39;</span></a>
-<a class="sourceLine" id="cb162-4" data-line-number="4">train_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
-<a class="sourceLine" id="cb162-5" data-line-number="5">                                           <span class="dt">train=</span><span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb162-6" data-line-number="6">                                           <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>(),</a>
-<a class="sourceLine" id="cb162-7" data-line-number="7">                                           <span class="dt">download=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb162-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb162-9" data-line-number="9">test_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
-<a class="sourceLine" id="cb162-10" data-line-number="10">                                          <span class="dt">train=</span><span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb162-11" data-line-number="11">                                          <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>())</a>
-<a class="sourceLine" id="cb162-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb162-13" data-line-number="13"><span class="co"># Data loader (input pipeline). Make the datasets iteratble</span></a>
-<a class="sourceLine" id="cb162-14" data-line-number="14">train_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>train_dataset, </a>
-<a class="sourceLine" id="cb162-15" data-line-number="15">                                           <span class="dt">batch_size=</span>batch_size, </a>
-<a class="sourceLine" id="cb162-16" data-line-number="16">                                           <span class="dt">shuffle=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb162-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb162-18" data-line-number="18">test_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>test_dataset, </a>
-<a class="sourceLine" id="cb162-19" data-line-number="19">                                          <span class="dt">batch_size=</span>batch_size, </a>
-<a class="sourceLine" id="cb162-20" data-line-number="20">                                          <span class="dt">shuffle=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">class</span>(train_loader)</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="co">#&gt; [1] &quot;torch.utils.data.dataloader.DataLoader&quot;</span></a>
-<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="co">#&gt; [2] &quot;python.builtin.object&quot;</span></a>
-<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="kw">length</span>(train_loader)</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="co"># MNIST dataset (images and labels)</span></a>
+<a class="sourceLine" id="cb167-2" data-line-number="2"><span class="co"># IDX format</span></a>
+<a class="sourceLine" id="cb167-3" data-line-number="3">local_folder &lt;-<span class="st"> &#39;./datasets/raw_data&#39;</span></a>
+<a class="sourceLine" id="cb167-4" data-line-number="4">train_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
+<a class="sourceLine" id="cb167-5" data-line-number="5">                                           <span class="dt">train=</span><span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb167-6" data-line-number="6">                                           <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>(),</a>
+<a class="sourceLine" id="cb167-7" data-line-number="7">                                           <span class="dt">download=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb167-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb167-9" data-line-number="9">test_dataset =<span class="st"> </span>torchvision<span class="op">$</span>datasets<span class="op">$</span><span class="kw">MNIST</span>(<span class="dt">root=</span>local_folder, </a>
+<a class="sourceLine" id="cb167-10" data-line-number="10">                                          <span class="dt">train=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb167-11" data-line-number="11">                                          <span class="dt">transform=</span>transforms<span class="op">$</span><span class="kw">ToTensor</span>())</a>
+<a class="sourceLine" id="cb167-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb167-13" data-line-number="13"><span class="co"># Data loader (input pipeline). Make the datasets iteratble</span></a>
+<a class="sourceLine" id="cb167-14" data-line-number="14">train_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>train_dataset, </a>
+<a class="sourceLine" id="cb167-15" data-line-number="15">                                           <span class="dt">batch_size=</span>batch_size, </a>
+<a class="sourceLine" id="cb167-16" data-line-number="16">                                           <span class="dt">shuffle=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb167-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb167-18" data-line-number="18">test_loader =<span class="st"> </span>torch<span class="op">$</span>utils<span class="op">$</span>data<span class="op">$</span><span class="kw">DataLoader</span>(<span class="dt">dataset=</span>test_dataset, </a>
+<a class="sourceLine" id="cb167-19" data-line-number="19">                                          <span class="dt">batch_size=</span>batch_size, </a>
+<a class="sourceLine" id="cb167-20" data-line-number="20">                                          <span class="dt">shuffle=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="kw">class</span>(train_loader)</a>
+<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="co">#&gt; [1] &quot;torch.utils.data.dataloader.DataLoader&quot;</span></a>
+<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="co">#&gt; [2] &quot;python.builtin.object&quot;</span></a>
+<a class="sourceLine" id="cb168-4" data-line-number="4"><span class="kw">length</span>(train_loader)</a>
+<a class="sourceLine" id="cb168-5" data-line-number="5"><span class="co">#&gt; [1] 2</span></a></code></pre></div>
 </div>
 <div id="define-the-model" class="section level2">
 <h2><span class="header-section-number">5.3</span> Define the model</h2>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="co"># Logistic regression model</span></a>
-<a class="sourceLine" id="cb164-2" data-line-number="2">model =<span class="st"> </span>nn<span class="op">$</span><span class="kw">Linear</span>(input_size, num_classes)</a>
-<a class="sourceLine" id="cb164-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb164-4" data-line-number="4"><span class="co"># Loss and optimizer</span></a>
-<a class="sourceLine" id="cb164-5" data-line-number="5"><span class="co"># nn.CrossEntropyLoss() computes softmax internally</span></a>
-<a class="sourceLine" id="cb164-6" data-line-number="6">criterion =<span class="st"> </span>nn<span class="op">$</span><span class="kw">CrossEntropyLoss</span>()  </a>
-<a class="sourceLine" id="cb164-7" data-line-number="7">optimizer =<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(model<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span>learning_rate)  </a>
-<a class="sourceLine" id="cb164-8" data-line-number="8"><span class="kw">print</span>(model)</a>
-<a class="sourceLine" id="cb164-9" data-line-number="9"><span class="co">#&gt; Linear(in_features=784, out_features=10, bias=True)</span></a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="co"># Logistic regression model</span></a>
+<a class="sourceLine" id="cb169-2" data-line-number="2">model =<span class="st"> </span>nn<span class="op">$</span><span class="kw">Linear</span>(input_size, num_classes)</a>
+<a class="sourceLine" id="cb169-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb169-4" data-line-number="4"><span class="co"># Loss and optimizer</span></a>
+<a class="sourceLine" id="cb169-5" data-line-number="5"><span class="co"># nn.CrossEntropyLoss() computes softmax internally</span></a>
+<a class="sourceLine" id="cb169-6" data-line-number="6">criterion =<span class="st"> </span>nn<span class="op">$</span><span class="kw">CrossEntropyLoss</span>()  </a>
+<a class="sourceLine" id="cb169-7" data-line-number="7">optimizer =<span class="st"> </span>torch<span class="op">$</span>optim<span class="op">$</span><span class="kw">SGD</span>(model<span class="op">$</span><span class="kw">parameters</span>(), <span class="dt">lr=</span>learning_rate)  </a>
+<a class="sourceLine" id="cb169-8" data-line-number="8"><span class="kw">print</span>(model)</a>
+<a class="sourceLine" id="cb169-9" data-line-number="9"><span class="co">#&gt; Linear(in_features=784, out_features=10, bias=True)</span></a></code></pre></div>
 </div>
 <div id="training" class="section level2">
 <h2><span class="header-section-number">5.4</span> Training</h2>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="co"># Train the model</span></a>
-<a class="sourceLine" id="cb165-2" data-line-number="2">iter_train_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(train_loader)</a>
-<a class="sourceLine" id="cb165-3" data-line-number="3">total_step &lt;-<span class="kw">length</span>(iter_train_loader)</a></code></pre></div>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
-<a class="sourceLine" id="cb166-2" data-line-number="2">    i &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb166-3" data-line-number="3">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_train_loader) {</a>
-<a class="sourceLine" id="cb166-4" data-line-number="4">        </a>
-<a class="sourceLine" id="cb166-5" data-line-number="5">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
-<a class="sourceLine" id="cb166-6" data-line-number="6">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
-<a class="sourceLine" id="cb166-7" data-line-number="7">        <span class="co"># cat(i, &quot;\t&quot;); print(images$shape)</span></a>
-<a class="sourceLine" id="cb166-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb166-9" data-line-number="9">        <span class="co"># Reshape images to (batch_size, input_size)</span></a>
-<a class="sourceLine" id="cb166-10" data-line-number="10">        images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
-<a class="sourceLine" id="cb166-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
-<a class="sourceLine" id="cb166-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb166-13" data-line-number="13">        <span class="co"># Forward pass</span></a>
-<a class="sourceLine" id="cb166-14" data-line-number="14">        outputs &lt;-<span class="st"> </span><span class="kw">model</span>(images)</a>
-<a class="sourceLine" id="cb166-15" data-line-number="15">        loss &lt;-<span class="st"> </span><span class="kw">criterion</span>(outputs, labels)</a>
-<a class="sourceLine" id="cb166-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb166-17" data-line-number="17">        <span class="co"># Backward and optimize</span></a>
-<a class="sourceLine" id="cb166-18" data-line-number="18">        optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
-<a class="sourceLine" id="cb166-19" data-line-number="19">        loss<span class="op">$</span><span class="kw">backward</span>()</a>
-<a class="sourceLine" id="cb166-20" data-line-number="20">        optimizer<span class="op">$</span><span class="kw">step</span>()</a>
-<a class="sourceLine" id="cb166-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb166-22" data-line-number="22">        <span class="cf">if</span> ((i<span class="op">+</span><span class="dv">1</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb166-23" data-line-number="23">            <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Epoch [%d/%d], Step [%d/%d], Loss: %f </span><span class="ch">\n</span><span class="st">&#39;</span>,</a>
-<a class="sourceLine" id="cb166-24" data-line-number="24">                epoch<span class="op">+</span><span class="dv">1</span>, num_epochs, i<span class="op">+</span><span class="dv">1</span>, total_step, loss<span class="op">$</span><span class="kw">item</span>()))</a>
-<a class="sourceLine" id="cb166-25" data-line-number="25">        }</a>
-<a class="sourceLine" id="cb166-26" data-line-number="26">        i &lt;-<span class="st">  </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb166-27" data-line-number="27">    }</a>
-<a class="sourceLine" id="cb166-28" data-line-number="28">}  </a>
-<a class="sourceLine" id="cb166-29" data-line-number="29"><span class="co">#&gt; Epoch [2/5], Step [100/600], Loss: 2.175031 </span></a>
-<a class="sourceLine" id="cb166-30" data-line-number="30"><span class="co">#&gt; Epoch [2/5], Step [200/600], Loss: 2.093698 </span></a>
-<a class="sourceLine" id="cb166-31" data-line-number="31"><span class="co">#&gt; Epoch [2/5], Step [300/600], Loss: 2.010728 </span></a>
-<a class="sourceLine" id="cb166-32" data-line-number="32"><span class="co">#&gt; Epoch [2/5], Step [400/600], Loss: 1.919379 </span></a>
-<a class="sourceLine" id="cb166-33" data-line-number="33"><span class="co">#&gt; Epoch [2/5], Step [500/600], Loss: 1.809128 </span></a>
-<a class="sourceLine" id="cb166-34" data-line-number="34"><span class="co">#&gt; Epoch [2/5], Step [600/600], Loss: 1.810952 </span></a>
-<a class="sourceLine" id="cb166-35" data-line-number="35"><span class="co">#&gt; Epoch [3/5], Step [100/600], Loss: 1.710733 </span></a>
-<a class="sourceLine" id="cb166-36" data-line-number="36"><span class="co">#&gt; Epoch [3/5], Step [200/600], Loss: 1.607757 </span></a>
-<a class="sourceLine" id="cb166-37" data-line-number="37"><span class="co">#&gt; Epoch [3/5], Step [300/600], Loss: 1.598756 </span></a>
-<a class="sourceLine" id="cb166-38" data-line-number="38"><span class="co">#&gt; Epoch [3/5], Step [400/600], Loss: 1.554271 </span></a>
-<a class="sourceLine" id="cb166-39" data-line-number="39"><span class="co">#&gt; Epoch [3/5], Step [500/600], Loss: 1.464945 </span></a>
-<a class="sourceLine" id="cb166-40" data-line-number="40"><span class="co">#&gt; Epoch [3/5], Step [600/600], Loss: 1.491697 </span></a>
-<a class="sourceLine" id="cb166-41" data-line-number="41"><span class="co">#&gt; Epoch [4/5], Step [100/600], Loss: 1.412455 </span></a>
-<a class="sourceLine" id="cb166-42" data-line-number="42"><span class="co">#&gt; Epoch [4/5], Step [200/600], Loss: 1.292850 </span></a>
-<a class="sourceLine" id="cb166-43" data-line-number="43"><span class="co">#&gt; Epoch [4/5], Step [300/600], Loss: 1.340431 </span></a>
-<a class="sourceLine" id="cb166-44" data-line-number="44"><span class="co">#&gt; Epoch [4/5], Step [400/600], Loss: 1.315060 </span></a>
-<a class="sourceLine" id="cb166-45" data-line-number="45"><span class="co">#&gt; Epoch [4/5], Step [500/600], Loss: 1.246835 </span></a>
-<a class="sourceLine" id="cb166-46" data-line-number="46"><span class="co">#&gt; Epoch [4/5], Step [600/600], Loss: 1.282187 </span></a>
-<a class="sourceLine" id="cb166-47" data-line-number="47"><span class="co">#&gt; Epoch [5/5], Step [100/600], Loss: 1.217498 </span></a>
-<a class="sourceLine" id="cb166-48" data-line-number="48"><span class="co">#&gt; Epoch [5/5], Step [200/600], Loss: 1.088097 </span></a>
-<a class="sourceLine" id="cb166-49" data-line-number="49"><span class="co">#&gt; Epoch [5/5], Step [300/600], Loss: 1.171362 </span></a>
-<a class="sourceLine" id="cb166-50" data-line-number="50"><span class="co">#&gt; Epoch [5/5], Step [400/600], Loss: 1.152947 </span></a>
-<a class="sourceLine" id="cb166-51" data-line-number="51"><span class="co">#&gt; Epoch [5/5], Step [500/600], Loss: 1.100762 </span></a>
-<a class="sourceLine" id="cb166-52" data-line-number="52"><span class="co">#&gt; Epoch [5/5], Step [600/600], Loss: 1.138870 </span></a>
-<a class="sourceLine" id="cb166-53" data-line-number="53"><span class="co">#&gt; Epoch [6/5], Step [100/600], Loss: 1.083696 </span></a>
-<a class="sourceLine" id="cb166-54" data-line-number="54"><span class="co">#&gt; Epoch [6/5], Step [200/600], Loss: 0.948392 </span></a>
-<a class="sourceLine" id="cb166-55" data-line-number="55"><span class="co">#&gt; Epoch [6/5], Step [300/600], Loss: 1.054588 </span></a>
-<a class="sourceLine" id="cb166-56" data-line-number="56"><span class="co">#&gt; Epoch [6/5], Step [400/600], Loss: 1.037630 </span></a>
-<a class="sourceLine" id="cb166-57" data-line-number="57"><span class="co">#&gt; Epoch [6/5], Step [500/600], Loss: 0.997384 </span></a>
-<a class="sourceLine" id="cb166-58" data-line-number="58"><span class="co">#&gt; Epoch [6/5], Step [600/600], Loss: 1.036139</span></a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1"><span class="co"># Train the model</span></a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">iter_train_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(train_loader)</a>
+<a class="sourceLine" id="cb170-3" data-line-number="3">total_step &lt;-<span class="kw">length</span>(iter_train_loader)</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="cf">for</span> (epoch <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>num_epochs) {</a>
+<a class="sourceLine" id="cb171-2" data-line-number="2">    i &lt;-<span class="st">  </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb171-3" data-line-number="3">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_train_loader) {</a>
+<a class="sourceLine" id="cb171-4" data-line-number="4">        </a>
+<a class="sourceLine" id="cb171-5" data-line-number="5">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
+<a class="sourceLine" id="cb171-6" data-line-number="6">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
+<a class="sourceLine" id="cb171-7" data-line-number="7">        <span class="co"># cat(i, &quot;\t&quot;); print(images$shape)</span></a>
+<a class="sourceLine" id="cb171-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb171-9" data-line-number="9">        <span class="co"># Reshape images to (batch_size, input_size)</span></a>
+<a class="sourceLine" id="cb171-10" data-line-number="10">        images &lt;-<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
+<a class="sourceLine" id="cb171-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
+<a class="sourceLine" id="cb171-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb171-13" data-line-number="13">        <span class="co"># Forward pass</span></a>
+<a class="sourceLine" id="cb171-14" data-line-number="14">        outputs &lt;-<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb171-15" data-line-number="15">        loss &lt;-<span class="st"> </span><span class="kw">criterion</span>(outputs, labels)</a>
+<a class="sourceLine" id="cb171-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb171-17" data-line-number="17">        <span class="co"># Backward and optimize</span></a>
+<a class="sourceLine" id="cb171-18" data-line-number="18">        optimizer<span class="op">$</span><span class="kw">zero_grad</span>()</a>
+<a class="sourceLine" id="cb171-19" data-line-number="19">        loss<span class="op">$</span><span class="kw">backward</span>()</a>
+<a class="sourceLine" id="cb171-20" data-line-number="20">        optimizer<span class="op">$</span><span class="kw">step</span>()</a>
+<a class="sourceLine" id="cb171-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb171-22" data-line-number="22">        <span class="cf">if</span> ((i<span class="op">+</span><span class="dv">1</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb171-23" data-line-number="23">            <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Epoch [%d/%d], Step [%d/%d], Loss: %f </span><span class="ch">\n</span><span class="st">&#39;</span>,</a>
+<a class="sourceLine" id="cb171-24" data-line-number="24">                epoch<span class="op">+</span><span class="dv">1</span>, num_epochs, i<span class="op">+</span><span class="dv">1</span>, total_step, loss<span class="op">$</span><span class="kw">item</span>()))</a>
+<a class="sourceLine" id="cb171-25" data-line-number="25">        }</a>
+<a class="sourceLine" id="cb171-26" data-line-number="26">        i &lt;-<span class="st">  </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb171-27" data-line-number="27">    }</a>
+<a class="sourceLine" id="cb171-28" data-line-number="28">}  </a>
+<a class="sourceLine" id="cb171-29" data-line-number="29"><span class="co">#&gt; Epoch [2/5], Step [100/600], Loss: 2.207937 </span></a>
+<a class="sourceLine" id="cb171-30" data-line-number="30"><span class="co">#&gt; Epoch [2/5], Step [200/600], Loss: 2.129730 </span></a>
+<a class="sourceLine" id="cb171-31" data-line-number="31"><span class="co">#&gt; Epoch [2/5], Step [300/600], Loss: 2.020010 </span></a>
+<a class="sourceLine" id="cb171-32" data-line-number="32"><span class="co">#&gt; Epoch [2/5], Step [400/600], Loss: 1.921782 </span></a>
+<a class="sourceLine" id="cb171-33" data-line-number="33"><span class="co">#&gt; Epoch [2/5], Step [500/600], Loss: 1.842267 </span></a>
+<a class="sourceLine" id="cb171-34" data-line-number="34"><span class="co">#&gt; Epoch [2/5], Step [600/600], Loss: 1.849545 </span></a>
+<a class="sourceLine" id="cb171-35" data-line-number="35"><span class="co">#&gt; Epoch [3/5], Step [100/600], Loss: 1.752690 </span></a>
+<a class="sourceLine" id="cb171-36" data-line-number="36"><span class="co">#&gt; Epoch [3/5], Step [200/600], Loss: 1.671137 </span></a>
+<a class="sourceLine" id="cb171-37" data-line-number="37"><span class="co">#&gt; Epoch [3/5], Step [300/600], Loss: 1.618696 </span></a>
+<a class="sourceLine" id="cb171-38" data-line-number="38"><span class="co">#&gt; Epoch [3/5], Step [400/600], Loss: 1.548630 </span></a>
+<a class="sourceLine" id="cb171-39" data-line-number="39"><span class="co">#&gt; Epoch [3/5], Step [500/600], Loss: 1.447902 </span></a>
+<a class="sourceLine" id="cb171-40" data-line-number="40"><span class="co">#&gt; Epoch [3/5], Step [600/600], Loss: 1.540873 </span></a>
+<a class="sourceLine" id="cb171-41" data-line-number="41"><span class="co">#&gt; Epoch [4/5], Step [100/600], Loss: 1.462256 </span></a>
+<a class="sourceLine" id="cb171-42" data-line-number="42"><span class="co">#&gt; Epoch [4/5], Step [200/600], Loss: 1.385923 </span></a>
+<a class="sourceLine" id="cb171-43" data-line-number="43"><span class="co">#&gt; Epoch [4/5], Step [300/600], Loss: 1.361354 </span></a>
+<a class="sourceLine" id="cb171-44" data-line-number="44"><span class="co">#&gt; Epoch [4/5], Step [400/600], Loss: 1.314525 </span></a>
+<a class="sourceLine" id="cb171-45" data-line-number="45"><span class="co">#&gt; Epoch [4/5], Step [500/600], Loss: 1.196100 </span></a>
+<a class="sourceLine" id="cb171-46" data-line-number="46"><span class="co">#&gt; Epoch [4/5], Step [600/600], Loss: 1.338717 </span></a>
+<a class="sourceLine" id="cb171-47" data-line-number="47"><span class="co">#&gt; Epoch [5/5], Step [100/600], Loss: 1.272773 </span></a>
+<a class="sourceLine" id="cb171-48" data-line-number="48"><span class="co">#&gt; Epoch [5/5], Step [200/600], Loss: 1.201425 </span></a>
+<a class="sourceLine" id="cb171-49" data-line-number="49"><span class="co">#&gt; Epoch [5/5], Step [300/600], Loss: 1.194291 </span></a>
+<a class="sourceLine" id="cb171-50" data-line-number="50"><span class="co">#&gt; Epoch [5/5], Step [400/600], Loss: 1.157681 </span></a>
+<a class="sourceLine" id="cb171-51" data-line-number="51"><span class="co">#&gt; Epoch [5/5], Step [500/600], Loss: 1.029743 </span></a>
+<a class="sourceLine" id="cb171-52" data-line-number="52"><span class="co">#&gt; Epoch [5/5], Step [600/600], Loss: 1.199558 </span></a>
+<a class="sourceLine" id="cb171-53" data-line-number="53"><span class="co">#&gt; Epoch [6/5], Step [100/600], Loss: 1.144258 </span></a>
+<a class="sourceLine" id="cb171-54" data-line-number="54"><span class="co">#&gt; Epoch [6/5], Step [200/600], Loss: 1.076404 </span></a>
+<a class="sourceLine" id="cb171-55" data-line-number="55"><span class="co">#&gt; Epoch [6/5], Step [300/600], Loss: 1.080425 </span></a>
+<a class="sourceLine" id="cb171-56" data-line-number="56"><span class="co">#&gt; Epoch [6/5], Step [400/600], Loss: 1.046417 </span></a>
+<a class="sourceLine" id="cb171-57" data-line-number="57"><span class="co">#&gt; Epoch [6/5], Step [500/600], Loss: 0.914617 </span></a>
+<a class="sourceLine" id="cb171-58" data-line-number="58"><span class="co">#&gt; Epoch [6/5], Step [600/600], Loss: 1.098780</span></a></code></pre></div>
 </div>
 <div id="prediction" class="section level2">
 <h2><span class="header-section-number">5.5</span> Prediction</h2>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
-<a class="sourceLine" id="cb167-2" data-line-number="2">iter_test_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(test_loader)</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
-<a class="sourceLine" id="cb167-5" data-line-number="5">    correct &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb167-6" data-line-number="6">    total &lt;-<span class="st">  </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb167-7" data-line-number="7">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_test_loader) {</a>
-<a class="sourceLine" id="cb167-8" data-line-number="8">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
-<a class="sourceLine" id="cb167-9" data-line-number="9">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
-<a class="sourceLine" id="cb167-10" data-line-number="10">        images =<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
-<a class="sourceLine" id="cb167-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
-<a class="sourceLine" id="cb167-12" data-line-number="12">        outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
-<a class="sourceLine" id="cb167-13" data-line-number="13">        .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
-<a class="sourceLine" id="cb167-14" data-line-number="14">        predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
-<a class="sourceLine" id="cb167-15" data-line-number="15">        total =<span class="st"> </span>total <span class="op">+</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">size</span>(0L)</a>
-<a class="sourceLine" id="cb167-16" data-line-number="16">        correct =<span class="st"> </span>correct <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>((predicted<span class="op">$</span><span class="kw">numpy</span>() <span class="op">==</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">numpy</span>()))</a>
-<a class="sourceLine" id="cb167-17" data-line-number="17">    }</a>
-<a class="sourceLine" id="cb167-18" data-line-number="18">    <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Accuracy of the model on the 10000 test images: %f %%&#39;</span>, (<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total)))</a>
-<a class="sourceLine" id="cb167-19" data-line-number="19">  </a>
-<a class="sourceLine" id="cb167-20" data-line-number="20">})</a>
-<a class="sourceLine" id="cb167-21" data-line-number="21"><span class="co">#&gt; Accuracy of the model on the 10000 test images: 83.450000 %</span></a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="co"># Adjust weights and reset gradients</span></a>
+<a class="sourceLine" id="cb172-2" data-line-number="2">iter_test_loader &lt;-<span class="st"> </span><span class="kw">iterate</span>(test_loader)</a>
+<a class="sourceLine" id="cb172-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb172-4" data-line-number="4"><span class="kw">with</span>(torch<span class="op">$</span><span class="kw">no_grad</span>(), {</a>
+<a class="sourceLine" id="cb172-5" data-line-number="5">    correct &lt;-<span class="st">  </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb172-6" data-line-number="6">    total &lt;-<span class="st">  </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb172-7" data-line-number="7">    <span class="cf">for</span> (obj <span class="cf">in</span> iter_test_loader) {</a>
+<a class="sourceLine" id="cb172-8" data-line-number="8">        images &lt;-<span class="st"> </span>obj[[<span class="dv">1</span>]]   <span class="co"># tensor torch.Size([64, 3, 28, 28])</span></a>
+<a class="sourceLine" id="cb172-9" data-line-number="9">        labels &lt;-<span class="st"> </span>obj[[<span class="dv">2</span>]]   <span class="co"># tensor torch.Size([64]), labels from 0 to 9</span></a>
+<a class="sourceLine" id="cb172-10" data-line-number="10">        images =<span class="st"> </span>images<span class="op">$</span><span class="kw">reshape</span>(<span class="op">-</span>1L, 28L<span class="op">*</span>28L)</a>
+<a class="sourceLine" id="cb172-11" data-line-number="11">        <span class="co"># images &lt;- torch$as_tensor(images$reshape(-1L, 28L*28L), dtype=torch$double)</span></a>
+<a class="sourceLine" id="cb172-12" data-line-number="12">        outputs =<span class="st"> </span><span class="kw">model</span>(images)</a>
+<a class="sourceLine" id="cb172-13" data-line-number="13">        .predicted =<span class="st"> </span>torch<span class="op">$</span><span class="kw">max</span>(outputs<span class="op">$</span>data, 1L)</a>
+<a class="sourceLine" id="cb172-14" data-line-number="14">        predicted &lt;-<span class="st"> </span>.predicted[1L]</a>
+<a class="sourceLine" id="cb172-15" data-line-number="15">        total =<span class="st"> </span>total <span class="op">+</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">size</span>(0L)</a>
+<a class="sourceLine" id="cb172-16" data-line-number="16">        correct =<span class="st"> </span>correct <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>((predicted<span class="op">$</span><span class="kw">numpy</span>() <span class="op">==</span><span class="st"> </span>labels<span class="op">$</span><span class="kw">numpy</span>()))</a>
+<a class="sourceLine" id="cb172-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb172-18" data-line-number="18">    <span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&#39;Accuracy of the model on the 10000 test images: %f %%&#39;</span>, (<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>correct <span class="op">/</span><span class="st"> </span>total)))</a>
+<a class="sourceLine" id="cb172-19" data-line-number="19">  </a>
+<a class="sourceLine" id="cb172-20" data-line-number="20">})</a>
+<a class="sourceLine" id="cb172-21" data-line-number="21"><span class="co">#&gt; Accuracy of the model on the 10000 test images: 83.360000 %</span></a></code></pre></div>
 </div>
 <div id="save-the-model" class="section level2">
 <h2><span class="header-section-number">5.6</span> Save the model</h2>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1"><span class="co"># Save the model checkpoint</span></a>
-<a class="sourceLine" id="cb168-2" data-line-number="2">torch<span class="op">$</span><span class="kw">save</span>(model<span class="op">$</span><span class="kw">state_dict</span>(), <span class="st">&#39;model.ckpt&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="co"># Save the model checkpoint</span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2">torch<span class="op">$</span><span class="kw">save</span>(model<span class="op">$</span><span class="kw">state_dict</span>(), <span class="st">&#39;model.ckpt&#39;</span>)</a></code></pre></div>
 
 </div>
 </div>
@@ -483,7 +497,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="linearalgebra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-sigmoid-function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="a-classic-classification-problem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

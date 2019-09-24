@@ -1,3 +1,6 @@
+# (PART) PyTorch and R data structures {-}
+
+
 # Working with data.frame
 
 ## Load PyTorch libraries
@@ -37,7 +40,7 @@ print(train_dataset)
 
 ### using `data.frame`
 
-```{r use-dataframe}
+```{r use-dataframe-599}
 library(tictoc)
 tic()
 

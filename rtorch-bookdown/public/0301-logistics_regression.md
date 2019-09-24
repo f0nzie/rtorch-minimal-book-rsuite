@@ -34,7 +34,7 @@ learning_rate <- 0.001
 ```r
 # MNIST dataset (images and labels)
 # IDX format
-local_folder <- '../datasets/raw_data'
+local_folder <- './datasets/raw_data'
 train_dataset = torchvision$datasets$MNIST(root=local_folder, 
                                            train=TRUE, 
                                            transform=transforms$ToTensor(),
@@ -118,36 +118,36 @@ for (epoch in 1:num_epochs) {
         i <-  i + 1
     }
 }  
-#> Epoch [2/5], Step [100/600], Loss: 2.175031 
-#> Epoch [2/5], Step [200/600], Loss: 2.093698 
-#> Epoch [2/5], Step [300/600], Loss: 2.010728 
-#> Epoch [2/5], Step [400/600], Loss: 1.919379 
-#> Epoch [2/5], Step [500/600], Loss: 1.809128 
-#> Epoch [2/5], Step [600/600], Loss: 1.810952 
-#> Epoch [3/5], Step [100/600], Loss: 1.710733 
-#> Epoch [3/5], Step [200/600], Loss: 1.607757 
-#> Epoch [3/5], Step [300/600], Loss: 1.598756 
-#> Epoch [3/5], Step [400/600], Loss: 1.554271 
-#> Epoch [3/5], Step [500/600], Loss: 1.464945 
-#> Epoch [3/5], Step [600/600], Loss: 1.491697 
-#> Epoch [4/5], Step [100/600], Loss: 1.412455 
-#> Epoch [4/5], Step [200/600], Loss: 1.292850 
-#> Epoch [4/5], Step [300/600], Loss: 1.340431 
-#> Epoch [4/5], Step [400/600], Loss: 1.315060 
-#> Epoch [4/5], Step [500/600], Loss: 1.246835 
-#> Epoch [4/5], Step [600/600], Loss: 1.282187 
-#> Epoch [5/5], Step [100/600], Loss: 1.217498 
-#> Epoch [5/5], Step [200/600], Loss: 1.088097 
-#> Epoch [5/5], Step [300/600], Loss: 1.171362 
-#> Epoch [5/5], Step [400/600], Loss: 1.152947 
-#> Epoch [5/5], Step [500/600], Loss: 1.100762 
-#> Epoch [5/5], Step [600/600], Loss: 1.138870 
-#> Epoch [6/5], Step [100/600], Loss: 1.083696 
-#> Epoch [6/5], Step [200/600], Loss: 0.948392 
-#> Epoch [6/5], Step [300/600], Loss: 1.054588 
-#> Epoch [6/5], Step [400/600], Loss: 1.037630 
-#> Epoch [6/5], Step [500/600], Loss: 0.997384 
-#> Epoch [6/5], Step [600/600], Loss: 1.036139
+#> Epoch [2/5], Step [100/600], Loss: 2.207937 
+#> Epoch [2/5], Step [200/600], Loss: 2.129730 
+#> Epoch [2/5], Step [300/600], Loss: 2.020010 
+#> Epoch [2/5], Step [400/600], Loss: 1.921782 
+#> Epoch [2/5], Step [500/600], Loss: 1.842267 
+#> Epoch [2/5], Step [600/600], Loss: 1.849545 
+#> Epoch [3/5], Step [100/600], Loss: 1.752690 
+#> Epoch [3/5], Step [200/600], Loss: 1.671137 
+#> Epoch [3/5], Step [300/600], Loss: 1.618696 
+#> Epoch [3/5], Step [400/600], Loss: 1.548630 
+#> Epoch [3/5], Step [500/600], Loss: 1.447902 
+#> Epoch [3/5], Step [600/600], Loss: 1.540873 
+#> Epoch [4/5], Step [100/600], Loss: 1.462256 
+#> Epoch [4/5], Step [200/600], Loss: 1.385923 
+#> Epoch [4/5], Step [300/600], Loss: 1.361354 
+#> Epoch [4/5], Step [400/600], Loss: 1.314525 
+#> Epoch [4/5], Step [500/600], Loss: 1.196100 
+#> Epoch [4/5], Step [600/600], Loss: 1.338717 
+#> Epoch [5/5], Step [100/600], Loss: 1.272773 
+#> Epoch [5/5], Step [200/600], Loss: 1.201425 
+#> Epoch [5/5], Step [300/600], Loss: 1.194291 
+#> Epoch [5/5], Step [400/600], Loss: 1.157681 
+#> Epoch [5/5], Step [500/600], Loss: 1.029743 
+#> Epoch [5/5], Step [600/600], Loss: 1.199558 
+#> Epoch [6/5], Step [100/600], Loss: 1.144258 
+#> Epoch [6/5], Step [200/600], Loss: 1.076404 
+#> Epoch [6/5], Step [300/600], Loss: 1.080425 
+#> Epoch [6/5], Step [400/600], Loss: 1.046417 
+#> Epoch [6/5], Step [500/600], Loss: 0.914617 
+#> Epoch [6/5], Step [600/600], Loss: 1.098780
 ```
 
 
@@ -175,7 +175,7 @@ with(torch$no_grad(), {
     cat(sprintf('Accuracy of the model on the 10000 test images: %f %%', (100 * correct / total)))
   
 })
-#> Accuracy of the model on the 10000 test images: 83.450000 %
+#> Accuracy of the model on the 10000 test images: 83.360000 %
 ```
 
 ## Save the model
