@@ -31,3 +31,5 @@ work/one-at-a-time/awesome_model.pkl
 work/one-at-a-time/one_at_a_time.log
 
 datasets/
+
+work/one-at-a-time/public/
